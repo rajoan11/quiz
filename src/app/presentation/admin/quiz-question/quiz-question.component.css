@@ -7,7 +7,6 @@
     display: block;
     height: 60px;
     background-color: #f9f9f9;
-    border-bottom: 1px #ccc solid;
     margin: 0;
     font-family: Firasans;
     font-size: 13px;
@@ -16,6 +15,7 @@
     text-align: left;
     padding: 0 26px;
     position: relative;
+    border-bottom: 1px #e6e2e2 solid;
 }
 #quetsion li:hover{
     background-color: #fff;
@@ -29,7 +29,7 @@
     font-size: inherit;
 }
 .mat-expansion-panel{
-    box-shadow: 1px 1px 11px #ccc;
+    box-shadow: 1px 1px 11px #ccc!important;
     border-radius: 0;
 }
 #quetsion li.question:before{
