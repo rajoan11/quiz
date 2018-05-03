@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminComponent } from '../../../presentation/admin/admin/admin.component';
+import { AdminRootComponent } from '../../../presentation/admin/admin-root/admin-root.component';
+import { ListQuizComponent } from '../../../presentation/admin/list-quiz/list-quiz.component';
+import { CreateQuizComponent } from '../../../presentation/admin/create-quiz/create-quiz.component';
 
 const routes: Routes = [
   {
     path: 'admin',
-    component: AdminComponent
+    component: AdminRootComponent,
+    children: [
+      { path: '', redirectTo: 'list', pathMatch: 'full' },
+      { path: 'list', component: ListQuizComponent },
+      { path: 'create', component: CreateQuizComponent }
+    ]
   }
 ];
 
@@ -14,4 +21,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: []
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}
