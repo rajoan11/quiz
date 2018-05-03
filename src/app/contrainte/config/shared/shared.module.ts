@@ -8,7 +8,8 @@ import {
   MatSortModule,
   MatTableModule,
   MatSelectModule,
-  MatInputModule
+  MatInputModule,
+  MatExpansionModule
 } from '@angular/material';
 import { ScrollbarModule } from 'ngx-scrollbar';
 
@@ -23,11 +24,12 @@ import { ScrollbarModule } from 'ngx-scrollbar';
     MatTableModule,
     MatSelectModule,
     ScrollbarModule,
-    MatInputModule
+    MatInputModule,
+    MatExpansionModule
   ],
   declarations: [],
   exports: [ButtonsModule,BsDropdownModule,CollapseModule,BrowserAnimationsModule, MatSortModule,
-    MatTableModule,MatSelectModule,ScrollbarModule,MatInputModule]
+    MatTableModule,MatSelectModule,ScrollbarModule,MatInputModule,MatExpansionModule]
 
 })
 export class SharedModule { }

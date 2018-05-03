@@ -1,3 +1,49 @@
-<p>
-  quiz-question works!
-</p>
+<mat-expansion-panel (opened)="panelOpenState = true"
+(closed)="panelOpenState = false">
+<mat-expansion-panel-header>
+<mat-panel-title>
+  
+    QUESTION 
+</mat-panel-title>
+<mat-panel-description>
+</mat-panel-description>
+</mat-expansion-panel-header>
+<ul id="quetsion">
+    
+  <li>
+    <a href="">Choix multiples</a>
+  </li>
+  <li>
+    <a href="">Cases à cocher</a>
+  </li>
+  <li>
+    <a href="">Réponse longue</a>
+  </li>
+  <li>
+    <a href="">Liste déroulante</a>
+  </li>
+  <li>
+    <a href="">Échelle linéaire</a>
+  </li>
+  <li>
+    <a href="">Date</a>
+  </li>
+  <li>
+    <a href="">Heure</a>
+  </li>
+  <li class="question text">
+    <a href="">TEXT</a>
+  </li>
+  <li class="question img">
+    <a href="">IMAGES</a>
+  </li>
+  <li class="question embed">
+    <a href="">Embed</a>
+  </li>
+  <li class="question rubrique">
+    <a href="">Rubrique</a>
+  </li>
+</ul>
+
+</mat-expansion-panel>
+

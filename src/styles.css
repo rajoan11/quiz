@@ -1,5 +1,65 @@
+
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@font-face {
+    font-family: 'firasans';
+    src: url('assets/fonts/firasans-bold-webfont.woff2') format('woff2'),
+         url('assets/fonts/firasans-bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'firasans';
+    src: url('assets/fonts/firasans-light-webfont.woff2') format('woff2'),
+         url('assets/fonts/firasans-light-webfont.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'firasans';
+    src: url('assets/fonts/firasans-semibold-webfont.woff2') format('woff2'),
+         url('assets/fonts/firasans-semibold-webfont.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'firasans';
+    src: url('assets/fonts/firasans-ultralight-webfont.woff2') format('woff2'),
+         url('assets/fonts/firasans-ultralight-webfont.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'firasans';
+    src: url('assets/fonts/firasans-regular-webfont.woff2') format('woff2'),
+         url('assets/fonts/firasans-regular-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+
+
+
 body{
     margin: 0;
     padding: 0;
@@ -18,12 +78,16 @@ ul,ol{
 /*HEADER QUIZZ*/
 .navbar{
     border-radius: 0;
+    margin-bottom: 30px;
 }
 .filtre-quiz .liste>li{
     list-style: none;
     display: inline-block;
     float: left;
     width: 28%;
+}
+.mat-expansion-panel-body{
+    padding: 0!important;
 }
 
 
@@ -61,6 +125,7 @@ ul,ol{
     background-size: contain;
     margin-right: 25px;
 }
+
 .filtre-quiz.navbar{
     margin: 0;
     border-radius: 0;
@@ -80,7 +145,7 @@ ul,ol{
      border-radius: 0;
      height: 34px;
  }
-.open>.dropdown-menu {
+ .filtre-quiz .open>.dropdown-menu {
     display: block;
     width: 200px;
     border-radius: 0;
@@ -88,6 +153,11 @@ ul,ol{
     overflow-y: scroll;
     width: 200px;
     border-radius: 0;
+}
+.open>.dropdown-menu {
+    display: block;
+    border-radius: 0;
+    width: 100%;
 }
 
 /* Responsive header quizz
@@ -263,4 +333,15 @@ ul,ol{
     font-size: 15px;
     font-weight: 600;
     color: #6b6b6b;
+}
+#creation-quizz .mat-expansion-indicator::after {
+    content: ''!important;
+    display: inline-block!important;
+    transform: rotate(90deg)!important;
+    vertical-align: middle!important;
+    border-color: #0000 #0000 #0000 #fc6100!important;
+    border-style: solid!important;
+    border-width: 6px!important;
+    margin-top: 2px!important;
+    padding: 0!important;
 }
