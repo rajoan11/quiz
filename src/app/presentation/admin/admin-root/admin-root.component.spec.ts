@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { QuizRootComponent } from './quiz-root.component';
+import { AdminRootComponent } from './admin-root.component';
 
-describe('QuizRootComponent', () => {
-  let component: QuizRootComponent;
-  let fixture: ComponentFixture<QuizRootComponent>;
+describe('AdminRootComponent', () => {
+  let component: AdminRootComponent;
+  let fixture: ComponentFixture<AdminRootComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QuizRootComponent ]
+      declarations: [ AdminRootComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuizRootComponent);
+    fixture = TestBed.createComponent(AdminRootComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

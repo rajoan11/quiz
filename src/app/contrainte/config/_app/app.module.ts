@@ -16,7 +16,6 @@ import { BusinessDelegateModule } from '../../../service-business-delegate/busin
 import { SharedModule } from '../shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminPresentationModule } from '../../../presentation/admin/admin-presentation.module';
-import { QuizPresentationModule } from '../../../presentation/quiz/quiz-presentation.module';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -33,15 +32,14 @@ import { QuizPresentationModule } from '../../../presentation/quiz/quiz-presenta
     BusinessDelegateModule,
     SharedModule,
     AppRoutingModule,
-    AdminPresentationModule,
-    QuizPresentationModule
+    AdminPresentationModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    },
+    }
   ]
 })
 export class AppModule {

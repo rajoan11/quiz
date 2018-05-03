@@ -7,4 +7,4 @@ const routes = [{ path: '', redirectTo: 'admin', pathMatch: 'full' }];
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
