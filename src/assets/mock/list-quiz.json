@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "QUIZ1",
+    "description": "lorem ipusm",
+    "created_date": "11/11/2011",
+    "entreprise": "ETECH",
+    "response": 123,
+    "status": "anonyme"
+  },
+  {
+    "id": 2,
+    "name": "QUIZ2",
+    "description": "lorem ipusm dolor",
+    "created_date": "11/11/2011",
+    "entreprise": "ETECH",
+    "response": 123,
+    "status": "anonyme"
+  }
+]

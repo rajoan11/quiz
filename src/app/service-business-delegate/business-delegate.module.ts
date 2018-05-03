@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
+import { QuizBusinessDelegateServiceProviders } from './quiz';
 
 @NgModule({
-  providers: [
-  ]
+  providers: [...QuizBusinessDelegateServiceProviders]
 })
 export class BusinessDelegateModule {}
