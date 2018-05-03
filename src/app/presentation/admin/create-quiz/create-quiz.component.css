@@ -1,5 +1,7 @@
  /* création quizz
  &&&&&&&&&&&&&&&&&&&&*/
+
+
  .creation-quizz .liste>ul>li{
     list-style: none;
     display: inline-block;
@@ -26,7 +28,76 @@
 }
 .creation-quizz .liste>.liste2>li:first-child>a{
     display: block;
+    width: 33px;
+    height: 34px;
 }
+.creation-quizz .liste>.liste2>li.open>.dropdown-menu{
+    left: -200px;
+    max-width: 250px;
+    width: 250px;
+    padding: 10px;
+}
+.creation-quizz .liste>.liste2>li.open>.dropdown-menu>li{
+    width: 50px;
+    height: 50px;
+    margin-left: 1%;
+    border: none;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+
+
+.theme1{
+    background-color: #db4437;
+}
+.theme2{
+    background-color: #e91d63;
+}
+.theme3{
+    background-color: #9c26b0;
+}
+.theme4{
+    background-color: #673ab7;
+}
+.theme5{
+    background-color: #3f51b5;
+}
+
+.theme6{
+    background-color: #4285f4;
+}
+.theme7{
+    background-color: #03a9f4;
+}
+.theme8{
+    background-color: #02bcd4;
+}
+.theme9{
+    background-color: #009688;
+}
+.theme10{
+    background-color: #0f9d58;
+}
+.theme11{
+    background-color: #cddc39;
+}
+.theme12{
+    background-color: #ff9800;
+}
+.theme13{
+    background-color: #795548;
+}
+.theme14{
+    background-color: #9e9f9e;
+}
+.theme15{
+    background-color: #607d8b;
+}
+.theme16{
+    background: url(/assets/images/multicolor.png)no-repeat center;
+}
+
 .creation-quizz .liste>.liste2>li:last-child{
     margin-left: 43px;
 }
