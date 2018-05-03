@@ -74,7 +74,6 @@ ng-scrollbar {
   width: 25px;
   height: 22px;
   margin-right: 10px;
-  float: left;
   background: url(/assets/images/pictos-agency.png) no-repeat center;
   overflow: hidden;
   background-size: 30px auto;

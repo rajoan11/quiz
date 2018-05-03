@@ -1,5 +1,9 @@
 export class QuizDo {
-  _id: number;
-  username: string;
-  password: string;
+  id: number;
+  name: string;
+  description: string;
+  created_date: Date;
+  entreprise: string;
+  response: string;
+  status: string;
 }

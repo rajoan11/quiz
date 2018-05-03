@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminRootComponent } from '../../../presentation/admin/admin-root/admin-root.component';
 import { ListQuizComponent } from '../../../presentation/admin/list-quiz/list-quiz.component';
 import { CreateQuizComponent } from '../../../presentation/admin/create-quiz/create-quiz.component';
+import { QuizResolver } from './admin.resolver';
 
 const routes: Routes = [
   {
@@ -10,7 +11,11 @@ const routes: Routes = [
     component: AdminRootComponent,
     children: [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
-      { path: 'list', component: ListQuizComponent },
+      {
+        path: 'list',
+        component: ListQuizComponent,
+        resolve: { quizs: QuizResolver }
+      },
       { path: 'create', component: CreateQuizComponent }
     ]
   }
@@ -19,6 +24,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [QuizResolver]
 })
 export class AdminRoutingModule {}

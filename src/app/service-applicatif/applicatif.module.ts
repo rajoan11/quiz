@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
+import { QuizApplicatifServiceProviders } from './quiz-admin';
 
 @NgModule({
-  providers: [
-  ]
+  providers: [...QuizApplicatifServiceProviders]
 })
 export class ApplicatifModule {}
