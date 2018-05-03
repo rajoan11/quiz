@@ -27,6 +27,9 @@
 .creation-quizz .liste>.liste2>li:first-child>a{
     display: block;
 }
+.creation-quizz .liste>.liste2>li:last-child{
+    margin-left: 30px;
+}
 .creation-quizz .liste>.liste2>li{
     float: left;
     margin-left: 15px;
@@ -98,3 +101,14 @@
     width: 100%;
     max-width: 290px;
 }
+#creation-quizz{
+    background-color: rgba(0, 0, 0, 0.03);
+}
+.form-quizz .row{
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 1px 1px 9px #e2e2e2;
+    margin-bottom: 15px;
+    margin-right: 19px;
+}
+
