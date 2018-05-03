@@ -1,0 +1,13 @@
+{
+  "name": "my quiz",
+  "description": "lorem ipsum",
+  "rubrique": [
+    {
+      "name": "rubrique name",
+      "text": "",
+      "image": "",
+      "video": "",
+      "question": [{}]
+    }
+  ]
+}

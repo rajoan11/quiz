@@ -11,6 +11,12 @@ import { QuizRubricComponent } from './quiz-rubric/quiz-rubric.component';
 
 @NgModule({
   imports: [CommonModule, AdminRoutingModule, SharedModule],
-  declarations: [ListQuizComponent, AdminRootComponent, CreateQuizComponent, QuizQuestionComponent, QuizRubricComponent]
+  declarations: [
+    ListQuizComponent,
+    AdminRootComponent,
+    CreateQuizComponent,
+    QuizQuestionComponent,
+    QuizRubricComponent
+  ]
 })
 export class AdminPresentationModule {}
