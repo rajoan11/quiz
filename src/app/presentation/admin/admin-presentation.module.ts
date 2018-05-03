@@ -7,9 +7,10 @@ import { ListQuizComponent } from './list-quiz/list-quiz.component';
 import { AdminRootComponent } from './admin-root/admin-root.component';
 import { CreateQuizComponent } from './create-quiz/create-quiz.component';
 import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
+import { QuizRubricComponent } from './quiz-rubric/quiz-rubric.component';
 
 @NgModule({
   imports: [CommonModule, AdminRoutingModule, SharedModule],
-  declarations: [ListQuizComponent, AdminRootComponent, CreateQuizComponent, QuizQuestionComponent]
+  declarations: [ListQuizComponent, AdminRootComponent, CreateQuizComponent, QuizQuestionComponent, QuizRubricComponent]
 })
 export class AdminPresentationModule {}
