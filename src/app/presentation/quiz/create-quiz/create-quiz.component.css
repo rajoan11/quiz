@@ -1,0 +1,100 @@
+ /* création quizz
+ &&&&&&&&&&&&&&&&&&&&*/
+ .creation-quizz .liste>ul>li{
+    list-style: none;
+    display: inline-block;
+    float: left;
+    width: 50%;
+}
+.creation-quizz .liste>ul>li>button{
+    border-radius: 0;
+    background-color: #fff;
+    width: 177px;
+    text-align: left;
+}
+.creation-quizz .liste>ul>li>button .caret{
+    float: right;
+    margin-top: 8px;
+    margin-right: 15px;
+}
+.creation-quizz .liste>.liste2>li:first-child{
+    float: left;
+    width: 33px;
+    height: 34px;
+    background: url(/assets/images/theme.png) no-repeat center;
+    cursor: pointer;
+}
+.creation-quizz .liste>.liste2>li:first-child>a{
+    display: block;
+}
+.creation-quizz .liste>.liste2>li{
+    float: left;
+    margin-left: 15px;
+}
+.creation-quizz .liste>.liste2>li>.btn{
+    width: auto;
+    color: #fc6100;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 4px;
+}
+.creation-quizz .liste{
+    display: table;
+    width: 100%;
+    padding: 6px 0;
+}
+.creation-quizz .liste1{
+    width: 40%;
+    float: left;
+    list-style: none;
+}
+.creation-quizz .liste2{
+    width: 100%;
+    float: right;
+    list-style: none;
+    max-width: 260px;
+}
+
+@media (max-width:992px){
+    .creation-quizz .liste1 {
+        width: 54%;
+    }
+}
+@media (max-width:768px){
+    .creation-quizz .liste1 {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .creation-quizz .liste1 .btn-group .btn {
+       float: right;
+    }
+    .creation-quizz .liste2{
+        width: 100%;
+        float: none;
+        margin: 0 auto;
+        max-width: 260px;
+    }
+}
+
+@media (max-width:530px){
+    .creation-quizz .liste .liste1 li{
+        width: 100%;
+        float: none;
+        text-align: center;
+    }
+    .creation-quizz .liste1 .btn-group .btn {
+        float: none;
+        width: 100%;
+     }
+     .creation-quizz .open>.dropdown-menu{
+        width: 100%;
+        margin-top: 0;
+     }
+}
+
+/* FORM INPUT
+&&&&&&&&&&&&&&& */
+.mat-form-field{
+    width: 100%;
+    max-width: 290px;
+}

@@ -1,0 +1,266 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body{
+    margin: 0;
+    padding: 0;
+}
+
+
+ul,ol{
+    margin: 0;
+    padding: 0;
+}
+
+.bg-quizz{
+    background: #fc6100;
+}
+
+/*HEADER QUIZZ*/
+.navbar{
+    border-radius: 0;
+}
+.filtre-quiz .liste>li{
+    list-style: none;
+    display: inline-block;
+    float: left;
+    width: 28%;
+}
+
+
+.filtre-quiz .liste>li:last-child{
+    float: right;
+}
+.filtre-quiz .liste{
+    display: table;
+    width: 100%;
+    padding: 6px 0;
+}
+.filtre-quiz .liste .title>a,
+.creation-quizz .liste .title>a{
+    font-family: firasans, fira sans;
+    font-size: 22px;
+    color: #fff;
+}
+.filtre-quiz .liste li>#button-basic{
+    background-color: inherit;
+    border: 0;
+}
+.filtre-quiz .liste li:first-child{
+    width: 40%;
+}
+.filtre-quiz .liste li>#button-basic:active{
+    box-shadow: 0px 0px;
+}
+#button-basic.btn .caret {
+    margin-left: 0;
+    float: left;
+    width: 25px;
+    height: 25px;
+    border: 0;
+    background: url(/assets/images/picto-filtre.png)no-repeat center;
+    background-size: contain;
+    margin-right: 25px;
+}
+.filtre-quiz.navbar{
+    margin: 0;
+    border-radius: 0;
+    height: auto;
+    min-height: 1px;
+}
+ .form .btn-search{
+    background: #fff url(/assets/images/search.png) no-repeat center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    background-size: 23px;
+    border-radius: 0;
+ }
+ .form .input-group input{
+     border: 0;
+     border-radius: 0;
+     height: 34px;
+ }
+.open>.dropdown-menu {
+    display: block;
+    width: 200px;
+    border-radius: 0;
+    max-height: 250px;
+    overflow-y: scroll;
+    width: 200px;
+    border-radius: 0;
+}
+
+/* Responsive header quizz
+************************** */
+@media (max-width:768px){
+    .filtre-quiz .liste>li {
+        display: block;
+        float: none;
+        width: 100%!important;
+        text-align: center;
+    }
+
+    .filtre-quiz .liste>li.btn-group{
+        display: table;
+        width: 220px!important;
+        margin: 15px auto;
+    }
+
+
+    .quizz-table .table{
+        width: 720px;
+    }
+}
+
+/*Fquizz-table
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
+.quizz-table .table{
+    border-collapse: initial;
+    
+}
+.quizz-table .container-table{
+    margin: 45px auto;
+    max-height: 410px;
+    border-bottom: 1px #000 solid;
+    
+}
+/* .quizz-table .table tr.odd{
+} */
+.quizz-table .table tr.even{
+    background-color:#e6e6e6 !important;
+}
+.quizz-table .table tr:hover{
+    background-color: #35cc99 !important;
+    color: #fff;
+}
+.quizz-table .table tr:hover td,.quizz-table .table tr:hover th{
+    color: #fff;
+}
+.quizz-table .table tr.no-border td,
+.quizz-table .table tr.no-border th{
+    border:0px;
+    border-bottom: 2px #fc6100 solid;
+}
+.quizz-table .table tr td,
+.quizz-table .table tr th{
+    border: 0;
+   border-bottom: 1px #ccc solid;
+   padding-left: 15px;
+}
+.quizz-table .table td,
+.quizz-table .table th{
+    font-size: 11px;
+    height: 26px;
+    padding: 0;
+    vertical-align: middle;
+    color: #000;
+}
+.quizz-table .table td button,
+.quizz-table .table th button{
+    padding: 0 15px;
+    border-radius: 0;
+    width: 100%;
+    height: 21px;
+    border: 0;
+    background: #fff;
+    color: #000;
+    font-size: 11px;
+    min-width: 115px;
+}
+.quizz-table .open>.dropdown-menu{
+    overflow: hidden;
+}
+.quizz-table .dropdown-menu>li>a{
+    font-size: 11px;    
+}
+.quizz-table .btn .caret {
+    margin-left: 5px;
+}
+.quizz-table .open>.dropdown-menu{
+    width: 100%;
+}
+
+.quizz-table .table td>a.picto,
+.quizz-table .table th>a.picto{
+    display: inline-block;
+    width: 25px;
+    height: 22px;
+    margin-right: 10px;
+    float: left;
+    background: url(/assets/images/pictos-agency.png) no-repeat center;
+    overflow: hidden;
+    background-size: 30px auto;
+    transition: 0.3s;
+}
+.quizz-table .table tr:hover td>a.picto,
+.quizz-table .table tr:hover th>a.picto{
+    background: url(/assets/images/pictos-agency2.png) no-repeat center;
+    background-size: 30px auto;
+}
+
+.quizz-table .table td>a.copy,
+.quizz-table .table th>a.copy{
+    background-position: -3px -2px;
+}
+.quizz-table .table td>a.reultat,
+.quizz-table .table th>a.reultat{
+    background-position: -3px -47px;
+}
+.quizz-table .table td>a.apercu,
+.quizz-table .table th>a.apercu{
+    background-position: -3px -26px;
+}
+.quizz-table .table td>a.suppr,
+.quizz-table .table th>a.suppr{
+    background-position: -3px -73px;
+}
+.quizz-table .table td:last-child,
+.quizz-table .table th:last-child{
+    width: auto;
+}
+
+.-vertical .ng-scrollbar-thumb{
+    background-color: #9ba7b5!important;
+}
+.add-quizz{
+    float: right;
+    width: 50px;
+    height: 50px;
+    display: block;
+    background: #fc6100;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    margin: 15px;
+    text-align: center;
+    line-height: 50px;
+    z-index: 100;
+}
+.add-quizz a{
+    font-size: 40px;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+.mat-select-trigger {
+    width: 100px;
+}
+
+/* .ng-scrollbar-container{
+    overflow: scroll!important;
+} */
+.-horizontal .ng-scrollbar-thumb{
+    background-color: #9ba7b5;
+}
+/*Création quizz :
+&&&&&&&&&&&&&&&&&&&*/
+.form-quizz .mat-form-field-label,
+.form-quizz .mat-input-element{
+    font-size: 15px;
+    font-weight: 600;
+    color: #6b6b6b;
+}

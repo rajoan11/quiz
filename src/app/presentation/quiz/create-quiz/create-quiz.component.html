@@ -1,0 +1,52 @@
+
+<!-- création quizz  -->
+<div id="creation-quizz">
+<div class="navbar creation-quizz bg-quizz">
+    <div class="container">
+        <div class="liste">
+          <ul class="liste1">
+              <li class="title"><a>Création de quizz</a></li>
+              <li class="btn-group" dropdown>
+                  <button dropdownToggle type="button" class="btn dropdown-toggle"
+                          aria-controls="dropdown-basic">
+                          Nominatif <span class="caret"></span>
+                  </button>
+                  <ul *dropdownMenu class="dropdown-menu"
+                      role="menu" aria-labelledby="button-basic">
+                    <li role="menuitem"><a class="dropdown-item" href="#">Anonyme</a></li>
+                  </ul>
+              </li>
+          </ul>
+
+          <ul class="liste2 theme">
+            <li><a href="" title="theme"></a></li>
+            <li><button class="btn">Finalisation de quizz</button></li>
+          </ul>
+        </div>
+    </div>
+  </div> 
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+          <div class="form-quizz">
+              <div class="row">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Nom quizz" value="Sushi">
+                </mat-form-field>
+              </div>
+        
+              <div class="row">
+                <mat-form-field class="example-full-width">
+                    <textarea matInput placeholder="Description"></textarea>
+                  </mat-form-field>
+              </div>
+            </div>
+      </div>
+      <div class="col-lg-3">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio, optio ullam quibusdam soluta cupiditate quas commodi tenetur eaque! Laudantium, molestias ullam? Vero mollitia officiis officia natus doloribus labore, quisquam fuga.
+      </div>
+    </div>
+  </div>
+</div>
+
