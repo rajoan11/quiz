@@ -15,7 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const authHeader = this.getToken();
+    const authHeader = this.getToken() || `bearer`;
     const escapedUrl = ['user/login', 'user/register'];
     if (escapedUrl.some(escaped => req.url.indexOf(escaped) >= 0)) {
       return next.handle(req);

@@ -8,6 +8,7 @@ import { AdminRootComponent } from './admin-root/admin-root.component';
 import { CreateQuizComponent } from './create-quiz/create-quiz.component';
 import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
 import { QuizRubricComponent } from './quiz-rubric/quiz-rubric.component';
+import { ContentRubricComponent } from './content-rubric/content-rubric.component';
 
 @NgModule({
   imports: [CommonModule, AdminRoutingModule, SharedModule],
@@ -16,7 +17,8 @@ import { QuizRubricComponent } from './quiz-rubric/quiz-rubric.component';
     AdminRootComponent,
     CreateQuizComponent,
     QuizQuestionComponent,
-    QuizRubricComponent
+    QuizRubricComponent,
+    ContentRubricComponent
   ]
 })
 export class AdminPresentationModule {}

@@ -28,7 +28,6 @@ export class ListQuizComponent implements OnInit, AfterViewInit {
     { value: 'anonyme', viewValue: 'anonyme' },
     { value: 'nominatif', viewValue: 'nominatif' }
   ];
-  selected = 'nominatif';
 
   ngOnInit() {
     this.getQuizs();
@@ -38,7 +37,6 @@ export class ListQuizComponent implements OnInit, AfterViewInit {
     this.activatedRoute.data.subscribe(data => {
       this.quizs = data.quizs;
       this.dataSource = new MatTableDataSource(data.quizs);
-      console.log(this.quizs);
     });
   }
 

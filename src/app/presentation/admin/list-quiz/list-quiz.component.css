@@ -44,7 +44,7 @@
 ng-scrollbar {
   height: 460px;
   width: 100%;
-  border-bottom: 1px #000 solid;
+
   /* overflow-x: scroll!important; */
 }
 
@@ -132,4 +132,7 @@ ng-scrollbar {
 }
 .quizz-table .mat-row:hover .mat-cell:last-child {
   width: auto;
+}
+.mat-elevation-z8{
+  box-shadow: none!important;
 }

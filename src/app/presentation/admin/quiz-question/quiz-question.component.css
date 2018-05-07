@@ -57,6 +57,31 @@
 #quetsion li.question{
     padding-left: 80px;
 }
+.mat-expansion-panel-header-title{
+    color: #797979;
+    font-family: firasans;
+    font-size: 13px;
+    font-weight: 600;
+    width: 100%;
+    margin: 0;
+    padding-left: 24px;
 
+}
+.mat-expansion-panel-header{
+    position: relative;
+}
+.mat-expansion-panel-header:before{
+    position: absolute;
+    content: "+";
+    width: 25px;
+    height: 25px;
+    background-color: #fc6100;
+    color: #fff;
+    border-radius: 50%;
+    left: 15px;
+    text-align: center;
+    font-size: 19px;
+    line-height: 23px;
+}
 
 

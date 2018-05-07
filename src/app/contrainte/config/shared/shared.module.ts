@@ -4,6 +4,7 @@ import { ButtonsModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NgxEditorModule } from 'ngx-editor';
 import {
   MatSortModule,
   MatTableModule,
@@ -25,11 +26,12 @@ import { ScrollbarModule } from 'ngx-scrollbar';
     MatSelectModule,
     ScrollbarModule,
     MatInputModule,
-    MatExpansionModule
+    MatExpansionModule,
+    NgxEditorModule 
   ],
   declarations: [],
   exports: [ButtonsModule,BsDropdownModule,CollapseModule,BrowserAnimationsModule, MatSortModule,
-    MatTableModule,MatSelectModule,ScrollbarModule,MatInputModule,MatExpansionModule]
+    MatTableModule,MatSelectModule,ScrollbarModule,MatInputModule,MatExpansionModule,NgxEditorModule]
 
 })
 export class SharedModule { }
