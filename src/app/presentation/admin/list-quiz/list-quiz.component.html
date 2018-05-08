@@ -101,7 +101,7 @@
           <ng-container matColumnDef="status">
             <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> Statut </mat-header-cell>
             <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}">
-              <mat-select [(value)]="element.status">
+              <mat-select [(value)]="status">
                 <mat-option value="nominatif">nominatif</mat-option>
                 <mat-option value="anonyme">anonyme</mat-option>
               </mat-select>
@@ -126,7 +126,7 @@
     </ng-scrollbar>
   </div>
 
-  <div class="add-quizz">
+  <div class="add-quizz hvr-float">
     <a [routerLink]="['/admin/create']" routerLinkActive="router-link-active">+</a>
   </div>
 </div>

@@ -18,4 +18,9 @@ export class QuizReadBusinessDelegateService
     const url = `assets/mock/detail-quiz.json`;
     return this.http.get<QuizDto>(url);
   }
+
+  getQuestion(): Observable<any> {
+    const url = `assets/mock/question.json`;
+    return this.http.get<QuizDto>(url);
+  }
 }

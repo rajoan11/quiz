@@ -1,74 +1,111 @@
-
 <!-- création quizz  -->
 <div id="creation-quizz">
-<div class="navbar creation-quizz bg-quizz">
+  <div class="navbar creation-quizz bg-quizz">
     <div class="container">
-        <div class="liste">
-          <ul class="liste1">
-              <li class="title"><a>Création de quizz</a></li>
-              <li class="btn-group" dropdown>
-                  <button dropdownToggle type="button" class="btn dropdown-toggle"
-                          aria-controls="dropdown-basic">
-                          Nominatif <span class="caret"></span>
-                  </button>
-                  <ul *dropdownMenu class="dropdown-menu"
-                      role="menu" aria-labelledby="button-basic">
-                    <li role="menuitem"><a class="dropdown-item" href="#">Anonyme</a></li>
-                  </ul>
+      <div class="liste">
+        <ul class="liste1">
+          <li class="title">
+            <a>Création de quizz</a>
+          </li>
+          <li class="btn-group" dropdown>
+            <button dropdownToggle type="button" class="btn dropdown-toggle" aria-controls="dropdown-basic">
+              Nominatif
+              <span class="caret"></span>
+            </button>
+            <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+              <li role="menuitem">
+                <a class="dropdown-item" href="#">Anonyme</a>
               </li>
-          </ul>
+            </ul>
+          </li>
+        </ul>
 
-          <ul class="liste2 theme">
-            <li class="btn-group" dropdown>
-              <a dropdownToggle type="button" class="btn-theme dropdown-toggle" aria-controls="dropdown-basic"></a>
-              <ul *dropdownMenu class="dropdown-menu"
-                  role="menu" aria-labelledby="button-basic">
-                <li role="theme " class="theme"><a class="dropdown-item theme1" href="#"></a></li>
-                <li role="theme " class="theme"><a class="dropdown-item theme2" href="#"></a></li>
-                <li role="theme " class="theme "><a class=" theme3 dropdown-item" href="#"></a></li>
-                <li role="theme " class="theme "><a class=" theme4 dropdown-item" href="#"></a></li>
-                <li role="theme " class="theme "><a class=" theme5 dropdown-item" href="#"></a></li>
-                <li role="theme " class="theme "><a class=" theme6 dropdown-item" href="#"></a></li>
-                <li role="theme " class="theme "><a class="theme7 dropdown-item" href="#"></a></li>
-                <li role="theme " class="theme "><a class=" theme8 dropdown-item" href="#"></a></li>
-                <li role="theme " class="theme "><a class="theme9 dropdown-item" href="#"></a></li>
-                <li role="theme " class="theme "><a class="theme10 dropdown-item" href="#"></a></li>
-                <li role="theme " class="theme "><a class="theme11 dropdown-item" href="#"></a></li>
-                <li role="theme " class="theme "><a class="theme12 dropdown-item" href="#"></a></li>
-                <li role="theme " class="theme "><a class="theme13 dropdown-item" href="#"></a></li>
-                <li role="theme " class="theme "><a class="theme14 dropdown-item" href="#"></a></li>
-                <li role="theme " class="theme "><a class="theme15 dropdown-item" href="#"></a></li>
-                <li role="theme " class="theme "><a class="theme16 dropdown-item" href="#"></a></li>
-              </ul>
-            </li>
-            <li><button class="btn">Finalisation de quizz</button></li>
-          </ul>
-        </div>
+        <ul class="liste2 theme">
+          <li class="btn-group" dropdown>
+            <a dropdownToggle type="button" class="btn-theme dropdown-toggle" aria-controls="dropdown-basic"></a>
+            <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+              <li role="theme " class="theme">
+                <a class="dropdown-item theme1" href="#"></a>
+              </li>
+              <li role="theme " class="theme">
+                <a class="dropdown-item theme2" href="#"></a>
+              </li>
+              <li role="theme " class="theme ">
+                <a class=" theme3 dropdown-item" href="#"></a>
+              </li>
+              <li role="theme " class="theme ">
+                <a class=" theme4 dropdown-item" href="#"></a>
+              </li>
+              <li role="theme " class="theme ">
+                <a class=" theme5 dropdown-item" href="#"></a>
+              </li>
+              <li role="theme " class="theme ">
+                <a class=" theme6 dropdown-item" href="#"></a>
+              </li>
+              <li role="theme " class="theme ">
+                <a class="theme7 dropdown-item" href="#"></a>
+              </li>
+              <li role="theme " class="theme ">
+                <a class=" theme8 dropdown-item" href="#"></a>
+              </li>
+              <li role="theme " class="theme ">
+                <a class="theme9 dropdown-item" href="#"></a>
+              </li>
+              <li role="theme " class="theme ">
+                <a class="theme10 dropdown-item" href="#"></a>
+              </li>
+              <li role="theme " class="theme ">
+                <a class="theme11 dropdown-item" href="#"></a>
+              </li>
+              <li role="theme " class="theme ">
+                <a class="theme12 dropdown-item" href="#"></a>
+              </li>
+              <li role="theme " class="theme ">
+                <a class="theme13 dropdown-item" href="#"></a>
+              </li>
+              <li role="theme " class="theme ">
+                <a class="theme14 dropdown-item" href="#"></a>
+              </li>
+              <li role="theme " class="theme ">
+                <a class="theme15 dropdown-item" href="#"></a>
+              </li>
+              <li role="theme " class="theme ">
+                <a class="theme16 dropdown-item" href="#"></a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <button class="btn">Finalisation de quizz</button>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div> 
+  </div>
 
   <div class="container">
     <div class="row">
-      <div class="col-lg-10 col-sm-8 col-xs-12">
-          <div class="form-quizz">
-              <div class="myrow">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Nom quizz" value="Sushi">
-                </mat-form-field>
-              </div>
-        
-              <div class="myrow textarea">
-                <mat-form-field class="example-full-width">
-                    <textarea matInput placeholder="Description"></textarea>
-                  </mat-form-field>
-              </div>
-            </div>
+      <div class="col-lg-10 col-sm-8 col-xs-12" dnd-droppable (onDropSuccess)="transferRubricSuccess($event)" [dropZones]="['rubric']">
+        <div class="form-quizz">
+          <div class="myrow">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Nom quizz" value="Sushi">
+            </mat-form-field>
+          </div>
 
-            <div class="rubrique">
-                <app-quiz-rubric></app-quiz-rubric>
-            </div>
+          <div class="myrow textarea">
+            <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="Description"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
 
-           
+        <div class="rubrique">
+          <div *ngFor="let rubric of rubrics">
+            <app-quiz-rubric></app-quiz-rubric>
+          </div>
+        </div>
+
+
       </div>
       <div class="col-lg-2 col-sm-4 col-xs-12">
         <app-quiz-question></app-quiz-question>
@@ -76,4 +113,3 @@
     </div>
   </div>
 </div>
-

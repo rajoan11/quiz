@@ -14,4 +14,7 @@ export class QuizReadApplicatifService implements QuizReadApplicatifServiceACI {
   public getQuizs(params: any): Observable<any> {
     return this.quizReadMetierService.getQuizs(params);
   }
+  public getQuestion(): Observable<any> {
+    return this.quizReadMetierService.getQuestion();
+  }
 }

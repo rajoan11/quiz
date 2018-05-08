@@ -1,0 +1,34 @@
+<!-- IMAGES & video -->
+<div class="prent-content-drop">
+  <div class="support"></div>
+  <div class="type-contenu img" *ngIf="contentQuiz === 'image'">Image</div>
+  <div class="type-contenu text" *ngIf="contentQuiz === 'text'">
+    <i class="glyphicon glyphicon-text-size">&nbsp;</i>Texte</div>
+  <div class="type-contenu" *ngIf="contentQuiz === 'video'">
+    <i> </i>Embed</div>
+  <div class="clear"></div>
+
+  <div class="content-drop">
+    <div *ngIf="contentQuiz === 'video'">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+      </div>
+      <div class="clear"></div>
+      <div class="outils">
+        <div class="w-50"></div>
+        <div class="w-50"></div>
+      </div>
+    </div>
+    <div *ngIf="contentQuiz === 'text'">
+      <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true"></app-ngx-editor>
+    </div>
+    <div *ngIf="contentQuiz === 'image'">
+      <img src="/assets/images/drop/1.jpg" alt="">
+      <div class="clear"></div>
+      <div class="outils">
+        <div class="w-50"></div>
+        <div class="w-50"></div>
+      </div>
+    </div>
+  </div>
+</div>

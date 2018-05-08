@@ -28,6 +28,11 @@
     text-decoration: none;
     font-size: inherit;
 }
+#quetsion li.question>a{
+  letter-spacing: 0.5px;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.6);
+}
 .mat-expansion-panel{
     box-shadow: 1px 1px 11px #ccc!important;
     border-radius: 0;

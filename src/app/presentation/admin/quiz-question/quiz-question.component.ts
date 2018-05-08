@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { QuizReadApplicatifServiceACI } from '../../../service-applicatif/quiz-admin';
+import { RubricDto } from '../../../donnee/quiz';
 
 @Component({
   selector: 'app-quiz-question',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./quiz-question.component.css']
 })
 export class QuizQuestionComponent implements OnInit {
+  panelOpenState: boolean;
+  transferData: Object = { id: 1, msg: 'Hello' };
+  rubric = new RubricDto();
 
-  constructor() { }
+  questions = [];
+  constructor(
+    private quizReadApplicatifServiceACI: QuizReadApplicatifServiceACI
+  ) {}
 
   ngOnInit() {
+    this.getQuestions();
   }
 
+  getQuestions(): void {
+    this.quizReadApplicatifServiceACI.getQuestion().subscribe(res => {
+      this.questions = res;
+    });
+  }
 }

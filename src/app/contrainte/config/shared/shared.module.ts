@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { ButtonsModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxEditorModule } from 'ngx-editor';
+import { DndModule } from 'ngx-dnd';
 import {
   MatSortModule,
   MatTableModule,
@@ -27,11 +28,23 @@ import { ScrollbarModule } from 'ngx-scrollbar';
     ScrollbarModule,
     MatInputModule,
     MatExpansionModule,
-    NgxEditorModule 
+    NgxEditorModule,
+    DndModule.forRoot()
   ],
   declarations: [],
-  exports: [ButtonsModule,BsDropdownModule,CollapseModule,BrowserAnimationsModule, MatSortModule,
-    MatTableModule,MatSelectModule,ScrollbarModule,MatInputModule,MatExpansionModule,NgxEditorModule]
-
+  exports: [
+    ButtonsModule,
+    BsDropdownModule,
+    CollapseModule,
+    BrowserAnimationsModule,
+    MatSortModule,
+    MatTableModule,
+    MatSelectModule,
+    ScrollbarModule,
+    MatInputModule,
+    MatExpansionModule,
+    NgxEditorModule,
+    DndModule
+  ]
 })
-export class SharedModule { }
+export class SharedModule {}

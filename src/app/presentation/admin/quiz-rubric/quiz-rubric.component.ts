@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./quiz-rubric.component.css']
 })
 export class QuizRubricComponent implements OnInit {
+  contentQuizs: Array<any> = [];
+  typeAttachement: string;
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  transferDataSuccess($event: any) {
+    this.typeAttachement = $event.dragData;
+    this.contentQuizs.push($event.dragData);
   }
-
 }

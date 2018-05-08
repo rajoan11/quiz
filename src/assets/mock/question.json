@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "value": "multiple_choice",
+    "name": "Choix multiples"
+  },
+  {
+    "id": 2,
+    "value": "checkboxes",
+    "name": "Cases à cocher"
+  },
+  {
+    "id": 3,
+    "value": "long_answer",
+    "name": "Réponse longue"
+  },
+  {
+    "id": 4,
+    "value": "Liste déroulante",
+    "name": "Liste déroulante"
+  },
+  {
+    "id": 5,
+    "value": "dropdown_list",
+    "name": "Échelle linéaire"
+  },
+  {
+    "id": 6,
+    "value": "date",
+    "name": "Date"
+  },
+  {
+    "id": 7,
+    "value": "hour",
+    "name": "Heure"
+  }
+]

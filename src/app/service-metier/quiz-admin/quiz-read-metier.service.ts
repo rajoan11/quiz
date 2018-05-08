@@ -23,8 +23,16 @@ export class QuizReadMetierService implements QuizReadMetierServiceACI {
     return this.quizReadBusinessDelegateService
       .getQuizs(params)
       .pipe(
-        tap(heroes => console.log(`fetched heroes`)),
+        tap(quizs => console.log(`fetched quizs`)),
         catchError(this.handleError('getQuizs', []))
+      );
+  }
+  getQuestion() {
+    return this.quizReadBusinessDelegateService
+      .getQuestion()
+      .pipe(
+        tap(quizs => console.log(`fetched question`)),
+        catchError(this.handleError('geQuestion', []))
       );
   }
 

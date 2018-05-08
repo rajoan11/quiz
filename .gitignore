@@ -44,3 +44,4 @@ testem.log
 Thumbs.db
 /.svn
 /utils
+/node_modules----
