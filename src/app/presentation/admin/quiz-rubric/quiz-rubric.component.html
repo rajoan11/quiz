@@ -11,7 +11,7 @@
     <input type="text" placeholder="  Nom rubrique">
   </p>
   <div class="parent-content">
-    <div *ngFor="let contentQuiz of contentQuizs">
+    <div *ngFor="let contentQuiz of contentQuizs; let i = index">
       <app-content-rubric [contentQuiz]='contentQuiz'></app-content-rubric>
     </div>
 
