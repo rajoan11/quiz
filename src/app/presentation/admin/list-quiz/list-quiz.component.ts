@@ -1,8 +1,20 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  TemplateRef,
+  Inject
+} from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+
 import { QuizDto } from '../../../donnee/quiz';
 import { QuizReadApplicatifServiceACI } from '../../../service-applicatif/quiz-admin';
+import { QuizCudApplicatifServiceACI } from '../../../service-applicatif/quiz-admin';
+import { Window } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-list-quiz',
@@ -10,10 +22,19 @@ import { QuizReadApplicatifServiceACI } from '../../../service-applicatif/quiz-a
   styleUrls: ['./list-quiz.component.css']
 })
 export class ListQuizComponent implements OnInit, AfterViewInit {
-  quizs = new QuizDto();
   dataSource: any;
+  idQuizTodelete: number;
+  message: string;
+  modalRef: BsModalRef;
+  allQuizLength = 210;
+  pages = [10, 20, 30, 40];
+  quizs = new QuizDto();
+  selectedPage = 10;
+  totalItems: number;
   constructor(
     private activatedRoute: ActivatedRoute,
+    private modalService: BsModalService,
+    private quizCudApplicatifServiceACI: QuizCudApplicatifServiceACI,
     private quizReadApplicatifServiceACI: QuizReadApplicatifServiceACI
   ) {}
 
@@ -46,11 +67,47 @@ export class ListQuizComponent implements OnInit, AfterViewInit {
     });
   }
 
-  /**
-   * Set the sort after the view init since this component will
-   * be able to query its view for the initialized sort.
-   */
+  deleteQuiz(idQuiz: number): void {
+    this.quizCudApplicatifServiceACI
+      .deleteQuiz(idQuiz)
+      .subscribe(res => {}, err => {});
+  }
+
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+  }
+
+  openModal(template: TemplateRef<any>, idQuiz: number) {
+    this.idQuizTodelete = idQuiz;
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+
+  confirm(idQuiz: number): void {
+    this.deleteQuiz(idQuiz);
+    this.message = 'Confirmed!';
+    this.modalRef.hide();
+  }
+
+  decline(): void {
+    this.message = 'Declined!';
+    this.modalRef.hide();
+  }
+
+  copyMessage(val: string) {
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = `/copy/${val}`;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+  }
+
+  changeNumberPage(): void {
+    this.totalItems = this.allQuizLength * 10 / this.selectedPage;
   }
 }

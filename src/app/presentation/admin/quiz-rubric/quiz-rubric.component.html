@@ -12,14 +12,16 @@
       <input type="text" placeholder="Nom rubrique">
     </p>
     <div class="parent-content">
-      <div *ngFor="let contentQuiz of contentQuizs">
-        <app-content-rubric [contentQuiz]='contentQuiz'></app-content-rubric>
-      </div>
-      <div dnd-sortable-container [sortableData]="questionQuizs">
+      <ng-container dnd-sortable-container [sortableData]="contentQuizs" [dropZones]="['container-quiz']">
+        <div *ngFor="let contentQuiz of contentQuizs;let j = index" dnd-sortable [sortableIndex]="j">
+          <app-content-rubric [contentQuiz]='contentQuiz'></app-content-rubric>
+        </div>
+      </ng-container>
+      <ng-container dnd-sortable-container [sortableData]="questionQuizs" [dropZones]="['container-question']">
         <div *ngFor="let questionQuiz of questionQuizs;let i = index" dnd-sortable [sortableIndex]="i">
           <app-content-rubric-question [questionQuiz]="questionQuiz"></app-content-rubric-question>
         </div>
-      </div>
+      </ng-container>
 
     </div>
   </div>

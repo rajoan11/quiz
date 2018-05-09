@@ -3,9 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ButtonsModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxEditorModule } from 'ngx-editor';
 import { DndModule } from 'ngx-dnd';
+
 import {
   MatSortModule,
   MatTableModule,
@@ -22,6 +25,8 @@ import { ScrollbarModule } from 'ngx-scrollbar';
     ButtonsModule.forRoot(),
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
+    ModalModule.forRoot(),
+    PaginationModule.forRoot(),
     MatSortModule,
     MatTableModule,
     MatSelectModule,
@@ -36,6 +41,8 @@ import { ScrollbarModule } from 'ngx-scrollbar';
     ButtonsModule,
     BsDropdownModule,
     CollapseModule,
+    ModalModule,
+    PaginationModule,
     BrowserAnimationsModule,
     MatSortModule,
     MatTableModule,

@@ -133,6 +133,19 @@ ng-scrollbar {
 .quizz-table .mat-row:hover .mat-cell:last-child {
   width: auto;
 }
-.mat-elevation-z8{
-  box-shadow: none!important;
+.mat-elevation-z8 {
+  box-shadow: none !important;
+}
+
+.parent-pagination {
+  max-width: 1175px;
+  margin: 0 auto;
+}
+.parent-pagination .paginator {
+  display: inline-block;
+  float: right;
+}
+.parent-pagination .number-item-page {
+  display: inline-block;
+  float: left;
 }

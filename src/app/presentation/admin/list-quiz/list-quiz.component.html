@@ -110,23 +110,50 @@
           <ng-container matColumnDef="vide">
             <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> </mat-header-cell>
             <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}">
-              <a href="" class="picto copy" title="copie"></a>
-              <a href="" class="picto reultat" title="stats global"></a>
-              <a href="" class="picto apercu" title="Aperçu" title="Aperçu"></a>
-              <a href="" class="picto suppr" title="Supprimer"></a>
+              <a (click)="copyMessage(element.id)" class="picto copy" title="copie"></a>
+              <a class="picto reultat" title="stats global"></a>
+              <a class="picto apercu" title="Aperçu" title="Aperçu"></a>
+              <a (click)="openModal(template,element.id)" class="picto suppr " title="Supprimer "></a>
             </mat-cell>
           </ng-container>
+          <!-- deleteQuiz(element.id) -->
 
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns; "></mat-row>
         </mat-table>
       </div>
 
       <!-- Content -->
     </ng-scrollbar>
   </div>
+  <div class="parent-pagination">
+    <div class="number-item-page">
+      <mat-form-field>
+        <mat-select [(value)]="selectedPage" (change)="changeNumberPage()">
+          <mat-option *ngFor="let page of pages" [value]="page">
+            {{ page}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="paginator">
+      <pagination [boundaryLinks]="true" [totalItems]="totalItems" [maxSize]="10" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+        lastText="&raquo;">
 
-  <div class="add-quizz hvr-float">
-    <a [routerLink]="['/admin/create']" routerLinkActive="router-link-active">+</a>
+      </pagination>
+    </div>
+  </div>
+
+
+  <div class="add-quizz hvr-float ">
+    <a [routerLink]="[ '/admin/create'] " routerLinkActive="router-link-active ">+</a>
   </div>
 </div>
+<ng-template #template>
+  <div class="modal-body text-center ">
+    <p>La suppression du formulaire va aussi supprimer les XXX réponses sur celui-ci. Si vous souhaitez conserver les réponses
+      dans votre back-office et que le formulaire ne soit plus en ligne contacter le support.</p>
+    <button type="button " class="btn btn-default " (click)="confirm(idQuizTodelete) ">valider </button>
+    <button type="button " class="btn btn-primary " (click)="decline() ">annuler</button>
+  </div>
+</ng-template>

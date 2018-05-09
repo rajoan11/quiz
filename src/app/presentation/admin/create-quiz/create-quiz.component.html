@@ -99,8 +99,8 @@
           </div>
         </div>
 
-        <div class="rubrique">
-          <div *ngFor="let rubric of rubrics; let x = index">
+        <div class="rubrique" dnd-sortable-container [sortableData]="rubrics" [dropZones]="['container-rubrique-parent']">
+          <div *ngFor="let rubric of rubrics; let x = index" dnd-sortable [sortableIndex]="x" [dragEnabled]="false">
             <app-quiz-rubric [position]="x" [quizLength]="rubrics.length"></app-quiz-rubric>
           </div>
         </div>
