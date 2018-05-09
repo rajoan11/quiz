@@ -1,19 +1,26 @@
 <div dnd-droppable (onDropSuccess)="transferDataSuccess($event)" [dropZones]="['attachement']">
-  <div class="order bg-quizz">
-    <p>
-      <a href="">Rubrique
-        <span>1</span> sur
-        <span>4</span>
-      </a>
-    </p>
-  </div>
-  <p class="order-name">
-    <input type="text" placeholder="  Nom rubrique">
-  </p>
-  <div class="parent-content">
-    <div *ngFor="let contentQuiz of contentQuizs; let i = index">
-      <app-content-rubric [contentQuiz]='contentQuiz'></app-content-rubric>
+  <div dnd-droppable (onDropSuccess)="transferQuestionSuccess($event)" [dropZones]="['question']">
+    <div class="order bg-quizz">
+      <p>
+        <a href="">Rubrique
+          <span>{{position+1}}</span> sur
+          <span>{{quizLength}}</span>
+        </a>
+      </p>
     </div>
+    <p class="order-name">
+      <input type="text" placeholder="Nom rubrique">
+    </p>
+    <div class="parent-content">
+      <div *ngFor="let contentQuiz of contentQuizs">
+        <app-content-rubric [contentQuiz]='contentQuiz'></app-content-rubric>
+      </div>
+      <div dnd-sortable-container [sortableData]="questionQuizs">
+        <div *ngFor="let questionQuiz of questionQuizs;let i = index" dnd-sortable [sortableIndex]="i">
+          <app-content-rubric-question [questionQuiz]="questionQuiz"></app-content-rubric-question>
+        </div>
+      </div>
 
+    </div>
   </div>
 </div>

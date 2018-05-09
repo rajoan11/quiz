@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-quiz-rubric',
@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuizRubricComponent implements OnInit {
   contentQuizs: Array<any> = [];
+  questionQuizs: Array<any> = [];
   typeAttachement: string;
+  @Input() quizLength: number;
+  @Input() position: number;
   constructor() {}
 
   ngOnInit() {}
@@ -15,5 +18,9 @@ export class QuizRubricComponent implements OnInit {
   transferDataSuccess($event: any) {
     this.typeAttachement = $event.dragData;
     this.contentQuizs.push($event.dragData);
+  }
+  transferQuestionSuccess($event: any) {
+    this.typeAttachement = $event.dragData;
+    this.questionQuizs.push($event.dragData);
   }
 }

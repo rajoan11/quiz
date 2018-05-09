@@ -9,6 +9,7 @@ import { CreateQuizComponent } from './create-quiz/create-quiz.component';
 import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
 import { QuizRubricComponent } from './quiz-rubric/quiz-rubric.component';
 import { ContentRubricComponent } from './content-rubric/content-rubric.component';
+import { ContentRubricQuestionComponent } from './content-rubric-question/content-rubric-question.component';
 
 @NgModule({
   imports: [CommonModule, AdminRoutingModule, SharedModule],
@@ -18,7 +19,8 @@ import { ContentRubricComponent } from './content-rubric/content-rubric.componen
     CreateQuizComponent,
     QuizQuestionComponent,
     QuizRubricComponent,
-    ContentRubricComponent
+    ContentRubricComponent,
+    ContentRubricQuestionComponent
   ]
 })
 export class AdminPresentationModule {}

@@ -1,7 +1,6 @@
 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
   <mat-expansion-panel-header>
     <mat-panel-title>
-
       QUESTION
     </mat-panel-title>
     <mat-panel-description>
@@ -10,27 +9,8 @@
 
   <ul id="quetsion">
 
-    <li *ngFor="let question of questions" dnd-draggable [dragEnabled]="true" [dragData]="question">
+    <li *ngFor="let question of questions" dnd-draggable [dragEnabled]="true" [dragData]="question" [dropZones]="['question']">
       <a href="">{{question.name}}</a>
-      <!-- </li>
-    <li>
-      <a href="">Cases à cocher</a>
-    </li>
-    <li>
-      <a href="">Réponse longue</a>
-    </li>
-    <li>
-      <a href="">Liste déroulante</a>
-    </li>
-    <li>
-      <a href="">Échelle linéaire</a>
-    </li>
-    <li>
-      <a href="">Date</a>
-    </li>
-    <li>
-      <a href="">Heure</a>
-    </li> -->
       <li class="question text" dnd-draggable [dragEnabled]="true" [dragData]="'text'" [dropZones]="['attachement']">
         <a href="">TEXT</a>
       </li>
