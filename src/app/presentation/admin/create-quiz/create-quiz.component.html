@@ -99,9 +99,9 @@
           </div>
         </div>
 
-        <div class="rubrique" dnd-sortable-container [sortableData]="rubrics">
-          <div *ngFor="let rubric of rubrics; let i = index" dnd-sortable [sortableIndex]="i">
-            <app-quiz-rubric [position]="i" [quizLength]="rubrics.length"></app-quiz-rubric>
+        <div class="rubrique">
+          <div *ngFor="let rubric of rubrics; let x = index">
+            <app-quiz-rubric [position]="x" [quizLength]="rubrics.length"></app-quiz-rubric>
           </div>
         </div>
 
