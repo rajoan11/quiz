@@ -17,6 +17,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminPresentationModule } from '../../../presentation/admin/admin-presentation.module';
 import { ResultatPresentationModule } from '../../../presentation/resultat/resultat-presentation.module';
+import { FrontPresentationModule } from '../../../presentation/front/front-presentation.module';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -34,7 +35,8 @@ import { ResultatPresentationModule } from '../../../presentation/resultat/resul
     SharedModule,
     AppRoutingModule,
     AdminPresentationModule,
-    ResultatPresentationModule
+    ResultatPresentationModule,
+    FrontPresentationModule
   ],
   providers: [
     {
