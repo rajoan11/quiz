@@ -438,3 +438,33 @@ ul,ol{
     background-color: #fff;
     border-color: #fc6100;
   }
+  .pagination{
+      border-radius: 0;
+  }
+  .pagination>li>a, .pagination>li>span{
+      border: none!important;
+  }
+  .pagination>li:first-child>a, .pagination>li:first-child>span,
+  .pagination>li:last-child>a, .pagination>li:last-child>span {
+    border: 1px #ddd solid!important;
+    padding: 5px 14px;
+    background-color: #fff;
+    border-radius: 15px!important;
+    color: #eb6b1c !important;
+    font-family: firasans;
+    font-weight: 400;
+}
+.pagination>.active>a, .pagination>.active>a:focus,.pagination>li>a:hover
+ .pagination>.active>a:hover, .pagination>.active>span,
+ .pagination>.active>span:focus, .pagination>.active>span:hover,
+ .pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus,
+  .pagination>li>span:hover {
+    color: #fc6100!important;
+    cursor: pointer!important;
+    background: none!important;
+}
+.pagination>li>a, .pagination>li>span{
+    color: #000!important;
+    font-family: firasans;
+    font-weight: 700;
+}
