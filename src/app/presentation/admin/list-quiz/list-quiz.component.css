@@ -42,7 +42,7 @@
 }
 
 ng-scrollbar {
-  height: 460px;
+  height: 317px;
   width: 100%;
 
   /* overflow-x: scroll!important; */
@@ -51,6 +51,8 @@ ng-scrollbar {
 .quizz-table .container-table {
   margin: 45px auto;
   padding: 0;
+  max-height: 317px;
+  overflow: hidden;
 }
 
 .ng-scrollbar -vertical > .ng-scrollbar-thumb {
