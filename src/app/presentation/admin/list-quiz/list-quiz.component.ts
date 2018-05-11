@@ -21,11 +21,14 @@ import { Window } from 'selenium-webdriver';
   templateUrl: './list-quiz.component.html',
   styleUrls: ['./list-quiz.component.css']
 })
-export class ListQuizComponent implements OnInit, AfterViewInit {
-  dataSource: any;
+export class ListQuizComponent implements OnInit {
+  currentPage: number;
+  initialPage = 1;
+  dataSource = new MatTableDataSource();
   idQuizTodelete: number;
   message: string;
   modalRef: BsModalRef;
+  loadingList = true;
   allQuizLength = 210;
   pages = [10, 20, 30, 40];
   quizs = new QuizDto();
@@ -56,25 +59,26 @@ export class ListQuizComponent implements OnInit, AfterViewInit {
   selected = 'nominatif';
 
   ngOnInit() {
-    this.getQuizs();
+    this.getQuizs(1);
   }
 
-  getQuizs(): void {
-    this.activatedRoute.data.subscribe(data => {
-      this.quizs = data.quizs;
-      this.dataSource = new MatTableDataSource(data.quizs);
-      console.log(this.quizs);
-    });
+  getQuizs(page = 1, enterprise?: string, search?: string): void {
+    this.loadingList = true;
+    this.quizReadApplicatifServiceACI.getQuizs({}).subscribe(
+      res => {
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.sort = this.sort;
+        this.totalItems = this.allQuizLength * 10 / this.selectedPage;
+        this.loadingList = false;
+      },
+      err => {}
+    );
   }
 
   deleteQuiz(idQuiz: number): void {
     this.quizCudApplicatifServiceACI
       .deleteQuiz(idQuiz)
       .subscribe(res => {}, err => {});
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
   }
 
   openModal(template: TemplateRef<any>, idQuiz: number) {
@@ -109,5 +113,11 @@ export class ListQuizComponent implements OnInit, AfterViewInit {
 
   changeNumberPage(): void {
     this.totalItems = this.allQuizLength * 10 / this.selectedPage;
+    this.getQuizs(this.currentPage);
+  }
+
+  pageChanged(event: any): void {
+    this.currentPage = event.page;
+    this.getQuizs(this.currentPage);
   }
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonsModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
@@ -17,10 +18,12 @@ import {
   MatExpansionModule
 } from '@angular/material';
 import { ScrollbarModule } from 'ngx-scrollbar';
+import { LoaderModule } from '../../../presentation/loader/loader.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     BrowserAnimationsModule,
     ButtonsModule.forRoot(),
     BsDropdownModule.forRoot(),
@@ -34,10 +37,12 @@ import { ScrollbarModule } from 'ngx-scrollbar';
     MatInputModule,
     MatExpansionModule,
     NgxEditorModule,
-    DndModule.forRoot()
+    DndModule.forRoot(),
+    LoaderModule
   ],
   declarations: [],
   exports: [
+    FormsModule,
     ButtonsModule,
     BsDropdownModule,
     CollapseModule,
@@ -51,7 +56,8 @@ import { ScrollbarModule } from 'ngx-scrollbar';
     MatInputModule,
     MatExpansionModule,
     NgxEditorModule,
-    DndModule
+    DndModule,
+    LoaderModule
   ]
 })
 export class SharedModule {}

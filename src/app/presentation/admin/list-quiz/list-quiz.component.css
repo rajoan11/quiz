@@ -96,6 +96,9 @@ ng-scrollbar {
 .quizz-table .mat-header-cell:first-child {
   font-weight: 600;
 }
+.quizz-table .mat-row a{
+  cursor: pointer;
+}
 .quizz-table .mat-row a.picto.copy {
   background-position: -3px -2px;
 }

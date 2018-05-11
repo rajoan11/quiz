@@ -378,7 +378,12 @@ ul,ol{
     padding: 8px 10px 0!important;
 }
 .ngx-editor-textarea{
-    min-height: 150px!important;
+    min-height: 84px!important;
+    border: none!important;
+    border-bottom: 1px #d8d8d8 solid!important;
+}
+.ngx-editor .ngx-wrapper .ngx-editor-placeholder{
+    display: inline;
 }
 .ngx-editor{
     width: 100%;
@@ -388,6 +393,9 @@ ul,ol{
 }
 .ngx-editor .ngx-editor-grippie{
     height: 31px!important;
+}
+.content-drop .ng-star-inserted>.ngx-editor-grippie{
+    visibility: hidden;
 }
 /* Float */
 .hvr-float {
@@ -408,3 +416,25 @@ ul,ol{
     transform: translateY(-8px);
   }
   
+  /* POPUP
+  &&&&&&&&&&&&*/
+  .modal-dialog{
+    max-width: 519px;
+    width: 100%!important;
+    display: block;
+  }
+  .modal-content{
+      border-radius: 0!important;
+  }
+  body .btn-primary{
+    background-color: #fc6100;
+    border-color: #fc6100;
+    border-radius: 0;
+    color: #fff;
+  }
+  body .btn-default{
+    border-radius: 0;
+    color: #fc6100!important;
+    background-color: #fff;
+    border-color: #fc6100;
+  }

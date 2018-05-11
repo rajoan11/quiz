@@ -60,7 +60,7 @@
 <div class="quizz-table">
 
   <div class="container container-table">
-
+    <app-loader [load]="loadingList"></app-loader>
     <ng-scrollbar #scrollRef [trackY]="true" [trackX]="true">
 
       <div class="example-container mat-elevation-z8">
@@ -111,7 +111,7 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> </mat-header-cell>
             <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}">
               <a (click)="copyMessage(element.id)" class="picto copy" title="copie"></a>
-              <a class="picto reultat" title="stats global"></a>
+              <a class="picto reultat" title="stats global" [routerLink]="['/resultat/stat']" routerLinkActive="router-link-active"></a>
               <a class="picto apercu" title="Aperçu" title="Aperçu"></a>
               <a (click)="openModal(template,element.id)" class="picto suppr " title="Supprimer "></a>
             </mat-cell>
@@ -137,8 +137,8 @@
       </mat-form-field>
     </div>
     <div class="paginator">
-      <pagination [boundaryLinks]="true" [totalItems]="totalItems" [maxSize]="10" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
-        lastText="&raquo;">
+      <pagination [(ngModel)]="initialPage" (pageChanged)="pageChanged($event)" [boundaryLinks]="true" [totalItems]="totalItems"
+        [maxSize]="10" previousText="Précédent" nextText="Suivant" firstText="&laquo;" lastText="&raquo;">
 
       </pagination>
     </div>
