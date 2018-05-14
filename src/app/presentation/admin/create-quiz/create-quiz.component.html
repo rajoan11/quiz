@@ -1,6 +1,6 @@
 <!-- création quizz  -->
 <div id="creation-quizz">
-  <div class="navbar creation-quizz bg-quizz">
+  <div class="navbar creation-quizz bg-quizz" [style.background]="colorCss">
     <div class="container">
       <div class="liste">
         <ul class="liste1">
@@ -25,7 +25,7 @@
             <a dropdownToggle type="button" class="btn-theme dropdown-toggle" aria-controls="dropdown-basic"></a>
             <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
               <li role="theme " class="theme">
-                <a class="dropdown-item theme1"></a>
+                <a class="dropdown-item theme1" (click)="changeColor('blue')"></a>
               </li>
               <li role="theme " class="theme">
                 <a class="dropdown-item theme2"></a>
@@ -87,13 +87,13 @@
       <div class="col-lg-10 col-sm-8 col-xs-12" dnd-droppable (onDropSuccess)="transferRubricSuccess($event)" [dropZones]="['rubric']">
         <div class="form-quizz">
           <div class="myrow">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Nom quizz" value="Sushi">
+            <mat-form-field class="example-full-width" floatPlaceholder="never">
+              <input matInput placeholder="Nom quizz" value="">
             </mat-form-field>
           </div>
 
           <div class="myrow textarea">
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="example-full-width" floatPlaceholder="never">
               <textarea matInput placeholder="Description"></textarea>
             </mat-form-field>
           </div>

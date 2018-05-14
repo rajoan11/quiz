@@ -7,12 +7,18 @@ import { RubricDo } from '../../../donnee/quiz';
   styleUrls: ['./create-quiz.component.css']
 })
 export class CreateQuizComponent implements OnInit {
+  colorCss: string;
   rubrics: Array<RubricDo> = [];
+
   constructor() {}
 
   ngOnInit() {}
 
   transferRubricSuccess($event: any) {
     this.rubrics.push($event && $event.dragData);
+  }
+
+  changeColor(color: string): void {
+    this.colorCss = color;
   }
 }
