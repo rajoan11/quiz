@@ -6,6 +6,7 @@ import {
   TemplateRef,
   Inject
 } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -14,7 +15,6 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { QuizDto } from '../../../donnee/quiz';
 import { QuizReadApplicatifServiceACI } from '../../../service-applicatif/quiz-admin';
 import { QuizCudApplicatifServiceACI } from '../../../service-applicatif/quiz-admin';
-import { Window } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-list-quiz',
@@ -22,17 +22,24 @@ import { Window } from 'selenium-webdriver';
   styleUrls: ['./list-quiz.component.css']
 })
 export class ListQuizComponent implements OnInit {
+  allQuizLength = 210;
   currentPage: number;
-  initialPage = 1;
   dataSource = new MatTableDataSource();
+  enterprises: any;
   idQuizTodelete: number;
+  initialPage = 1;
   message: string;
   modalRef: BsModalRef;
-  loadingList = true;
-  allQuizLength = 210;
+  loadingList = false;
   pages = [10, 20, 30, 40];
   quizs = new QuizDto();
-  selectedPage = 10;
+  searchParams = {
+    page: 1,
+    numberListPerPage: 10,
+    name: null,
+    enterprise: null
+  };
+  searchTerm = new Subject<any>();
   totalItems: number;
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -44,8 +51,8 @@ export class ListQuizComponent implements OnInit {
   displayedColumns = [
     'name',
     'description',
-    'date',
-    'enterprise',
+    'created_date',
+    'entreprise',
     'response',
     'status',
     'vide'
@@ -59,20 +66,15 @@ export class ListQuizComponent implements OnInit {
   selected = 'nominatif';
 
   ngOnInit() {
-    this.getQuizs(1);
+    this.searchQuiz();
+    this.getEntreprises();
+    this.searchTerm.next(this.searchParams);
   }
 
-  getQuizs(page = 1, enterprise?: string, search?: string): void {
-    this.loadingList = true;
-    this.quizReadApplicatifServiceACI.getQuizs({}).subscribe(
-      res => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
-        this.totalItems = this.allQuizLength * 10 / this.selectedPage;
-        this.loadingList = false;
-      },
-      err => {}
-    );
+  getEntreprises(): void {
+    this.activatedRoute.data.subscribe(data => {
+      this.enterprises = data.enterprises;
+    });
   }
 
   deleteQuiz(idQuiz: number): void {
@@ -112,12 +114,70 @@ export class ListQuizComponent implements OnInit {
   }
 
   changeNumberPage(): void {
-    this.totalItems = this.allQuizLength * 10 / this.selectedPage;
-    this.getQuizs(this.currentPage);
+    setTimeout(() => {
+      this.setPage(1);
+    }, 1);
+    this.totalItems =
+      this.allQuizLength * 10 / this.searchParams.numberListPerPage;
+    this.searchTerm.next(this.searchParams);
   }
 
   pageChanged(event: any): void {
-    this.currentPage = event.page;
-    this.getQuizs(this.currentPage);
+    this.searchParams.page = event.page;
+    this.searchTerm.next(this.searchParams);
+  }
+  onChangeName(event: any): void {
+    setTimeout(() => {
+      this.setPage(1);
+    }, 1);
+    this.searchTerm.next(this.searchParams);
+  }
+
+  changeEnterprise(): void {
+    setTimeout(() => {
+      this.setPage(1);
+    }, 1);
+    this.searchTerm.next(this.searchParams);
+  }
+
+  formatDate(date: string): string {
+    const dateFormat = date.split('/');
+    return `${dateFormat[1]}/${dateFormat[0]}/${dateFormat[2]}`;
+  }
+
+  searchQuiz(): void {
+    this.loadingList = true;
+    this.searchTerm
+      .switchMap(term => {
+        return this.quizReadApplicatifServiceACI.getQuizs(this.searchParams);
+      })
+      .subscribe(
+        res => this.onSuccessSearch(res),
+        err => this.onErrorSearch(err)
+      );
+  }
+
+  onSuccessSearch(res): void {
+    this.loadingList = false;
+    this.dataSource = new MatTableDataSource(res);
+    this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch (property) {
+        case 'created_date':
+          return new Date(this.formatDate(item['created_date'])).getTime();
+        default:
+          return item[property];
+      }
+    };
+    this.totalItems =
+      this.allQuizLength * 10 / this.searchParams.numberListPerPage;
+    this.loadingList = false;
+  }
+  onErrorSearch(err): void {
+    this.loadingList = false;
+  }
+
+  setPage(page: number): void {
+    this.searchParams.page = page;
   }
 }

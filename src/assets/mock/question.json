@@ -11,26 +11,31 @@
   },
   {
     "id": 3,
+    "value": "short_answer",
+    "name": "Réponse courte"
+  },
+  {
+    "id": 4,
     "value": "long_answer",
     "name": "Réponse longue"
   },
   {
-    "id": 4,
-    "value": "Liste déroulante",
+    "id": 5,
+    "value": "select",
     "name": "Liste déroulante"
   },
   {
-    "id": 5,
+    "id": 6,
     "value": "dropdown_list",
     "name": "Échelle linéaire"
   },
   {
-    "id": 6,
+    "id": 7,
     "value": "date",
     "name": "Date"
   },
   {
-    "id": 7,
+    "id": 8,
     "value": "hour",
     "name": "Heure"
   }

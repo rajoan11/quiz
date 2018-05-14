@@ -1,10 +1,10 @@
 <!-- IMAGES & video -->
-<div class="prent-content-drop">
+<div class="prent-content-drop w-picto">
   <div class="support"></div>
   <div class="type-contenu img" *ngIf="contentQuiz === 'image'">Image</div>
   <div class="type-contenu text" *ngIf="contentQuiz === 'text'">
     <i class="glyphicon glyphicon-text-size">&nbsp;</i>Texte</div>
-  <div class="type-contenu" *ngIf="contentQuiz === 'video'">
+  <div class="type-contenu embed_a" *ngIf="contentQuiz === 'video'">
     <i> </i>Embed</div>
   <div class="clear"></div>
 
@@ -30,5 +30,12 @@
         <div class="w-50"></div>
       </div>
     </div>
+    <div class="groupe-btn">
+        <div class="row">
+          <div class="col-sm-12">
+              <button class="btn btn-suppr pull-right border"></button>
+            </div>
+        </div>
+      </div>
   </div>
 </div>

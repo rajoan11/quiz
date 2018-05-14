@@ -36,6 +36,15 @@ export class QuizReadMetierService implements QuizReadMetierServiceACI {
       );
   }
 
+  getEnterprises() {
+    return this.quizReadBusinessDelegateService
+      .getEnterprises()
+      .pipe(
+        tap(entreprises => console.log(`fetched entreprises`)),
+        catchError(this.handleError('getEnterprise', []))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       return of(error as T);

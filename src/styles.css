@@ -300,17 +300,17 @@ ul,ol{
 }
 .add-quizz{
     float: right;
-    width: 50px;
-    height: 50px;
-    display: block;
+    width: 80px;
+    height: 80px;
+    display: block!important;
     background: #fc6100;
     position: fixed;
-    bottom: 0;
+    bottom: 0px;
     right: 0;
     border-radius: 50%;
     margin: 15px;
     text-align: center;
-    line-height: 50px;
+    line-height: 80px;
     z-index: 100;
 }
 .add-quizz a{
@@ -344,6 +344,7 @@ ul,ol{
     font-weight: 600;
     color: #6b6b6b;
 }
+
 #creation-quizz .mat-expansion-indicator::after {
     content: ''!important;
     display: inline-block!important;
@@ -358,6 +359,7 @@ ul,ol{
 
 .prent-content-drop{
     box-shadow: 0 5px 14px 0 rgba(166, 166, 166, 0.4);
+    margin: 40px 0;
 }
 .form-quizz,.rubrique,.parent-content{
     margin-bottom: 30px;
@@ -425,6 +427,7 @@ ul,ol{
   }
   .modal-content{
       border-radius: 0!important;
+      padding: 25px 15px;
   }
   body .btn-primary{
     background-color: #fc6100;
@@ -467,4 +470,137 @@ ul,ol{
     color: #000!important;
     font-family: firasans;
     font-weight: 700;
+}
+.parent-pagination .mat-form-field-infix{
+    width: 65px!important;
+  }
+  .parent-pagination .mat-select-trigger{
+      width: 100%!important;
+  }
+  .parent-pagination .mat-form-field-wrapper{
+      margin: 0 10px;
+}
+.content-drop{
+    display: table;
+    width: 100%;
+}
+
+.content-drop .groupe-btn .btn,
+.content-drop .groupe-btn table td{
+    display: inline-block;
+    height: 54px;
+}
+
+.content-drop .groupe-btn .btn-suppr{
+    width: 54px;
+    height: 54px;
+    background: url(/assets/images/delete.png) no-repeat center;
+    background-size: 26px 26px;
+}
+.content-drop .groupe-btn .btn-suppr.border{
+    border: 1px #ddd solid;
+}
+.content-drop .groupe-btn table td{
+    width: auto;
+}
+.content-drop .groupe-btn table td .mat-slide-toggle{
+    width: 100%;
+    height: 100%;
+    padding-left: 39px;
+}
+.content-drop .groupe-btn table td:nth-child(2){
+    width: 66%;
+}
+.content-drop .groupe-btn table td:nth-child(1){
+    border-right: 1px #e4e0e0 solid;
+}
+.content-drop .groupe-btn table td>.menu{
+    width: 20px;
+    float: right;
+    height: 100%;
+    background: url(/assets/images/action2.png) no-repeat center;
+    background-size: contain;
+    border: 0;
+}
+.content-drop .groupe-btn table{
+    width: 100%;
+}
+.content-drop .groupe-btn{
+    display: table;
+    background: #fff;
+    border-radius: 0;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+.content-drop .groupe-btn table,
+.content-drop .groupe-btn .btn.edite{
+    border: 1px #e4e0e0 solid;
+}
+.content-drop .groupe-btn .btn.edite{
+    background: #fff;
+    border-radius: 0;
+    padding-left: 40px;
+    position: relative;
+    font-weight: 600;
+    color: #fc6100;
+    font-size: 12px;
+    width: 130px;
+}
+.content-drop .groupe-btn .btn.edite>span.edit{
+    position: absolute;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    left: 4px;
+    top: 21%;
+    background: url(/assets/images/edit.jpg) no-repeat center;
+    background-size: contain;
+}
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb{
+    background-color: #fc6100;
+}
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar{
+    background-color: #ff9b5c;
+}
+
+.form-quizz.q-courte .mat-form-field-label{
+    color: #4f5e65;
+    font-size: 16px;
+    font-weight: 600;
+}
+.form-quizz.q-courte .textarea label{
+    color: #4f5e65;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: italic;
+}
+.form-quizz.q-courte .textarea .mat-form-field{
+    max-width: 100%;
+}
+.form-quizz .mat-form-field{
+    max-width: 290px;
+    width: 100%;
+}
+.mat-form-field-ripple{
+    background-color: #fc6100!important;
+}
+.mat-form-field-underline{
+    background-color: #dcdcdc;
+}
+.prent-content-drop .embed-responsive{
+    max-width: 532px;
+    width: 100%;
+    margin: 0 auto;
+}
+#attachement{
+    opacity: 1;
+    display: table;
+    box-shadow: 1px 1px 11px #ccc!important;
+}
+#attachement li{
+    background-color: #fff;
+}
+.relative app-quiz-question{
+    position: fixed;
 }

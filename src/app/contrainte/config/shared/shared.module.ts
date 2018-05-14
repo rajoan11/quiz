@@ -9,6 +9,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxEditorModule } from 'ngx-editor';
 import { DndModule } from 'ngx-dnd';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import {
   MatSortModule,
@@ -38,7 +39,8 @@ import { LoaderModule } from '../../../presentation/loader/loader.module';
     MatExpansionModule,
     NgxEditorModule,
     DndModule.forRoot(),
-    LoaderModule
+    LoaderModule,
+    MatSlideToggleModule
   ],
   declarations: [],
   exports: [
@@ -57,7 +59,8 @@ import { LoaderModule } from '../../../presentation/loader/loader.module';
     MatExpansionModule,
     NgxEditorModule,
     DndModule,
-    LoaderModule
+    LoaderModule,
+    MatSlideToggleModule
   ]
 })
 export class SharedModule {}

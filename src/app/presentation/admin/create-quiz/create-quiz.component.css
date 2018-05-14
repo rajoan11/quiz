@@ -252,3 +252,6 @@
 .rubrique {
   min-height: 100px;
 }
+.relative{
+  position: relative;
+}

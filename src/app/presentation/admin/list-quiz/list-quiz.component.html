@@ -5,52 +5,35 @@
         <a>Création de quizz</a>
       </li>
       <li class="btn-group" dropdown>
-        <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+        <!-- <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
           Filtrer par entreprise
-          <span class="caret"></span>
-        </button>
-        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-          <li role="menuitem">
-            <a class="dropdown-item" href="#">Entreprise1</a>
-          </li>
-          <li role="menuitem">
-            <a class="dropdown-item" href="#">Entreprise2</a>
-          </li>
-          <li role="menuitem">
-            <a class="dropdown-item" href="#">Entreprise3</a>
+          <span class="caret"></span> floatPlaceholder="never"
+        </button> -->
+        <mat-form-field floatPlaceholder="never">
+          <mat-select placeholder="Filtrer par entreprise" [(ngModel)]="searchParams.enterprise" (change)="changeEnterprise()">
+            <mat-option>Aucun</mat-option>
+            <mat-option *ngFor="let enterprise of enterprises" [value]="enterprise.nid">
+              {{enterprise.title}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+          <li role="menuitem" *ngFor="let enterprise of enterprises">
+            <a class="dropdown-item" (click)="filterByEntreprise(enterprise.nid)">{{enterprise.title}}</a>
           </li>
           <li class="divider dropdown-divider"></li>
-          <li role="menuitem">
-            <a class="dropdown-item" href="#">Entreprise4</a>
-            <li role="menuitem">
-              <a class="dropdown-item" href="#">Entreprise5</a>
-              <li role="menuitem">
-                <a class="dropdown-item" href="#">Entreprise6</a>
-                <li role="menuitem">
-                  <a class="dropdown-item" href="#">Entreprise7</a>
-                  <li role="menuitem">
-                    <a class="dropdown-item" href="#">Entreprise8</a>
-                    <li role="menuitem">
-                      <a class="dropdown-item" href="#">Entreprise9</a>
-                      <li role="menuitem">
-                        <a class="dropdown-item" href="#">Entreprise10</a>
-                        <li role="menuitem">
-                          <a class="dropdown-item" href="#">Entreprise11</a>
-                          <li role="menuitem">
-                            <a class="dropdown-item" href="#">Entreprise12</a>
-                            <li role="menuitem">
-                              <a class="dropdown-item" href="#">Entreprise13</a>
-                            </li>
-        </ul>
-        </li>
-        <li class="form">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Rechercher..">
-            <span class="input-group-btn">
-              <button class="btn btn-search" type="button"></button>
-            </span>
-          </div>
-        </li>
+
+        </ul> -->
+      </li>
+      <li class="form">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Rechercher.." [(ngModel)]="searchParams.name" (ngModelChange)="onChangeName($event)"
+          />
+          <span class="input-group-btn">
+            <button class="btn btn-search" type="button"></button>
+          </span>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
@@ -81,12 +64,12 @@
             <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.description}} </mat-cell>
           </ng-container>
           <!-- Symbol Column -->
-          <ng-container matColumnDef="date">
+          <ng-container matColumnDef="created_date">
             <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> date creation </mat-header-cell>
             <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.created_date}} </mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="enterprise">
+          <ng-container matColumnDef="entreprise">
             <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> Entreprise </mat-header-cell>
             <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.entreprise}} </mat-cell>
           </ng-container>
@@ -101,7 +84,7 @@
           <ng-container matColumnDef="status">
             <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> Statut </mat-header-cell>
             <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}">
-              <mat-select [(value)]="status">
+              <mat-select [(value)]="element.status">
                 <mat-option value="nominatif">nominatif</mat-option>
                 <mat-option value="anonyme">anonyme</mat-option>
               </mat-select>
@@ -128,17 +111,20 @@
   </div>
   <div class="parent-pagination">
     <div class="number-item-page">
+      AFFICHER
       <mat-form-field>
-        <mat-select [(value)]="selectedPage" (change)="changeNumberPage()">
+        <mat-select [(ngModel)]="searchParams.numberListPerPage" (change)="changeNumberPage()">
           <mat-option *ngFor="let page of pages" [value]="page">
             {{ page}}
           </mat-option>
         </mat-select>
       </mat-form-field>
+      LIGNES PAR PAGE
+
     </div>
     <div class="paginator">
-      <pagination [(ngModel)]="initialPage" (pageChanged)="pageChanged($event)"  [totalItems]="totalItems"
-        [maxSize]="10" previousText="Précédent" nextText="Suivant" firstText="&laquo;" lastText="&raquo;">
+      <pagination [(ngModel)]="searchParams.page" (pageChanged)="pageChanged($event)" [totalItems]="totalItems" [maxSize]="10"
+        previousText="Précédent" nextText="Suivant" firstText="&laquo;" lastText="&raquo;">
 
       </pagination>
     </div>

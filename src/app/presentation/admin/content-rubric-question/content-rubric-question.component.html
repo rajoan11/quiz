@@ -1,15 +1,124 @@
-<!-- <div class="prent-content-drop">
-  <div class="support"></div>
-  <div class="type-contenu img">{{_questionQuiz.name}}</div>
-  <div class="content-drop">
 
-  </div>
-</div> -->
 
 <div class="prent-content-drop">
   <div class="support"></div>
-  <div class="type-contenu img">{{_questionQuiz.name}}</div>
+  <div class="type-contenu">{{_questionQuiz.name}}</div>
   <div class="content-drop">
+    <div *ngIf="_questionQuiz.value === 'multiple_choice'">
+      choix multiple
+    </div>
+    <div *ngIf="_questionQuiz.value === 'checkboxes'">
+      case à cocher
+    </div>
+    <!-- question courte -->
+    <div *ngIf="_questionQuiz.value === 'short_answer'">
+      <div class="form-quizz ">
+        <div class=" col-sm-12">
+          <div class="myrow">
+            <mat-form-field class="example-full-width mat-form-field">
+              <input matInput placeholder="Question" value="">
+            </mat-form-field>
+          </div>
+
+          <div class="myrow textarea">
+            <mat-form-field class="example-full-width mat-form-field">
+              <textarea matInput placeholder="Réponse courte ..."></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-6">
+              <table>
+                <tr>
+                  <td>
+                    <mat-form-field>
+                      <mat-select  >
+                        <mat-option *ngFor="let page of [1,2,3]" [value]="page">
+                         select1
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field>
+                      
+                      <mat-select  >
+                        <mat-option *ngFor="let page of [1,2,3]" [value]="page">
+                          select2
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="col-sm-6">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero qui nemo porro, aut itaque, ducimus corporis doloremque vitae nesciunt commodi cum fugit odio cumque ex, earum tempora quidem corrupti eaque?
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- question long -->
+    <div *ngIf="_questionQuiz.value === 'long_answer'">
+      <div class="form-quizz q-courte">
+        <div class=" col-sm-12">
+          <div class="myrow">
+            <mat-form-field class="example-full-width mat-form-field">
+              <input matInput placeholder="Question" value="">
+            </mat-form-field>
+          </div>
+
+          <div class="myrow textarea">
+            <mat-form-field class="example-full-width mat-form-field">
+              <textarea matInput placeholder="Réponse longue ..."></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="_questionQuiz.value === 'select'">
+     liste deroulante
+    </div>
+    <div *ngIf="_questionQuiz.value === 'dropdown_list'">
+      echelle lineaire
+    </div>
+    <div *ngIf="_questionQuiz.value === 'date'">
+      date
+    </div>
+    <div *ngIf="_questionQuiz.value === 'hour'">
+      heure 
+    </div>
+    
+
+      <div class="groupe-btn">
+        <div class="row">
+          <div class="col-sm-2">
+              <button class="btn edite"><span class="edit"></span>Corriger</button>
+          </div>
+          <div class="col-sm-4 col-sm-offset-6">
+              <table>
+                <tr>
+                  <td><button class="btn btn-suppr"></button></td>
+                  <td><mat-slide-toggle>Slide me!</mat-slide-toggle></td>
+                  <td><button class="menu"></button></td>
+                </tr>
+              </table>
+            </div>
+        </div>
+        
+      </div>
+
+
+          
 
   </div>
+ 
+
 </div>

@@ -1,8 +1,8 @@
-#quetsion{
+#attachement, #quetsion {
     padding: 0;
     margin: 0;
 }
-#quetsion li{
+#attachement  li, #quetsion  li{
     list-style: none;
     display: block;
     height: 60px;
@@ -17,18 +17,18 @@
     position: relative;
     border-bottom: 1px #e6e2e2 solid;
 }
-#quetsion li:hover{
+#attachement li:hover, #quetsion  li:hover{
     background-color: #fff;
 }
-#quetsion li ul>li{
+#attachement li ul>li, #quetsion  li ul>li{
     height: auto;
 }
-#quetsion li>a{
+#attachement  li>a, #quetsion  li>a{
     color: #000;
     text-decoration: none;
     font-size: inherit;
 }
-#quetsion li.question>a{
+#attachement  li.question>a, #quetsion  li.question>a{
   letter-spacing: 0.5px;
   text-align: left;
   color: rgba(0, 0, 0, 0.6);
@@ -37,7 +37,7 @@
     box-shadow: 1px 1px 11px #ccc!important;
     border-radius: 0;
 }
-#quetsion li.question:before{
+#attachement  li.question:before, #quetsion  li.question:before{
     position: absolute;
     content: '';
     width: 35px;
@@ -47,19 +47,19 @@
     top: 10px;
     background-size: 35px 150px;
 }
-#quetsion li.question.text:before{
+#attachement   li.question.text:before, #quetsion  li.question.text:before{
     background-position: 0px -113px;
 }
-#quetsion li.question.img:before{
+#attachement   li.question.img:before, #quetsion  li.question.img:before{
     background-position: 0px -75px;
 }
-#quetsion li.question.embed:before{
+#attachement   li.question.embed:before, #quetsion  li.question.embed:before{
     background-position: 0px -37px;
 }
-#quetsion li.question.rubrique:before{
+#attachement   li.question.rubrique:before, #quetsion  li.question.rubrique:before{
     background-position: 0px 2px;
 }
-#quetsion li.question{
+#attachement  li.question, #quetsion  li.question{
     padding-left: 80px;
 }
 .mat-expansion-panel-header-title{
@@ -87,6 +87,12 @@
     text-align: center;
     font-size: 19px;
     line-height: 23px;
+}
+#quetsion ng-scrollbar{
+    height: 240px;
+}
+mat-expansion-panel-header{
+    height: 60px!important;
 }
 
 

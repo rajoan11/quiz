@@ -18,11 +18,11 @@ export class QuizResolver implements Resolve<QuizDto[] | QuizDto> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<QuizDto[] | QuizDto> {
-    if (route.params['id']) {
-      console.log('id: ', +route.params['id']);
-      return this.QuizReadApplicatifService.getQuiz(route.params['id']);
-    } else {
-      return this.QuizReadApplicatifService.getQuizs({});
-    }
+    // if (route.params['id']) {
+    //   console.log('id: ', +route.params['id']);
+    //   return this.QuizReadApplicatifService.getQuiz(route.params['id']);
+    // } else {
+    return this.QuizReadApplicatifService.getEnterprises();
+    // }
   }
 }

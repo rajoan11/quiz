@@ -5,7 +5,7 @@
   height: 40px;
   background-color: #0003;
   padding: 11px;
-  padding-left: 5%;
+  padding-left: 2%;
   color: #fff;
   font-size: 18px;
 }
@@ -23,7 +23,6 @@
   left: 14px;
 }
 .prent-content-drop .content-drop {
-  margin: 40px;
   padding-bottom: 115px;
 }
 .prent-content-drop .content-drop img {
@@ -58,7 +57,7 @@
   background: url(/assets/images/format2.jpg) no-repeat center;
   background-size: contain;
 }
-.content-drop::after {
+/* .content-drop::after {
   position: absolute;
   content: '';
   width: 54px;
@@ -69,7 +68,7 @@
   bottom: 0;
   cursor: pointer;
   border: 1px #dedcdc solid;
-}
+} */
 .prent-content-drop {
   background-color: #fff;
   position: relative;

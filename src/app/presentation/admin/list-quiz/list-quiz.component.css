@@ -151,6 +151,12 @@ ng-scrollbar {
   float: right;
 }
 .parent-pagination .number-item-page {
+  font-family: firasans;
   display: inline-block;
   float: left;
+  font-weight: 600;
 }
+.relative{
+  position: relative;
+}
+

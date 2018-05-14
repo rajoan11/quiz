@@ -14,7 +14,7 @@ const routes: Routes = [
       {
         path: 'list',
         component: ListQuizComponent,
-        resolve: { quizs: QuizResolver }
+        resolve: { enterprises: QuizResolver }
       },
       { path: 'create', component: CreateQuizComponent }
     ]

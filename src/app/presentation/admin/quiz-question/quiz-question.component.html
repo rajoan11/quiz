@@ -7,22 +7,27 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
 
-  <ul id="quetsion">
 
-    <li *ngFor="let question of questions" dnd-draggable [dragEnabled]="true" [dragData]="question" [dropZones]="['question']">
-      <a href="">{{question.name}}</a>
-      <li class="question text" dnd-draggable [dragEnabled]="true" [dragData]="'text'" [dropZones]="['attachement']">
-        <a href="">TEXT</a>
+  <ul id="quetsion">
+    <ng-scrollbar #scrollRef [trackY]="true" [trackX]="false">
+      <li *ngFor="let question of questions" dnd-draggable [dragEnabled]="true" [dragData]="question" [dropZones]="['question']">
+        <a href="">{{question.name}}</a>
       </li>
-      <li class="question img" dnd-draggable [dragEnabled]="true" [dragData]="'image'" [dropZones]="['attachement']">
-        <a href="">IMAGES</a>
-      </li>
-      <li class="question embed" dnd-draggable [dragEnabled]="true" [dragData]="'video'" [dropZones]="['attachement']">
-        <a href="">Embed</a>
-      </li>
-      <li class="question rubrique" dnd-draggable [dragEnabled]="true" [dragData]="rubric" [dropZones]="['rubric']">
-        <a href="">Rubrique</a>
-      </li>
+    </ng-scrollbar>
   </ul>
 
 </mat-expansion-panel>
+<ul id="attachement">
+  <li class="question text" dnd-draggable [dragEnabled]="true" [dragData]="'text'" [dropZones]="['attachement']">
+    <a>TEXT</a>
+  </li>
+  <li class="question img" dnd-draggable [dragEnabled]="true" [dragData]="'image'" [dropZones]="['attachement']">
+    <a>IMAGES</a>
+  </li>
+  <li class="question embed" dnd-draggable [dragEnabled]="true" [dragData]="'video'" [dropZones]="['attachement']">
+    <a>Embed</a>
+  </li>
+  <li class="question rubrique" dnd-draggable [dragEnabled]="true" [dragData]="rubric" [dropZones]="['rubric']">
+    <a>Rubrique</a>
+  </li>
+</ul>
