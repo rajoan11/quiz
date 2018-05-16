@@ -15,8 +15,9 @@ export class QuizCudMetierService implements QuizCudMetierServiceACI {
   ) {}
 
   createQuiz(quiz: QuizDto) {
+    const { id, created_date, ...quizToSave } = quiz;
     return this.quizCudBusinessDelegateService
-      .createQuiz(quiz)
+      .createQuiz(quizToSave)
       .pipe(
         tap(_ => this.log(`create successfully`)),
         catchError(this.handleError<any>('updateHero'))
