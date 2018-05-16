@@ -1,5 +1,5 @@
 <!-- IMAGES & video -->
-<div class="prent-content-drop w-picto">
+<div class="prent-content-drop" [ngClass]="{ 'w-picto': contentQuiz === 'image'}">
   <div class="support"></div>
   <div class="type-contenu img" *ngIf="contentQuiz === 'image'">Image</div>
   <div class="type-contenu text" *ngIf="contentQuiz === 'text'">
@@ -23,19 +23,23 @@
       <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true"></app-ngx-editor>
     </div>
     <div *ngIf="contentQuiz === 'image'">
-      <img src="/assets/images/drop/1.jpg" alt="">
-      <div class="clear"></div>
-      <div class="outils">
-        <div class="w-50"></div>
-        <div class="w-50"></div>
+
+      <div id="result "></div>
+      <img src="/assets/images/drop/1.jpg " alt=" ">
+      <div class="clear "></div>
+      <div class="outils ">
+        <div class="w-50 "></div>
+        <div class="w-50 "></div>
       </div>
     </div>
-    <div class="groupe-btn">
-        <div class="row">
-          <div class="col-sm-12">
-              <button class="btn btn-suppr pull-right border"></button>
-            </div>
+    <div class="groupe-btn ">
+      <div class="row ">
+        <div class="col-sm-12 ">
+          <!-- <div (click)="onApiLoad()">
+          </div> -->
+          <button class="btn btn-suppr pull-right border "></button>
         </div>
       </div>
+    </div>
   </div>
 </div>

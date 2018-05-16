@@ -6,6 +6,15 @@ export class QuizDto {
     public created_date = '',
     public entreprise = '',
     public response = '',
-    public status = ''
+    public status = '',
+    public enterpriseUid = null,
+    public enterpriseName = '',
+    public isAnonyme = true,
+    public acceptReponse = true,
+    public showAnswer = false,
+    public readScore = false,
+    public initializeQuizz = true,
+    public endingMessage = '',
+    public rubrique = []
   ) {}
 }

@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { QuizDto } from '../../donnee/quiz';
 import { QuizReadBusinessDelegateServiceACI } from './index';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class QuizReadBusinessDelegateService
@@ -28,7 +29,7 @@ export class QuizReadBusinessDelegateService
   }
 
   getEnterprises(): Observable<any> {
-    const url = `http://lcas.arkeup.com/dpor/entreprise/all`;
+    const url = `${environment.apiUrlDrupal}/entreprise/all`;
     return this.http.get<any>(url);
   }
 

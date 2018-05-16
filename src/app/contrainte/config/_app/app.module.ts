@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminPresentationModule } from '../../../presentation/admin/admin-presentation.module';
 import { ResultatPresentationModule } from '../../../presentation/resultat/resultat-presentation.module';
 import { FrontPresentationModule } from '../../../presentation/front/front-presentation.module';
+import { CommunModule } from '../../../commun/commun.module';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -36,7 +37,8 @@ import { FrontPresentationModule } from '../../../presentation/front/front-prese
     AppRoutingModule,
     AdminPresentationModule,
     ResultatPresentationModule,
-    FrontPresentationModule
+    FrontPresentationModule,
+    CommunModule
   ],
   providers: [
     {

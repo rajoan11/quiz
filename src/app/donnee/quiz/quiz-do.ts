@@ -1,3 +1,5 @@
+import { RubricDto } from '.';
+
 export class QuizDo {
   id: number;
   name: string;
@@ -6,4 +8,13 @@ export class QuizDo {
   entreprise: string;
   response: string;
   status: string;
+  enterpriseUid: number;
+  enterpriseName: string;
+  isAnonyme: boolean;
+  acceptReponse: boolean;
+  showAnswer: boolean;
+  readScore: boolean;
+  initializeQuizz: boolean;
+  endingMessage: string;
+  rubrique: Array<RubricDto>;
 }

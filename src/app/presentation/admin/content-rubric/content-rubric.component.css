@@ -37,6 +37,7 @@
 .prent-content-drop .content-drop img{
     width: 100%;
     height: auto;
+    padding: 40px;
 }
 .content-drop{
     position: relative;

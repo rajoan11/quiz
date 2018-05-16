@@ -32,7 +32,6 @@ export class ListQuizComponent implements OnInit {
   modalRef: BsModalRef;
   loadingList = false;
   pages = [10, 20, 30, 40];
-  quizs = new QuizDto();
   searchParams = {
     page: 1,
     numberListPerPage: 10,

@@ -10,7 +10,7 @@
           <span class="caret"></span> floatPlaceholder="never"
         </button> -->
         <mat-form-field floatPlaceholder="never">
-          <mat-select placeholder="Filtrer par entreprise" [(ngModel)]="searchParams.enterprise" (change)="changeEnterprise()">
+          <mat-select  disableRipple panelClass="example-panel" placeholder="Filtrer par entreprise" [(ngModel)]="searchParams.enterprise" (change)="changeEnterprise()">
             <mat-option>Aucun</mat-option>
             <mat-option *ngFor="let enterprise of enterprises" [value]="enterprise.nid">
               {{enterprise.title}}

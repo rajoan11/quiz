@@ -1,4 +1,5 @@
 <!-- création quizz  -->
+<ng2-toasty [position]="'top-right'"></ng2-toasty>
 <div id="creation-quizz">
   <div class="navbar creation-quizz bg-quizz" [style.background]="colorCss">
     <div class="container">
@@ -8,7 +9,7 @@
             <a>Création de quizz</a>
           </li>
           <li class="btn-group" dropdown>
-            <button dropdownToggle type="button" class="btn dropdown-toggle" aria-controls="dropdown-basic">
+            <!-- <button dropdownToggle type="button" class="btn dropdown-toggle" aria-controls="dropdown-basic">
               Nominatif
               <span class="caret"></span>
             </button>
@@ -16,7 +17,18 @@
               <li role="menuitem">
                 <a class="dropdown-item">Anonyme</a>
               </li>
-            </ul>
+              <li role="menuitem">
+                <a class="dropdown-item">Nominatif</a>
+              </li>
+            </ul> -->
+
+            <mat-form-field floatPlaceholder="never">
+              <mat-select panelClass="example-panel" [(ngModel)]="newQuiz.isAnonyme">
+                <mat-option *ngFor="let typeQuestion of typeQuestions" [value]="typeQuestion.value">
+                  {{typeQuestion.type}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </li>
         </ul>
 
@@ -75,7 +87,7 @@
             </ul>
           </li>
           <li>
-            <button class="btn">Finalisation de quizz</button>
+            <button class="btn" (click)="saveQuiz()">Finalisation de quizz</button>
           </li>
         </ul>
       </div>
@@ -83,18 +95,20 @@
   </div>
 
   <div class="container">
+    <app-loader [load]="savingLoad"></app-loader>
     <div class="row">
       <div class="col-lg-10 col-sm-8 col-xs-12" dnd-droppable (onDropSuccess)="transferRubricSuccess($event)" [dropZones]="['rubric']">
         <div class="form-quizz">
           <div class="myrow">
-            <mat-form-field class="example-full-width" floatPlaceholder="never">
-              <input matInput placeholder="Nom quizz" value="">
+            <mat-form-field class="example-full-width">
+              <!-- floatPlaceholder="never" -->
+              <input matInput placeholder="Nom quizz" value="" name="" [(ngModel)]="newQuiz.name">
             </mat-form-field>
           </div>
 
           <div class="myrow textarea">
-            <mat-form-field class="example-full-width" floatPlaceholder="never">
-              <textarea matInput placeholder="Description"></textarea>
+            <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="Description" name="" [(ngModel)]="newQuiz.description"></textarea>
             </mat-form-field>
           </div>
         </div>
