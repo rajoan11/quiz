@@ -4,13 +4,13 @@ export class QuizDo {
   id: number;
   name: string;
   description: string;
-  created_date: Date;
+  created_at: Date;
   entreprise: string;
-  response: string;
+  nb_of_records: number;
   status: string;
   enterpriseUid: number;
   enterpriseName: string;
-  isAnonyme: boolean;
+  is_anonyme: boolean;
   acceptReponse: boolean;
   showAnswer: boolean;
   readScore: boolean;

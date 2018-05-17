@@ -18,4 +18,7 @@ export class QuizCudApplicatifService implements QuizCudApplicatifServiceACI {
   public deleteQuiz(quizId: number): Observable<any> {
     return this.quizCudMetierService.deleteQuiz(quizId);
   }
+  public changeStatusQuiz(quizId: number): Observable<any> {
+    return this.quizCudMetierService.changeStatusQuiz(quizId);
+  }
 }

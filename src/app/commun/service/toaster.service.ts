@@ -15,7 +15,7 @@ export class ToastService {
     public toastyService: ToastyService,
     private toastyConfig: ToastyConfig
   ) {
-    this.toastyConfig.theme = 'material';
+    this.toastyConfig.theme = 'bootstrap';
   }
 
   showToast(message: string, type: string, title?: string): void {
@@ -24,7 +24,7 @@ export class ToastService {
       msg: message ? message : '',
       showClose: true,
       timeout: 10000,
-      theme: 'material',
+      theme: 'bootstrap',
       onAdd: (toast: ToastData) => {},
       onRemove: function(toast: ToastData) {}
     };

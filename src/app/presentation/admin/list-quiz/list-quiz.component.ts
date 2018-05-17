@@ -7,6 +7,7 @@ import {
   Inject
 } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/debounceTime';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -15,6 +16,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { QuizDto } from '../../../donnee/quiz';
 import { QuizReadApplicatifServiceACI } from '../../../service-applicatif/quiz-admin';
 import { QuizCudApplicatifServiceACI } from '../../../service-applicatif/quiz-admin';
+import { ToastService } from '../../../commun/service/toaster.service';
 
 @Component({
   selector: 'app-list-quiz',
@@ -35,12 +37,13 @@ export class ListQuizComponent implements OnInit {
   searchParams = {
     page: 1,
     numberListPerPage: 10,
-    name: null,
-    enterprise: null
+    keyWord: null,
+    entreprise: null
   };
   searchTerm = new Subject<any>();
   totalItems: number;
   constructor(
+    private toastService: ToastService,
     private activatedRoute: ActivatedRoute,
     private modalService: BsModalService,
     private quizCudApplicatifServiceACI: QuizCudApplicatifServiceACI,
@@ -50,19 +53,14 @@ export class ListQuizComponent implements OnInit {
   displayedColumns = [
     'name',
     'description',
-    'created_date',
+    'created_at',
     'entreprise',
-    'response',
-    'status',
+    'nb_of_records',
+    'is_anonyme',
     'vide'
   ];
 
   @ViewChild(MatSort) sort: MatSort;
-  options = [
-    { value: 'anonyme', viewValue: 'anonyme' },
-    { value: 'nominatif', viewValue: 'nominatif' }
-  ];
-  selected = 'nominatif';
 
   ngOnInit() {
     this.searchQuiz();
@@ -145,9 +143,10 @@ export class ListQuizComponent implements OnInit {
   }
 
   searchQuiz(): void {
-    this.loadingList = true;
     this.searchTerm
+      .debounceTime(500)
       .switchMap(term => {
+        this.loadingList = true;
         return this.quizReadApplicatifServiceACI.getQuizs(this.searchParams);
       })
       .subscribe(
@@ -157,13 +156,13 @@ export class ListQuizComponent implements OnInit {
   }
 
   onSuccessSearch(res): void {
-    this.loadingList = false;
-    this.dataSource = new MatTableDataSource(res);
+    this.dataSource = new MatTableDataSource(res.forms);
     this.dataSource.sort = this.sort;
+    this.allQuizLength = res.form_count;
     this.dataSource.sortingDataAccessor = (item, property) => {
       switch (property) {
-        case 'created_date':
-          return new Date(this.formatDate(item['created_date'])).getTime();
+        case 'created_at':
+          return new Date(item['created_at']).getTime();
         default:
           return item[property];
       }
@@ -173,10 +172,23 @@ export class ListQuizComponent implements OnInit {
     this.loadingList = false;
   }
   onErrorSearch(err): void {
+    console.log(err);
     this.loadingList = false;
   }
 
   setPage(page: number): void {
     this.searchParams.page = page;
+  }
+
+  changeStatusQuiz(idQuiz: number): void {
+    this.quizCudApplicatifServiceACI.changeStatusQuiz(idQuiz).subscribe(
+      res => {
+        this.toastService.showToast(
+          res.message,
+          this.toastService.typeToast.success
+        );
+      },
+      err => {}
+    );
   }
 }
