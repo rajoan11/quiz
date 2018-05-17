@@ -5,7 +5,7 @@ declare const gapi: any;
 @Component({
   selector: 'app-content-rubric',
   templateUrl: './content-rubric.component.html',
-  styleUrls: ['./content-rubric.component.css']
+  styleUrls: ['./content-rubric.component.scss']
 })
 export class ContentRubricComponent implements OnInit {
   @Input() contentQuiz: any;

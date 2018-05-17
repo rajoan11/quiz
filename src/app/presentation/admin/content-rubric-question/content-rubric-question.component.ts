@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-content-rubric-question',
   templateUrl: './content-rubric-question.component.html',
-  styleUrls: ['./content-rubric-question.component.css']
+  styleUrls: ['./content-rubric-question.component.scss']
 })
 export class ContentRubricQuestionComponent implements OnInit {
   _questionQuiz: any;

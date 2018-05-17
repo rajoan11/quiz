@@ -6,7 +6,7 @@ import { ToastService } from '../../../commun/service/toaster.service';
 @Component({
   selector: 'app-create-quiz',
   templateUrl: './create-quiz.component.html',
-  styleUrls: ['./create-quiz.component.css']
+  styleUrls: ['./create-quiz.component.scss']
 })
 export class CreateQuizComponent implements OnInit {
   colorCss: string;

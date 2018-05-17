@@ -19,7 +19,7 @@ import { QuizCudApplicatifServiceACI } from '../../../service-applicatif/quiz-ad
 @Component({
   selector: 'app-list-quiz',
   templateUrl: './list-quiz.component.html',
-  styleUrls: ['./list-quiz.component.css']
+  styleUrls: ['./list-quiz.component.scss']
 })
 export class ListQuizComponent implements OnInit {
   allQuizLength = 210;
