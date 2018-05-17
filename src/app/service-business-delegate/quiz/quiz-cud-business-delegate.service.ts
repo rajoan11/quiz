@@ -9,6 +9,11 @@ export class QuizCudBusinessDelegateService
   implements QuizCudBusinessDelegateServiceACI {
   constructor(private http: HttpClient) {}
 
+  changeStatusQuiz(QuizId: number) {
+    const url = `${environment.apiUrl}/admin/form/${QuizId}/status`;
+    return this.http.patch<any>(url, null);
+  }
+
   createQuiz(quiz: any) {
     const url = `${environment.apiUrl}/admin/formulaire`;
     return this.http.post<any>(url, quiz);

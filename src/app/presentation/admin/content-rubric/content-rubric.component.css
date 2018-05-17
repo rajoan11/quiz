@@ -5,7 +5,7 @@
     height: 40px;
     background-color: #0003;
     padding: 11px;
-    padding-left: 5%;
+    padding-left: 50px;
     color: #fff;
     font-size: 18px;
 }
@@ -97,5 +97,10 @@
     background: url(/assets/images/deplace.png) no-repeat;
     background-size: contain;
     cursor: move;
+}
+@media (max-width:533px){
+    .type-contenu{
+        width: 33%;
+    }
 }
 

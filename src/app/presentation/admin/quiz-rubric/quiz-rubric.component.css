@@ -47,5 +47,9 @@
 .order-name input:focus{
     outline: none;
 }
-
+@media(max-width:768px){
+    .order{
+        max-width: 195px;;
+    }
+}
 

@@ -23,7 +23,7 @@
             </ul> -->
 
             <mat-form-field floatPlaceholder="never">
-              <mat-select panelClass="example-panel" [(ngModel)]="newQuiz.isAnonyme">
+              <mat-select panelClass="example-panel" [(ngModel)]="newQuiz.is_anonyme">
                 <mat-option *ngFor="let typeQuestion of typeQuestions" [value]="typeQuestion.value">
                   {{typeQuestion.type}}
                 </mat-option>
@@ -87,7 +87,7 @@
             </ul>
           </li>
           <li>
-            <button class="btn" (click)="saveQuiz()">Finalisation de quizz</button>
+            <button class="btn" (click)="saveQuiz()" [disabled]="!newQuiz.name || !newQuiz.description">Finalisation de quizz</button>
           </li>
         </ul>
       </div>
@@ -97,7 +97,7 @@
   <div class="container">
     <app-loader [load]="savingLoad"></app-loader>
     <div class="row">
-      <div class="col-lg-10 col-sm-8 col-xs-12" dnd-droppable (onDropSuccess)="transferRubricSuccess($event)" [dropZones]="['rubric']">
+      <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12" dnd-droppable (onDropSuccess)="transferRubricSuccess($event)" [dropZones]="['rubric']">
         <div class="form-quizz">
           <div class="myrow">
             <mat-form-field class="example-full-width">
@@ -121,7 +121,7 @@
 
 
       </div>
-      <div class="col-lg-2 col-sm-4 col-xs-12 relative">
+      <div class="col-lg-2 col-md-2 col-sm-2 relative">
         <app-quiz-question></app-quiz-question>
       </div>
     </div>

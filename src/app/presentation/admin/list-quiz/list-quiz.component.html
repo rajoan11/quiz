@@ -1,8 +1,9 @@
+<ng2-toasty [position]="'top-right'"></ng2-toasty>
 <div class="navbar filtre-quiz bg-quizz">
   <div class="container">
     <ul class="liste">
       <li class="title">
-        <a>Création de quizz</a>
+        <a>Mes quizz</a>
       </li>
       <li class="btn-group" dropdown>
         <!-- <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
@@ -10,7 +11,8 @@
           <span class="caret"></span> floatPlaceholder="never"
         </button> -->
         <mat-form-field floatPlaceholder="never">
-          <mat-select  disableRipple panelClass="example-panel" placeholder="Filtrer par entreprise" [(ngModel)]="searchParams.enterprise" (change)="changeEnterprise()">
+          <mat-select disableRipple panelClass="example-panel" placeholder="Filtrer par entreprise" [(ngModel)]="searchParams.entreprise"
+            (change)="changeEnterprise()">
             <mat-option>Aucun</mat-option>
             <mat-option *ngFor="let enterprise of enterprises" [value]="enterprise.nid">
               {{enterprise.title}}
@@ -27,7 +29,7 @@
       </li>
       <li class="form">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Rechercher.." [(ngModel)]="searchParams.name" (ngModelChange)="onChangeName($event)"
+          <input type="text" class="form-control" placeholder="Rechercher.." [(ngModel)]="searchParams.keyWord" (ngModelChange)="onChangeName($event)"
           />
           <span class="input-group-btn">
             <button class="btn btn-search" type="button"></button>
@@ -64,9 +66,9 @@
             <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.description}} </mat-cell>
           </ng-container>
           <!-- Symbol Column -->
-          <ng-container matColumnDef="created_date">
+          <ng-container matColumnDef="created_at">
             <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> date creation </mat-header-cell>
-            <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.created_date}} </mat-cell>
+            <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.created_at| date:"dd/MM/yyyy" }} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="entreprise">
@@ -75,18 +77,18 @@
           </ng-container>
 
           <!-- Name Column -->
-          <ng-container matColumnDef="response">
+          <ng-container matColumnDef="nb_of_records">
             <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> Reponse </mat-header-cell>
-            <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.response}} </mat-cell>
+            <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.nb_of_records}} </mat-cell>
           </ng-container>
 
           <!-- Weight Column -->
-          <ng-container matColumnDef="status">
+          <ng-container matColumnDef="is_anonyme">
             <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> Statut </mat-header-cell>
             <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}">
-              <mat-select [(value)]="element.status">
-                <mat-option value="nominatif">nominatif</mat-option>
-                <mat-option value="anonyme">anonyme</mat-option>
+              <mat-select [(value)]="element.is_anonyme" (change)="changeStatusQuiz(element.id)">
+                <mat-option [value]="false" disabled>nominatif</mat-option>
+                <mat-option [value]="true">anonyme</mat-option>
               </mat-select>
             </mat-cell>
           </ng-container>
@@ -110,23 +112,25 @@
     </ng-scrollbar>
   </div>
   <div class="parent-pagination">
-    <div class="number-item-page">
-      AFFICHER
-      <mat-form-field>
-        <mat-select [(ngModel)]="searchParams.numberListPerPage" (change)="changeNumberPage()">
-          <mat-option *ngFor="let page of pages" [value]="page">
-            {{ page}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      LIGNES PAR PAGE
+    <div class="container">
+      <div class="number-item-page">
+        AFFICHER
+        <mat-form-field>
+          <mat-select [(ngModel)]="searchParams.numberListPerPage" (change)="changeNumberPage()">
+            <mat-option *ngFor="let page of pages" [value]="page">
+              {{ page}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        LIGNES PAR PAGE
 
-    </div>
-    <div class="paginator">
-      <pagination [(ngModel)]="searchParams.page" (pageChanged)="pageChanged($event)" [totalItems]="totalItems" [maxSize]="10"
-        previousText="Précédent" nextText="Suivant" firstText="&laquo;" lastText="&raquo;">
+      </div>
+      <div class="paginator">
+        <pagination [(ngModel)]="searchParams.page" (pageChanged)="pageChanged($event)" [totalItems]="totalItems" [maxSize]="10"
+          previousText="Précédent" nextText="Suivant" firstText="&laquo;" lastText="&raquo;">
 
-      </pagination>
+        </pagination>
+      </div>
     </div>
   </div>
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { of } from 'rxjs/observable/of';
 import { catchError, tap } from 'rxjs/operators';
+import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 
 import { QuizCudMetierServiceACI } from '.';
@@ -15,12 +16,12 @@ export class QuizCudMetierService implements QuizCudMetierServiceACI {
   ) {}
 
   createQuiz(quiz: QuizDto) {
-    const { id, created_date, ...quizToSave } = quiz;
+    const { id, created_at, ...quizToSave } = quiz;
     return this.quizCudBusinessDelegateService
       .createQuiz(quizToSave)
       .pipe(
         tap(_ => this.log(`create successfully`)),
-        catchError(this.handleError<any>('updateHero'))
+        catchError(this.handleError)
       );
   }
   updateQuiz(quiz: QuizDto) {
@@ -28,7 +29,7 @@ export class QuizCudMetierService implements QuizCudMetierServiceACI {
       .updateQuiz(quiz)
       .pipe(
         tap(_ => this.log(`update successfully`)),
-        catchError(this.handleError<any>('updateHero'))
+        catchError(this.handleError)
       );
   }
   deleteQuiz(quizId: number) {
@@ -36,14 +37,20 @@ export class QuizCudMetierService implements QuizCudMetierServiceACI {
       .deleteQuiz(quizId)
       .pipe(
         tap(_ => this.log(`delete successfully`)),
-        catchError(this.handleError<any>('updateHero'))
+        catchError(this.handleError)
+      );
+  }
+  changeStatusQuiz(quizId: number) {
+    return this.quizCudBusinessDelegateService
+      .changeStatusQuiz(quizId)
+      .pipe(
+        tap(_ => this.log(`update successfully`)),
+        catchError(this.handleError)
       );
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      return of(result as T);
-    };
+  private handleError(error) {
+    return Observable.throw(error && error.message);
   }
 
   private log(message: string) {

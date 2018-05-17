@@ -7,6 +7,7 @@
   font-size: 11px;
   height: 100%;
   line-height: 26px;
+  padding-right: 15px;
 }
 .quizz-table .mat-cell:first-child {
   padding-left: 15px;
@@ -72,10 +73,9 @@ ng-scrollbar {
 }
 
 .quizz-table .mat-row a.picto {
-  display: inline-block;
-  width: 25px;
+  display: table-cell;
+  width: 30px;
   height: 22px;
-  margin-right: 10px;
   background: url(/assets/images/pictos-agency.png) no-repeat center;
   overflow: hidden;
   background-size: 30px auto;
@@ -142,10 +142,7 @@ ng-scrollbar {
   box-shadow: none !important;
 }
 
-.parent-pagination {
-  max-width: 1024px;
-  margin: 0 auto;
-}
+
 .parent-pagination .paginator {
   display: inline-block;
   float: right;
@@ -155,6 +152,31 @@ ng-scrollbar {
   display: inline-block;
   float: left;
   font-weight: 600;
+  padding-top: 11px;
+}
+@media (max-width:1000px){
+  .parent-pagination .paginator {
+    width: 65%;
+  }
+}
+@media (max-width:992px){
+  .parent-pagination .paginator,
+  .parent-pagination .number-item-page {
+    display: block;
+    float: none;
+    width: 100%;
+  }
+  .add-quizz{
+    right: 0;
+    background: #fc610080;
+    transition: 0.3s;
+  }
+  .add-quizz:hover{
+    background-color: #fc6100;
+  }
+  .quizz-table .container-table{
+    margin: 35px auto 15px;
+  }
 }
 .relative{
   position: relative;

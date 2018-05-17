@@ -13,7 +13,7 @@ export class QuizReadBusinessDelegateService
 
   getQuizs(params: any): Observable<QuizDto[]> {
     const myParams = this.getHttpParams(params);
-    return this.http.get<QuizDto[]>('assets/mock/list-quiz.json', {
+    return this.http.get<QuizDto[]>(`${environment.apiUrl}/admin/formulaires`, {
       params: myParams
     });
   }

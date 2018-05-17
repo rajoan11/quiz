@@ -29,10 +29,10 @@
 
         <div class="col-sm-12 q-child">
           <div class="row">
-            <div class="col-lg-6 col-md-12">
-              <table>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <table class="w-100">
                 <tr>
-                  <td>
+                  <td class="w-100">
                     <mat-form-field>
                       <mat-select placeholder="Nombre" >
                         <mat-option *ngFor="let page of [1,2,3]" [value]="page">
@@ -41,7 +41,7 @@
                       </mat-select>
                     </mat-form-field>
                   </td>
-                  <td>
+                  <td  class="w-100">
                     <mat-form-field>
                       
                       <mat-select placeholder="Superieur à" >
@@ -55,7 +55,7 @@
               </table>
             </div>
 
-            <div class="col-lg-6 col-md-12 ">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
              <div class="row">
                <div class="col-sm-6 label-italic">
                   <mat-form-field class="example-full-width mat-form-field">
@@ -106,7 +106,6 @@
           </ol>
         </div>
       </div>
-      
     </div>
 
 
@@ -123,10 +122,10 @@
 
       <div class="groupe-btn">
         <div class="row">
-          <div class="col-sm-2">
+          <div class="col-md-2 col-sm-1 col-xs-1 ">
               <button class="btn edite"><span class="edit"></span>Corriger</button>
           </div>
-          <div class="col-sm-4 col-sm-offset-6">
+          <div class="col-md-4 col-sm-10 col-xs-10 pull-right">
               <table>
                 <tr>
                   <td><button class="btn btn-suppr"></button></td>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, tap } from 'rxjs/operators';
+import 'rxjs/add/observable/throw';
 import { QuizReadBusinessDelegateServiceACI } from '../../service-business-delegate/quiz';
 import { QuizDto } from '../../donnee/quiz/';
 import { QuizReadMetierServiceACI } from '.';
@@ -16,7 +17,7 @@ export class QuizReadMetierService implements QuizReadMetierServiceACI {
       .getQuiz(id)
       .pipe(
         tap(_ => this.log(`fetched hero id=${id}`)),
-        catchError(this.handleError<QuizDto>(`getQuiz id=${id}`))
+        catchError(this.handleError)
       );
   }
   getQuizs(params: any) {
@@ -24,7 +25,7 @@ export class QuizReadMetierService implements QuizReadMetierServiceACI {
       .getQuizs(params)
       .pipe(
         tap(quizs => console.log(`fetched quizs`)),
-        catchError(this.handleError('getQuizs', []))
+        catchError(this.handleError)
       );
   }
   getQuestion() {
@@ -32,7 +33,7 @@ export class QuizReadMetierService implements QuizReadMetierServiceACI {
       .getQuestion()
       .pipe(
         tap(quizs => console.log(`fetched question`)),
-        catchError(this.handleError('geQuestion', []))
+        catchError(this.handleError)
       );
   }
 
@@ -41,14 +42,12 @@ export class QuizReadMetierService implements QuizReadMetierServiceACI {
       .getEnterprises()
       .pipe(
         tap(entreprises => console.log(`fetched entreprises`)),
-        catchError(this.handleError('getEnterprise', []))
+        catchError(this.handleError)
       );
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      return of(error as T);
-    };
+  private handleError(error) {
+    return Observable.throw(error && error.message);
   }
 
   private log(message: string) {
