@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -24,24 +25,32 @@ import { ToastService } from '../../../commun/service/toaster.service';
   styleUrls: ['./list-quiz.component.css']
 })
 export class ListQuizComponent implements OnInit {
+  addClassOnClickEnterprise = false;
   allQuizLength = 210;
   currentPage: number;
   dataSource = new MatTableDataSource();
   enterprises: any;
+  idQuizToChange: number;
   idQuizTodelete: number;
   initialPage = 1;
+  matSelected = false;
   message: string;
   modalRef: BsModalRef;
+  modalRefSelect: BsModalRef;
   loadingList = false;
   pages = [10, 20, 30, 40];
   searchParams = {
     page: 1,
     numberListPerPage: 10,
     keyWord: null,
-    entreprise: null
+    entreprise: null,
+    orderby: null,
+    sort: null
   };
   searchTerm = new Subject<any>();
+  selectedSorter: string;
   totalItems: number;
+  valueQuizToChange: boolean;
   constructor(
     private toastService: ToastService,
     private activatedRoute: ActivatedRoute,
@@ -54,7 +63,7 @@ export class ListQuizComponent implements OnInit {
     'name',
     'description',
     'created_at',
-    'entreprise',
+    'enterprise_name',
     'nb_of_records',
     'is_anonyme',
     'vide'
@@ -131,6 +140,17 @@ export class ListQuizComponent implements OnInit {
   }
 
   changeEnterprise(): void {
+    this.addClassOnClickEnterprise = false;
+    setTimeout(() => {
+      this.setPage(1);
+    }, 1);
+    this.searchTerm.next(this.searchParams);
+  }
+
+  orderQuizz(type: string, header: string): void {
+    this.searchParams.orderby = header;
+    this.searchParams.sort = type;
+    this.selectedSorter = `${type}_${header}`;
     setTimeout(() => {
       this.setPage(1);
     }, 1);
@@ -144,7 +164,8 @@ export class ListQuizComponent implements OnInit {
 
   searchQuiz(): void {
     this.searchTerm
-      .debounceTime(500)
+      // .distinctUntilChanged()
+      .debounceTime(1000)
       .switchMap(term => {
         this.loadingList = true;
         return this.quizReadApplicatifServiceACI.getQuizs(this.searchParams);
@@ -180,7 +201,29 @@ export class ListQuizComponent implements OnInit {
     this.searchParams.page = page;
   }
 
-  changeStatusQuiz(idQuiz: number): void {
+  changeStatusQuiz(
+    idQuiz: number,
+    template: TemplateRef<any>,
+    eventValue: any
+  ): void {
+    this.openModalChangeSelect(template, idQuiz, eventValue);
+  }
+
+  openModalChangeSelect(
+    template: TemplateRef<any>,
+    idQuiz: number,
+    eventValue: any
+  ) {
+    this.idQuizToChange = idQuiz;
+    this.valueQuizToChange = eventValue;
+    this.modalRefSelect = this.modalService.show(template, {
+      backdrop: true,
+      ignoreBackdropClick: true,
+      class: 'modal-sm'
+    });
+  }
+
+  confirmSelect(idQuiz: number, valueQuiz: boolean): void {
     this.quizCudApplicatifServiceACI.changeStatusQuiz(idQuiz).subscribe(
       res => {
         this.toastService.showToast(
@@ -190,5 +233,17 @@ export class ListQuizComponent implements OnInit {
       },
       err => {}
     );
+    this.message = 'Confirmed!';
+    this.modalRefSelect.hide();
+  }
+
+  declineSelect(valueQuiz: boolean): void {
+    this.message = 'Declined!';
+    this.modalRefSelect.hide();
+    this.dataSource['data'].forEach(data => {
+      if (data && data['id'] === this.idQuizToChange) {
+        data['is_anonyme'] = !valueQuiz;
+      }
+    });
   }
 }

@@ -24,12 +24,18 @@
 }
 .creation-quizz .liste > .liste2 > li:first-child {
   float: left;
-  height: 34px;
+  height:42px;
   background: url(/assets/images/theme.png) no-repeat center;
   cursor: pointer;
   margin: 0;
   width: 20%;
   text-align: left;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+.creation-quizz .liste > .liste2 > li:first-child:hover,.creation-quizz .liste > .liste2 > li:first-child:active,
+.creation-quizz .liste > .liste2 > li:first-child:focus {
+  background-color: #fff3;
 }
 .creation-quizz .liste > .liste2 > li:first-child > a {
   display: block;
@@ -155,6 +161,7 @@
   margin-left:0px;
   width: 65%;
   float: right;
+  padding: 6px 0;
 }
 .creation-quizz .liste > .liste2 > li {
   float: left;
@@ -187,7 +194,6 @@
   list-style: none;
   max-width: 260px;
   margin: 0;
-  padding: 6px 0;
 }
 .creation-quizz .open > .dropdown-menu {
   max-width: 177px;
@@ -230,6 +236,7 @@
   }
   .creation-quizz .liste .liste2 li:last-child{
     width: 88%;
+    padding: 6px 0;
   }
   .creation-quizz .liste > .liste2 > li > .btn{
     width: 100%;

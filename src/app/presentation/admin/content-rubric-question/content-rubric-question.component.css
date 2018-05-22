@@ -1,3 +1,16 @@
+
+h3{
+  font-size: 16px;
+  font-weight: 700;
+  color: #4f5e65;
+}
+.form-quizz h3{
+  max-width: 280px;
+  border-bottom: 1px #ccc solid;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+  margin-left: 20px;
+}
 .type-contenu {
   width: 29%;
   float: right;
@@ -59,18 +72,7 @@
   background: url(/assets/images/format2.jpg) no-repeat center;
   background-size: contain;
 }
-/* .content-drop::after {
-  position: absolute;
-  content: '';
-  width: 54px;
-  height: 54px;
-  background: url(/assets/images/delete.png) no-repeat center;
-  background-size: 26px 26px;
-  right: -40px;
-  bottom: 0;
-  cursor: pointer;
-  border: 1px #dedcdc solid;
-} */
+
 .prent-content-drop {
   background-color: #fff;
   position: relative;
@@ -83,11 +85,15 @@
   margin: 0 auto;
   display: block;
   content: '';
-  width: 20px;
+  width: 20px; 
   height: 20px;
   background: url(/assets/images/deplace.png) no-repeat;
   background-size: contain;
   cursor: move;
+}
+.l-deroulant.echelle ol li:after,
+.l-deroulant.echelle ol li:before{
+  display: none;
 }
 .mat-select-trigger{
   width: 100%;
@@ -105,17 +111,30 @@
 
 .l-deroulant ol{
   margin-left: 45px;
-  max-width: 355px;
+  max-width: 290px;
   width: 100%;
+  margin-left: 67px;
 }
-.l-deroulant ol li{
+.l-deroulant ol li,
+.l-deroulant ol li>.txt{
   position: relative;
   margin-bottom: 15px;
   color: #4f5e65;
-  font-size: 14px;
+  font-size: 15px;
+  padding-left: 13px;
   cursor: pointer;
-  border-bottom: 1px #e0e0e0 solid;
-  padding: 5px; 
+  border:0;
+  margin-top: 8px;
+  list-style: none;
+}
+.l-deroulant ol.c-coche li{
+  list-style: none;
+}
+.l-deroulant.deroulant-custome ol.c-coche li,
+.l-deroulant.echelle ol li{
+  list-style: inherit;
+  font-size: 15px;
+  padding-left: 13px;
 }
 .l-deroulant ol li:before{
   position: absolute;
@@ -124,17 +143,40 @@
   height: 20px;
   background: url(/assets/images/deplace-v.png) no-repeat center;
   content: "";
-  left: -50px;
+  left: -68px;
   top: 5px;
   background-size: contain;
   cursor: move;
+}
+.l-deroulant.deroulant-custome ol li:after{
+  display: none;
+}
+.l-deroulant.deroulant-custome ol li:before{
+ left: -50px;
+}
+.l-deroulant.deroulant-custome ol{
+  margin-left: 50px;
+}
+.l-deroulant ol li:after{
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 20px;
+  content: "";
+  left: -30px;
+  top: 5px;
+  border: 2px #ccc solid;
+  border-radius: 50%;
 
+}
+.l-deroulant ol.c-coche li:after{
+  border-radius: 2px;
 }
 .l-deroulant ol li:last-child:before{
   display: none;
 }
 .l-deroulant ol li:last-child{
-  font-style: italic
+  font-style: italic;
 }
 
 .l-deroulant ol li>span{
@@ -146,12 +188,37 @@
   background: url(/assets/images/close.png) no-repeat center;
   background-size: contain;
   opacity: 0.3;
+  position: absolute;
+  right: -25px;
 }
 .l-deroulant ol li>span:hover{
   opacity: 0.9;
   border-radius: 50%;
   box-shadow:1px 1px 10px #c5c5c5;
 }
+
+/* CASE A COCHER
+&&&&&&&&&&&&&&&&&*/
+
+.l-deroulant.c-coche ol li{
+  list-style: none;
+  position: relative;
+}
+
+
+.l-deroulant.c-coche ol li:before{
+  left: -90px;
+}
+
+.form-quizz .no-border .mat-form-field{
+  background-color: #fafafa;
+}
+.form-quizz .no-border .mat-form-field:hover{
+  background-color: #ececec;
+}
+
+
+
 
 @media(max-width:992px){
   .content-drop .groupe-btn .btn.edite{
@@ -166,9 +233,22 @@
     position: static;
   }
 
+
   .prent-content-drop .content-drop{
     padding: 0!important;
   }
+
+  .l-deroulant ol{
+  }
+  .l-deroulant.c-coche ol{
+    margin-left: 90px;
+   }
+  .l-deroulant ol li > span{
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
 }
 
 @media(max-width:533px){

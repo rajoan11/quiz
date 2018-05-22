@@ -1,149 +1,202 @@
 <ng2-toasty [position]="'top-right'"></ng2-toasty>
-<div class="navbar filtre-quiz bg-quizz">
-  <div class="container">
-    <ul class="liste">
-      <li class="title">
-        <a>Mes quizz</a>
-      </li>
-      <li class="btn-group" dropdown>
-        <!-- <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+<div [ngClass]="{'class-flou': addClassOnClickEnterprise}">
+  <div class="navbar filtre-quiz bg-quizz">
+    <div class="container">
+      <ul class="liste">
+        <li class="title">
+          <a>Mes quizz</a>
+        </li>
+        <li class="btn-group" dropdown>
+          <!-- <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
           Filtrer par entreprise
           <span class="caret"></span> floatPlaceholder="never"
         </button> -->
-        <mat-form-field floatPlaceholder="never">
-          <mat-select disableRipple panelClass="example-panel" placeholder="Filtrer par entreprise" [(ngModel)]="searchParams.entreprise"
-            (change)="changeEnterprise()">
-            <mat-option>Aucun</mat-option>
-            <mat-option *ngFor="let enterprise of enterprises" [value]="enterprise.nid">
-              {{enterprise.title}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+          <mat-form-field floatPlaceholder="never"  class="custom-test-panel">
+            <mat-select disableRipple  placeholder="Filtrer par entreprise" [(ngModel)]="searchParams.entreprise"
+              (change)="changeEnterprise()" (click)="addClassOnClickEnterprise = true"  panelClass="test-panel">
+              <mat-option>Aucun</mat-option>
+              <mat-option *ngFor="let enterprise of enterprises" [value]="enterprise.nid">
+                {{enterprise.title}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- <select class="selectpicker" data-style="btn-warning" name="entreprise" [(ngModel)]="searchParams.entreprise" (change)="changeEnterprise()">
+            <option>- Veuillez choisir - </option>
+            <option *ngFor="let enterprise of enterprises" [value]="enterprise.nid">{{enterprise.title}}</option>
+          </select> -->
+            <!-- <option>Relish</option> -->
+          
+
+          <!-- <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
           <li role="menuitem" *ngFor="let enterprise of enterprises">
             <a class="dropdown-item" (click)="filterByEntreprise(enterprise.nid)">{{enterprise.title}}</a>
           </li>
           <li class="divider dropdown-divider"></li>
 
         </ul> -->
-      </li>
-      <li class="form">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Rechercher.." [(ngModel)]="searchParams.keyWord" (ngModelChange)="onChangeName($event)"
-          />
-          <span class="input-group-btn">
-            <button class="btn btn-search" type="button"></button>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<!-- quizz-table -->
-
-<div class="quizz-table">
-
-  <div class="container container-table">
-    <app-loader [load]="loadingList"></app-loader>
-    <ng-scrollbar #scrollRef [trackY]="true" [trackX]="true">
-
-      <div class="example-container mat-elevation-z8">
-        <mat-table #table [dataSource]="dataSource" matSort>
-
-          <!-- Position Column -->
-
-
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> Nom </mat-header-cell>
-            <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.name}} </mat-cell>
-          </ng-container>
-
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="description">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> description </mat-header-cell>
-            <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.description}} </mat-cell>
-          </ng-container>
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="created_at">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> date creation </mat-header-cell>
-            <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.created_at| date:"dd/MM/yyyy" }} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="entreprise">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> Entreprise </mat-header-cell>
-            <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.entreprise}} </mat-cell>
-          </ng-container>
-
-          <!-- Name Column -->
-          <ng-container matColumnDef="nb_of_records">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> Reponse </mat-header-cell>
-            <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.nb_of_records}} </mat-cell>
-          </ng-container>
-
-          <!-- Weight Column -->
-          <ng-container matColumnDef="is_anonyme">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> Statut </mat-header-cell>
-            <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}">
-              <mat-select [(value)]="element.is_anonyme" (change)="changeStatusQuiz(element.id)">
-                <mat-option [value]="false" disabled>nominatif</mat-option>
-                <mat-option [value]="true">anonyme</mat-option>
-              </mat-select>
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="vide">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="test"> </mat-header-cell>
-            <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}">
-              <a (click)="copyMessage(element.id)" class="picto copy" title="copie"></a>
-              <a class="picto reultat" title="stats global" [routerLink]="['/resultat/stat']" routerLinkActive="router-link-active"></a>
-              <a class="picto apercu" [routerLink]="['/resultat/preview']" target="_blank" title="Aperçu" title="Aperçu"></a>
-              <a (click)="openModal(template,element.id)" class="picto suppr " title="Supprimer "></a>
-            </mat-cell>
-          </ng-container>
-          <!-- deleteQuiz(element.id) -->
-
-          <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns; "></mat-row>
-        </mat-table>
-      </div>
-
-      <!-- Content -->
-    </ng-scrollbar>
-  </div>
-  <div class="parent-pagination">
-    <div class="container">
-      <div class="number-item-page">
-        AFFICHER
-        <mat-form-field>
-          <mat-select [(ngModel)]="searchParams.numberListPerPage" (change)="changeNumberPage()">
-            <mat-option *ngFor="let page of pages" [value]="page">
-              {{ page}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        LIGNES PAR PAGE
-
-      </div>
-      <div class="paginator">
-        <pagination [(ngModel)]="searchParams.page" (pageChanged)="pageChanged($event)" [totalItems]="totalItems" [maxSize]="10"
-          previousText="Précédent" nextText="Suivant" firstText="&laquo;" lastText="&raquo;">
-
-        </pagination>
-      </div>
+        </li>
+        <li class="form">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Rechercher.." [(ngModel)]="searchParams.keyWord" (ngModelChange)="onChangeName($event)"
+            />
+            <span class="input-group-btn">
+              <button class="btn btn-search" type="button"></button>
+            </span>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 
+  <!-- quizz-table -->
 
-  <div class="add-quizz hvr-float ">
-    <a [routerLink]="[ '/admin/create'] " routerLinkActive="router-link-active ">+</a>
+  <div class="quizz-table">
+
+    <div class="container container-table">
+      <app-loader [load]="loadingList"></app-loader>
+      <ng-scrollbar #scrollRef [trackY]="true" [trackX]="true">
+
+        <div class="example-container mat-elevation-z8">
+          <!-- <mat-table #table [dataSource]="dataSource" matSort> -->
+          <mat-table #table [dataSource]="dataSource">
+
+            <!-- Position Column -->
+
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Nom
+                <div class="btn-header">
+                  <span class="haut caret" [ngClass]="{'is-selected': selectedSorter === 'asc_name'}" (click)="orderQuizz('asc','name')"></span>
+                  <span class="bas caret" [ngClass]="{'is-selected': selectedSorter === 'desc_name'}" (click)="orderQuizz('desc','name')"></span>
+                </div>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.name}} </mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="description">
+              <mat-header-cell *matHeaderCellDef class="btn-header"> Description </mat-header-cell>
+              <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.description}} </mat-cell>
+            </ng-container>
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="created_at">
+              <mat-header-cell *matHeaderCellDef> Date de création
+                <div class="btn-header">
+                  <span class="haut caret" [ngClass]="{'is-selected': selectedSorter === 'asc_createdAt'}" (click)="orderQuizz('asc','createdAt')"></span>
+                  <span class="bas caret" [ngClass]="{'is-selected': selectedSorter === 'desc_createdAt'}" (click)="orderQuizz('desc','createdAt')"></span>
+                </div>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.created_at| date:"dd/MM/yyyy" }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="enterprise_name">
+              <mat-header-cell *matHeaderCellDef> Entreprise
+                <div class="btn-header">
+                  <span class="haut caret" [ngClass]="{'is-selected': selectedSorter === 'asc_enterpriseName'}" (click)="orderQuizz('asc','enterpriseName')"></span>
+                  <span class="bas caret" [ngClass]="{'is-selected': selectedSorter === 'desc_enterpriseName'}" (click)="orderQuizz('desc','enterpriseName')"></span>
+                </div>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.enterprise_name}} </mat-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="nb_of_records">
+              <mat-header-cell *matHeaderCellDef> Réponses
+                <div class="btn-header">
+                  <span class="haut caret" [ngClass]="{'is-selected': selectedSorter === 'asc_nbOfRecords'}" (click)="orderQuizz('asc','nbOfRecords')"></span>
+                  <span class="bas caret" [ngClass]="{'is-selected': selectedSorter === 'desc_nbOfRecords'}" (click)="orderQuizz('desc','nbOfRecords')"></span>
+                </div>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.nb_of_records}} </mat-cell>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="is_anonyme">
+              <mat-header-cell *matHeaderCellDef> Statut
+                <div class="btn-header">
+                  <span class="haut caret" [ngClass]="{'is-selected': selectedSorter === 'asc_isAnonyme'}" (click)="orderQuizz('asc','isAnonyme')"></span>
+                  <span class="bas caret" [ngClass]="{'is-selected': selectedSorter === 'desc_isAnonyme'}" (click)="orderQuizz('desc','isAnonyme')"></span>
+                </div>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}">
+                <mat-select [(value)]="element.is_anonyme" (change)="changeStatusQuiz(element.id , templateSelect ,$event.value)">
+                  <mat-option [value]="false">nominatif</mat-option>
+                  <mat-option [value]="true">anonyme</mat-option>
+                </mat-select>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="vide">
+              <mat-header-cell *matHeaderCellDef class="btn-header"> </mat-header-cell>
+              <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}">
+                <a (click)="copyMessage(element.id)" class="picto copy" title="copie"></a>
+                <a class="picto reultat" title="stats global" [routerLink]="['/resultat/stat']" routerLinkActive="router-link-active"></a>
+                <a class="picto apercu" [routerLink]="['/resultat/preview']" target="_blank" title="Aperçu" title="Aperçu"></a>
+                <a (click)="openModal(template,element.id)" class="picto suppr " title="Supprimer "></a>
+              </mat-cell>
+            </ng-container>
+            <!-- deleteQuiz(element.id) -->
+
+            <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns; "></mat-row>
+          </mat-table>
+          <div *ngIf="allQuizLength  === 0" class="quizz-blank">LISTE VIDE</div>
+        </div>
+
+        <!-- Content -->
+      </ng-scrollbar>
+    </div>
+    <div class="parent-pagination">
+      <div class="container">
+        <div class="number-item-page">
+          AFFICHER
+          <mat-form-field>
+            <mat-select [(ngModel)]="searchParams.numberListPerPage" (change)="changeNumberPage()">
+              <mat-option *ngFor="let page of pages" [value]="page">
+                {{ page}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          LIGNES PAR PAGE
+
+        </div>
+        <div class="paginator">
+          <pagination [(ngModel)]="searchParams.page" (pageChanged)="pageChanged($event)" [totalItems]="totalItems" [maxSize]="10"
+            previousText="Précédent" nextText="Suivant" firstText="&laquo;" lastText="&raquo;">
+
+          </pagination>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="add-quizz hvr-float ">
+      <a [routerLink]="[ '/admin/create'] " routerLinkActive="router-link-active ">+</a>
+    </div>
   </div>
+  <ng-template #template>
+    <div class="modal-body text-center ">
+      <p>La suppression du formulaire va aussi supprimer les XXX réponses sur celui-ci. Si vous souhaitez conserver les réponses
+        dans votre back-office et que le formulaire ne soit plus en ligne contacter le support.</p>
+      <button type="button " class="btn btn-default " (click)="confirm(idQuizTodelete) ">valider </button>
+      <button type="button " class="btn btn-primary " (click)="decline() ">annuler</button>
+    </div>
+  </ng-template>
+
+  <ng-template #templateSelect>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="declineSelect(valueQuizToChange)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+    <div class="modal-body text-center ">
+      <p *ngIf="valueQuizToChange"> vous passez de nominatif à anonyme donc toutes les anciennes donnée seront convertie en donnée anonyme (suppression
+        nom prénom email).</p>
+      <p *ngIf="!valueQuizToChange"> vous passez de anonyme à nominatif donc une connexion sera obligatoire pour répondre aux formulaire et que toute les
+        donnée précédente resterons anonyme.</p>
+      <button type="button " class="btn  btn-default btn-quizz " (click)="declineSelect(valueQuizToChange)">annuler</button>
+      <button type="button " class="btn btn-primary btn-quizz " (click)="confirmSelect(idQuizToChange,valueQuizToChange) ">valider </button>
+
+    </div>
+  </ng-template>
 </div>
-<ng-template #template>
-  <div class="modal-body text-center ">
-    <p>La suppression du formulaire va aussi supprimer les XXX réponses sur celui-ci. Si vous souhaitez conserver les réponses
-      dans votre back-office et que le formulaire ne soit plus en ligne contacter le support.</p>
-    <button type="button " class="btn btn-default " (click)="confirm(idQuizTodelete) ">valider </button>
-    <button type="button " class="btn btn-primary " (click)="decline() ">annuler</button>
-  </div>
-</ng-template>

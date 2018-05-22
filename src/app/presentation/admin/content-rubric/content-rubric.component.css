@@ -104,3 +104,98 @@
     }
 }
 
+.upload-img {
+    position: relative;
+    overflow: hidden;
+}
+
+/* layout.css Style */
+.upload-img .upload-drop-zone {
+    height: 200px;
+    border-width: 2px;
+    margin-bottom: 20px;
+  }
+  
+  /* skin.css Style*/
+  .upload-img .upload-drop-zone {
+    color: #ccc;
+    border-style: dashed;
+    border-color: #ccc;
+    line-height: 200px;
+    text-align: center
+  }
+  .upload-img .upload-drop-zone.drop {
+    color: #222;
+    border-color: #222;
+  }
+  
+  
+  
+  .upload-img .image-preview-input {
+      position: relative;
+      overflow: hidden;
+      margin: 0px;    
+      color: #333;
+      background-color: #fff;
+      border-color: #ccc;    
+  }
+  .upload-img .image-preview-input input[type=file] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0;
+      filter: alpha(opacity=0);
+  }
+  .upload-img  .image-preview-input-title {
+      margin-left:2px;
+  }
+  .upload-img .image-preview-filename{
+      border: none;
+      border-radius: 0;
+      height:56px;
+      box-shadow: none!important;
+  }
+  .upload-img .input-group-btn > .btn{
+      border: none;
+      border-radius: 0;
+      height: 56px;
+      line-height: 50px;
+  }
+  .upload-img .input-group-btn > .image-preview-input{
+      background-color: #f17222;
+      transition: 0.5s;
+  }
+  .upload-img .input-group-btn > .btn-labeled{
+      background-color: #ff8a41;
+      transition: 0.5s;
+  }
+  .content-drop .groupe-btn table td:first-child{
+      width: 20%;
+  }
+  .content-drop .groupe-btn table td:last-child{
+      width: 80%;
+  }
+  .upload-img .btn,
+  .upload-img button {
+    background-color: #fc6100;
+    border:none!important;
+  }
+  .upload-img .btn span,
+  .upload-img button span{
+      color: #fff;
+  }
+  .upload-img .glyphicon{
+    color: #fff;
+  }
+  .content-drop .groupe-btn .text-type table td{
+      width: 100%;
+      
+  }
+  .content-drop .groupe-btn .text-type {
+    width: 89px;
+    }
+

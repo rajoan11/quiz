@@ -90,15 +90,39 @@ ng-scrollbar {
   border-bottom: 2px #fc6100 solid;
   padding: 0 15px;
   min-height: 1px;
-  height: 26px;
+  height: 46px;
+  vertical-align: bottom;
 }
 .quizz-table .mat-header-cell {
-  color: #000;
+  color: #8d8d8d;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 15px;
+  padding-right: 20px;
+  position: relative;
+  overflow: visible;
+  padding-left: 5px;
 }
 .quizz-table .mat-header-cell:first-child {
   font-weight: 600;
 }
-.quizz-table .mat-row a{
+.quizz-table .mat-header-cell:last-child:after {
+  display: none;
+}
+.quizz-table .mat-header-cell:after {
+  position: absolute;
+  width: 1px;
+  height: 43px;
+  background-color: #8d8d8d;
+  content: '';
+  right: 1px;
+  top: 0;
+  z-index: 50;
+  bottom: 0;
+  display: block;
+  margin: auto;
+}
+.quizz-table .mat-row a {
   cursor: pointer;
 }
 .quizz-table .mat-row a.picto.copy {
@@ -142,7 +166,6 @@ ng-scrollbar {
   box-shadow: none !important;
 }
 
-
 .parent-pagination .paginator {
   display: inline-block;
   float: right;
@@ -154,34 +177,87 @@ ng-scrollbar {
   font-weight: 600;
   padding-top: 11px;
 }
-@media (max-width:1000px){
+@media (max-width: 1000px) {
   .parent-pagination .paginator {
     width: 65%;
   }
 }
-@media (max-width:992px){
+@media (max-width: 992px) {
   .parent-pagination .paginator,
   .parent-pagination .number-item-page {
     display: block;
     float: none;
     width: 100%;
   }
-  .add-quizz{
+  .add-quizz {
     right: 0;
     background: #fc610080;
     transition: 0.3s;
   }
-  .add-quizz:hover{
+  .add-quizz:hover {
     background-color: #fc6100;
   }
-  .quizz-table .container-table{
+  .quizz-table .container-table {
     margin: 35px auto 15px;
   }
 }
-.relative{
+.relative {
   position: relative;
 }
 .example-panel::parent {
-  top: 44px!important;
+  top: 44px !important;
 }
 
+.quizz-blank {
+  text-align: center;
+  font-size: larger;
+}
+
+.class-flou {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+}
+.btn-header {
+  width: 15px;
+  height: 20px;
+  position: absolute;
+  right: 3px;
+  top: 0;
+  bottom: 0;
+  display: block;
+  margin: auto;
+}
+.btn-header > .caret {
+  display: block;
+  border-right: 5px solid rgba(0, 0, 0, 0);
+  border-left: 5px solid rgba(0, 0, 0, 0);
+  border-top:6px dashed;
+  margin-bottom: 3px;
+  cursor: pointer;
+  color: #8d8d8d;
+}
+.btn-header > .caret:hover {
+  color: #fc6100;
+}
+.is-selected {
+  color: #fc6100!important;
+}
+.btn-header > .haut.caret {
+  transform: rotate(180deg);
+}
+
+.filtre-quiz .liste > li.btn-group > select {
+  width: 100%;
+  height: 40px;
+  margin-top: 3px;
+}
+.filtre-quiz .liste > li.btn-group > select > option.ng-star-inserted {
+  background-color: #fc6100;
+}
+
+.test-panel .mat-select-content{
+  background-color: rgba(0, 255, 0, 0.5)!important;
+}

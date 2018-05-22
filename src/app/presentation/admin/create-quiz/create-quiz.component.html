@@ -87,7 +87,7 @@
             </ul>
           </li>
           <li>
-            <button class="btn" (click)="saveQuiz()" [disabled]="!newQuiz.name || !newQuiz.description">Finalisation de quizz</button>
+            <button class="btn" (click)="saveQuiz()" [disabled]="!newQuiz.name">FINALISER LE QUIZZ</button>
           </li>
         </ul>
       </div>
@@ -102,13 +102,13 @@
           <div class="myrow">
             <mat-form-field class="example-full-width">
               <!-- floatPlaceholder="never" -->
-              <input matInput placeholder="Nom quizz" value="" name="" [(ngModel)]="newQuiz.name">
+              <input matInput placeholder="Nom Quizz..." value="" name="" [(ngModel)]="newQuiz.name">
             </mat-form-field>
           </div>
 
           <div class="myrow textarea">
             <mat-form-field class="example-full-width">
-              <textarea matInput placeholder="Description" name="" [(ngModel)]="newQuiz.description"></textarea>
+              <textarea matInput placeholder="Description..." name="" [(ngModel)]="newQuiz.description"></textarea>
             </mat-form-field>
           </div>
         </div>

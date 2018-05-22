@@ -15,7 +15,7 @@ export class QuizCudBusinessDelegateService
   }
 
   createQuiz(quiz: any) {
-    const url = `${environment.apiUrl}/admin/formulaire`;
+    const url = `${environment.apiUrl}/admin/form`;
     return this.http.post<any>(url, quiz);
   }
   updateQuiz(quiz: any) {

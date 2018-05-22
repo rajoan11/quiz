@@ -34,11 +34,34 @@
     </div>
     <div class="groupe-btn ">
       <div class="row ">
-        <div class="col-sm-12 ">
-          <!-- <div (click)="onApiLoad()">
-          </div> -->
-          <button class="btn btn-suppr pull-right border "></button>
-        </div>
+        <div class="col-sm-4 pull-right" [ngClass]="{'text-type': contentQuiz === 'text'}">
+            <table >
+              <tr >
+                <td><button class="btn btn-suppr"></button></td>
+                <td class="upload-img" *ngIf="contentQuiz === 'video'"> 
+                    <div class="input-group image-preview">
+                        <input placeholder="" type="text" class="form-control image-preview-filename" placeholder="Votre url ...">                        
+                      </div>
+                </td>
+                <td class="upload-img" *ngIf="contentQuiz === 'image'"> 
+                    <div class="input-group image-preview">
+                        <input placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
+                        <!-- don't give a name === doesn't send on POST/GET --> 
+                        <span class="input-group-btn"> 
+                        <!-- image-preview-clear button -->
+                        <button type="button" class="btn btn-default image-preview-clear" style="display:none;"> <span class="glyphicon glyphicon-remove"></span> Clear </button>
+                        <!-- image-preview-input -->
+                        <div class="btn image-preview-input btn-primary"> <span class="glyphicon glyphicon-folder-open"></span> <span class="image-preview-input-title"></span>
+                          <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/>
+                          <!-- rename it --> 
+                        </div>
+                        <button type="button" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-upload"></i> </span></button>
+                        </span> 
+                      </div>
+                </td>
+              </tr>
+            </table>
+          </div>
       </div>
     </div>
   </div>

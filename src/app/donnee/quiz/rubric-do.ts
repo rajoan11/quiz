@@ -7,4 +7,6 @@ export class RubricDo {
   numero_order: number;
   questions: Array<Question>;
   attachements: Array<Attachement>;
+  activate_points_rules: boolean;
+  score: number;
 }

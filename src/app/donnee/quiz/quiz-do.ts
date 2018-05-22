@@ -16,5 +16,5 @@ export class QuizDo {
   readScore: boolean;
   initializeQuizz: boolean;
   endingMessage: string;
-  rubrique: Array<RubricDto>;
+  rubriques: Array<RubricDto>;
 }

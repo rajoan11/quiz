@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxEditorModule } from 'ngx-editor';
 import { DndModule } from 'ngx-dnd';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
 
 import {
   MatSortModule,
@@ -42,7 +44,9 @@ import { CommunModule } from '../../../commun/commun.module';
     DndModule.forRoot(),
     LoaderModule,
     MatSlideToggleModule,
-    CommunModule
+    CommunModule,
+    MatCheckboxModule,
+    MatRadioModule
   ],
   declarations: [],
   exports: [
@@ -63,7 +67,9 @@ import { CommunModule } from '../../../commun/commun.module';
     DndModule,
     LoaderModule,
     MatSlideToggleModule,
-    CommunModule
+    CommunModule,
+    MatCheckboxModule,
+    MatRadioModule
   ]
 })
 export class SharedModule {}
