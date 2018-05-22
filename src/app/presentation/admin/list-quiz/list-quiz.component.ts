@@ -22,7 +22,7 @@ import { ToastService } from '../../../commun/service/toaster.service';
 @Component({
   selector: 'app-list-quiz',
   templateUrl: './list-quiz.component.html',
-  styleUrls: ['./list-quiz.component.css']
+  styleUrls: ['./list-quiz.component.scss']
 })
 export class ListQuizComponent implements OnInit {
   addClassOnClickEnterprise = false;

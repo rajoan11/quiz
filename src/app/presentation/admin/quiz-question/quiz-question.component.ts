@@ -5,7 +5,7 @@ import { RubricDto } from '../../../donnee/quiz';
 @Component({
   selector: 'app-quiz-question',
   templateUrl: './quiz-question.component.html',
-  styleUrls: ['./quiz-question.component.css']
+  styleUrls: ['./quiz-question.component.scss']
 })
 export class QuizQuestionComponent implements OnInit {
   panelOpenState: boolean;
