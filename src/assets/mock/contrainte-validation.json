@@ -1,0 +1,110 @@
+[
+  {
+    "operator": [
+      {
+        "validation_operator": "Contient",
+        "constraint_value": "Text"
+      },
+      {
+        "validation_operator": "Ne contient pas",
+        "constraint_value": "Text"
+      },
+      {
+        "validation_operator": "Adresse e-mail",
+        "constraint_value": "Text"
+      },
+      {
+        "validation_operator": "URL",
+        "constraint_value": "Text"
+      }
+    ],
+    "test_error": "",
+    "type_validation": "Texte",
+    "type_value": "Text"
+  },
+  {
+    "operator": [
+      {
+        "validation_operator": "Supérieur à",
+        "constraint_value": "Nombre"
+      },
+      {
+        "validation_operator": "Supérieur ou égal à",
+        "constraint_value": "Nombre"
+      },
+      {
+        "validation_operator": "Inférieur à",
+        "constraint_value": "Nombre"
+      },
+      {
+        "validation_operator": "Inférieur ou égal à",
+        "constraint_value": "Nombre"
+      },
+      {
+        "validation_operator": "Egal à",
+        "constraint_value": "Nombre"
+      },
+      {
+        "validation_operator": "Différent de",
+        "constraint_value": "Nombre"
+      },
+      {
+        "validation_operator": "Entre",
+        "constraint_value": "Nombre2"
+      },
+      {
+        "validation_operator": "Non compris entre",
+        "constraint_value": "Nombre2"
+      },
+      {
+        "validation_operator": "Est le nombre",
+        "constraint_value": "Nombre"
+      },
+      {
+        "validation_operator": "Nombre entier",
+        "constraint_value": "Nombre"
+      }
+    ],
+    "test_error": "",
+    "type_validation": "Nombre",
+    "type_value": "number"
+  },
+  {
+    "operator": [
+      {
+        "validation_operator": "Nombre de caractères maximal",
+        "constraint_value": "Nombre"
+      },
+      {
+        "validation_operator": "Nombre de caractères minimal",
+        "constraint_value": "Nombre"
+      }
+    ],
+    "test_error": "",
+    "type_validation": "Longueur",
+    "type_value": "long"
+  },
+  {
+    "operator": [
+      {
+        "validation_operator": "Contient",
+        "constraint_value": "Text"
+      },
+      {
+        "validation_operator": "Ne contient pas",
+        "constraint_value": "Text"
+      },
+      {
+        "validation_operator": "Correspond à",
+        "constraint_value": "Text"
+      },
+      {
+        "validation_operator": "Ne correspond à",
+        "constraint_value": "Text"
+      }
+    ],
+    "test_error": "",
+    "type_validation": "Expression régulière",
+    "type_value": "regex"
+  }
+]

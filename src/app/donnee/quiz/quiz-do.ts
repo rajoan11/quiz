@@ -5,7 +5,7 @@ export class QuizDo {
   name: string;
   description: string;
   created_at: Date;
-  entreprise: string;
+  enterprise_forms: Array<any>;
   nb_of_records: number;
   status: string;
   enterpriseUid: number;

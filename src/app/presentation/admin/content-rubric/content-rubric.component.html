@@ -1,15 +1,15 @@
-<!-- IMAGES & video -->
-<div class="prent-content-drop" [ngClass]="{ 'w-picto': contentQuiz === 'image'}">
+<!-- IMAGES & embed -->
+<div class="prent-content-drop" [ngClass]="{ 'w-picto': contentQuiz.value === 'image'}" [ngStyle]="{'border-color':contentQuiz.value === 'image' ? colorCss : '' }">
   <div class="support"></div>
-  <div class="type-contenu img" *ngIf="contentQuiz === 'image'">Image</div>
-  <div class="type-contenu text" *ngIf="contentQuiz === 'text'">
+  <div class="type-contenu img" *ngIf="contentQuiz.value === 'image'">Image</div>
+  <div class="type-contenu text" *ngIf="contentQuiz.value === 'text'">
     <i class="glyphicon glyphicon-text-size">&nbsp;</i>Texte</div>
-  <div class="type-contenu embed_a" *ngIf="contentQuiz === 'video'">
+  <div class="type-contenu embed_a" *ngIf="contentQuiz.value === 'embed'">
     <i> </i>Embed</div>
   <div class="clear"></div>
 
   <div class="content-drop">
-    <div *ngIf="contentQuiz === 'video'">
+    <div *ngIf="contentQuiz.value === 'embed'">
       <div class="embed-responsive embed-responsive-16by9">
         <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
       </div>
@@ -19,10 +19,10 @@
         <div class="w-50"></div>
       </div>
     </div>
-    <div *ngIf="contentQuiz === 'text'">
+    <div *ngIf="contentQuiz.value === 'text'">
       <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true"></app-ngx-editor>
     </div>
-    <div *ngIf="contentQuiz === 'image'">
+    <div *ngIf="contentQuiz.value === 'image'">
 
       <div id="result "></div>
       <img src="/assets/images/drop/1.jpg " alt=" ">
@@ -34,34 +34,43 @@
     </div>
     <div class="groupe-btn ">
       <div class="row ">
-        <div class="col-sm-4 pull-right" [ngClass]="{'text-type': contentQuiz === 'text'}">
-            <table >
-              <tr >
-                <td><button class="btn btn-suppr"></button></td>
-                <td class="upload-img" *ngIf="contentQuiz === 'video'"> 
-                    <div class="input-group image-preview">
-                        <input placeholder="" type="text" class="form-control image-preview-filename" placeholder="Votre url ...">                        
-                      </div>
-                </td>
-                <td class="upload-img" *ngIf="contentQuiz === 'image'"> 
-                    <div class="input-group image-preview">
-                        <input placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
-                        <!-- don't give a name === doesn't send on POST/GET --> 
-                        <span class="input-group-btn"> 
-                        <!-- image-preview-clear button -->
-                        <button type="button" class="btn btn-default image-preview-clear" style="display:none;"> <span class="glyphicon glyphicon-remove"></span> Clear </button>
-                        <!-- image-preview-input -->
-                        <div class="btn image-preview-input btn-primary"> <span class="glyphicon glyphicon-folder-open"></span> <span class="image-preview-input-title"></span>
-                          <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/>
-                          <!-- rename it --> 
-                        </div>
-                        <button type="button" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-upload"></i> </span></button>
-                        </span> 
-                      </div>
-                </td>
-              </tr>
-            </table>
-          </div>
+        <div class="col-sm-4 pull-right" [ngClass]="{'text-type': contentQuiz.value === 'text'}">
+          <table>
+            <tr>
+              <td>
+                <button class="btn btn-suppr" (click)="deleteContent(index)"></button>
+              </td>
+              <td class="upload-img" *ngIf="contentQuiz.value === 'embed'">
+                <div class="input-group image-preview">
+                  <input placeholder="" type="text" class="form-control image-preview-filename" placeholder="Votre url ...">
+                </div>
+              </td>
+              <td class="upload-img" *ngIf="contentQuiz.value === 'image'">
+                <div class="input-group image-preview">
+                  <input placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
+                  <!-- don't give a name === doesn't send on POST/GET -->
+                  <span class="input-group-btn">
+                    <!-- image-preview-clear button -->
+                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                      <span class="glyphicon glyphicon-remove"></span> Clear </button>
+                    <!-- image-preview-input -->
+                    <div class="btn image-preview-input btn-primary" [style.background-color]="colorCss">
+                      <span class="glyphicon glyphicon-folder-open"></span>
+                      <span class="image-preview-input-title"></span>
+                      <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview" />
+                      <!-- rename it -->
+                    </div>
+                    <button type="button" class="btn btn-labeled btn-primary" [style.background-color]="colorCss">
+                      <span class="btn-label">
+                        <i class="glyphicon glyphicon-upload"></i>
+                      </span>
+                    </button>
+                  </span>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>

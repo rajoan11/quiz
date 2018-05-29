@@ -18,24 +18,28 @@ import { QuizDto } from '../../../donnee/quiz';
 import { QuizReadApplicatifServiceACI } from '../../../service-applicatif/quiz-admin';
 import { QuizCudApplicatifServiceACI } from '../../../service-applicatif/quiz-admin';
 import { ToastService } from '../../../commun/service/toaster.service';
+import { EnterpriseService } from '../../../commun/service/enterprise.service';
 
 @Component({
   selector: 'app-list-quiz',
   templateUrl: './list-quiz.component.html',
-  styleUrls: ['./list-quiz.component.scss']
+  styleUrls: ['./list-quiz.component.css']
 })
 export class ListQuizComponent implements OnInit {
   addClassOnClickEnterprise = false;
   allQuizLength = 210;
   currentPage: number;
   dataSource = new MatTableDataSource();
-  enterprises: any;
+  enterprises: Array<any>;
+  // enterprisesItems: Array<any>;
+  // entrepriseSelected: Array<any> = [];
   idQuizToChange: number;
   idQuizTodelete: number;
   initialPage = 1;
   matSelected = false;
   message: string;
   modalRef: BsModalRef;
+  modalRefChoiceEnterprise: BsModalRef;
   modalRefSelect: BsModalRef;
   loadingList = false;
   pages = [10, 20, 30, 40];
@@ -47,11 +51,15 @@ export class ListQuizComponent implements OnInit {
     orderby: null,
     sort: null
   };
+  searchEntrepriseParams: string;
   searchTerm = new Subject<any>();
+  // searchTermEntreprise = new Subject<any>();
   selectedSorter: string;
   totalItems: number;
   valueQuizToChange: boolean;
   constructor(
+    private router: Router,
+    private enterpriseService: EnterpriseService,
     private toastService: ToastService,
     private activatedRoute: ActivatedRoute,
     private modalService: BsModalService,
@@ -73,6 +81,7 @@ export class ListQuizComponent implements OnInit {
 
   ngOnInit() {
     this.searchQuiz();
+    // this.autcompleteSearchEnterprise();
     this.getEntreprises();
     this.searchTerm.next(this.searchParams);
   }
@@ -147,6 +156,10 @@ export class ListQuizComponent implements OnInit {
     this.searchTerm.next(this.searchParams);
   }
 
+  // onChangeEntreprise(event: any): void {
+  //   this.searchTermEntreprise.next(event);
+  // }
+
   orderQuizz(type: string, header: string): void {
     this.searchParams.orderby = header;
     this.searchParams.sort = type;
@@ -175,6 +188,49 @@ export class ListQuizComponent implements OnInit {
         err => this.onErrorSearch(err)
       );
   }
+
+  // autcompleteSearchEnterprise(): void {
+  //   this.searchTermEntreprise
+  //     .debounceTime(1000)
+  //     .distinctUntilChanged()
+  //     .subscribe(
+  //       res => {
+  //         if (res) {
+  //           this.enterprisesItems = this.enterprises
+  //             .filter(
+  //               enter =>
+  //                 !this.entrepriseSelected.find(
+  //                   enterSelect => enterSelect.nid === enter.nid
+  //                 )
+  //             )
+  //             .filter(enterprise =>
+  //               enterprise['title'].toLowerCase().includes(res.toLowerCase())
+  //             );
+  //           console.log(this.enterprisesItems);
+  //         } else {
+  //           this.enterprisesItems = [];
+  //         }
+  //       },
+  //       err => {}
+  //     );
+  // }
+
+  // selectEnterprise(enterprise): void {
+  //   this.entrepriseSelected.push(enterprise);
+  //   this.enterprisesItems.forEach((ent, index) => {
+  //     if (ent.nid === enterprise.nid) {
+  //       this.enterprisesItems.splice(index, 1);
+  //     }
+  //   });
+  // }
+
+  // deleteSelectEnterprise(enterprise): void {
+  //   this.entrepriseSelected.forEach((ent, index) => {
+  //     if (ent.nid === enterprise.nid) {
+  //       this.entrepriseSelected.splice(index, 1);
+  //     }
+  //   });
+  // }
 
   onSuccessSearch(res): void {
     this.dataSource = new MatTableDataSource(res.forms);
@@ -223,6 +279,13 @@ export class ListQuizComponent implements OnInit {
     });
   }
 
+  openModalChoiceEnterprise(template: TemplateRef<any>) {
+    this.modalRefChoiceEnterprise = this.modalService.show(template, {
+      backdrop: false,
+      ignoreBackdropClick: true
+    });
+  }
+
   confirmSelect(idQuiz: number, valueQuiz: boolean): void {
     this.quizCudApplicatifServiceACI.changeStatusQuiz(idQuiz).subscribe(
       res => {
@@ -237,6 +300,12 @@ export class ListQuizComponent implements OnInit {
     this.modalRefSelect.hide();
   }
 
+  confirmSelectEntreprise(entreprise): void {
+    this.enterpriseService.setEnterprise(entreprise);
+    this.router.navigate(['/admin/create']);
+    this.modalRefChoiceEnterprise.hide();
+  }
+
   declineSelect(valueQuiz: boolean): void {
     this.message = 'Declined!';
     this.modalRefSelect.hide();
@@ -245,5 +314,9 @@ export class ListQuizComponent implements OnInit {
         data['is_anonyme'] = !valueQuiz;
       }
     });
+  }
+
+  aaa(a: any): void {
+    console.log(a);
   }
 }

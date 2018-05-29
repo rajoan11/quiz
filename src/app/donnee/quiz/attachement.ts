@@ -1,5 +1,5 @@
 export class Attachement {
-  images: {};
-  text: string;
-  video: string;
+  content: string;
+  type: string;
+  type_content: string;
 }

@@ -1,0 +1,139 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: firaSans, muli, Arial, Helvetica, sans-serif;
+    color: #4f5e65;
+  }
+.padd{
+    padding-left: 25px;
+}
+.nav-front{
+    padding: 45px 40px;
+    background-color: #f96922;
+    position: relative;
+    margin-bottom: 70px;
+}
+.paginate-rubrique,
+.order{
+  margin-bottom: 50px;  
+}
+.nav-front:after{
+    position: absolute;
+    content: '';
+    width: 30px;
+    height: 30px;
+    bottom: -30px;
+    left: 0;
+    right: 0;
+    display: block;
+    margin: auto;
+    border-left: 20px solid #0000;
+    border-right: 20px solid #0000;
+    border-top: 21px solid;
+    border-top-color: #f96922;
+}
+.nav-front p{
+    color: #fff;
+    font-size: 17px;
+    font-weight: 200;
+
+}
+.nav-front p,.nav-front h1{
+    color: #fff;
+}
+h1{
+    font-size: 22px;
+    font-weight: bold;
+}
+p{
+  font-family: firaSans;
+  font-weight: normal;
+}
+.paginate-rubrique ul{
+    text-align: center;
+}
+.paginate-rubrique ul li {
+    list-style: none;
+    display: inline-block;
+    width: 64px;
+    position: relative;
+}
+.paginate-rubrique ul li>span{
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #cecece;
+    display: block;
+    margin: 5px;
+    cursor: pointer;
+    border-color: #f96922;
+}
+.paginate-rubrique ul li>span:before{
+    position: absolute;
+    content: "";
+    width: 22px;
+    height: 22px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: inherit;
+    top: 1px;
+    left: 1px;
+    display: block;
+    border-radius: 50%;
+    display: none;
+    transition:0.3s;
+}
+.paginate-rubrique ul li>span:hover:before{
+    display: block;
+}
+.paginate-rubrique ul li>span:hover{
+    background-color: #f96922;
+}
+
+
+.paginate-rubrique ul li:before{
+    position: absolute;
+    content: "";
+    width: 33px;
+    height: 1px;
+    background-color: #9b9b9b;
+    top: 11px;
+    left: 28px;
+    display: block;
+    opacity: 0.4;
+    overflow: hidden;
+}
+.paginate-rubrique ul li:last-child:before{
+    display: none;
+}
+
+.front-rubrique .contenu {
+    max-width: 495px;
+    padding: 40px 56px;
+    background: #fff;
+    box-shadow: 0 5px 14px 0 rgba(166, 166, 166, 0.2);
+    margin: auto;
+    margin-bottom: 20px;
+    float: none;
+}
+.front-rubrique .contenu:last-child{
+    margin-bottom: 40px;
+}
+.front-rubrique .contenu img {
+    width: 100%;
+}
+.front-rubrique .contenu mat-radio-group>mat-radio-button,
+.front-rubrique .contenu mat-radio-group>mat-checkbox{
+   display:block; 
+   margin-bottom: 14px;
+   font-family: Muli;
+   font-size: 16px;
+   color: #4f5e65;
+}
+.title{
+    font-size: 17px;
+    font-weight: 600;
+    font-family: muli;
+    margin-bottom: 25px;
+    color: #4f5e65;
+}

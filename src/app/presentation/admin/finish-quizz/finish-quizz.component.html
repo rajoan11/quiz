@@ -1,0 +1,64 @@
+<ng2-toasty [position]="'top-right'"></ng2-toasty>
+<div id="creation-quizz" class="fin-quizz">
+
+  <div class="container">
+    <p class="desc">Vous êtes sur le point de finaliser votre quizz.
+      <br/> Il ne vous reste plus qu’à personnaliser le message final que va reçevoir l’utilisateur après avoir rempli le quizz.</p>
+    <div class="form-quizz">
+      <div class="myrow textarea">
+        <mat-form-field class="example-full-width">
+          <textarea matInput placeholder="Ajouter un titre au message final de votre quizz" value="Merci d'avoir repondu au quizz"></textarea>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Ajouter un message final à votre quizz..."></textarea>
+          </mat-form-field>
+      </div>
+    </div>
+    <!-- SLIDE TOOGLE -->
+    <div class="toogle">
+      <div class="col-sm-9">
+        <div class="row">
+          <div class="col-sm-8 col-xs-8">
+            <p>L’utilisateur pourra consulter son score à la fin du quizz</p>
+          </div>
+          <div class="col-sm-4 col-xs-4">
+            <mat-slide-toggle></mat-slide-toggle>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8 col-xs-8">
+            <p> L’utilisateur pourra consulter la correction à la fin du quizz</p>
+          </div>
+          <div class="col-sm-4 col-xs-4">
+            <mat-slide-toggle></mat-slide-toggle>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8 col-xs-8">
+            <p> L’utilisateur pourra recommencer le quizz
+              <br/>
+              <small>Les anciennes réponses ainsi que son score seront remplacés une fois la nouvelle saisie réalisé. seulement
+                pour les quizz nominatif.</small>
+            </p>
+          </div>
+          <div class="col-sm-4 col-xs-4" >
+            <mat-slide-toggle></mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-15">
+          <div class="col-sm-4 pull-right">
+            <p class="text-right">
+              <button class="btn btn-voir-quizz " type="button ">Terminer et voir le quizz</button>
+            </p>
+            <p class="text-right">
+              <button class="btn btn-fin-quizz  " type="button ">terminer</button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>

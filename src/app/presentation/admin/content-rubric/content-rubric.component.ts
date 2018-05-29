@@ -1,20 +1,23 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 declare const google: any;
 declare const gapi: any;
 @Component({
   selector: 'app-content-rubric',
   templateUrl: './content-rubric.component.html',
-  styleUrls: ['./content-rubric.component.scss']
+  styleUrls: ['./content-rubric.component.css']
 })
 export class ContentRubricComponent implements OnInit {
+  @Input() colorCss: string;
   @Input() contentQuiz: any;
+  @Input() index;
   @Input() questionQuizs: any;
   developerKey = 'ZMfujAxBWavplSWzmKfm-57i';
   clientId = '274345426144-4pas2h82ls0u3qknse2ucnlrphpar7uf.apps.googleusercontent.com';
   scope = ['https://www.googleapis.com/auth/photos'];
   pickerApiLoaded = false;
   oauthToken?: any;
+  @Output() deleteIndex: EventEmitter<number> = new EventEmitter<number>();
   constructor() {}
 
   ngOnInit() {}
@@ -88,5 +91,9 @@ export class ContentRubricComponent implements OnInit {
     }
     const message = 'You picked: ' + url;
     alert(message);
+  }
+
+  deleteContent(index: number): void {
+    this.deleteIndex.emit(index);
   }
 }

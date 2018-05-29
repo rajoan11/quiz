@@ -1,28 +1,131 @@
-<div dnd-droppable (onDropSuccess)="transferDataSuccess($event)" [dropZones]="['attachement']">
-  <div dnd-droppable (onDropSuccess)="transferQuestionSuccess($event)" [dropZones]="['question']">
-    <div class="order bg-quizz">
+<!--  <div dnd-droppable (onDropSuccess)="transferQuestionSuccess($event)" [dropZones]="['attachement']">
+  <div class="drop-zone-question" dnd-droppable (onDropSuccess)="transferQuestionSuccess($event)" [dropZones]="['question']"> -->
+<div dnd-sortable-container [sortableData]="newRubrique.contents_rubriques" [ngStyle]="{'min-height': '100px'}" [dropZones]="['attachement']">
+  <div dnd-droppable class="drop-zone-question" (onDropSuccess)="addTo($event)" (onDragOver)="addTo($event)" [dropZones]="['attachement']">
+    <div class="order" [style.border-color]="colorCss">
       <p>
-        <a href="">Rubrique
+        <a>Rubrique
           <span>{{position+1}}</span> sur
-          <span>{{quizLength}}</span>
+          <span>{{quizLengthValue}}</span>
         </a>
+        <span class="pops" *ngIf="newRubrique.activate_points_rules && quizLengthValue > 1" (click)="openModal(template)"></span>
       </p>
+      <span class="order-option" (click)="activatePointRule()"></span>
     </div>
     <p class="order-name">
-      <input type="text" placeholder="Nom rubrique">
+      <input type="text" placeholder="Nom rubrique" name="name" [(ngModel)]="newRubrique.name">
     </p>
     <div class="parent-content">
-      <ng-container dnd-sortable-container [sortableData]="contentQuizs" [dropZones]="['container-quiz']">
-        <div *ngFor="let contentQuiz of contentQuizs;let j = index" dnd-sortable [sortableIndex]="j">
-          <app-content-rubric [contentQuiz]='contentQuiz'></app-content-rubric>
+      <!-- <ng-container dnd-sortable-container [sortableData]="newRubrique.contents_rubriques" [dropZones]="['container-quiz']">
+        <div *ngFor="let contentQuiz of newRubrique.contents_rubriques;let j = index" dnd-sortable [sortableIndex]="j">
+          <app-content-rubric [contentQuiz]='contentQuiz' [colorCss]="colorCss" *ngIf="contentQuiz.type_content !== 'question'"></app-content-rubric>
+          <app-content-rubric-question [questionQuiz]="contentQuiz" [colorCss]="colorCss" *ngIf="contentQuiz.type_content === 'question'"></app-content-rubric-question>
         </div>
-      </ng-container>
-      <ng-container dnd-sortable-container [sortableData]="questionQuizs" [dropZones]="['container-question']">
+      </ng-container> -->
+      <div *ngFor="let contentQuiz of newRubrique.contents_rubriques;let i = index" dnd-sortable [sortableIndex]="i">
+        <div *ngIf="contentQuiz">
+          <app-content-rubric (deleteIndex)="onDeleteIndex($event)" [contentQuiz]='contentQuiz' [colorCss]="colorCss" [index]="i" *ngIf="contentQuiz.type_content !== 'question'"></app-content-rubric>
+          <app-content-rubric-question (deleteIndex)="onDeleteIndex($event)" [questionQuiz]="contentQuiz" [colorCss]="colorCss" [index]="i"
+            *ngIf="contentQuiz.type_content === 'question'"></app-content-rubric-question>
+        </div>
+      </div>
+      <!-- <ng-container dnd-sortable-container [sortableData]="questionQuizs" [dropZones]="['container-question']">
         <div *ngFor="let questionQuiz of questionQuizs;let i = index" dnd-sortable [sortableIndex]="i">
-          <app-content-rubric-question [questionQuiz]="questionQuiz"></app-content-rubric-question>
+          <app-content-rubric-question [questionQuiz]="questionQuiz" [colorCss]="colorCss"></app-content-rubric-question>
         </div>
-      </ng-container>
+      </ng-container> -->
 
     </div>
   </div>
 </div>
+
+<!-- MODALE NBR RUBRIQUE -->
+
+
+<ng-template #template class="generale-pops">
+  <div class="modal-header text-center">
+    <h3 class="modal-title">Rubrique {{position+1}}</h3>
+    <p class="small">SCORE MAX : 50</p>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide();newRubrique.points_rules = []">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path fill="#000" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"
+        />
+      </svg>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="pad">Cette fonction vous permet de diriger l’utilisateur vers une selon son nombre de point obtenu à la fin de cette section</p>
+
+
+    <div class="group-selection" *ngFor="let pr of newRubrique.points_rules; let i = index">
+      <!-- table1 -->
+      <table class="table1" align="left">
+        <tr>
+          <td>
+            <span>de</span>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-select [(ngModel)]="pr.point_min">
+                <mat-option *ngFor="let score1 of arrayScore1" [value]="score1">
+                  {{ score1 }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </td>
+          <td>
+            <span>points</span>
+          </td>
+          <td>
+            <span class="mask">à</span>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-select [(ngModel)]="pr.point_max">
+                <mat-option *ngFor="let score2 of arrayScore2" [value]="score2">
+                  {{ score2 }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </td>
+          <td>
+            <span>points</span>
+          </td>
+        </tr>
+      </table>
+      <!-- table2 -->
+      <table class="table2" align="right">
+        <tr>
+          <td class="w30">
+            <span class="mask">aller à</span>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-select [(ngModel)]="pr.rubrique_target_id">
+                <mat-option *ngFor="let aq of arrayQuiz" [value]="aq">
+                  rubrique {{ aq }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td class="relative">
+            <div class="close">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="#000" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"
+                />
+              </svg>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn  non-valide btn-quizz " type="button " (click)="modalRef.hide();newRubrique.points_rules = []">annuler</button>
+    <button class="btn  valide btn-quizz " type="button " (click)="modalRef.hide()">valider</button>
+  </div>
+</ng-template>

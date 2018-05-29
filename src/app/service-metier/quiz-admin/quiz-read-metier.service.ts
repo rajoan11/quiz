@@ -31,8 +31,13 @@ export class QuizReadMetierService implements QuizReadMetierServiceACI {
   getQuestion() {
     return this.quizReadBusinessDelegateService
       .getQuestion()
+      .pipe(tap(quizs => {}), catchError(this.handleError));
+  }
+  getColors() {
+    return this.quizReadBusinessDelegateService
+      .getColors()
       .pipe(
-        tap(quizs => console.log(`fetched question`)),
+        tap(quizs => console.log(`fetched colors`)),
         catchError(this.handleError)
       );
   }
@@ -44,6 +49,11 @@ export class QuizReadMetierService implements QuizReadMetierServiceACI {
         tap(entreprises => console.log(`fetched entreprises`)),
         catchError(this.handleError)
       );
+  }
+  getContraintes() {
+    return this.quizReadBusinessDelegateService
+      .getContraintes()
+      .pipe(tap(entreprises => {}), catchError(this.handleError));
   }
 
   private handleError(error) {

@@ -1,0 +1,57 @@
+<header>
+    <div class="nav-front">
+        <div class="container">
+          <h1>Quizz - Lorem Ipsum</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.consequat.</p>
+        </div>
+      </div>
+</header>
+<div class="front-rubrique">
+  <div class="container">
+    <div class="paginate-rubrique">
+      <ul>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+      </ul>
+    </div>
+    <div class="order" [style.border-color]="colorCss">
+        <p>
+          <a>Rubrique
+            <span>{{position+1}}</span> sur
+            <span>{{quizLengthValue}}</span>
+          </a>
+        </p>
+      </div>
+      <!-- images -->
+      <div class="contenu">
+        <img src="/assets/images/drop/1.jpg" alt="">
+      </div>
+      <!-- choix multiple -->
+      <div class="contenu">
+        <p class="title">Question (choix multiples)</p>
+        <mat-radio-group>
+          <mat-radio-button value="1"><span class="nb-400 padd">Réponse 1</span>  </mat-radio-button>
+          <mat-radio-button value="2"><span class="nb-400 padd">Réponse 1</span> </mat-radio-button>
+          <mat-radio-button value="3"><span class="nb-400 padd">Réponse 1</span> </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <!-- Case acocher -->
+      <div class="contenu">
+          <p class="title">Question (cases à cocher)</p>
+          <mat-radio-group>
+            <mat-checkbox><span class="nb-400 padd">Réponse 1</span> </mat-checkbox>
+            <mat-checkbox><span class="nb-400 padd">Réponse 2</span> </mat-checkbox>
+            <mat-checkbox><span class="nb-400 padd">Réponse 3</span> </mat-checkbox>
+          </mat-radio-group>
+        </div>
+ </div>  <!-- fin container -->
+ <div class="new-page">
+   <!-- <p class="retoure">Retoure</p> -->
+   <p class="suivant">suivant</p>
+ </div>
+</div>

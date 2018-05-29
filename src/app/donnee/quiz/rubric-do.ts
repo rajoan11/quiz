@@ -1,12 +1,17 @@
-import { Question } from '.';
-import { Attachement } from '.';
+import { Question, PointsRules, Attachement } from '.';
 
 export class RubricDo {
   id: number;
   name: string;
   numero_order: number;
-  questions: Array<Question>;
-  attachements: Array<Attachement>;
+  question: Array<Question>;
+  meta_contents: Array<Attachement>;
+  contents_rubriques: Array<Attachement>;
   activate_points_rules: boolean;
+  form: any;
+  form_id: number;
   score: number;
+  points_rules: Array<PointsRules>;
+  response_targetting: any;
+  rules_targetting: boolean;
 }

@@ -1,7 +1,7 @@
 <!-- création quizz  -->
 <ng2-toasty [position]="'top-right'"></ng2-toasty>
 <div id="creation-quizz">
-  <div class="navbar creation-quizz bg-quizz" [style.background]="colorCss">
+  <div class="navbar creation-quizz bg-quizz" [style.background-color]="colorCss" [style.border-color]="colorCss">
     <div class="container">
       <div class="liste">
         <ul class="liste1">
@@ -9,18 +9,6 @@
             <a>Création de quizz</a>
           </li>
           <li class="btn-group" dropdown>
-            <!-- <button dropdownToggle type="button" class="btn dropdown-toggle" aria-controls="dropdown-basic">
-              Nominatif
-              <span class="caret"></span>
-            </button>
-            <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-              <li role="menuitem">
-                <a class="dropdown-item">Anonyme</a>
-              </li>
-              <li role="menuitem">
-                <a class="dropdown-item">Nominatif</a>
-              </li>
-            </ul> -->
 
             <mat-form-field floatPlaceholder="never">
               <mat-select panelClass="example-panel" [(ngModel)]="newQuiz.is_anonyme">
@@ -33,71 +21,33 @@
         </ul>
 
         <ul class="liste2 theme">
-          <li class="btn-group" dropdown>
+          <li class="btn-group" dropdown [autoClose]="false" #dropdown="bs-dropdown">
             <a dropdownToggle type="button" class="btn-theme dropdown-toggle" aria-controls="dropdown-basic"></a>
             <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-              <li role="theme " class="theme">
-                <a class="dropdown-item theme1" (click)="changeColor('blue')"></a>
-              </li>
-              <li role="theme " class="theme">
-                <a class="dropdown-item theme2"></a>
+              <li role="theme " class="theme" *ngFor="let color of colors">
+                <a class="dropdown-item theme{{color.id}}" (click)="changeColor(color.value);dropdown.hide()"></a>
               </li>
               <li role="theme " class="theme ">
-                <a class=" theme3 dropdown-item"></a>
-              </li>
-              <li role="theme " class="theme ">
-                <a class=" theme4 dropdown-item"></a>
-              </li>
-              <li role="theme " class="theme ">
-                <a class=" theme5 dropdown-item"></a>
-              </li>
-              <li role="theme " class="theme ">
-                <a class=" theme6 dropdown-item"></a>
-              </li>
-              <li role="theme " class="theme ">
-                <a class="theme7 dropdown-item"></a>
-              </li>
-              <li role="theme " class="theme ">
-                <a class=" theme8 dropdown-item"></a>
-              </li>
-              <li role="theme " class="theme ">
-                <a class="theme9 dropdown-item"></a>
-              </li>
-              <li role="theme " class="theme ">
-                <a class="theme10 dropdown-item"></a>
-              </li>
-              <li role="theme " class="theme ">
-                <a class="theme11 dropdown-item"></a>
-              </li>
-              <li role="theme " class="theme ">
-                <a class="theme12 dropdown-item"></a>
-              </li>
-              <li role="theme " class="theme ">
-                <a class="theme13 dropdown-item"></a>
-              </li>
-              <li role="theme " class="theme ">
-                <a class="theme14 dropdown-item"></a>
-              </li>
-              <li role="theme " class="theme ">
-                <a class="theme15 dropdown-item"></a>
-              </li>
-              <li role="theme " class="theme ">
-                <a class="theme16 dropdown-item"></a>
+                <a class="dropdown-item theme16">
+                  <input [(colorPicker)]="color" [style.background]="color" [cpOKButton]="true" (colorPickerSelect)="changeColor(color);dropdown.hide()"
+                  />
+                </a>
+
               </li>
             </ul>
           </li>
           <li>
-            <button class="btn" (click)="saveQuiz()" [disabled]="!newQuiz.name">FINALISER LE QUIZZ</button>
+            <button class="btn" (click)="saveQuiz()" [disabled]="!newQuiz.name" [style.color]="colorCss">FINALISER LE QUIZZ</button>
           </li>
         </ul>
       </div>
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" >
     <app-loader [load]="savingLoad"></app-loader>
     <div class="row">
-      <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12" dnd-droppable (onDropSuccess)="transferRubricSuccess($event)" [dropZones]="['rubric']">
+      <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 bg" dnd-droppable (onDropSuccess)="transferRubricSuccess($event)" [dropZones]="['rubric']">
         <div class="form-quizz">
           <div class="myrow">
             <mat-form-field class="example-full-width">
@@ -111,19 +61,46 @@
               <textarea matInput placeholder="Description..." name="" [(ngModel)]="newQuiz.description"></textarea>
             </mat-form-field>
           </div>
+          <div class="myrow textarea" *ngIf="isSuperAdmin">
+            <mat-form-field class="example-full-width">
+              <!-- floatPlaceholder="never" -->
+              <input matInput placeholder="Choisissez votre entreprise..." name="searchEntreprise" [(ngModel)]="searchEntreprise" (ngModelChange)="onChangeEntreprise($event)">
+            </mat-form-field>
+            <!-- <div class="input-group">
+                <input class="form-control " type="text" [(ngModel)]="searchEntreprise" (ngModelChange)="onChangeEntreprise($event)">
+              </div> -->
+            <div class="list-autocomplete">
+              <div *ngFor="let item of enterprisesItems">
+                <span (click)="selectEnterprise(item)">{{item.enterprise_name}}</span>
+              </div>
+
+            </div>
+            <div class="list-selected">
+              <div *ngFor="let item of newQuiz.enterprise_forms">
+                <span>{{item.enterprise_name}}</span>
+                <span (click)="deleteSelectEnterprise(item)" class="close">&times;</span>
+              </div>
+            </div>
+
+          </div>
         </div>
 
-        <div class="rubrique" dnd-sortable-container [sortableData]="rubrics" [dropZones]="['container-rubrique-parent']">
-          <div *ngFor="let rubric of rubrics; let x = index" dnd-sortable [sortableIndex]="x" [dragEnabled]="false">
-            <app-quiz-rubric [position]="x" [quizLength]="rubrics.length"></app-quiz-rubric>
+        <div class="rubrique" dnd-sortable-container [sortableData]="newQuiz.rubriques" [dropZones]="['container-rubrique-parent']">
+          <div *ngFor="let rubric of newQuiz.rubriques; let x = index" dnd-sortable [sortableIndex]="x" [dragEnabled]="false">
+            <app-quiz-rubric [position]="x" [quizLength]="newQuiz.rubriques.length" [newRubrique]="rubric" [colorCss]="colorCss"></app-quiz-rubric>
           </div>
         </div>
 
 
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 relative">
-        <app-quiz-question></app-quiz-question>
+        <app-quiz-question [colorCss]="colorCss">
+        </app-quiz-question>
+        
       </div>
     </div>
+  </div>
+  <div *ngIf="false">
+    <app-finish-quizz></app-finish-quizz>
   </div>
 </div>

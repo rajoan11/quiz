@@ -37,28 +37,8 @@
     box-shadow: 1px 1px 11px #ccc!important;
     border-radius: 0;
 }
-#attachement  li.question:before, #quetsion  li.question:before{
-    position: absolute;
-    content: '';
-    width: 35px;
-    height: 35px;
-    background: url(/assets/images/question.png) no-repeat center;
-    left: 10px;
-    top: 10px;
-    background-size: 35px 150px;
-}
-#attachement   li.question.text:before, #quetsion  li.question.text:before{
-    background-position: 0px -113px;
-}
-#attachement   li.question.img:before, #quetsion  li.question.img:before{
-    background-position: 0px -75px;
-}
-#attachement   li.question.embed:before, #quetsion  li.question.embed:before{
-    background-position: 0px -37px;
-}
-#attachement   li.question.rubrique:before, #quetsion  li.question.rubrique:before{
-    background-position: 0px 2px;
-}
+
+
 #attachement  li.question, #quetsion  li.question{
     padding-left: 80px;
 }
@@ -66,18 +46,14 @@
     color: #797979;
     font-family: firasans;
     font-size: 13px;
-    font-weight: 600;
     width: 100%;
     margin: 0;
     padding-left: 24px;
 
 }
-.mat-expansion-panel-header{
-    position: relative;
-}
-.mat-expansion-panel-header:before{
+
+.mat-expansion-panel-header span.plus{
     position: absolute;
-    content: "+";
     width: 25px;
     height: 25px;
     background-color: #fc6100;
@@ -87,12 +63,35 @@
     text-align: center;
     font-size: 19px;
     line-height: 23px;
+    top: 17px;
 }
 #quetsion ng-scrollbar{
     height: 240px;
 }
-mat-expansion-panel-header{
+.mat-expansion-panel-header{
+    border-bottom: 1px #e6e2e2 solid!important;
+}
+.mat-expansion-panel-header,
+.mat-expansion-panel-header:hover,
+.mat-expansion-panel-header:focus{
     height: 60px!important;
+    position: relative;
+    border-color: #fc6100;
+    background-color: #fff!important;
 }
 
+
+#attachement  li.question svg, #quetsion  li.question svg{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 36px!important;
+    height: 36px;
+}
+#attachement  li.question svg fill, #quetsion  li.question svg fill{
+    color: #FC6100;
+}
+#attachement  li{
+    background-color: #fff;
+}
 

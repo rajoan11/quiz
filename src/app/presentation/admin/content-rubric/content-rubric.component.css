@@ -164,6 +164,7 @@
       border-radius: 0;
       height: 56px;
       line-height: 50px;
+      border:1px #fff solid!important;
   }
   .upload-img .input-group-btn > .image-preview-input{
       background-color: #f17222;

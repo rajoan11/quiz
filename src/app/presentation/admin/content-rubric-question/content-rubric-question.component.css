@@ -1,5 +1,5 @@
 
-h3{
+h3,.question{
   font-size: 16px;
   font-weight: 700;
   color: #4f5e65;
@@ -12,7 +12,7 @@ h3{
   margin-left: 20px;
 }
 .type-contenu {
-  width: 29%;
+  width: 32%;
   float: right;
   position: relative;
   height: 40px;
@@ -148,6 +148,21 @@ h3{
   background-size: contain;
   cursor: move;
 }
+.form-quizz .move:before{
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url(/assets/images/deplace-v.png) no-repeat center;
+  content: "";
+  left: 18px;
+  top: 13px;
+  background-size: contain;
+  cursor: move;
+}
+.form-quizz .move{
+  position: relative;
+}
 .l-deroulant.deroulant-custome ol li:after{
   display: none;
 }
@@ -157,7 +172,7 @@ h3{
 .l-deroulant.deroulant-custome ol{
   margin-left: 50px;
 }
-.l-deroulant ol li:after{
+/* .l-deroulant ol li:after{
   position: absolute;
   display: block;
   width: 20px;
@@ -167,6 +182,14 @@ h3{
   top: 5px;
   border: 2px #ccc solid;
   border-radius: 50%;
+
+} */
+.l-deroulant ol li>.mat-checkbox{
+  position: absolute;
+  display: block;
+  left: -30px;
+  top: 5px;
+  z-index: 2;
 
 }
 .l-deroulant ol.c-coche li:after{
@@ -232,7 +255,13 @@ h3{
   .content-drop .groupe-btn{
     position: static;
   }
-
+  .form-quizz .move:before{
+    left: 35px;
+    top: 5px;
+  }
+  .l-deroulant ol{
+    max-width: calc(100% - 67px);
+  }
 
   .prent-content-drop .content-drop{
     padding: 0!important;
@@ -260,3 +289,4 @@ h3{
   }
 
 }
+

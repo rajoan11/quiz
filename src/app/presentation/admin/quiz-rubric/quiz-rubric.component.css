@@ -1,0 +1,18 @@
+
+@media(max-width:768px){
+    .order{
+        max-width: 80%;;
+    }
+    .modal-dialog.rubric-pops{
+        max-width: 360px;
+        width: 100%;
+    }
+}
+
+.drop-zone-question{
+    min-height: 1px;
+    padding-bottom: 296px;
+    background: url(/assets/images/body2.png) no-repeat bottom center;
+    background-size: 300px auto;
+}
+

@@ -1,0 +1,56 @@
+.fin-quizz .navbar{
+    margin-bottom: 40px;
+}
+.fin-quizz .desc{
+    font-size: 18px;
+    font-weight: 200;
+    margin-bottom: 30px;
+}
+.body .fin-quizz .ng-star-insertedmat-form-field-empty.mat-form-field-label{
+    font-weight: normal!important;    
+}
+.fin-quizz p{
+    color: #4f5e65;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.fin-quizz small{
+    font-size:12px;
+}
+
+.fin-quizz .myrow.textarea{
+    min-height: 170px;
+    padding: 40px;
+    margin-bottom: 40px;
+    max-width: 780px;
+
+}
+.btn-voir-quizz{
+  width: 100%;
+  border-radius: 4px;
+  background-color: #95a5a6; 
+}
+.btn-fin-quizz{
+  border-radius: 4px;
+  background-color: #fc6100;
+ 
+}
+.fin-quizz .btn{
+    color: #fff;
+    font-size: 12px;
+    width: auto;
+}
+.fin-quizz .toogle p{
+    margin-bottom: 15px;
+}
+@media (max-width:768px){
+    .fin-quizz .toogle .row{
+        border-bottom:1px #95a5a6 solid;
+        margin-bottom: 15px;
+        padding: 15px;
+    }
+    .fin-quizz .toogle .row:last-child{
+        border:none;
+    }
+}

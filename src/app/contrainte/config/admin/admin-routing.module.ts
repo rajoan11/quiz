@@ -4,6 +4,7 @@ import { AdminRootComponent } from '../../../presentation/admin/admin-root/admin
 import { ListQuizComponent } from '../../../presentation/admin/list-quiz/list-quiz.component';
 import { CreateQuizComponent } from '../../../presentation/admin/create-quiz/create-quiz.component';
 import { QuizResolver } from './admin.resolver';
+import { FinishQuizzComponent } from '../../../presentation/admin/finish-quizz/finish-quizz.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,15 @@ const routes: Routes = [
         component: ListQuizComponent,
         resolve: { enterprises: QuizResolver }
       },
-      { path: 'create', component: CreateQuizComponent }
+      {
+        path: 'create',
+        component: CreateQuizComponent,
+        resolve: { enterprises: QuizResolver }
+      },
+      {
+        path: 'create/finish',
+        component: FinishQuizzComponent,
+      }
     ]
   }
 ];

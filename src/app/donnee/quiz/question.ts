@@ -4,4 +4,5 @@ export class Question {
   requirred: boolean;
   error_message: string;
   validator: Array<any>;
+  type_content: string;
 }

@@ -4097,6 +4097,10 @@ ngx-bootstrap@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-2.0.4.tgz#26be0eb1b9a5dc133caa93b39ae221d6872c8b55"
 
+ngx-color-picker@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/ngx-color-picker/-/ngx-color-picker-6.2.0.tgz#86e417a830a88e214a0a5ad085805c3f8607cc5f"
+
 ngx-dnd@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ngx-dnd/-/ngx-dnd-1.1.1.tgz#0ea22f75afbdb32559f795afdd9873706c3758e8"
@@ -4192,7 +4196,7 @@ node-pre-gyp@^0.9.0:
     semver "^5.3.0"
     tar "^4"
 
-node-sass@^4.7.2, node-sass@^4.9.0:
+node-sass@^4.7.2:
   version "4.9.0"
   resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.9.0.tgz#d1b8aa855d98ed684d6848db929a20771cc2ae52"
   dependencies:

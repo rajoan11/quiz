@@ -10,15 +10,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxEditorModule } from 'ngx-editor';
 import { DndModule } from 'ngx-dnd';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { ColorPickerModule } from 'ngx-color-picker';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import {
   MatSortModule,
   MatTableModule,
   MatSelectModule,
   MatInputModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatNativeDateModule
 } from '@angular/material';
 import { ScrollbarModule } from 'ngx-scrollbar';
 import { LoaderModule } from '../../../presentation/loader/loader.module';
@@ -46,7 +49,10 @@ import { CommunModule } from '../../../commun/commun.module';
     MatSlideToggleModule,
     CommunModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    ColorPickerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   declarations: [],
   exports: [
@@ -69,7 +75,10 @@ import { CommunModule } from '../../../commun/commun.module';
     MatSlideToggleModule,
     CommunModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    ColorPickerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class SharedModule {}

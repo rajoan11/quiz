@@ -11,9 +11,9 @@
           Filtrer par entreprise
           <span class="caret"></span> floatPlaceholder="never"
         </button> -->
-          <mat-form-field floatPlaceholder="never"  class="custom-test-panel">
-            <mat-select disableRipple  placeholder="Filtrer par entreprise" [(ngModel)]="searchParams.entreprise"
-              (change)="changeEnterprise()" (click)="addClassOnClickEnterprise = true"  panelClass="test-panel">
+          <mat-form-field floatPlaceholder="never" class="custom-test-panel">
+            <mat-select disableRipple placeholder="Filtrer par entreprise" [(ngModel)]="searchParams.entreprise" (change)="changeEnterprise()"
+              (click)="addClassOnClickEnterprise = true" panelClass="test-panel">
               <mat-option>Aucun</mat-option>
               <mat-option *ngFor="let enterprise of enterprises" [value]="enterprise.nid">
                 {{enterprise.title}}
@@ -24,8 +24,8 @@
             <option>- Veuillez choisir - </option>
             <option *ngFor="let enterprise of enterprises" [value]="enterprise.nid">{{enterprise.title}}</option>
           </select> -->
-            <!-- <option>Relish</option> -->
-          
+          <!-- <option>Relish</option> -->
+
 
           <!-- <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
           <li role="menuitem" *ngFor="let enterprise of enterprises">
@@ -121,8 +121,8 @@
               </mat-header-cell>
               <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}">
                 <mat-select [(value)]="element.is_anonyme" (change)="changeStatusQuiz(element.id , templateSelect ,$event.value)">
-                  <mat-option [value]="false">nominatif</mat-option>
-                  <mat-option [value]="true">anonyme</mat-option>
+                  <mat-option [value]="false">Nominatif</mat-option>
+                  <mat-option [value]="true">Anonyme</mat-option>
                 </mat-select>
               </mat-cell>
             </ng-container>
@@ -172,14 +172,16 @@
 
     <div class="add-quizz hvr-float ">
       <a [routerLink]="[ '/admin/create'] " routerLinkActive="router-link-active ">+</a>
+      <!-- <a (click)="openModalChoiceEnterprise(templateChoiceEnterprise)">+</a> -->
     </div>
   </div>
   <ng-template #template>
     <div class="modal-body text-center ">
       <p>La suppression du formulaire va aussi supprimer les XXX réponses sur celui-ci. Si vous souhaitez conserver les réponses
         dans votre back-office et que le formulaire ne soit plus en ligne contacter le support.</p>
-      <button type="button " class="btn btn-default " (click)="confirm(idQuizTodelete) ">valider </button>
-      <button type="button " class="btn btn-primary " (click)="decline() ">annuler</button>
+     
+      <button type="button " class="btn non-valide btn-quizz " (click)="decline() ">annuler</button>
+      <button type="button " class="btn valide btn-quizz" (click)="confirm(idQuizTodelete) ">valider </button>
     </div>
   </ng-template>
 
@@ -194,9 +196,39 @@
         nom prénom email).</p>
       <p *ngIf="!valueQuizToChange"> vous passez de anonyme à nominatif donc une connexion sera obligatoire pour répondre aux formulaire et que toute les
         donnée précédente resterons anonyme.</p>
-      <button type="button " class="btn  btn-default btn-quizz " (click)="declineSelect(valueQuizToChange)">annuler</button>
-      <button type="button " class="btn btn-primary btn-quizz " (click)="confirmSelect(idQuizToChange,valueQuizToChange) ">valider </button>
+      <button type="button " class="btn  non-valide btn-quizz " (click)="declineSelect(valueQuizToChange)">annuler</button>
+      <button type="button " class="btn valide btn-quizz " (click)="confirmSelect(idQuizToChange,valueQuizToChange) ">valider </button>
 
     </div>
   </ng-template>
+
+  <!-- <ng-template #templateChoiceEnterprise>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefChoiceEnterprise.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+    <div class="modal-body">
+      <h2 class="text-center">CHOISIR VOTRE ENTREPRISE</h2>
+      <div class="input-group">
+        <input class="form-control " type="text" [(ngModel)]="searchEntreprise" (ngModelChange)="onChangeEntreprise($event)">
+      </div>
+      <div class="list-autocomplete">
+        <div *ngFor="let item of enterprisesItems">
+          <span (click)="selectEnterprise(item)">{{item.title}}</span>
+        </div>
+
+      </div>
+      <div class="list-selected">
+        <div *ngFor="let item of entrepriseSelected">
+          <span (click)="selectEnterprise(item)">{{item.title}}</span>
+          <span (click)="deleteSelectEnterprise(item)">x</span>
+        </div>
+
+      </div>
+      <button type="button " class="btn btn-primary btn-quizz " (click)="confirmSelectEntreprise(entrepriseSelected)" [disabled]="!entrepriseSelected || entrepriseSelected && entrepriseSelected.length === 0">valider </button>
+
+    </div>
+  </ng-template> -->
+
 </div>

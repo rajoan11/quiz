@@ -2,41 +2,167 @@
   {
     "id": 1,
     "value": "multiple_choice",
-    "name": "Choix multiples"
+    "name": "Choix multiples",
+    "type_question": {
+      "slug": "multiple_choice"
+    },
+    "response_options": [
+      {
+        "correct_answer": false,
+        "name": "option 1",
+        "poids": null,
+        "points": null,
+        "slug": ""
+      }
+    ],
+    "is_mandatory": false,
+    "activate_vote": false,
+    "constraint": "",
+    "correction_explanation": "",
+    "description": "",
+    "placeholder": "",
+    "poids": "",
+    "with_validation_contrainte": false
   },
   {
     "id": 2,
     "value": "checkboxes",
-    "name": "Cases à cocher"
+    "name": "Cases à cocher",
+    "type_question": {
+      "slug": "checkbox"
+    },
+    "response_options": [
+      {
+        "correct_answer": false,
+        "name": "option 1",
+        "poids": null,
+        "points": null,
+        "slug": ""
+      }
+    ],
+    "is_mandatory": false,
+    "activate_vote": false,
+    "constraint": "",
+    "correction_explanation": "",
+    "description": "",
+    "placeholder": "",
+    "poids": "",
+    "with_validation_contrainte": false
   },
   {
     "id": 3,
     "value": "short_answer",
-    "name": "Réponse courte"
+    "name": "Réponse courte",
+    "type_question": {
+      "slug": "short_answer"
+    },
+    "response_options": [],
+    "is_mandatory": false,
+    "activate_vote": false,
+    "constraint": "",
+    "correction_explanation": "",
+    "description": "",
+    "placeholder": "",
+    "poids": "",
+    "with_validation_contrainte": false
   },
   {
     "id": 4,
     "value": "long_answer",
-    "name": "Réponse longue"
+    "name": "Réponse longue",
+    "type_question": {
+      "slug": "width_answer"
+    },
+    "response_options": [],
+    "is_mandatory": false,
+    "activate_vote": false,
+    "constraint": "",
+    "correction_explanation": "",
+    "description": "",
+    "placeholder": "",
+    "poids": "",
+    "with_validation_contrainte": false
   },
   {
     "id": 5,
     "value": "select",
-    "name": "Liste déroulante"
+    "name": "Liste déroulante",
+    "type_question": {
+      "slug": "list_scroll"
+    },
+    "response_options": [
+      {
+        "correct_answer": false,
+        "name": "option 1",
+        "poids": null,
+        "points": null,
+        "slug": ""
+      }
+    ],
+    "is_mandatory": false,
+    "activate_vote": false,
+    "constraint": "",
+    "correction_explanation": "",
+    "description": "",
+    "placeholder": "",
+    "poids": "",
+    "with_validation_contrainte": false
   },
   {
     "id": 6,
     "value": "dropdown_list",
-    "name": "Échelle linéaire"
+    "name": "Échelle linéaire",
+    "type_question": {
+      "slug": "lineary_scale"
+    },
+    "response_options": [],
+    "is_mandatory": false,
+    "activate_vote": false,
+    "constraint": "",
+    "correction_explanation": "",
+    "description": "",
+    "placeholder": "",
+    "poids": "",
+    "with_validation_contrainte": false
   },
   {
     "id": 7,
     "value": "date",
-    "name": "Date"
+    "name": "Date",
+    "type_question": {
+      "slug": "date"
+    },
+    "response_options": [],
+    "is_mandatory": false,
+    "activate_vote": false,
+    "constraint": "",
+    "correction_explanation": "",
+    "description": "",
+    "placeholder": "",
+    "poids": "",
+    "with_validation_contrainte": false
   },
   {
     "id": 8,
     "value": "hour",
-    "name": "Heure"
+    "name": "Heure",
+    "type_question": {
+      "slug": "hour"
+    }
+  },
+  {
+    "id": 9,
+    "value": "text",
+    "name": "text"
+  },
+  {
+    "id": 10,
+    "value": "image",
+    "name": "images"
+  },
+  {
+    "id": 11,
+    "value": "embed",
+    "name": "embed"
   }
 ]

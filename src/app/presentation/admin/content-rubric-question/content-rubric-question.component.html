@@ -1,71 +1,44 @@
-
-
 <div class="prent-content-drop">
   <div class="support"></div>
   <div class="type-contenu">{{_questionQuiz.name}}</div>
   <div class="content-drop">
 
 
-  <!-- choix multiple -->
+    <!-- choix multiple -->
     <div *ngIf="_questionQuiz.value === 'multiple_choice'">
       <div class="form-quizz l-deroulant ">
-          <div class="row">
-              <h3>Question</h3>
-              <div class="col-md-8 col-sm-12">
-                  <ol class="plus rond">
-                    <li>
-                        <mat-form-field class="example-full-width mat-form-field">
-                            <input matInput placeholder="Option1" value="">
-                        </mat-form-field>
-                        <span class="fermer"></span>
-                    </li>
-                    <li>
-                        <mat-form-field class="example-full-width mat-form-field">
-                            <input matInput placeholder="Option1" value="">
-                        </mat-form-field>
-                        <span class="fermer"></span>
-                    </li>
-                    <li>
-                        <mat-form-field class="example-full-width mat-form-field">
-                            <input matInput placeholder="Autre ..." value="">
-                        </mat-form-field>
-                        <span class="fermer"></span>
-                    </li>
-                    <li>
-                        <mat-form-field class="example-full-width mat-form-field">
-                            <input matInput placeholder="Ajouter option ou AJOUTER AUTRE" value="">
-                        </mat-form-field>
-                    </li>
-                  </ol>
-              </div>
-              <div class="col-md-4 col-sm-12 no-border pad-21" >
-                <div class="contenu-resp">
-                  <mat-form-field>
-                    <mat-select placeholder="Passer à la section suivante" >
-                      <mat-option [value]="page">
-                          Passer à la section suivante
-                      </mat-option>
-                    </mat-select>
+        <div class="row">
+          <div class="col-sm-12">
+            <mat-form-field class="question example-full-width">
+              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 move" *ngFor="let questQuiz of _questionQuiz.response_options;let i=index">
+            <div class="col-md-8 col-sm-12">
+              <ol class="plus rond">
+                <li>
+                  <mat-checkbox></mat-checkbox>
+                  <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
+                    <input matInput [placeholder]="questQuiz.placeholder" [(ngModel)]="questQuiz.name" (focus)="addOptionMs( _questionQuiz.response_options, questQuiz, i)">
                   </mat-form-field>
-
-                  <mat-form-field>
-                      <mat-select placeholder="Passer à la section Lorem" >
-                        <mat-option  [value]="page">
-                            Passer à la section Lorem
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-
-                    <mat-form-field>
-                        <mat-select placeholder=" Envoyer le formulaire  select1" >
-                          <mat-option [value]="page">
-                             Envoyer le formulaire  select1
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                </div>
+                  <span class="fermer" (click)="deleteteOptionMs(_questionQuiz.response_options, i)"></span>
+                </li>
+              </ol>
+            </div>
+            <div class="col-md-4 col-sm-12 no-border pad-21">
+              <div class="contenu-resp">
+                <mat-form-field>
+                  <mat-select placeholder="Passer à la section suivante">
+                    <mat-option [value]="page">
+                      Passer à la section suivante
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
             </div>
+          </div>
+
+        </div>
       </div>
     </div>
     <!--fin choix multiple -->
@@ -73,78 +46,68 @@
     <!-- case a cocher -->
     <div *ngIf="_questionQuiz.value === 'checkboxes'">
       <div class="col-sm-12">
-          <div class="form-quizz l-deroulant ">
-              <div class="row">
-                  <h3>Question</h3>
-                  <div class="col-md-8 col-sm-12">
-                      <ol class="plus c-coche">
-                        <li>
-                            <mat-form-field class="example-full-width mat-form-field">
-                                <input matInput placeholder="Option1" value="">
-                            </mat-form-field>
-                            <span class="fermer"></span>
-                        </li>
-                        <li>
-                            <mat-form-field class="example-full-width mat-form-field">
-                                <input matInput placeholder="Option1" value="">
-                            </mat-form-field>
-                            <span class="fermer"></span>
-                        </li>
-                        <li>
-                            <mat-form-field class="example-full-width mat-form-field">
-                                <input matInput placeholder="Autre ..." value="">
-                            </mat-form-field>
-                            <span class="fermer"></span>
-                        </li>
-                        <li>
-                            <mat-form-field class="example-full-width mat-form-field">
-                                <input matInput placeholder="Ajouter option ou AJOUTER AUTRE" value="">
-                            </mat-form-field>
-                        </li>
-                      </ol>
-                  </div>
-                </div>
+        <div class="form-quizz l-deroulant ">
+          <div class="row">
+            <div class="col-sm-12">
+              <mat-form-field class="question example-full-width">
+                <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 move" *ngFor="let questQuiz of _questionQuiz.response_options;let i=index">
+              <div class="col-md-8 col-sm-12">
+                <ol class="plus c-coche">
+                  <li>
+                    <mat-checkbox></mat-checkbox>
+                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
+                      <input matInput placeholder="Option1" value="" [placeholder]="questQuiz.placeholder" [(ngModel)]="questQuiz.name" (focus)="addOptionMs( _questionQuiz.response_options, questQuiz, i)">
+                    </mat-form-field>
+                    <span class="fermer" (click)="deleteteOptionMs(_questionQuiz.response_options, i)"></span>
+                  </li>
+                </ol>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
     </div>
-     <!--fin case a cocher -->
+    <!--fin case a cocher -->
     <!-- question courte -->
     <div *ngIf="_questionQuiz.value === 'short_answer'">
       <div class="form-quizz q-courte ">
         <div class=" col-sm-12">
           <div class="myrow">
             <mat-form-field class="example-full-width mat-form-field">
-              <input matInput placeholder="Question" value="">
+              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
             </mat-form-field>
           </div>
 
           <div class="myrow textarea">
             <mat-form-field class="example-full-width mat-form-field">
-              <textarea matInput placeholder="Réponse courte ..."></textarea>
+              <textarea matInput placeholder="Réponse courte ..." [disabled]="true"></textarea>
             </mat-form-field>
           </div>
         </div>
 
         <div class="col-sm-12 q-child">
-          <div class="row">
+          <div class="row" *ngIf="contraintes">
             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
               <table class="w-100">
                 <tr>
                   <td class="w-100">
-                    <mat-form-field>
-                      <mat-select placeholder="Nombre" >
-                        <mat-option *ngFor="let page of [1,2,3]" [value]="page">
-                         select1
+                    <mat-form-field floatPlaceholder="never">
+                      <mat-select placeholder="Nombre" [(ngModel)]="_questionQuiz.constraint.type_validation" (change)="changeContrainteType($event)">
+                        <mat-option *ngFor="let type of contraintes" [value]="type.type_value">
+                          {{type.type_validation}}
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
                   </td>
-                  <td  class="w-100">
-                    <mat-form-field>
-                      
-                      <mat-select placeholder="Superieur à" >
-                        <mat-option *ngFor="let page of [1,2,3]" [value]="page">
-                          select2
+                  <td class="w-100">
+                    <mat-form-field floatPlaceholder="never">
+
+                      <mat-select placeholder="Superieur à" [(ngModel)]="_questionQuiz.constraint.validation_operator" (change)="changeValidationOperator($event)">
+                        <mat-option *ngFor="let op of operator" [value]="op.validation_operator">
+                          {{op.validation_operator}}
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
@@ -154,18 +117,28 @@
             </div>
 
             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-             <div class="row">
-               <div class="col-sm-6 label-italic">
-                  <mat-form-field class="example-full-width mat-form-field">
-                      <input matInput placeholder="Question" value="">
+              <div class="row">
+                <div class="col-sm-4 label-italic">
+                  <div *ngIf="contrainteValue !=='Nombre2'">
+                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
+                      <input matInput [placeholder]="contrainteValue" [(ngModel)]="_questionQuiz.constraint.constraint_value">
                     </mat-form-field>
-               </div>
-               <div class="col-sm-6 textarea">
-                  <mat-form-field class="example-full-width mat-form-field">
-                      <textarea matInput placeholder="Texte d'erreur personnalisé ..."></textarea>
+                  </div>
+                  <div *ngIf="contrainteValue ==='Nombre2'">
+                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
+                      <input matInput placeholder="Nombre" [(ngModel)]="_questionQuiz.constraint.constraint_value">
+                    </mat-form-field> et
+                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
+                      <input matInput placeholder="Nombre" [(ngModel)]="_questionQuiz.constraint.constraint_value">
                     </mat-form-field>
-               </div>
-             </div>
+                  </div>
+                </div>
+                <div class="col-sm-8 textarea">
+                  <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
+                    <textarea matInput placeholder="Texte d'erreur personnalisé ..." [(ngModel)]="_questionQuiz.constraint.text_error"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -178,13 +151,13 @@
         <div class=" col-sm-12">
           <div class="myrow">
             <mat-form-field class="example-full-width mat-form-field">
-              <input matInput placeholder="Question" value="">
+              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
             </mat-form-field>
           </div>
 
           <div class="myrow textarea">
             <mat-form-field class="example-full-width mat-form-field">
-              <textarea matInput placeholder="Réponse longue ..."></textarea>
+              <textarea matInput placeholder="Réponse longue ..." [disabled]="true"></textarea>
             </mat-form-field>
           </div>
         </div>
@@ -193,129 +166,174 @@
 
     <!-- liste deroulant -->
     <div *ngIf="_questionQuiz.value === 'select'">
-        <div class="form-quizz l-deroulant deroulant-custome ">
-            <div class="row">
-                <h3>Question</h3>
-                <div class="col-md-8 col-sm-12">
-                    <ol class="plus c-coche">
-                      <li>
-                          <mat-form-field class="example-full-width mat-form-field">
-                              <input matInput placeholder="Option1" value="">
-                          </mat-form-field>
-                          <span class="fermer"></span>
-                      </li>
-                      <li>
-                          <mat-form-field class="example-full-width mat-form-field">
-                              <input matInput placeholder="Option1" value="">
-                          </mat-form-field>
-                          <span class="fermer"></span>
-                      </li>
-                      <li>
-                          <mat-form-field class="example-full-width mat-form-field">
-                              <input matInput placeholder="Autre ..." value="">
-                          </mat-form-field>
-                          <span class="fermer"></span>
-                      </li>
-                      <li>
-                          <mat-form-field class="example-full-width mat-form-field">
-                              <input matInput placeholder="Ajouter option ou AJOUTER AUTRE" value="">
-                          </mat-form-field>
-                      </li>
-                    </ol>
-                </div>
-              </div>
+      <div class="form-quizz l-deroulant deroulant-custome ">
+        <div class="row">
+          <div class="col-sm-12">
+            <mat-form-field class="question example-full-width">
+              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12">
+            <div class="col-md-8 col-sm-12">
+              <ol class="plus c-coche">
+                <li *ngFor="let questQuiz of _questionQuiz.response_options;let i=index">
+                  <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
+                    <input matInput [placeholder]="questQuiz.placeholder" [(ngModel)]="questQuiz.name" (focus)="addOptionMs( _questionQuiz.response_options, questQuiz, i)">
+                  </mat-form-field>
+                  <span class="fermer" (click)="deleteteOptionMs(_questionQuiz.response_options, i)"></span>
+                </li>
+              </ol>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- echelle lineaire -->
     <div *ngIf="_questionQuiz.value === 'dropdown_list'">
       <div class="row">
-        <div class="col-md-8">
-            <div class="form-quizz l-deroulant echelle">
-                <h3>Question</h3>
-                <ol class="plus">
-                  <li>
-                    <mat-form-field class="example-full-width mat-form-field">
-                      <input matInput placeholder="Réponse 1 (obligatoire)" value="">
-                  </mat-form-field>
-                   <span class="fermer"></span>
-                  </li>
-                  <li>
-                    <mat-form-field class="example-full-width mat-form-field">
-                      <input matInput placeholder="Réponse 1 (facultatif)" value="">
-                    </mat-form-field>
-                     <span class="fermer"></span>
-                  </li>
-                  <li>
-                    <mat-form-field class="example-full-width mat-form-field">
-                      <input matInput placeholder="Réponse 1 (obligatoire)" value="">
-                    </mat-form-field>
-                     <span class="fermer"></span>
-                  </li>
-                  <li>
-                    <mat-form-field class="example-full-width mat-form-field">
-                      <input matInput placeholder="Réponse 1 (facultatif)" value="">
-                    </mat-form-field>
-                     <span class="fermer"></span>
-                  </li>
-                  <li>
-                    <mat-form-field class="example-full-width mat-form-field">
-                      <input matInput placeholder="Réponse 1 (obligatoire)" value="">
-                    </mat-form-field>
-                     <span class="fermer"></span>
-                  </li>
-                  <li>
-                    <mat-form-field class="example-full-width mat-form-field">
-                      <input matInput placeholder="Réponse 1 (facultatif)" value="">
-                    </mat-form-field>
-                     <span class="fermer"></span>
-                  </li>
-                  <li>
-                    <mat-form-field class="example-full-width mat-form-field">
-                      <input matInput placeholder="Réponse 1 (facultatif)" value="">
-                    </mat-form-field>
-                     <span class="fermer"></span>
-                  </li>
-                </ol>
-              </div>
-        </div>
-        <div class="col-md-4">
-            <p>select...</p>
-        </div>
-       
-      </div>
-    </div>
-    <!--fin echelle lineaire -->
-    <div *ngIf="_questionQuiz.value === 'date'">
-      date
-    </div>
-    <div *ngIf="_questionQuiz.value === 'hour'">
-      heure 
-    </div>
-    
+        <div class="col-md-7 col-sm-12">
 
-      <div class="groupe-btn">
-        <div class="row">
-          <div class="col-md-2 col-sm-1 col-xs-1 ">
-              <button class="btn edite"><span class="edit"></span>Corriger</button>
-          </div>
-          <div class="col-md-4 col-sm-10 col-xs-10 pull-right">
-              <table>
-                <tr>
-                  <td><button class="btn btn-suppr"></button></td>
-                  <td><mat-slide-toggle>Slide me!</mat-slide-toggle></td>
-                  <td><button class="menu"></button></td>
-                </tr>
-              </table>
+          <div class="form-quizz l-deroulant echelle">
+            <div class="col-sm-12">
+
             </div>
+            <div class="col-sm-12">
+              <mat-form-field class="question example-full-width">
+                <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
+              </mat-form-field>
+            </div>
+            <mat-form-field>
+              <mat-select [(ngModel)]="initialValue" (change)="changeInitialType($event)">
+                <mat-option *ngFor="let nbr1 of ['0','1']" [value]="nbr1">
+                  {{nbr1}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <span>à</span>
+            <mat-form-field>
+              <mat-select [(ngModel)]="endValue" (change)="changefinalType($event)">
+                <mat-option *ngFor="let nbr of secondArray" [value]="nbr">
+                  {{nbr}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <ol class="plus">
+              <li *ngFor="let item of listArrayLinear; let i = index">
+                <span>{{item}}</span>
+                <mat-form-field class="example-full-width mat-form-field">
+                  <input matInput [placeholder]="(i === 0 || i+1 === listArrayLinear.length)? ('Réponse'+item+ '(obligatoire)') : ('Réponse'+item+ '(facultatif)')"
+                    [value]="(i === 0) ?('minimum'): ((i+1 === listArrayLinear.length) ?'maximum':'') ">
+                </mat-form-field>
+                <span class="fermer"></span>
+              </li>
+            </ol>
+          </div>
         </div>
-        
+        <div class="col-md-5 col-sm-12">
+          <div class="row">
+            <div class="echell-select">
+              <div class="col-sm-5 col-xs-12">
+                <p>Style de point</p>
+              </div>
+              <div class="col-sm-7 col-xs-12">
+                <mat-form-field class="w100">
+                  <mat-select placeholder="smiley">
+                    <mat-option *ngFor="let food of ['smiley','point','coeur', 'autre']" [value]="smiley">
+                      {{ food }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
 
+    <!--fin echelle lineaire -->
 
-          
+    <!-- date -->
+    <div *ngIf="_questionQuiz.value === 'date'">
+      <div class="form-quizz q-courte date ">
+        <div class=" col-sm-12">
+          <div class="myrow">
+            <mat-form-field class="example-full-width mat-form-field">
+              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
+            </mat-form-field>
+          </div>
 
+          <div class="myrow textarea">
+            <mat-form-field>
+              <input matInput [matDatepicker]="dp2" placeholder="Jour/Mois/Année">
+              <mat-datepicker-toggle matSuffix [for]="dp2" disabled></mat-datepicker-toggle>
+              <mat-datepicker #dp2></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- date fin -->
+    <!-- heure -->
+    <div *ngIf="_questionQuiz.value === 'hour'">
+      <div class="form-quizz q-courte date ">
+        <div class=" col-sm-12">
+          <div class="myrow">
+            <mat-form-field class="example-full-width mat-form-field">
+              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
+            </mat-form-field>
+          </div>
+
+          <div class="myrow textarea hours">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Heure" value="">
+            </mat-form-field>
+            <span class="absolute">
+              <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+                <g fill="#D8D8D8" fill-rule="evenodd">
+                  <path d="M10.053 1.826c4.537 0 8.226 3.69 8.226 8.226 0 4.536-3.689 8.226-8.226 8.226-4.538 0-8.227-3.69-8.227-8.226 0-4.536 3.689-8.226 8.227-8.226zm0 18.278c5.542 0 10.052-4.51 10.052-10.052C20.105 4.509 15.595 0 10.053 0 4.51 0 0 4.509 0 10.052c0 5.543 4.51 10.052 10.053 10.052z"
+                  />
+                  <path d="M14.353 13.057l-3.387-3.384V3.659H9.14v6.77l3.917 3.92 1.296-1.292" />
+                </g>
+              </svg>
+            </span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- fin heure -->
+
+    <div class="groupe-btn">
+      <div class="row">
+        <div class="col-md-2 col-sm-1 col-xs-1 ">
+          <button class="btn edite" [style.color]="colorCss">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22">
+              <g [attr.fill]="colorCss" fill-rule="evenodd" stroke="#fff" stroke-width=".5">
+                <path d="M16.381 4.873l-.981.977-2.331-2.326.981-.978 2.331 2.328zm-12.312 7.65L11.8 4.796l2.331 2.327L6.4 14.85l-2.331-2.326zm-1.269 3.6v-2.327l2.331 2.328H2.8zm-1.8 1.8h4.869l13.05-13.05L14.05 0 1 13.05v4.873zM1 21.523h18v-1.8H1z"
+                />
+              </g>
+            </svg>Corriger</button>
+        </div>
+        <div class="col-md-4 col-sm-10 col-xs-10 pull-right">
+          <table>
+            <tr>
+              <td>
+                <button class="btn btn-suppr" (click)="deleteContent(index)"></button>
+              </td>
+              <td>
+                <span style="font-size: 12px; font-weight: 700;">obligatoire</span>
+              </td>
+              <td>
+                <mat-slide-toggle [(ngModel)]="_questionQuiz.is_mandatory"></mat-slide-toggle>
+              </td>
+              <td class="conditionE">
+                <button class="menu"></button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
- 
-
 </div>

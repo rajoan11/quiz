@@ -4,3 +4,5 @@ export * from './question';
 export * from './attachement';
 export * from './rubric-do';
 export * from './rubric-dto';
+export * from './pointsrules';
+export * from './response-option';

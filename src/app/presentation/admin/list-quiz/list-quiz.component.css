@@ -112,7 +112,7 @@ ng-scrollbar {
 .quizz-table .mat-header-cell:after {
   position: absolute;
   width: 1px;
-  height: 43px;
+  height:32px;
   background-color: #8d8d8d;
   content: '';
   right: 1px;

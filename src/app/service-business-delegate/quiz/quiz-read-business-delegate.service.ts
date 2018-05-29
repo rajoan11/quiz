@@ -25,11 +25,20 @@ export class QuizReadBusinessDelegateService
 
   getQuestion(): Observable<any> {
     const url = `assets/mock/question.json`;
-    return this.http.get<QuizDto>(url);
+    return this.http.get<any>(url);
+  }
+
+  getColors(): Observable<any> {
+    const url = `assets/mock/color.json`;
+    return this.http.get<any>(url);
   }
 
   getEnterprises(): Observable<any> {
     const url = `${environment.apiUrlDrupal}/entreprise/all`;
+    return this.http.get<any>(url);
+  }
+  getContraintes(): Observable<any> {
+    const url = `assets/mock/contrainte-validation.json`;
     return this.http.get<any>(url);
   }
 
