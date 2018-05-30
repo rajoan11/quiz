@@ -1,4 +1,15 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  EventEmitter,
+  Output,
+  TemplateRef
+} from '@angular/core';
+
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+
 import { ResponseOption } from '../../../donnee/quiz';
 import { QuizReadApplicatifServiceACI } from '../../../service-applicatif/quiz-admin';
 
@@ -12,28 +23,41 @@ export class ContentRubricQuestionComponent implements OnInit {
   contraintes: Array<any>;
   contrainteValue = 'text';
   endValue: string;
+  fontawesomes: Array<any>;
   initialValue: string;
   @Input() index;
   @Output() deleteIndex: EventEmitter<number> = new EventEmitter<number>();
   listArrayLinear: Array<any>;
+  modalRef: BsModalRef;
   operator = [];
   _questionQuiz: any;
+  response_options: Array<any>;
   secondArray: Array<number>;
   textLength: Array<number>;
   constructor(
-    private quizReadApplicatifServiceACI: QuizReadApplicatifServiceACI
+    private quizReadApplicatifServiceACI: QuizReadApplicatifServiceACI,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit() {
     this.textLength = Array.from(Array(50).keys(), n => n + 1);
     this.secondArray = Array.from(Array(11).keys(), n => n + 0);
     this.getContraintes();
+    this.getFontawesomes();
   }
 
   getContraintes(): void {
     this.quizReadApplicatifServiceACI.getContraintes().subscribe(res => {
       this.contraintes = res;
-      console.log(res);
+    });
+  }
+  getFontawesomes(): void {
+    this.quizReadApplicatifServiceACI.getFontawesomes().subscribe(res => {
+      this.fontawesomes = Object.entries(res).reduce((acc, curr) => {
+        const a = { key: curr[0], value: curr[1] };
+        acc.push(a);
+        return acc;
+      }, []);
     });
   }
 
@@ -81,30 +105,55 @@ export class ContentRubricQuestionComponent implements OnInit {
       }
     });
   }
-  changeInitialType($event): void {
-    let lengtharray = 10;
-    parseInt($event.value, null) === 0
-      ? (lengtharray = 11)
-      : (lengtharray = 10);
+  changeInitialType($event, questionQuiz1): void {
+    let length = 10;
+    parseInt($event.value, null) === 0 ? (length = 11) : (length = 10);
     this.secondArray = Array.from(
-      Array(lengtharray).keys(),
+      Array(length).keys(),
       n => n + parseInt($event.value, null)
     );
+
+    if (this.endValue) {
+      questionQuiz1.response_options = [];
+      Array.from(
+        Array(
+          this.toNumber(this.endValue) - this.toNumber($event.value) + 1
+        ).keys(),
+        n => n + parseInt($event.value, null)
+      ).forEach((arr, index) => {
+        questionQuiz1.response_options.push({
+          name: '',
+          poids: index,
+          slug: null
+        });
+      });
+    }
   }
 
-  changefinalType($event): void {
-    this.listArrayLinear = Array.from(Array(10).keys());
-    let lengtharray = 10;
-    parseInt($event.value, null) === 0
-      ? (lengtharray =
-          parseInt(this.endValue, null) - parseInt(this.initialValue, null) + 2)
-      : (lengtharray =
-          parseInt(this.endValue, null) -
-          parseInt(this.initialValue, null) +
-          1);
-    this.listArrayLinear = Array.from(
-      Array(lengtharray).keys(),
-      n => n + parseInt(this.initialValue, null)
-    );
+  changefinalType($event, questionQuiz1): void {
+    if (this.initialValue) {
+      questionQuiz1.response_options = [];
+      Array.from(
+        Array(
+          this.toNumber($event.value) - this.toNumber(this.initialValue) + 1
+        ).keys(),
+        n => n + parseInt($event.value, null)
+      ).forEach((arr, index) => {
+        questionQuiz1.response_options.push({
+          name: '',
+          poids: index,
+          slug: null
+        });
+      });
+    }
   }
+
+  toNumber(value) {
+    return parseInt(value, null);
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+  faValue(value: string): void {}
 }

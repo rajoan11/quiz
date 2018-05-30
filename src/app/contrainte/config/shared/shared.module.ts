@@ -14,6 +14,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { ColorPickerModule } from 'ngx-color-picker';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSliderModule} from '@angular/material/slider';
 
 import {
   MatSortModule,
@@ -52,7 +53,8 @@ import { CommunModule } from '../../../commun/commun.module';
     MatRadioModule,
     ColorPickerModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSliderModule
   ],
   declarations: [],
   exports: [
@@ -78,7 +80,8 @@ import { CommunModule } from '../../../commun/commun.module';
     MatRadioModule,
     ColorPickerModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSliderModule
   ]
 })
 export class SharedModule {}

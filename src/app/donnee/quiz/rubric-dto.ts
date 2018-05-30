@@ -10,8 +10,6 @@ export class RubricDto {
     public form = [],
     public form_id = null,
     public score = 0,
-    public points_rules = [],
-    public response_targetting = null,
-    public rules_targetting = false
+    public points_rules = []
   ) {}
 }

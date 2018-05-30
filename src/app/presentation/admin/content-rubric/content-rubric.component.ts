@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 declare const google: any;
 declare const gapi: any;
@@ -11,6 +12,7 @@ export class ContentRubricComponent implements OnInit {
   @Input() colorCss: string;
   @Input() contentQuiz: any;
   @Input() index;
+  isYoutubeVideo = true;
   @Input() questionQuizs: any;
   developerKey = 'ZMfujAxBWavplSWzmKfm-57i';
   clientId = '274345426144-4pas2h82ls0u3qknse2ucnlrphpar7uf.apps.googleusercontent.com';
@@ -18,7 +20,7 @@ export class ContentRubricComponent implements OnInit {
   pickerApiLoaded = false;
   oauthToken?: any;
   @Output() deleteIndex: EventEmitter<number> = new EventEmitter<number>();
-  constructor() {}
+  constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit() {}
 
@@ -95,5 +97,57 @@ export class ContentRubricComponent implements OnInit {
 
   deleteContent(index: number): void {
     this.deleteIndex.emit(index);
+  }
+
+  onFileChanged(event, contentQuiz) {
+    const reader = new FileReader();
+    console.log(event.target.files[0]);
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.addEventListener('load', e => {
+        const data = {
+          filename: file.name,
+          filetype: file.type,
+          value: reader.result
+        };
+        contentQuiz.content = data.value;
+        console.log(data);
+      });
+    }
+  }
+
+  getUrl(fileUrl: any) {
+    const idUrl = this.getIdYoutubeVideo(fileUrl);
+
+    return this.sanitizer.bypassSecurityTrustResourceUrl(
+      `https://www.youtube.com/embed/${idUrl}`
+    );
+  }
+
+  getIdYoutubeVideo(url: any) {
+    if (url) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+
+      if (match && match[2].length === 11) {
+        return match[2];
+      } else {
+        return 'error';
+      }
+    }
+    return '';
+  }
+
+  isValideYoutubeUrl(url: any, contentQuiz): boolean {
+    const p = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    url.match(p) ? (contentQuiz.content = url) : (contentQuiz.content = '');
+
+    return url.match(p) ? true : false;
+  }
+
+  addYoutubeVideo(event: any, contentQuiz): void {
+    console.log(event);
+    this.isYoutubeVideo = this.isValideYoutubeUrl(event, contentQuiz);
   }
 }

@@ -131,7 +131,7 @@
               <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}">
                 <a (click)="copyMessage(element.id)" class="picto copy" title="copie"></a>
                 <a class="picto reultat" title="stats global" [routerLink]="['/resultat/stat']" routerLinkActive="router-link-active"></a>
-                <a class="picto apercu" [routerLink]="['/resultat/preview']" target="_blank" title="Aperçu" title="Aperçu"></a>
+                <a class="picto apercu" [routerLink]="['/front/resp']" target="_blank" title="Aperçu" title="Aperçu"></a>
                 <a (click)="openModal(template,element.id)" class="picto suppr " title="Supprimer "></a>
               </mat-cell>
             </ng-container>
@@ -179,7 +179,7 @@
     <div class="modal-body text-center ">
       <p>La suppression du formulaire va aussi supprimer les XXX réponses sur celui-ci. Si vous souhaitez conserver les réponses
         dans votre back-office et que le formulaire ne soit plus en ligne contacter le support.</p>
-     
+
       <button type="button " class="btn non-valide btn-quizz " (click)="decline() ">annuler</button>
       <button type="button " class="btn valide btn-quizz" (click)="confirm(idQuizTodelete) ">valider </button>
     </div>

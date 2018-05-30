@@ -5,4 +5,5 @@ export abstract class QuizReadBusinessDelegateServiceACI {
   public abstract getEnterprises();
   public abstract getColors();
   public abstract getContraintes();
+  public abstract getFontawesomes();
 }

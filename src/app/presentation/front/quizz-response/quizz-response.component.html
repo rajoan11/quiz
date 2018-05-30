@@ -11,18 +11,18 @@
   <div class="container">
     <div class="paginate-rubrique">
       <ul>
+        <li><em class="rubric-name">Rubrique name</em>  <span class="actived"></span></li>
+        <li><span class="active"></span></li>
         <li><span></span></li>
         <li><span></span></li>
-        <li><span></span></li>
-        <li><span></span></li>
-        <li><span></span></li>
+       <li><span></span></li> 
       </ul>
     </div>
-    <div class="order" [style.border-color]="colorCss">
+    <div class="order">
         <p>
           <a>Rubrique
-            <span>{{position+1}}</span> sur
-            <span>{{quizLengthValue}}</span>
+            <span>1</span> sur
+            <span>2</span>
           </a>
         </p>
       </div>
@@ -49,9 +49,66 @@
             <mat-checkbox><span class="nb-400 padd">Réponse 3</span> </mat-checkbox>
           </mat-radio-group>
         </div>
+
+      <!-- video -->
+      <div class="contenu">
+          <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+            </div>
+        </div>
+
+      <!-- question court -->
+      <div class="contenu">
+          <p class="title">Question (réponse courte)</p>
+          <div class="myrow">
+              <mat-form-field class="example-full-width">
+                  <textarea matInput placeholder="votre reponse"></textarea>
+                </mat-form-field>
+          </div>  
+      </div>
+      <!-- Question (échelle linéaire)  -->
+      <div class="contenu">
+          <p class="title">Question (échelle linéaire)</p>
+          <div class="myrow progress">
+            <ul>
+              <li><span class="rond"></span> <i>1</i></li>
+              <li><span class="rond"></span> <i>2</i></li>
+              <li><span class="rond"></span><i>3</i></li>
+              <li><span class="rond"></span><i>4</i></li>
+              <li><span class="rond"></span><i>5</i></li>
+              <li><span class="rond"></span><i>6</i></li>
+            </ul>
+              <mat-slider></mat-slider>
+          </div>  
+      </div>
+
+      <!-- Date  -->
+      <div class="contenu">
+          <p class="title">Question (date)</p>
+          <div class="myrow date">
+            <!-- <mat-form-field>
+              <input matInput [matDatepicker]="dp2" placeholder="Jour/Mois/Année">
+              <mat-datepicker-toggle matSuffix [for]="dp2" disabled></mat-datepicker-toggle>
+              <mat-datepicker #dp2></mat-datepicker>
+            </mat-form-field> -->
+            <mat-form-field class="example-full-width">
+                <input matInput type="date" placeholder="Jour/Mois/Année" value="Sushi">
+              </mat-form-field>
+          </div>  
+      </div>
+
+      <!-- Date  -->
+      <div class="contenu">
+          <p class="title">Question (heure)</p>
+          <div class="myrow date">
+              <mat-form-field class="example-full-width">
+                  <input matInput type="time" placeholder="Favorite food" value="Sushi">
+                </mat-form-field>
+          </div>  
+      </div>
  </div>  <!-- fin container -->
  <div class="new-page">
-   <!-- <p class="retoure">Retoure</p> -->
+   <p class="retoure">Retoure</p>
    <p class="suivant">suivant</p>
  </div>
 </div>

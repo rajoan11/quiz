@@ -11,7 +11,7 @@
   <div class="content-drop">
     <div *ngIf="contentQuiz.value === 'embed'">
       <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+        <iframe class="embed-responsive-item" [src]="getUrl(contentQuiz.content)"></iframe>
       </div>
       <div class="clear"></div>
       <div class="outils">
@@ -20,12 +20,12 @@
       </div>
     </div>
     <div *ngIf="contentQuiz.value === 'text'">
-      <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true"></app-ngx-editor>
+      <app-ngx-editor [placeholder]="'Enter text here...'" [(ngModel)]="contentQuiz.content" [spellcheck]="true"></app-ngx-editor>
     </div>
     <div *ngIf="contentQuiz.value === 'image'">
 
       <div id="result "></div>
-      <img src="/assets/images/drop/1.jpg " alt=" ">
+      <img [src]="contentQuiz.content" alt=" ">
       <div class="clear "></div>
       <div class="outils ">
         <div class="w-50 "></div>
@@ -41,8 +41,9 @@
                 <button class="btn btn-suppr" (click)="deleteContent(index)"></button>
               </td>
               <td class="upload-img" *ngIf="contentQuiz.value === 'embed'">
-                <div class="input-group image-preview">
-                  <input placeholder="" type="text" class="form-control image-preview-filename" placeholder="Votre url ...">
+                <div class="input-group image-preview" [ngClass]="{'not-youtube': !isYoutubeVideo}">
+                  <input placeholder="" [(ngModel)]="contentQuiz.urlYoutube" type="text" class="form-control image-preview-filename" placeholder="Votre url ..."
+                    (blur)="addYoutubeVideo(contentQuiz.urlYoutube,contentQuiz)">
                 </div>
               </td>
               <td class="upload-img" *ngIf="contentQuiz.value === 'image'">
@@ -57,7 +58,8 @@
                     <div class="btn image-preview-input btn-primary" [style.background-color]="colorCss">
                       <span class="glyphicon glyphicon-folder-open"></span>
                       <span class="image-preview-input-title"></span>
-                      <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview" />
+                      <input type="file" (change)="onFileChanged($event,contentQuiz)" accept="image/png, image/jpeg, image/gif" name="input-file-preview"
+                      />
                       <!-- rename it -->
                     </div>
                     <button type="button" class="btn btn-labeled btn-primary" [style.background-color]="colorCss">

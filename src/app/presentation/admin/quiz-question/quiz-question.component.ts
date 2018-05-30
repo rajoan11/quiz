@@ -52,8 +52,12 @@ export class QuizQuestionComponent implements OnInit {
         }
       });
       this.questions.sort((a, b) => a.id - b.id);
-      this.questions1 = this.questions.filter(q1 => q1.id < 9);
-      this.questions2 = this.questions.filter(q1 => q1.id > 8);
+      this.questions1 = JSON.parse(
+        JSON.stringify(this.questions.filter(q1 => q1.id < 9))
+      );
+      this.questions2 = JSON.parse(
+        JSON.stringify(this.questions.filter(q1 => q1.id > 8))
+      );
     });
   }
 

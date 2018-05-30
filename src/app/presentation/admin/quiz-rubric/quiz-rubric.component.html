@@ -16,12 +16,6 @@
       <input type="text" placeholder="Nom rubrique" name="name" [(ngModel)]="newRubrique.name">
     </p>
     <div class="parent-content">
-      <!-- <ng-container dnd-sortable-container [sortableData]="newRubrique.contents_rubriques" [dropZones]="['container-quiz']">
-        <div *ngFor="let contentQuiz of newRubrique.contents_rubriques;let j = index" dnd-sortable [sortableIndex]="j">
-          <app-content-rubric [contentQuiz]='contentQuiz' [colorCss]="colorCss" *ngIf="contentQuiz.type_content !== 'question'"></app-content-rubric>
-          <app-content-rubric-question [questionQuiz]="contentQuiz" [colorCss]="colorCss" *ngIf="contentQuiz.type_content === 'question'"></app-content-rubric-question>
-        </div>
-      </ng-container> -->
       <div *ngFor="let contentQuiz of newRubrique.contents_rubriques;let i = index" dnd-sortable [sortableIndex]="i">
         <div *ngIf="contentQuiz">
           <app-content-rubric (deleteIndex)="onDeleteIndex($event)" [contentQuiz]='contentQuiz' [colorCss]="colorCss" [index]="i" *ngIf="contentQuiz.type_content !== 'question'"></app-content-rubric>
@@ -29,11 +23,6 @@
             *ngIf="contentQuiz.type_content === 'question'"></app-content-rubric-question>
         </div>
       </div>
-      <!-- <ng-container dnd-sortable-container [sortableData]="questionQuizs" [dropZones]="['container-question']">
-        <div *ngFor="let questionQuiz of questionQuizs;let i = index" dnd-sortable [sortableIndex]="i">
-          <app-content-rubric-question [questionQuiz]="questionQuiz" [colorCss]="colorCss"></app-content-rubric-question>
-        </div>
-      </ng-container> -->
 
     </div>
   </div>

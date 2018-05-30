@@ -22,7 +22,7 @@ body {
     content: '';
     width: 30px;
     height: 30px;
-    bottom: -30px;
+    bottom: -29px;
     left: 0;
     right: 0;
     display: block;
@@ -49,91 +49,106 @@ p{
   font-family: firaSans;
   font-weight: normal;
 }
-.paginate-rubrique ul{
-    text-align: center;
-}
-.paginate-rubrique ul li {
-    list-style: none;
-    display: inline-block;
-    width: 64px;
-    position: relative;
-}
-.paginate-rubrique ul li>span{
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background-color: #cecece;
-    display: block;
-    margin: 5px;
-    cursor: pointer;
-    border-color: #f96922;
-}
-.paginate-rubrique ul li>span:before{
-    position: absolute;
-    content: "";
-    width: 22px;
-    height: 22px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: inherit;
-    top: 1px;
-    left: 1px;
-    display: block;
-    border-radius: 50%;
-    display: none;
-    transition:0.3s;
-}
-.paginate-rubrique ul li>span:hover:before{
-    display: block;
-}
-.paginate-rubrique ul li>span:hover{
-    background-color: #f96922;
-}
 
 
-.paginate-rubrique ul li:before{
-    position: absolute;
-    content: "";
-    width: 33px;
-    height: 1px;
-    background-color: #9b9b9b;
-    top: 11px;
-    left: 28px;
-    display: block;
-    opacity: 0.4;
-    overflow: hidden;
-}
-.paginate-rubrique ul li:last-child:before{
-    display: none;
-}
 
-.front-rubrique .contenu {
-    max-width: 495px;
-    padding: 40px 56px;
-    background: #fff;
-    box-shadow: 0 5px 14px 0 rgba(166, 166, 166, 0.2);
-    margin: auto;
-    margin-bottom: 20px;
-    float: none;
-}
-.front-rubrique .contenu:last-child{
-    margin-bottom: 40px;
-}
-.front-rubrique .contenu img {
-    width: 100%;
-}
-.front-rubrique .contenu mat-radio-group>mat-radio-button,
-.front-rubrique .contenu mat-radio-group>mat-checkbox{
-   display:block; 
-   margin-bottom: 14px;
-   font-family: Muli;
-   font-size: 16px;
-   color: #4f5e65;
-}
 .title{
     font-size: 17px;
     font-weight: 600;
     font-family: muli;
     margin-bottom: 25px;
     color: #4f5e65;
+}
+.contenu .mat-form-field{
+    max-width: 324px;
+    width: 100%;
+    color: #4f5e65;
+}
+.contenu .mat-form-field-label{
+    color: inherit!important;
+}
+
+.paginate-rubrique ul li>.rubric-name{
+    font-family: muli;
+    font-size: 12px;
+    font-weight: 200;
+    position: absolute;
+    top: -25px;
+    height: 25px;
+    background: #efefef;
+    padding: 5px;
+    left: -45px;
+    min-width: 111px;
+    overflow: hidden;
+    font-style: normal;
+    border-radius: 7px;
+}
+
+.contenu .progress{
+    position: relative;
+    display: table;
+    width: 100%;
+    background: #fff;
+    box-shadow: none;
+    min-height: 100px;
+}
+.contenu .progress mat-slider{
+    display: table;
+    width: 100%;
+    position: absolute;
+    bottom: calc(48px/2);
+    z-index: 2;
+}
+.contenu .progress ul{
+    display: block;
+    height: 1px;
+    /* border-top: 3px #00000042 solid; */
+    padding: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    margin-bottom: 0px;
+    top: 48px;
+}
+.contenu .progress ul li{
+    display: inline-block;
+    max-width: 70px;
+    position: relative;
+    width: 100%; 
+}
+.contenu .progress ul li>.rond{
+    position: absolute;
+    left: 0px;
+    top: -15px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #787373;  
+}
+.contenu .progress ul li>i{
+    position: absolute;
+    left: -1px;
+    top: -50px;
+    width: 15px;
+    height: 15px;
+    font-size: 12px;
+    font-weight: normal; 
+    font-style: normal;
+}
+.contenu .progress ul li:last-child{
+    display: inline-block;
+    width: 4px;   
+}
+@media(max-width: 768px){
+    .front-rubrique .contenu {
+        padding: 40px 15px;
+    }
+}
+@media(max-width: 530px){
+    .contenu .progress ul li{
+        display: inline-block;
+        max-width: 67px;
+        position: relative;
+        width: 18%;
+    }
 }

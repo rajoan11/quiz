@@ -153,16 +153,26 @@
   {
     "id": 9,
     "value": "text",
-    "name": "text"
+    "name": "text",
+    "content": "",
+    "poids": "images",
+    "type": "textwysig"
   },
   {
     "id": 10,
     "value": "image",
-    "name": "images"
+    "name": "images",
+    "content": "",
+    "poids": "",
+    "type": "image"
   },
   {
     "id": 11,
     "value": "embed",
-    "name": "embed"
+    "name": "embed",
+    "content": "",
+    "urlYoutube": "",
+    "poids": "",
+    "type": "video"
   }
 ]

@@ -55,6 +55,11 @@ export class QuizReadMetierService implements QuizReadMetierServiceACI {
       .getContraintes()
       .pipe(tap(entreprises => {}), catchError(this.handleError));
   }
+  getFontawesomes() {
+    return this.quizReadBusinessDelegateService
+      .getFontawesomes()
+      .pipe(tap(fas => {}), catchError(this.handleError));
+  }
 
   private handleError(error) {
     return Observable.throw(error && error.message);

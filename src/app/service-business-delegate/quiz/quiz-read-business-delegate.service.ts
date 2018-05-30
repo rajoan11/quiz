@@ -41,6 +41,10 @@ export class QuizReadBusinessDelegateService
     const url = `assets/mock/contrainte-validation.json`;
     return this.http.get<any>(url);
   }
+  getFontawesomes(): Observable<any> {
+    const url = `assets/mock/fontawesome.json`;
+    return this.http.get<any>(url);
+  }
 
   private getHttpParams(args: any) {
     let params = new HttpParams();

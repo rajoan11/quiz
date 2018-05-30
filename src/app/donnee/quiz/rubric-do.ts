@@ -12,6 +12,4 @@ export class RubricDo {
   form_id: number;
   score: number;
   points_rules: Array<PointsRules>;
-  response_targetting: any;
-  rules_targetting: boolean;
 }

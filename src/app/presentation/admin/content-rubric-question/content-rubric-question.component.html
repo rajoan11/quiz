@@ -17,7 +17,7 @@
             <div class="col-md-8 col-sm-12">
               <ol class="plus rond">
                 <li>
-                  <mat-checkbox></mat-checkbox>
+                  <mat-radio-button value="1"></mat-radio-button>
                   <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
                     <input matInput [placeholder]="questQuiz.placeholder" [(ngModel)]="questQuiz.name" (focus)="addOptionMs( _questionQuiz.response_options, questQuiz, i)">
                   </mat-form-field>
@@ -118,22 +118,24 @@
 
             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
               <div class="row">
-                <div class="col-sm-4 label-italic">
-                  <div *ngIf="contrainteValue !=='Nombre2'">
-                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
-                      <input matInput [placeholder]="contrainteValue" [(ngModel)]="_questionQuiz.constraint.constraint_value">
-                    </mat-form-field>
-                  </div>
-                  <div *ngIf="contrainteValue ==='Nombre2'">
-                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
-                      <input matInput placeholder="Nombre" [(ngModel)]="_questionQuiz.constraint.constraint_value">
-                    </mat-form-field> et
-                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
-                      <input matInput placeholder="Nombre" [(ngModel)]="_questionQuiz.constraint.constraint_value">
-                    </mat-form-field>
-                  </div>
+                <div class="col-sm-4 label-italic" *ngIf="contrainteValue !=='Nombre2'">
+
+                  <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
+                    <input matInput [placeholder]="contrainteValue" [(ngModel)]="_questionQuiz.constraint.constraint_value">
+                  </mat-form-field>
+
+
                 </div>
-                <div class="col-sm-8 textarea">
+                <div class="col-sm-8 label-italic wto-50" *ngIf="contrainteValue ==='Nombre2'">
+                  <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
+                    <input matInput placeholder="Nombre" [(ngModel)]="_questionQuiz.constraint.constraint_value">
+                  </mat-form-field>
+                  <span class="inline">et</span>
+                  <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
+                    <input matInput placeholder="Nombre" [(ngModel)]="_questionQuiz.constraint.constraint_value">
+                  </mat-form-field>
+                </div>
+                <div class=" textarea" [ngClass]="{'col-sm-8': contrainteValue !=='Nombre2','col-sm-4': contrainteValue ==='Nombre2'}">
                   <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
                     <textarea matInput placeholder="Texte d'erreur personnalisé ..." [(ngModel)]="_questionQuiz.constraint.text_error"></textarea>
                   </mat-form-field>
@@ -192,40 +194,48 @@
     <!-- echelle lineaire -->
     <div *ngIf="_questionQuiz.value === 'dropdown_list'">
       <div class="row">
+        <div class="col-sm-12">
+          <mat-form-field class="question example-full-width">
+            <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
+          </mat-form-field>
+        </div>
         <div class="col-md-7 col-sm-12">
 
           <div class="form-quizz l-deroulant echelle">
-            <div class="col-sm-12">
-
-            </div>
-            <div class="col-sm-12">
-              <mat-form-field class="question example-full-width">
-                <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
-              </mat-form-field>
-            </div>
-            <mat-form-field>
-              <mat-select [(ngModel)]="initialValue" (change)="changeInitialType($event)">
-                <mat-option *ngFor="let nbr1 of ['0','1']" [value]="nbr1">
-                  {{nbr1}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <span>à</span>
-            <mat-form-field>
-              <mat-select [(ngModel)]="endValue" (change)="changefinalType($event)">
-                <mat-option *ngFor="let nbr of secondArray" [value]="nbr">
-                  {{nbr}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+            <table class="nbr-limite">
+              <tr>
+                <td>
+                  <mat-form-field>
+                    <mat-select [(ngModel)]="initialValue" (change)="changeInitialType($event,_questionQuiz)">
+                      <mat-option *ngFor="let nbr1 of ['0','1']" [value]="nbr1">
+                        {{nbr1}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <span>à</span>
+                </td>
+                <td>
+                  <mat-form-field>
+                    <mat-select [(ngModel)]="endValue" (change)="changefinalType($event,_questionQuiz)">
+                      <mat-option *ngFor="let nbr of secondArray" [value]="nbr">
+                        {{nbr}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+              </tr>
+            </table>
             <ol class="plus">
-              <li *ngFor="let item of listArrayLinear; let i = index">
-                <span>{{item}}</span>
+              <li *ngFor="let item of _questionQuiz.response_options; let i = index">
+                <span class="nbr">{{i + toNumber(initialValue,null)}}.</span>
+
                 <mat-form-field class="example-full-width mat-form-field">
-                  <input matInput [placeholder]="(i === 0 || i+1 === listArrayLinear.length)? ('Réponse'+item+ '(obligatoire)') : ('Réponse'+item+ '(facultatif)')"
-                    [value]="(i === 0) ?('minimum'): ((i+1 === listArrayLinear.length) ?'maximum':'') ">
+                  <input matInput [placeholder]="(i === 0 || i+1 === _questionQuiz.response_options.length)? ('Réponse'+(i + toNumber(initialValue,null))+ '(obligatoire)') : ('Réponse'+(i + toNumber(initialValue,null))+ '(facultatif)')"
+                    [(ngModel)]="item.name" [value]="(i === 0) ?('minimum'): ((i+1 === _questionQuiz.response_options.length) ?'maximum':'') ">
                 </mat-form-field>
-                <span class="fermer"></span>
+                <span class="fermer" (click)="deleteteOptionMs(_questionQuiz.response_options, i)"></span>
               </li>
             </ol>
           </div>
@@ -239,8 +249,11 @@
               <div class="col-sm-7 col-xs-12">
                 <mat-form-field class="w100">
                   <mat-select placeholder="smiley">
-                    <mat-option *ngFor="let food of ['smiley','point','coeur', 'autre']" [value]="smiley">
-                      {{ food }}
+                    <mat-option *ngFor="let fa of ['smiley','point','coeur']" [value]="smifaley">
+                      {{ fa }}
+                    </mat-option>
+                    <mat-option (click)="openModal(template)">
+                      autre
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -337,3 +350,21 @@
     </div>
   </div>
 </div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <p class="color title">choisir une icône</p>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="list-icon">
+      <ng-scrollbar #scrollRef [trackY]="true" [trackX]="true">
+        <div *ngFor="let fontawesome of fontawesomes" class="child-list">
+          <i class="fa {{fontawesome.key}}" (click)="faValue(fontawesome.value)"></i>
+        </div>
+      </ng-scrollbar>
+    </div>
+  </div>
+</ng-template>

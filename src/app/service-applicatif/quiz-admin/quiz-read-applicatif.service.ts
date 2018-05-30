@@ -26,4 +26,7 @@ export class QuizReadApplicatifService implements QuizReadApplicatifServiceACI {
   public getContraintes(): Observable<any> {
     return this.quizReadMetierService.getContraintes();
   }
+  public getFontawesomes(): Observable<any> {
+    return this.quizReadMetierService.getFontawesomes();
+  }
 }

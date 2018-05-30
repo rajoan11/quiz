@@ -1,71 +1,71 @@
-.type-contenu{
-    width: 29%;
-    float: right;
-    position: relative;
-    height: 40px;
-    background-color: #0003;
-    padding: 11px;
-    padding-left: 50px;
-    color: #fff;
-    font-size: 18px;
+.type-contenu {
+  width: 29%;
+  float: right;
+  position: relative;
+  height: 40px;
+  background-color: #0003;
+  padding: 11px;
+  padding-left: 50px;
+  color: #fff;
+  font-size: 18px;
 }
-.type-contenu.text{
-    padding-left: 2%;
+.type-contenu.text {
+  padding-left: 2%;
 }
 
-.type-contenu.img:before{
-    position: absolute;
-    content: '';
-    width: 25px;
-    height: 18px;
-    background: url(/assets/images/picto-image.png) no-repeat center;
-    background-size: contain;
-    left: 14px;
+.type-contenu.img:before {
+  position: absolute;
+  content: '';
+  width: 25px;
+  height: 18px;
+  background: url(/assets/images/picto-image.png) no-repeat center;
+  background-size: contain;
+  left: 14px;
 }
-.type-contenu.embed_a:before{
-    position: absolute;
-    content: '';
-    width: 25px;
-    height: 18px;
-    background: url(/assets/images/embed_a.png) no-repeat center;
-    background-size: contain;
-    left: 14px;
+.type-contenu.embed_a:before {
+  position: absolute;
+  content: '';
+  width: 25px;
+  height: 18px;
+  background: url(/assets/images/embed_a.png) no-repeat center;
+  background-size: contain;
+  left: 14px;
 }
-.prent-content-drop .content-drop{
-    padding-bottom: 115px;
+.prent-content-drop .content-drop {
+  padding-bottom: 115px;
 }
-.prent-content-drop .content-drop img{
-    width: 100%;
-    height: auto;
-    padding: 40px;
+.prent-content-drop .content-drop img {
+  width: 100%;
+  height: auto;
+  padding: 40px;
 }
-.content-drop{
-    position: relative;
+.content-drop {
+  position: relative;
 }
-.content-drop>.outils{
-    position: absolute;
-    bottom: 70px;
-    width: 100px;
-    height: 32px;
-    display: block;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
+.content-drop > .outils {
+  position: absolute;
+  bottom: 70px;
+  width: 100px;
+  height: 32px;
+  display: block;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
-.content-drop>.outils>.w-50{
-    width: 46%;
-    float: left;
-    height: 32px;
-    margin: 2%;
-    cursor: pointer;
+.content-drop > .outils > .w-50 {
+  width: 46%;
+  float: left;
+  height: 32px;
+  margin: 2%;
+  cursor: pointer;
 }
-.content-drop>.outils>.w-50:first-child{
-    background: url(/assets/images/format1.jpg) no-repeat center;  
-    background-size: contain;  
+.content-drop > .outils > .w-50:first-child {
+  background: url(/assets/images/format1.jpg) no-repeat center;
+  background-size: contain;
 }
-.content-drop>.outils>.w-50:last-child{
-    background: url(/assets/images/format2.jpg) no-repeat center;   
-    background-size: contain; 
+.content-drop > .outils > .w-50:last-child {
+  background: url(/assets/images/format2.jpg) no-repeat center;
+  background-size: contain;
 }
 /*.content-drop::after{
     position: absolute;
@@ -80,123 +80,125 @@
     border: 1px #dedcdc solid;
 }*/
 
-.prent-content-drop{
-    background-color: #fff;
-    position: relative;
+.prent-content-drop {
+  background-color: #fff;
+  position: relative;
 }
-.prent-content-drop>.support{
-    position: absolute;
-    top: 8px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    display: block;
-    content: '';
-    width: 20px;
-    height: 20px;
-    background: url(/assets/images/deplace.png) no-repeat;
-    background-size: contain;
-    cursor: move;
+.prent-content-drop > .support {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: block;
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: url(/assets/images/deplace.png) no-repeat;
+  background-size: contain;
+  cursor: move;
 }
-@media (max-width:533px){
-    .type-contenu{
-        width: 33%;
-    }
+@media (max-width: 533px) {
+  .type-contenu {
+    width: 33%;
+  }
 }
 
 .upload-img {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 /* layout.css Style */
 .upload-img .upload-drop-zone {
-    height: 200px;
-    border-width: 2px;
-    margin-bottom: 20px;
-  }
-  
-  /* skin.css Style*/
-  .upload-img .upload-drop-zone {
-    color: #ccc;
-    border-style: dashed;
-    border-color: #ccc;
-    line-height: 200px;
-    text-align: center
-  }
-  .upload-img .upload-drop-zone.drop {
-    color: #222;
-    border-color: #222;
-  }
-  
-  
-  
-  .upload-img .image-preview-input {
-      position: relative;
-      overflow: hidden;
-      margin: 0px;    
-      color: #333;
-      background-color: #fff;
-      border-color: #ccc;    
-  }
-  .upload-img .image-preview-input input[type=file] {
-      position: absolute;
-      top: 0;
-      right: 0;
-      margin: 0;
-      padding: 0;
-      font-size: 20px;
-      cursor: pointer;
-      opacity: 0;
-      filter: alpha(opacity=0);
-  }
-  .upload-img  .image-preview-input-title {
-      margin-left:2px;
-  }
-  .upload-img .image-preview-filename{
-      border: none;
-      border-radius: 0;
-      height:56px;
-      box-shadow: none!important;
-  }
-  .upload-img .input-group-btn > .btn{
-      border: none;
-      border-radius: 0;
-      height: 56px;
-      line-height: 50px;
-      border:1px #fff solid!important;
-  }
-  .upload-img .input-group-btn > .image-preview-input{
-      background-color: #f17222;
-      transition: 0.5s;
-  }
-  .upload-img .input-group-btn > .btn-labeled{
-      background-color: #ff8a41;
-      transition: 0.5s;
-  }
-  .content-drop .groupe-btn table td:first-child{
-      width: 20%;
-  }
-  .content-drop .groupe-btn table td:last-child{
-      width: 80%;
-  }
-  .upload-img .btn,
-  .upload-img button {
-    background-color: #fc6100;
-    border:none!important;
-  }
-  .upload-img .btn span,
-  .upload-img button span{
-      color: #fff;
-  }
-  .upload-img .glyphicon{
-    color: #fff;
-  }
-  .content-drop .groupe-btn .text-type table td{
-      width: 100%;
-      
-  }
-  .content-drop .groupe-btn .text-type {
-    width: 89px;
-    }
+  height: 200px;
+  border-width: 2px;
+  margin-bottom: 20px;
+}
 
+/* skin.css Style*/
+.upload-img .upload-drop-zone {
+  color: #ccc;
+  border-style: dashed;
+  border-color: #ccc;
+  line-height: 200px;
+  text-align: center;
+}
+.upload-img .upload-drop-zone.drop {
+  color: #222;
+  border-color: #222;
+}
+
+.upload-img .image-preview-input {
+  position: relative;
+  overflow: hidden;
+  margin: 0px;
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.upload-img .image-preview-input input[type='file'] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.upload-img .image-preview-input-title {
+  margin-left: 2px;
+}
+.upload-img .image-preview-filename {
+  border: none;
+  border-radius: 0;
+  height: 56px;
+  box-shadow: none !important;
+}
+.upload-img .input-group-btn > .btn {
+  border: none;
+  border-radius: 0;
+  height: 56px;
+  line-height: 50px;
+  border: 1px #fff solid !important;
+}
+.upload-img .input-group-btn > .image-preview-input {
+  background-color: #f17222;
+  transition: 0.5s;
+}
+.upload-img .input-group-btn > .btn-labeled {
+  background-color: #ff8a41;
+  transition: 0.5s;
+}
+.content-drop .groupe-btn table td:first-child {
+  width: 20%;
+}
+.content-drop .groupe-btn table td:last-child {
+  width: 80%;
+}
+.upload-img .btn,
+.upload-img button {
+  background-color: #fc6100;
+  border: none !important;
+}
+.upload-img .btn span,
+.upload-img button span {
+  color: #fff;
+}
+.upload-img .glyphicon {
+  color: #fff;
+}
+.content-drop .groupe-btn .text-type table td {
+  width: 100%;
+}
+.content-drop .groupe-btn .text-type {
+  width: 89px;
+}
+
+.input-group.image-preview.not-youtube {
+  border-color: red;
+  border-width: 1px;
+  border-style: solid;
+}

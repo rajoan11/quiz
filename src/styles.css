@@ -197,7 +197,9 @@ body .btn-primary:focus {
 }
 
 
-
+body .color{
+  color: #fc6100!important;
+}
 
 /* FIN */
 /* MODALE && popup 
@@ -380,7 +382,7 @@ body .btn-primary:focus {
 ************************** */
 @media (max-width: 992px) {
   .prent-content-drop {
-    padding-right: 30px;
+    padding-right: 0 15px;
   }
 }
 
@@ -547,6 +549,7 @@ body .btn-primary:focus {
   font-family: firasans !important;
   font-weight: 600 !important;
 }
+
 
 #creation-quizz .mat-expansion-indicator::after {
     content: '';
@@ -1041,6 +1044,7 @@ body .rubric-pops .modal-body .close{
   font-weight: 200;
   text-align: center;
 }
+
 .rubric-pops .modal-header,
 .rubric-pops .modal-footer{
   border: none;
@@ -1058,38 +1062,7 @@ body .rubric-pops .modal-body .close{
   color: #4a4a4a;
   font-weight: 600;
 }
-@media(max-width:768px){
 
-  .modal-dialog.rubric-pops{
-    max-width: 360px;
-    width: 100%!important;
-    margin: auto;
-}
-  .group-selection>table:first-child,
-  .group-selection>table:last-child {
-    width: 100%!important;
-    float: none!important;
-    margin-bottom: 25px;
-  }
-  .rubric-pops .modal-footer button {
-    text-transform: uppercase;
-    max-width: 100%;
-    width: 100%;
-    margin: 15px 0;
-  }
-  .rubric-pops .modal-footer button:focus{
-    outline: none;
-  }
-  .rubric-pops .modal-body .pad {
-    padding: 15px 0;
-  }
-  .rubric-pops .modal-body table td>.mat-form-field{
-    width: 100%;
-  }
-  .rubric-pops .modal-body table td.w30{
-    width: 30%;
-  }
-}
 
 .rubric-pops .modal-body .group-selection.flou td .mat-form-field{
   width: 100%;
@@ -1159,7 +1132,9 @@ body .ng-star-inserted{
 body .fin-quizz label{
   font-weight: 200!important;
 }
-
+body .nbr-limite .mat-input-underline.mat-form-field-underline{
+  display: none;
+}
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
   border-color: #f96922;
 }
@@ -1238,7 +1213,144 @@ body .fin-quizz label{
   outline: none;
 }
 
+/* FRONT
+&&&&&&&&&&& */
+.new-page{
+  display: table;
+  width: 100%;
+}
+.new-page p{
+  display: table-cell;
+  height: 40px;
+  vertical-align: middle;
+  padding: 0 50px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+}
+.new-page p:before{
+  position: absolute;
+  content: "";
+  width: 17px;
+  height: 12px;
+  display: block;
+  right: 17px;
+  background: url(/assets/images/shape.png) no-repeat center;
+  background-size: contain;
+  top: 14px;
+}
 
+.new-page p.retoure:before{
+  transform: rotate(180deg);
+  left: 17px;
+}
+.new-page p.suivant:hover{
+  background: linear-gradient(#f96000, #ff8e47);
+}
+.new-page p.retoure:hover{
+  background: linear-gradient(#9b9b9b, #c7c7c7);
+}
+.new-page p.retoure{
+  width: 50%;
+  background-color: #9b9b9b;
+}
+.new-page p.suivant{
+  text-align: right;
+  background-color: #fc6100;
+}
+
+.paginate-rubrique ul{
+  text-align: center;
+}
+.paginate-rubrique ul li {
+  list-style: none;
+  display: inline-block;
+  width: 64px;
+  position: relative;
+}
+.paginate-rubrique ul li>span{
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #cecece;
+  display: block;
+  margin: 5px;
+  cursor: pointer;
+  border-color: #f96922;
+}
+.paginate-rubrique ul li>span:before{
+  position: absolute;
+  content: "";
+  width: 22px;
+  height: 22px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: inherit;
+  top: 1px;
+  left: 1px;
+  display: block;
+  border-radius: 50%;
+  display: none;
+  transition:0.3s;
+}
+.paginate-rubrique ul li>span:hover:before,
+.paginate-rubrique ul li>span.active:before{
+  display: block;
+}
+.paginate-rubrique ul li>span:hover,
+.paginate-rubrique ul li>span.actived,
+.paginate-rubrique ul li>span.active{
+  background-color: #f96922;
+}
+
+.paginate-rubrique ul li:before{
+  position: absolute;
+  content: "";
+  width: 33px;
+  height: 1px;
+  background-color: #9b9b9b;
+  top: 11px;
+  left: 28px;
+  display: block;
+  opacity: 0.4;
+  overflow: hidden;
+}
+.paginate-rubrique ul li:last-child:before{
+  display: none;
+}
+.paginate-rubrique ul li:last-child{
+  width: 25px;
+}
+.front-rubrique .contenu {
+  max-width: 495px;
+  padding: 40px 56px;
+  background: #fff;
+  box-shadow: 0 5px 14px 0 rgba(166, 166, 166, 0.2);
+  margin: auto;
+  margin-bottom: 20px;
+  float: none;
+}
+.front-rubrique .contenu:last-child{
+  margin-bottom: 40px;
+}
+.front-rubrique .contenu img {
+  width: 100%;
+}
+.front-rubrique .contenu mat-radio-group>mat-radio-button,
+.front-rubrique .contenu mat-radio-group>mat-checkbox{
+ display:block; 
+ margin-bottom: 14px;
+ font-family: Muli;
+ font-size: 16px;
+ color: #4f5e65;
+}
+
+
+/* RESPMONSIVE
+&&&&&&&&&&&&&&&& */
 @media (max-width: 768px) {
   .filtre-quiz .liste > li {
     display: block;
@@ -1262,6 +1374,14 @@ body .fin-quizz label{
   .form-quizz .mat-form-field {
     max-width: 100% !important;
     width: 100% !important;
+    display: block!important;
+    clear: both !important; float: none!important;
+    margin-bottom: 20px;
+  }
+  .wto-50 > mat-form-field + .inline{
+    margin-bottom: 15px;
+    display: block!important;
+    width: 100%!important;
   }
   body .form-quizz .hours .absolute {
       position: absolute;
@@ -1273,38 +1393,46 @@ body .fin-quizz label{
   }
 
   .order{
-    max-width: 80%;;
+    max-width: 100%;;
+  }
+  .modal-dialog.rubric-pops{
+    max-width: 360px;
+    width: 100%!important;
+    margin: auto;
+  }
+  .group-selection>table:first-child,
+  .group-selection>table:last-child {
+    width: 100%!important;
+    float: none!important;
+    margin-bottom: 25px;
+  }
+  .rubric-pops .modal-footer button {
+    text-transform: uppercase;
+    max-width: 100%;
+    width: 100%;
+    margin: 15px 0;
+  }
+  .rubric-pops .modal-footer button:focus{
+    outline: none;
+  }
+  .rubric-pops .modal-body .pad {
+    padding: 15px 0;
+  }
+  .rubric-pops .modal-body table td>.mat-form-field{
+    width: 100%;
+  }
+  .rubric-pops .modal-body table td.w30{
+    width: 30%;
+  }
+  .paginate-rubrique ul li{
+    width:50px;
+  }
+  .paginate-rubrique ul li:before{
+    width: 30px;
+    left: 24px;
+  }
+  .nav-front {
+    padding: 45px 20px;
   }
 }
 
-/* FRONT
-&&&&&&&&&&& */
-.new-page{
-  display: table;
-  width: 100%;
-}
-.new-page p{
-  display: table-cell;
-  height: 40px;
-  vertical-align: middle;
-  padding: 0 15px;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-.new-page p.suivant:hover{
-  background: linear-gradient(#f96000, #ff8e47);
-}
-.new-page p.retoure:hover{
-  background: linear-gradient(#9b9b9b, #c7c7c7);
-}
-.new-page p.retoure{
-  width: 50%;
-  background-color: #9b9b9b;
-}
-.new-page p.suivant{
-  text-align: right;
-  background-color: #fc6100;
-}

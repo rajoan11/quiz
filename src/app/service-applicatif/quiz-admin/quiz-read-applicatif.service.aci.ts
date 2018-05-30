@@ -6,4 +6,5 @@ export abstract class QuizReadApplicatifServiceACI {
   public abstract getEnterprises();
   public abstract getColors();
   public abstract getContraintes();
+  public abstract getFontawesomes();
 }
