@@ -8,6 +8,7 @@ import { ToastService } from '../../../commun/service/toaster.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EnterpriseService } from '../../../commun/service/enterprise.service';
 import { Subject } from 'rxjs/Subject';
+import { RubriqueService } from '../../../commun/service/rubrique.service';
 
 @Component({
   selector: 'app-create-quiz',
@@ -21,9 +22,12 @@ export class CreateQuizComponent implements OnInit {
   enterprisesItems: Array<any>;
   enterprisesItems1: Array<any>;
   entrepriseSelected: Array<any> = [];
+  finishQuizz = false;
+  finishQuizzId = false;
   isSuperAdmin = false;
   newQuiz = new QuizDto();
   // rubrics: Array<RubricDo> = [];
+  quizzStateAnonyme: boolean;
   savingLoad = false;
   searchTermEntreprise = new Subject<any>();
   typeQuestionDefault = 'Nominatif';
@@ -35,6 +39,7 @@ export class CreateQuizComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private enterpriseService: EnterpriseService,
+    private rubriqueService: RubriqueService,
     private quizCudApplicatifService: QuizCudApplicatifServiceACI,
     private quizReadApplicatifService: QuizReadApplicatifServiceACI,
     private toastService: ToastService,
@@ -52,6 +57,7 @@ export class CreateQuizComponent implements OnInit {
   pushDefaultRubrique(): void {
     if (this.newQuiz.rubriques.length === 0) {
       this.newQuiz.rubriques.push(new RubricDto());
+      this.rubriqueService.setRubrique(this.newQuiz.rubriques);
     }
   }
 
@@ -87,11 +93,14 @@ export class CreateQuizComponent implements OnInit {
 
   transferRubricSuccess($event: any) {
     this.newQuiz.rubriques.push(new RubricDto());
+    this.rubriqueService.setRubrique(this.newQuiz.rubriques);
   }
 
   changeColor(color: string): void {
     this.colorCss = `${color}`;
+    this.newQuiz.basic_color = this.colorCss.split('#')[1];
     console.log(color);
+    console.log(this.newQuiz.basic_color);
   }
 
   saveQuiz(): void {
@@ -109,8 +118,10 @@ export class CreateQuizComponent implements OnInit {
       res => {
         if (res && res.success) {
           this.savingLoad = false;
+          this.quizzStateAnonyme = this.newQuiz.is_anonyme;
           this.newQuiz = new QuizDto();
-          this.router.navigate(['/admin/list']);
+          this.finishQuizz = true;
+          this.finishQuizzId = res.idquizz;
         }
       },
       err => {

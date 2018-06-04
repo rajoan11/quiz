@@ -7,12 +7,12 @@
     <div class="form-quizz">
       <div class="myrow textarea">
         <mat-form-field class="example-full-width">
-          <textarea matInput placeholder="Ajouter un titre au message final de votre quizz" value="Merci d'avoir repondu au quizz"></textarea>
+          <textarea matInput placeholder="Ajouter un titre au message final de votre quizz" [(ngModel)]="quizzPatch.tilte_message"></textarea>
         </mat-form-field>
         <br>
         <mat-form-field class="example-full-width">
-            <textarea matInput placeholder="Ajouter un message final à votre quizz..."></textarea>
-          </mat-form-field>
+          <textarea matInput placeholder="Ajouter un message final à votre quizz..." [(ngModel)]="quizzPatch.ending_message"></textarea>
+        </mat-form-field>
       </div>
     </div>
     <!-- SLIDE TOOGLE -->
@@ -23,7 +23,7 @@
             <p>L’utilisateur pourra consulter son score à la fin du quizz</p>
           </div>
           <div class="col-sm-4 col-xs-4">
-            <mat-slide-toggle></mat-slide-toggle>
+            <mat-slide-toggle [(ngModel)]="quizzPatch.read_score"></mat-slide-toggle>
           </div>
         </div>
         <div class="row">
@@ -31,7 +31,7 @@
             <p> L’utilisateur pourra consulter la correction à la fin du quizz</p>
           </div>
           <div class="col-sm-4 col-xs-4">
-            <mat-slide-toggle></mat-slide-toggle>
+            <mat-slide-toggle [(ngModel)]="quizzPatch.show_answer"></mat-slide-toggle>
           </div>
         </div>
         <div class="row">
@@ -42,8 +42,9 @@
                 pour les quizz nominatif.</small>
             </p>
           </div>
-          <div class="col-sm-4 col-xs-4" >
-            <mat-slide-toggle></mat-slide-toggle>
+          <div class="col-sm-4 col-xs-4">
+            <mat-slide-toggle *ngIf="_quizzStateAnonyme" [(ngModel)]="quizzPatch.initialize_quizz" [disabled]="_quizzStateAnonyme" matTooltip="vous ne pouvez pas désactivé cette option car votre quizz est anonyme"></mat-slide-toggle>
+            <mat-slide-toggle *ngIf="!_quizzStateAnonyme" [(ngModel)]="quizzPatch.initialize_quizz"></mat-slide-toggle>
           </div>
         </div>
       </div>
@@ -51,10 +52,10 @@
         <div class="col-sm-15">
           <div class="col-sm-4 pull-right">
             <p class="text-right">
-              <button class="btn btn-voir-quizz " type="button ">Terminer et voir le quizz</button>
+              <button class="btn btn-voir-quizz " type="button " (click)="finishQuizz(true)">Terminer et voir le quizz</button>
             </p>
             <p class="text-right">
-              <button class="btn btn-fin-quizz  " type="button ">terminer</button>
+              <button class="btn btn-fin-quizz  " type="button " (click)="finishQuizz()">Terminer</button>
             </p>
           </div>
         </div>

@@ -21,7 +21,9 @@ export class QuizRubricComponent implements OnInit {
   @Input() colorCss: string;
   contentQuizs: Array<any> = [];
   modalRef: BsModalRef;
+  pointRedirectionActiveExist = false;
   questionQuizs: Array<any> = [];
+  scoreMax = 50;
   typeAttachement: string;
 
   @Input() newRubrique: RubricDto;
@@ -35,8 +37,20 @@ export class QuizRubricComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(
       template,
-      Object.assign({}, { class: 'rubric-pops' })
+      Object.assign(
+        {},
+        {
+          class: 'rubric-pops',
+          backdrop: true,
+          ignoreBackdropClick: true
+        }
+      )
     );
+  }
+  closeModal(template: TemplateRef<any>) {
+    this.modalRef.hide();
+    this.newRubrique.points_rules = [];
+    this.newRubrique.points_rules.push(new PointsRules());
   }
 
   ngOnInit() {
@@ -51,8 +65,8 @@ export class QuizRubricComponent implements OnInit {
 
   getLengthOfQuizz(): void {
     this.arrayQuiz = Array.from(Array(this.quizLengthValue).keys(), n => n + 1);
-    this.arrayScore1 = Array.from(Array(50).keys(), n => n + 1);
-    this.arrayScore2 = Array.from(Array(50).keys(), n => n + 1);
+    this.arrayScore1 = Array.from(Array(this.scoreMax).keys(), n => n + 1);
+    this.arrayScore2 = Array.from(Array(this.scoreMax).keys(), n => n + 1);
   }
 
   addTo($event: any) {
@@ -62,16 +76,37 @@ export class QuizRubricComponent implements OnInit {
   activatePointRule(): void {
     this.newRubrique.activate_points_rules = !this.newRubrique
       .activate_points_rules;
-    this.newRubrique.points_rules.push(new PointsRules());
+    if (
+      this.newRubrique.points_rules &&
+      this.newRubrique.points_rules.length === 0
+    ) {
+      this.newRubrique.points_rules.push(new PointsRules());
+    }
   }
 
   onDeleteIndex(event: any): void {
-    console.log(event);
-    console.log(this.newRubrique.contents_rubriques);
     this.newRubrique.contents_rubriques.forEach((cr, index) => {
       if (index === event) {
         this.newRubrique.contents_rubriques.splice(index, 1);
+        this.newRubrique.contents_rubriques.length === 0
+          ? (this.newRubrique.contents_rubriques = [])
+          : (this.newRubrique.contents_rubriques = this.newRubrique.contents_rubriques);
       }
     });
+  }
+  changePoint(index, pointsRulesLength): void {
+    if (index + 1 === pointsRulesLength) {
+      this.newRubrique.points_rules.push(new PointsRules());
+    }
+  }
+  deletePointRule(index, pointsRules): void {
+    pointsRules.forEach((pr, i) => {
+      if (i === index) {
+        pointsRules.splice(index, 1);
+      }
+    });
+  }
+  pointRedirectionActive($event): void {
+    this.pointRedirectionActiveExist = $event;
   }
 }

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { QuizCudApplicatifServiceACI } from '.';
 import { QuizCudMetierServiceACI } from '../../service-metier/quiz-admin';
-import { QuizDto } from '../../donnee/quiz';
+import { QuizDto, QuizzPatch } from '../../donnee/quiz';
 
 @Injectable()
 export class QuizCudApplicatifService implements QuizCudApplicatifServiceACI {
@@ -20,5 +20,8 @@ export class QuizCudApplicatifService implements QuizCudApplicatifServiceACI {
   }
   public changeStatusQuiz(quizId: number): Observable<any> {
     return this.quizCudMetierService.changeStatusQuiz(quizId);
+  }
+  public finishQuizz(quizId: QuizzPatch): Observable<any> {
+    return this.quizCudMetierService.finishQuizz(quizId);
   }
 }

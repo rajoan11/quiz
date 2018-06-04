@@ -11,18 +11,25 @@
         "correct_answer": false,
         "name": "option 1",
         "poids": null,
-        "points": null,
-        "slug": ""
+        "points": 0,
+        "slug": "",
+        "action": {
+          "has_rule_direction": false,
+          "rubrique_target_poids": null
+        }
       }
     ],
     "is_mandatory": false,
+    "response_redirection": false,
+    "question_is_selected": "",
+    "is_response_redirection": true,
     "activate_vote": false,
     "constraint": "",
     "correction_explanation": "",
-    "description": "",
     "placeholder": "",
     "poids": "",
-    "with_validation_contrainte": false
+    "with_validation_contrainte": false,
+    "corection": false
   },
   {
     "id": 2,
@@ -36,18 +43,26 @@
         "correct_answer": false,
         "name": "option 1",
         "poids": null,
-        "points": null,
-        "slug": ""
+        "points": 0,
+        "slug": "",
+        "action": {
+          "has_rule_direction": false,
+          "rubrique_target_poids": null
+        }
       }
     ],
     "is_mandatory": false,
+    "response_redirection": false,
+    "question_is_selected": "",
+    "is_response_redirection": true,
     "activate_vote": false,
     "constraint": "",
     "correction_explanation": "",
     "description": "",
     "placeholder": "",
     "poids": "",
-    "with_validation_contrainte": false
+    "with_validation_contrainte": false,
+    "corection": false
   },
   {
     "id": 3,
@@ -58,13 +73,17 @@
     },
     "response_options": [],
     "is_mandatory": false,
+    "response_redirection": false,
+    "question_is_selected": "",
+    "is_response_redirection": true,
     "activate_vote": false,
-    "constraint": "",
+    "constraint": {},
     "correction_explanation": "",
     "description": "",
     "placeholder": "",
     "poids": "",
-    "with_validation_contrainte": false
+    "with_validation_contrainte": false,
+    "corection": false
   },
   {
     "id": 4,
@@ -75,13 +94,17 @@
     },
     "response_options": [],
     "is_mandatory": false,
+    "response_redirection": false,
+    "question_is_selected": "",
+    "is_response_redirection": true,
     "activate_vote": false,
     "constraint": "",
     "correction_explanation": "",
     "description": "",
     "placeholder": "",
     "poids": "",
-    "with_validation_contrainte": false
+    "with_validation_contrainte": false,
+    "corection": false
   },
   {
     "id": 5,
@@ -95,18 +118,26 @@
         "correct_answer": false,
         "name": "option 1",
         "poids": null,
-        "points": null,
-        "slug": ""
+        "points": 0,
+        "slug": "",
+        "action": {
+          "has_rule_direction": false,
+          "rubrique_target_poids": null
+        }
       }
     ],
     "is_mandatory": false,
+    "response_redirection": false,
+    "question_is_selected": "",
+    "is_response_redirection": true,
     "activate_vote": false,
     "constraint": "",
     "correction_explanation": "",
     "description": "",
     "placeholder": "",
     "poids": "",
-    "with_validation_contrainte": false
+    "with_validation_contrainte": false,
+    "corection": false
   },
   {
     "id": 6,
@@ -117,13 +148,17 @@
     },
     "response_options": [],
     "is_mandatory": false,
+    "response_redirection": false,
+    "question_is_selected": "",
+    "is_response_redirection": true,
     "activate_vote": false,
     "constraint": "",
     "correction_explanation": "",
     "description": "",
     "placeholder": "",
     "poids": "",
-    "with_validation_contrainte": false
+    "with_validation_contrainte": false,
+    "corection": false
   },
   {
     "id": 7,
@@ -134,13 +169,17 @@
     },
     "response_options": [],
     "is_mandatory": false,
+    "response_redirection": false,
+    "question_is_selected": "",
+    "is_response_redirection": true,
     "activate_vote": false,
     "constraint": "",
     "correction_explanation": "",
     "description": "",
     "placeholder": "",
     "poids": "",
-    "with_validation_contrainte": false
+    "with_validation_contrainte": false,
+    "corection": false
   },
   {
     "id": 8,
@@ -148,7 +187,8 @@
     "name": "Heure",
     "type_question": {
       "slug": "hour"
-    }
+    },
+    "corection": false
   },
   {
     "id": 9,
@@ -163,6 +203,7 @@
     "value": "image",
     "name": "images",
     "content": "",
+    "display": "full",
     "poids": "",
     "type": "image"
   },

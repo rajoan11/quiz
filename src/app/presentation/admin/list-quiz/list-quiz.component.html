@@ -167,13 +167,15 @@
           </pagination>
         </div>
       </div>
-    </div>
+
+      <div class="add-quizz hvr-float ">
+          <a [routerLink]="[ '/admin/create'] " routerLinkActive="router-link-active ">+</a>
+          <!-- <a (click)="openModalChoiceEnterprise(templateChoiceEnterprise)">+</a> -->
+        </div>
+    </div><!-- parent-pagination -->
 
 
-    <div class="add-quizz hvr-float ">
-      <a [routerLink]="[ '/admin/create'] " routerLinkActive="router-link-active ">+</a>
-      <!-- <a (click)="openModalChoiceEnterprise(templateChoiceEnterprise)">+</a> -->
-    </div>
+    
   </div>
   <ng-template #template>
     <div class="modal-body text-center ">

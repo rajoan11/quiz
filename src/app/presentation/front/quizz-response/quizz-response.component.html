@@ -1,114 +1,276 @@
 <header>
-    <div class="nav-front">
-        <div class="container">
-          <h1>Quizz - Lorem Ipsum</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.consequat.</p>
-        </div>
-      </div>
+  <div class="nav-front">
+    <div class="container">
+      <h1>Quizz - Lorem Ipsum</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+        aliqua.consequat.
+      </p>
+    </div>
+  </div>
 </header>
 <div class="front-rubrique">
   <div class="container">
     <div class="paginate-rubrique">
       <ul>
-        <li><em class="rubric-name">Rubrique name</em>  <span class="actived"></span></li>
-        <li><span class="active"></span></li>
-        <li><span></span></li>
-        <li><span></span></li>
-       <li><span></span></li> 
+        <li>
+          <em class="rubric-name">Rubrique name</em>
+          <span class="actived"></span>
+        </li>
+        <li>
+          <span class="active"></span>
+        </li>
+        <li>
+          <span></span>
+        </li>
+        <li>
+          <span></span>
+        </li>
+        <li>
+          <span></span>
+        </li>
       </ul>
     </div>
     <div class="order">
-        <p>
-          <a>Rubrique
-            <span>1</span> sur
-            <span>2</span>
-          </a>
-        </p>
-      </div>
-      <!-- images -->
-      <div class="contenu">
-        <img src="/assets/images/drop/1.jpg" alt="">
-      </div>
-      <!-- choix multiple -->
-      <div class="contenu">
-        <p class="title">Question (choix multiples)</p>
-        <mat-radio-group>
-          <mat-radio-button value="1"><span class="nb-400 padd">Réponse 1</span>  </mat-radio-button>
-          <mat-radio-button value="2"><span class="nb-400 padd">Réponse 1</span> </mat-radio-button>
-          <mat-radio-button value="3"><span class="nb-400 padd">Réponse 1</span> </mat-radio-button>
-        </mat-radio-group>
-      </div>
+      <p>
+        <a>Rubrique
+          <span>1</span> sur
+          <span>2</span>
+        </a>
+      </p>
+    </div>
+    <!-- images -->
+    <div class="contenu">
+      <img src="/assets/images/drop/1.jpg" alt="">
+    </div>
+    <!-- choix multiple -->
+    <div class="contenu">
+      <p class="title">Question (choix multiples)</p>
+      <mat-radio-group>
 
-      <!-- Case acocher -->
-      <div class="contenu">
-          <p class="title">Question (cases à cocher)</p>
-          <mat-radio-group>
-            <mat-checkbox><span class="nb-400 padd">Réponse 1</span> </mat-checkbox>
-            <mat-checkbox><span class="nb-400 padd">Réponse 2</span> </mat-checkbox>
-            <mat-checkbox><span class="nb-400 padd">Réponse 3</span> </mat-checkbox>
-          </mat-radio-group>
-        </div>
+        <mat-radio-button value="1">
+          <span class="nb-400 padd">Réponse 1</span>
+        </mat-radio-button>
+        <mat-radio-button value="2">
+          <span class="nb-400 padd">Réponse 1</span>
+        </mat-radio-button>
+        <mat-radio-button value="3">
+          <span class="nb-400 padd">Réponse 1</span>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
 
-      <!-- video -->
-      <div class="contenu">
-          <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
-            </div>
-        </div>
+    <!-- Case acocher -->
+    <div class="contenu">
+      <p class="title">Question (cases à cocher)</p>
+      <mat-radio-group>
+        <mat-checkbox>
+          <span class="nb-400 padd">Réponse 1</span>
+        </mat-checkbox>
+        <mat-checkbox>
+          <span class="nb-400 padd">Réponse 2</span>
+        </mat-checkbox>
+        <mat-checkbox>
+          <span class="nb-400 padd">Réponse 3</span>
+        </mat-checkbox>
+      </mat-radio-group>
+    </div>
 
-      <!-- question court -->
-      <div class="contenu">
-          <p class="title">Question (réponse courte)</p>
-          <div class="myrow">
-              <mat-form-field class="example-full-width">
-                  <textarea matInput placeholder="votre reponse"></textarea>
-                </mat-form-field>
-          </div>  
+    <!-- video -->
+    <div class="contenu">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
       </div>
-      <!-- Question (échelle linéaire)  -->
-      <div class="contenu">
-          <p class="title">Question (échelle linéaire)</p>
-          <div class="myrow progress">
-            <ul>
-              <li><span class="rond"></span> <i>1</i></li>
-              <li><span class="rond"></span> <i>2</i></li>
-              <li><span class="rond"></span><i>3</i></li>
-              <li><span class="rond"></span><i>4</i></li>
-              <li><span class="rond"></span><i>5</i></li>
-              <li><span class="rond"></span><i>6</i></li>
-            </ul>
-              <mat-slider></mat-slider>
-          </div>  
-      </div>
+    </div>
 
-      <!-- Date  -->
-      <div class="contenu">
-          <p class="title">Question (date)</p>
-          <div class="myrow date">
-            <!-- <mat-form-field>
-              <input matInput [matDatepicker]="dp2" placeholder="Jour/Mois/Année">
-              <mat-datepicker-toggle matSuffix [for]="dp2" disabled></mat-datepicker-toggle>
-              <mat-datepicker #dp2></mat-datepicker>
-            </mat-form-field> -->
-            <mat-form-field class="example-full-width">
-                <input matInput type="date" placeholder="Jour/Mois/Année" value="Sushi">
-              </mat-form-field>
-          </div>  
+    <!-- question court -->
+    <div class="contenu">
+      <p class="title">Question (réponse courte)</p>
+      <div class="myrow textarea">
+        <mat-form-field class="example-full-width">
+          <textarea matInput placeholder="votre reponse"></textarea>
+        </mat-form-field>
       </div>
+    </div>
+    <!-- Question (échelle linéaire)  -->
+    <div class="contenu">
+      <p class="title">Question (échelle linéaire)</p>
+      <div class="myrow progress">
+        <ul>
+          <li>
+            <span class="rond"></span>
+            <i>1</i>
+          </li>
+          <li>
+            <span class="rond"></span>
+            <i>2</i>
+          </li>
+          <li>
+            <span class="rond"></span>
+            <i>3</i>
+          </li>
+          <li>
+            <span class="rond"></span>
+            <i>4</i>
+          </li>
+          <li>
+            <span class="rond"></span>
+            <i>5</i>
+          </li>
+          <li>
+            <span class="rond"></span>
+            <i>6</i>
+          </li>
+        </ul>
+        <mat-slider></mat-slider>
+      </div>
+    </div>
 
-      <!-- Date  -->
-      <div class="contenu">
-          <p class="title">Question (heure)</p>
-          <div class="myrow date">
-              <mat-form-field class="example-full-width">
-                  <input matInput type="time" placeholder="Favorite food" value="Sushi">
-                </mat-form-field>
-          </div>  
+    <!-- Date  -->
+    <div class="contenu">
+      <p class="title">Question (date)</p>
+      <div class="myrow date">
+        <mat-form-field class="example-full-width">
+          <input matInput type="date" placeholder="Jour/Mois/Année" value="Sushi">
+        </mat-form-field>
       </div>
- </div>  <!-- fin container -->
- <div class="new-page">
-   <p class="retoure">Retoure</p>
-   <p class="suivant">suivant</p>
- </div>
+    </div>
+
+    <!-- time  -->
+    <div class="contenu">
+      <p class="title">Question (heure)</p>
+      <div class="myrow date">
+        <mat-form-field class="example-full-width">
+          <input matInput type="time" placeholder="Favorite food" value="Sushi">
+        </mat-form-field>
+      </div>
+    </div>
+    <!-- reponse longue  -->
+    <div class="contenu">
+      <p class="title">Question (réponse longue)</p>
+      <div class="myrow ">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="réponse longue" value="">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- reponse court  -->
+    <div class="contenu">
+      <p class="title">Question (réponse courte)</p>
+      <div class="myrow date">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="réponse courte" value="">
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <!-- liste déroulante  -->
+    <div class="contenu">
+      <p class="title">Question (liste déroulante)</p>
+      <div class="myrow date">
+        <mat-form-field class="border-none-color">
+          <mat-select placeholder="Favorite food" class="border-none-color">
+            <mat-option *ngFor="let food of ['foods']" [value]="food">
+              {{ food }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="obligatoire">Obligatoire</div>
+    </div>
+
+
+  </div>
+  <!-- fin container -->
+
+  <!-- voire correction -->
+  <div class="contenu-header">
+    <div class="container">
+      <h1 class="title">Merci d’avoir
+        <br class="bloc" />répondu au quizz !
+        <br/>
+        <small>Votre score final est de 0/8.</small>
+      </h1>
+      <p>Vous pouvez consultez le détail de vos points et la correction en cliquant ci-dessous :</p>
+      <button class="btn btn-one">Voir la correction</button>
+    </div>
+  </div>
+
+
+   <!-- choix multiple voire correction -->
+   <div class="contenu correction">
+    <span class="mon-point">1/2 points</span>
+    <p class="title">Question (choix multiples)</p>
+    <mat-radio-group>
+
+      <mat-radio-button value="1">
+        <span class="nb-400 padd green">Réponse 1</span>
+        <i class="after-question">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+          </svg>
+        </i>
+      </mat-radio-button>
+      <mat-radio-button value="2">
+        <span class="nb-400 padd green">Réponse 1</span>
+        <i class="after-question">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+          </svg>
+        </i>
+      </mat-radio-button>
+      <mat-radio-button value="3">
+        <span class="nb-400 padd red">Réponse 1</span>
+        <i class="after-question">
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#D0021B" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"/>
+          </svg> -->
+        </i>
+      </mat-radio-button>
+    </mat-radio-group>
+    <div class="explicatif">
+      <p><span class="color">Explicatif</span><br/> 
+        Lorem ipsum dolor sit amet,
+        consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+  </div>
+
+  <!-- Case acocher correction -->
+  <div class="contenu correction">
+      <p class="title">Question (cases à cocher)</p>
+      <mat-radio-group>
+        <mat-checkbox>
+          <span class="nb-400 padd green">Réponse 1</span>
+          <i class="after-question">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg>
+          </i>
+        </mat-checkbox>
+        <mat-checkbox>
+          <span class="nb-400 padd red">Réponse 2</span>
+          <i class="after-question">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="#D0021B" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"/>
+            </svg>
+          </i>
+        </mat-checkbox>
+        
+        <mat-checkbox>
+          <span class="nb-400 padd">Réponse 3</span>
+          <i class="after-question">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg>
+          </i>
+        </mat-checkbox>
+      </mat-radio-group>
+    </div>
+
+ 
+  <div class="new-page">
+    <p class="retoure">Retoure</p>
+    <p class="suivant">suivant</p>
+  </div>
 </div>

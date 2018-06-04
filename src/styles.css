@@ -46,45 +46,45 @@
 @font-face {
   font-family: 'muli';
   src: url('assets/fonts/muli-bold-webfont.woff2') format('woff2'),
-       url('assets/fonts/muli-bold-webfont.woff') format('woff');
+    url('assets/fonts/muli-bold-webfont.woff') format('woff');
   font-weight: 700;
   font-style: normal;
-
 }
-
 
 @font-face {
   font-family: 'muli';
   src: url('assets/fonts/muli-webfont.woff2') format('woff2'),
-       url('assets/fonts/muli-webfont.woff') format('woff');
+    url('assets/fonts/muli-webfont.woff') format('woff');
   font-weight: 400;
   font-style: normal;
-
 }
-
-
-
 
 @font-face {
   font-family: 'muli';
   src: url('assets/fonts/muli-light-webfont.woff2') format('woff2'),
-       url('assets/fonts/muli-light-webfont.woff') format('woff');
+    url('assets/fonts/muli-light-webfont.woff') format('woff');
   font-weight: 200;
   font-style: normal;
-
 }
-
-
-
 
 @font-face {
   font-family: 'muli';
   src: url('assets/fonts/muli-semibold-webfont.woff2') format('woff2'),
-       url('assets/fonts/muli-semibold-webfont.woff') format('woff');
+    url('assets/fonts/muli-semibold-webfont.woff') format('woff');
   font-weight: 600;
   font-style: normal;
-
 }
+
+/* ROBOTO */
+
+@font-face {
+  font-family: 'roboto';
+  src: url('assets/fonts/roboto-regular-webfont.woff2') format('woff2'),
+    url('assets/fonts/roboto-regular-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
 
 body {
   margin: 0;
@@ -93,13 +93,13 @@ body {
   color: #4a4a4a;
 }
 
-.mat-input-element{
+.mat-input-element {
   color: #4a4a4a;
 }
 
-  body .container {
-      max-width: 1024px!important;
-    }
+body .container {
+  max-width: 1024px !important;
+}
 
 li,
 p,
@@ -121,7 +121,10 @@ ol {
 .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
   background-color: #fc6100 !important;
 }
-.bg-quizz {
+.bg-quizz,
+.mat-accent .mat-slider-thumb,
+.mat-accent .mat-slider-thumb-label,
+.mat-accent .mat-slider-track-fill {
   background-color: #fc6100;
 }
 /* BOUTTON
@@ -131,7 +134,7 @@ body .btn-quizz {
   outline: none;
   font-size: 15px;
   font-weight: 600;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   padding: 10px 50px;
   margin: 5px 20px;
   text-align: center;
@@ -142,18 +145,18 @@ body .btn-quizz {
   font-weight: 400;
   cursor: pointer;
 }
-body .btn-quizz.valide{
+body .btn-quizz.valide {
   background-color: #fc6100;
   border-color: #fc6100;
   color: #fff;
   outline: none;
 }
 body .btn-quizz.valide:hover,
-body .btn-quizz.valide:focus{
+body .btn-quizz.valide:focus {
   background: linear-gradient(#f96000, #ff8e47);
   border-color: #ff8e47;
 }
-body .btn-quizz.non-valide{
+body .btn-quizz.non-valide {
   color: #fc6100;
   background-color: #fff;
 }
@@ -191,14 +194,31 @@ body .btn-primary {
   outline: none;
 }
 body .btn-primary:hover,
-body .btn-primary:focus {
+body .btn-primary:focus,
+.contenu-header button:hover,
+.contenu-header button:focus {
   background: linear-gradient(#f96000, #ff8e47);
   border-color: #ff8e47;
 }
+.retour-class .pad-right mat-form-field {
+  margin-left: 15px;
+}
 
-
-body .color{
-  color: #fc6100!important;
+body .color {
+  color: #fc6100 !important;
+}
+.l-deroulant ol li .absolute {
+  position: absolute;
+  top: -3px;
+  left: 106px;
+  background: #fff;
+  padding: 5px;
+  cursor: pointer !important;
+  transition: 0.3s;
+}
+.l-deroulant ol li .absolute:hover {
+  color: #fc6100;
+  font-weight: 600;
 }
 
 /* FIN */
@@ -206,7 +226,6 @@ body .color{
 &&&&&&&&&&&&&&&&&&&&*/
 .modal-content {
   position: relative;
-
 }
 .modal-content .close {
   position: absolute;
@@ -378,6 +397,10 @@ body .color{
 .mat-select-arrow-wrapper {
   width: 30px;
 }
+
+.contenu .mat-select-arrow {
+  border-top-color: inherit;
+}
 /* Responsive header quizz
 ************************** */
 @media (max-width: 992px) {
@@ -385,8 +408,6 @@ body .color{
     padding-right: 0 15px;
   }
 }
-
-
 
 /*Fquizz-table
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
@@ -496,14 +517,17 @@ body .color{
 .-vertical .ng-scrollbar-thumb {
   background-color: #9ba7b5 !important;
 }
+.parent-pagination {
+  position: relative;
+}
 .add-quizz {
   float: right;
   width: 80px;
   height: 80px;
   display: block !important;
   background: #fc6100;
-  position: fixed;
-  bottom: 88px;
+  position: absolute;
+  bottom: 0px;
   right: 30px;
   border-radius: 50%;
   margin: 15px;
@@ -528,6 +552,28 @@ body .color{
 .mat-select-trigger {
   width: 100px;
 }
+.mat-menu-xx.mat-menu-panel {
+  max-width: 450px !important;
+}
+.mat-menu-xx .mat-menu-content button {
+  padding-right: 60px;
+  position: relative;
+  height: 36px;
+  line-height: 36px;
+}
+.mat-menu-xx .mat-menu-content button > .svg {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+}
+.txt {
+  width: 100%;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 400;
+  color: #000;
+  font-family: roboto;
+}
 
 /* .ng-scrollbar-container{
     overflow: scroll!important;
@@ -550,24 +596,23 @@ body .color{
   font-weight: 600 !important;
 }
 
-
 #creation-quizz .mat-expansion-indicator::after {
-    content: '';
-    display: inline-block;
-    transform: rotate(90deg);
-    vertical-align: middle;
-    /* border-color: #0000 #0000 #0000 #fc6100; */
-    border-style: solid;
-    border-width: 6px;
-    margin-top: -4px;
-    padding: 0;
-    border-top-color: #0000;
-    border-right-color: #0000;
-    border-bottom-color: #0000;
-    border-left-color:inherit;
+  content: '';
+  display: inline-block;
+  transform: rotate(90deg);
+  vertical-align: middle;
+  /* border-color: #0000 #0000 #0000 #fc6100; */
+  border-style: solid;
+  border-width: 6px;
+  margin-top: -4px;
+  padding: 0;
+  border-top-color: #0000;
+  border-right-color: #0000;
+  border-bottom-color: #0000;
+  border-left-color: inherit;
 }
-#creation-quizz .mat-expansion-indicator{
-    border-left-color:inherit;
+#creation-quizz .mat-expansion-indicator {
+  border-left-color: inherit;
 }
 .prent-content-drop {
   box-shadow: 0 5px 14px 0 rgba(166, 166, 166, 0.4);
@@ -629,9 +674,9 @@ body .color{
 }
 .modal-content {
   padding: 25px 15px;
-  border-radius: 10px!important;
-  box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.27)!important;
-  border: none!important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.27) !important;
+  border: none !important;
 }
 
 .pagination {
@@ -698,6 +743,13 @@ body .color{
   .pagination > li:last-child > span {
     display: table;
     float: none;
+  }
+  .cdk-overlay-pane{
+    left: 0!important;
+    right: 0!important;
+  }
+  .mat-menu-xx.mat-menu-panel {
+    margin: auto;
   }
 }
 .content-drop {
@@ -824,6 +876,10 @@ body .color{
   margin-bottom: 15px;
   height: 38px;
 }
+.form-quizz .textarea .mat-form-field {
+  min-height: 38px;
+  height: auto;
+}
 .form-quizz .q-child .mat-form-field-type-mat-select .mat-form-field-underline {
   display: none;
 }
@@ -865,6 +921,9 @@ body .color{
   width: 100%;
   margin: 40px auto;
 }
+.border-none-color .mat-select-arrow {
+  border-top-color: #fc6100;
+}
 #attachement {
   opacity: 1;
   display: table;
@@ -878,8 +937,8 @@ body .color{
 #quetsion li > a,
 #attachement li > a,
 li.list-group-item,
-.ng-star-inserted>li{
-  cursor: move!important;
+.ng-star-inserted > li {
+  cursor: move !important;
 }
 .relative app-quiz-question {
   position: fixed;
@@ -926,7 +985,6 @@ li.list-group-item,
   z-index: 9999 !important;
 }
 
-
 .list-autocomplete {
   margin-bottom: 15px;
   padding-bottom: 15px;
@@ -949,16 +1007,16 @@ li.list-group-item,
   position: relative;
   padding-right: 20px;
 }
-.list-selected .ng-star-inserted>span{
+.list-selected .ng-star-inserted > span {
   color: #fff;
   font-size: 12px;
 }
-.list-selected .ng-star-inserted>span.close{
+.list-selected .ng-star-inserted > span.close {
   position: absolute;
   right: -5px;
   top: -3px;
   font-size: 14px;
-  color: #929292!important;
+  color: #929292 !important;
   background: #fff;
   opacity: 1;
   border: none;
@@ -972,35 +1030,35 @@ li.list-group-item,
 
 /* MODALE NBR RUBRIQUE */
 
-.rubric-pops .modal-content h3, 
-.rubric-pops .modal-content .modal-title{
+.rubric-pops .modal-content h3,
+.rubric-pops .modal-content .modal-title {
   font-family: inherit;
   font-size: 23px;
   font-weight: 700;
 }
-.rubric-pops .modal-content{
+.rubric-pops .modal-content {
   border: none;
-  border-left: 5px #f96000 solid!important;
-  border-radius: 10px!important;
+  border-left: 5px #f96000 solid !important;
+  border-radius: 10px !important;
   background-color: #ffffff;
   box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.27);
 }
 
-.rubric-pops .modal-content .modal-title + p{
-    font-size: 12px;
-    font-weight: 300;
+.rubric-pops .modal-content .modal-title + p {
+  font-size: 12px;
+  font-weight: 300;
 }
-.rubric-pops .modal-body .pad{
+.rubric-pops .modal-body .pad {
   padding: 15px 15%;
 }
-.rubric-pops .modal-body table td{
-    padding: 0 3px;
-    font-size: 13px;
-    text-align: left;
+.rubric-pops .modal-body table td {
+  padding: 0 3px;
+  font-size: 13px;
+  text-align: left;
 }
 body .modal-content .close,
 body .rubric-pops .modal-body .close,
-body .modal close{
+body .modal close {
   text-align: center;
   width: 32px;
   padding: 0;
@@ -1011,34 +1069,34 @@ body .modal close{
   border-radius: 0;
   box-shadow: none;
 }
-body .modal-content .close{
+body .modal-content .close {
   top: 10px;
   right: 15px;
 }
-body .modal-content .close:focus{
+body .modal-content .close:focus {
   outline: none;
 }
-body .rubric-pops .modal-body .close{
+body .rubric-pops .modal-body .close {
   top: 0;
   right: 0;
 }
-.rubric-pops .modal-body table td>span{
+.rubric-pops .modal-body table td > span {
   padding: 0 5px;
 }
-.rubric-pops .modal-body table td>span.mask{
- opacity: 0.7;
+.rubric-pops .modal-body table td > span.mask {
+  opacity: 0.7;
 }
-.rubric-pops .modal-body table td .close{
+.rubric-pops .modal-body table td .close {
   top: 0;
-  left:-15px;
+  left: -15px;
   text-align: center;
   width: 25px;
   padding: 0;
 }
-.rubric-pops .modal-body table td.relative{
+.rubric-pops .modal-body table td.relative {
   position: relative;
 }
-.rubric-pops .modal-body p{
+.rubric-pops .modal-body p {
   font-family: FiraSans;
   font-size: 16px;
   font-weight: 200;
@@ -1046,10 +1104,10 @@ body .rubric-pops .modal-body .close{
 }
 
 .rubric-pops .modal-header,
-.rubric-pops .modal-footer{
+.rubric-pops .modal-footer {
   border: none;
 }
-.rubric-pops .modal-footer button{
+.rubric-pops .modal-footer button {
   text-transform: uppercase;
   font-size: 12px;
 }
@@ -1058,93 +1116,93 @@ body .rubric-pops .modal-body .close{
   padding: 5px 5px 25px;
   margin: auto;
 }
-.rubric-pops .mat-form-field-label{
+.rubric-pops .mat-form-field-label {
   color: #4a4a4a;
   font-weight: 600;
 }
 
-
-.rubric-pops .modal-body .group-selection.flou td .mat-form-field{
+.rubric-pops .modal-body .group-selection.flou td .mat-form-field {
   width: 100%;
 }
-.group-selection.flou{
+.group-selection.flou {
   opacity: 0.7;
 }
 .modal-backdrop.in {
   background: #ffffffa8;
 }
-.modal-open>app-root{
-    filter: blur(6px);
-    display: table;
-    width: 100%;
+.modal-open > app-root {
+  filter: blur(6px);
+  display: table;
+  width: 100%;
 }
-.group-selection{
+.group-selection {
   display: table;
   width: 100%;
   margin-bottom: 40px;
 }
-.group-selection>table:first-child{
+.group-selection > table:first-child {
   width: 60%;
 }
-.group-selection>table:last-child{
+.group-selection > table:last-child {
   width: 40%;
 }
-.w100{
-  width: 100%!important;
+.w100 {
+  width: 100% !important;
 }
-body .ng-star-inserted{
-  cursor: default!important;
+body .ng-star-inserted {
+  cursor: default !important;
 }
-.echell-select{
+.echell-select {
   padding: 25px 0px;
   display: table;
   width: 100%;
 }
-.echell-select p{
+.echell-select p {
   color: #727272;
   font-size: 16px;
   font-weight: 200;
 }
 .mat-option-text,
-.mat-input-element{
+.mat-input-element {
   color: inherit;
 }
 .echell-select .mat-form-field-label,
-.echell-select .mat-option-text{
+.echell-select .mat-option-text {
   color: rgba(0, 0, 0, 1);
 }
 /* HOURS */
 .form-quizz .hours .mat-form-field,
-.form-quizz .hours .absolute{
+.form-quizz .hours .absolute {
   float: left;
 }
 
-.form-quizz .hours .absolute{
+.form-quizz .hours .absolute {
   position: relative;
   display: inline-block;
   top: 7px;
   right: 18px;
   float: left;
 }
-.mat-form-field-prefix .mat-datepicker-toggle-default-icon, .mat-form-field-suffix .mat-datepicker-toggle-default-icon{
-  width: auto!important;
+.mat-form-field-prefix .mat-datepicker-toggle-default-icon,
+.mat-form-field-suffix .mat-datepicker-toggle-default-icon {
+  width: auto !important;
 }
-body .fin-quizz label{
-  font-weight: 200!important;
+body .fin-quizz label {
+  font-weight: 200 !important;
 }
-body .nbr-limite .mat-input-underline.mat-form-field-underline{
+body .nbr-limite .mat-input-underline.mat-form-field-underline {
   display: none;
 }
-.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
-  border-color: #f96922;
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #fc6100;
 }
-.mat-radio-button.mat-accent .mat-radio-inner-circle{
-  background-color: #f96922;;
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: #fc6100;
 }
-.nb-400{
+.nb-400 {
   font-weight: normal;
 }
-.order p{
+.order p {
   margin: 0;
   top: -32px;
   position: absolute;
@@ -1153,7 +1211,7 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline{
   display: inline-block;
   width: 100%;
 }
-.order .pops{
+.order .pops {
   position: absolute;
   right: -25px;
   top: -4px;
@@ -1162,13 +1220,13 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline{
   background: url(/assets/images/pops.png) no-repeat center;
   cursor: pointer;
 }
-.order p>a{
+.order p > a {
   color: #fff;
   text-decoration: none;
-} 
+}
 
-.order{
-  vertical-align: middle!important;
+.order {
+  vertical-align: middle !important;
   border-color: #fc6100;
   border-width: 40px 29px 0 0;
   border-style: solid;
@@ -1177,11 +1235,11 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline{
   display: inline-block;
   height: 40px;
   position: relative;
-  border-left-color: #0000!important;
-  border-bottom-color: #0000!important;
-  border-right-color: #0000!important;
+  border-left-color: #0000 !important;
+  border-bottom-color: #0000 !important;
+  border-right-color: #0000 !important;
 }
-.order .order-option{
+.order .order-option {
   position: absolute;
   width: 48px;
   height: 24px;
@@ -1191,7 +1249,7 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline{
   cursor: pointer;
   background-size: 25px 7px;
 }
-.order-name{
+.order-name {
   padding: 8px 15px;
   background: #fff;
   width: 100%;
@@ -1199,27 +1257,27 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline{
   box-shadow: 1px 1px 7px #ccc;
   border-radius: 0;
 }
-.order-name{
+.order-name {
   font-size: 16px;
   font-family: firasans;
   color: #4a4a4a;
   margin-bottom: 28px;
 }
-.order-name input{
+.order-name input {
   border: none;
   width: 100%;
 }
-.order-name input:focus{
+.order-name input:focus {
   outline: none;
 }
 
 /* FRONT
 &&&&&&&&&&& */
-.new-page{
+.new-page {
   display: table;
   width: 100%;
 }
-.new-page p{
+.new-page p {
   display: table-cell;
   height: 40px;
   vertical-align: middle;
@@ -1231,9 +1289,9 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline{
   cursor: pointer;
   position: relative;
 }
-.new-page p:before{
+.new-page p:before {
   position: absolute;
-  content: "";
+  content: '';
   width: 17px;
   height: 12px;
   display: block;
@@ -1243,26 +1301,26 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline{
   top: 14px;
 }
 
-.new-page p.retoure:before{
+.new-page p.retoure:before {
   transform: rotate(180deg);
   left: 17px;
 }
-.new-page p.suivant:hover{
+.new-page p.suivant:hover {
   background: linear-gradient(#f96000, #ff8e47);
 }
-.new-page p.retoure:hover{
+.new-page p.retoure:hover {
   background: linear-gradient(#9b9b9b, #c7c7c7);
 }
-.new-page p.retoure{
+.new-page p.retoure {
   width: 50%;
   background-color: #9b9b9b;
 }
-.new-page p.suivant{
+.new-page p.suivant {
   text-align: right;
   background-color: #fc6100;
 }
 
-.paginate-rubrique ul{
+.paginate-rubrique ul {
   text-align: center;
 }
 .paginate-rubrique ul li {
@@ -1271,7 +1329,7 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline{
   width: 64px;
   position: relative;
 }
-.paginate-rubrique ul li>span{
+.paginate-rubrique ul li > span {
   width: 14px;
   height: 14px;
   border-radius: 50%;
@@ -1281,9 +1339,9 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline{
   cursor: pointer;
   border-color: #f96922;
 }
-.paginate-rubrique ul li>span:before{
+.paginate-rubrique ul li > span:before {
   position: absolute;
-  content: "";
+  content: '';
   width: 22px;
   height: 22px;
   border-width: 1px;
@@ -1294,21 +1352,21 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline{
   display: block;
   border-radius: 50%;
   display: none;
-  transition:0.3s;
+  transition: 0.3s;
 }
-.paginate-rubrique ul li>span:hover:before,
-.paginate-rubrique ul li>span.active:before{
+.paginate-rubrique ul li > span:hover:before,
+.paginate-rubrique ul li > span.active:before {
   display: block;
 }
-.paginate-rubrique ul li>span:hover,
-.paginate-rubrique ul li>span.actived,
-.paginate-rubrique ul li>span.active{
+.paginate-rubrique ul li > span:hover,
+.paginate-rubrique ul li > span.actived,
+.paginate-rubrique ul li > span.active {
   background-color: #f96922;
 }
 
-.paginate-rubrique ul li:before{
+.paginate-rubrique ul li:before {
   position: absolute;
-  content: "";
+  content: '';
   width: 33px;
   height: 1px;
   background-color: #9b9b9b;
@@ -1318,10 +1376,10 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline{
   opacity: 0.4;
   overflow: hidden;
 }
-.paginate-rubrique ul li:last-child:before{
+.paginate-rubrique ul li:last-child:before {
   display: none;
 }
-.paginate-rubrique ul li:last-child{
+.paginate-rubrique ul li:last-child {
   width: 25px;
 }
 .front-rubrique .contenu {
@@ -1333,22 +1391,85 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline{
   margin-bottom: 20px;
   float: none;
 }
-.front-rubrique .contenu:last-child{
+.front-rubrique .contenu:last-child {
   margin-bottom: 40px;
 }
 .front-rubrique .contenu img {
   width: 100%;
 }
-.front-rubrique .contenu mat-radio-group>mat-radio-button,
-.front-rubrique .contenu mat-radio-group>mat-checkbox{
- display:block; 
- margin-bottom: 14px;
- font-family: Muli;
- font-size: 16px;
- color: #4f5e65;
+.front-rubrique .contenu mat-radio-group > mat-radio-button,
+.front-rubrique .contenu mat-radio-group > mat-checkbox {
+  display: block;
+  margin-bottom: 14px;
+  font-family: Muli;
+  font-size: 16px;
+  color: #4f5e65;
 }
 
+.correction .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.correction .mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: #0000008a !important;
+}
+.correction
+  .mat-radio-button.mat-accent.mat-radio-checked
+  .mat-radio-outer-circle {
+  border-color: #0000008a;
+}
+.correction .mat-checkbox-frame,
+.correction .mat-radio-outer-circle {
+  border-width: 1px;
+  opacity: 0.5;
+}
+.correction .mat-checkbox-checked .mat-checkbox-frame {
+  border: none;
+}
+.multiple ol li mat-checkbox .mat-checkbox-frame {
+  border-radius: 50%;
+}
+.multiple ol li mat-checkbox.mat-checkbox-checked .mat-checkbox-frame {
+  border-color: #f96000;
+}
+.multiple .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  left: 5px;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  font-size: 0px;
+  top: 5px;
+}
+.multiple .mat-checkbox-checked .mat-checkbox-checkmark {
+  opacity: 0;
+  display: none;
+  width: 0px;
+  height: 0px;
+}
+.multiple mat-checkbox svg:not(:root) {
+  display: none;
+}
+.multiple mat-checkbox .mat-checkbox-background {
+  transition: none;
+}
 
+/* .multiple .no-border .mat-select-arrow-wrapper {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #fafafa;
+  opacity: 1;
+}
+.multiple .mat-select-arrow{
+  margin: 8px 11px 4px;
+}
+.multiple .pad-21 .mat-form-field {
+  padding-right: 8px;
+} */
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: inherit !important;
+}
+.relative app-quiz-question>.resp-menu{
+  display: none;
+}
 /* RESPMONSIVE
 &&&&&&&&&&&&&&&& */
 @media (max-width: 768px) {
@@ -1374,36 +1495,37 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline{
   .form-quizz .mat-form-field {
     max-width: 100% !important;
     width: 100% !important;
-    display: block!important;
-    clear: both !important; float: none!important;
+    display: block !important;
+    clear: both !important;
+    float: none !important;
     margin-bottom: 20px;
   }
-  .wto-50 > mat-form-field + .inline{
+  .wto-50 > mat-form-field + .inline {
     margin-bottom: 15px;
-    display: block!important;
-    width: 100%!important;
+    display: block !important;
+    width: 100% !important;
   }
   body .form-quizz .hours .absolute {
-      position: absolute;
-      right: 15px;
-      top: 9px;
+    position: absolute;
+    right: 15px;
+    top: 9px;
   }
   .echell-select {
     padding: 25px 8%;
   }
 
-  .order{
-    max-width: 100%;;
+  .order {
+    max-width: 100%;
   }
-  .modal-dialog.rubric-pops{
+  .modal-dialog.rubric-pops {
     max-width: 360px;
-    width: 100%!important;
+    width: 100% !important;
     margin: auto;
   }
-  .group-selection>table:first-child,
-  .group-selection>table:last-child {
-    width: 100%!important;
-    float: none!important;
+  .group-selection > table:first-child,
+  .group-selection > table:last-child {
+    width: 100% !important;
+    float: none !important;
     margin-bottom: 25px;
   }
   .rubric-pops .modal-footer button {
@@ -1412,27 +1534,51 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline{
     width: 100%;
     margin: 15px 0;
   }
-  .rubric-pops .modal-footer button:focus{
+  .rubric-pops .modal-footer button:focus {
     outline: none;
   }
   .rubric-pops .modal-body .pad {
     padding: 15px 0;
   }
-  .rubric-pops .modal-body table td>.mat-form-field{
+  .rubric-pops .modal-body table td > .mat-form-field {
     width: 100%;
   }
-  .rubric-pops .modal-body table td.w30{
+  .rubric-pops .modal-body table td.w30 {
     width: 30%;
   }
-  .paginate-rubrique ul li{
-    width:50px;
+  .paginate-rubrique ul li {
+    width: 50px;
   }
-  .paginate-rubrique ul li:before{
+  .paginate-rubrique ul li:before {
     width: 30px;
     left: 24px;
   }
   .nav-front {
     padding: 45px 20px;
   }
-}
 
+  .mat-menu-xx.mat-menu-panel {
+    max-width: 300px !important;
+  }
+  .relative app-quiz-question>.resp-menu{
+    display: block;
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    z-index: 100;
+    left: -45px;
+    transition:0.3s;
+    box-shadow:-9px -3px 22px #d8d8d8;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    top: 0;
+    padding: 5px;
+    background: #fff;
+  }
+  .relative app-quiz-question>.resp-menu{
+    display: block;
+  }
+  .creation-quizz .liste > .liste2 > li.open > .dropdown-menu{
+    left: 0!important;
+  }
+}

@@ -13,8 +13,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { ColorPickerModule } from 'ngx-color-picker';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatSliderModule} from '@angular/material/slider';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { MatMenuModule } from '@angular/material/menu';
+
+import { DragulaModule } from 'ng2-dragula';
 
 import {
   MatSortModule,
@@ -54,7 +59,11 @@ import { CommunModule } from '../../../commun/commun.module';
     ColorPickerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSliderModule
+    MatSliderModule,
+    MatTooltipModule,
+    ProgressbarModule.forRoot(),
+    MatMenuModule,
+    DragulaModule
   ],
   declarations: [],
   exports: [
@@ -81,7 +90,11 @@ import { CommunModule } from '../../../commun/commun.module';
     ColorPickerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSliderModule
+    MatSliderModule,
+    MatTooltipModule,
+    ProgressbarModule,
+    MatMenuModule,
+    DragulaModule
   ]
 })
 export class SharedModule {}

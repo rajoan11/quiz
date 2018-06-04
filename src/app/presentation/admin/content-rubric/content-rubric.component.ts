@@ -109,11 +109,20 @@ export class ContentRubricComponent implements OnInit {
         const data = {
           filename: file.name,
           filetype: file.type,
-          value: reader.result
+          value: reader.result.split(',')[1]
         };
         contentQuiz.content = data.value;
         console.log(data);
       });
+    }
+  }
+
+  displayImage(url: string) {
+    const base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+    if (base64regex.test(url)) {
+      return `data:image/jpeg;base64,${url}`;
+    } else {
+      return `${url}`;
     }
   }
 

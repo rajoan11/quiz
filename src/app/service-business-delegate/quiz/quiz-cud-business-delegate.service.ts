@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { QuizCudBusinessDelegateServiceACI } from '.';
 import { environment } from '../../../environments/environment';
+import { QuizzPatch } from '../../donnee/quiz';
 
 @Injectable()
 export class QuizCudBusinessDelegateService
@@ -17,6 +18,10 @@ export class QuizCudBusinessDelegateService
   createQuiz(quiz: any) {
     const url = `${environment.apiUrl}/admin/form`;
     return this.http.post<any>(url, quiz);
+  }
+  finishQuizz(quiz: QuizzPatch) {
+    const url = `${environment.apiUrl}/admin/form/${quiz.id}/parameter`;
+    return this.http.patch<any>(url, quiz);
   }
   updateQuiz(quiz: any) {
     throw new Error('Method not implemented.');

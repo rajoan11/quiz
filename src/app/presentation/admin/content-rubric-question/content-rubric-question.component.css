@@ -16,14 +16,15 @@ h3,
 }
 .type-contenu {
   width: 32%;
-  float: right;
-  position: relative;
+  position: absolute;
   height: 40px;
   background-color: #0003;
   padding: 11px;
   padding-left: 2%;
   color: #fff;
   font-size: 18px;
+  top: 0;
+  right: 0;
 }
 .type-contenu.text {
   padding-left: 2%;
@@ -39,10 +40,15 @@ h3,
   left: 14px;
 }
 .prent-content-drop .content-drop {
-  padding-bottom: 56px;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding: 56px 40px;
 }
+.bg-point {
+  background: #fafafa;
+  width: 167px;
+  height: 40px;
+  overflow: hidden;
+}
+
 .prent-content-drop .content-drop img {
   width: 100%;
   height: auto;
@@ -60,12 +66,33 @@ h3,
   right: 0;
   margin: 0 auto;
 }
+
+.italic {
+  display: block;
+  opacity: 0.5;
+  font-family: firaSans;
+  font-size: 15px;
+  font-weight: normal;
+  text-align: left;
+  color: #4a4a4a;
+  margin-bottom: 15px;
+}
+.h36 {
+  height: 36px;
+  line-height: 36px;
+}
 .content-drop > .outils > .w-50 {
   width: 46%;
   float: left;
   height: 32px;
   margin: 2%;
   cursor: pointer;
+}
+.f-bold {
+  font-size: 15px;
+  font-weight: normal;
+  font-family: firasans;
+  color: #4a4a4a;
 }
 .content-drop > .outils > .w-50:first-child {
   background: url(/assets/images/format1.jpg) no-repeat center;
@@ -92,7 +119,8 @@ h3,
   height: 20px;
   background: url(/assets/images/deplace.png) no-repeat;
   background-size: contain;
-  cursor: move;
+  cursor: move !important;
+  z-index: 2;
 }
 .l-deroulant.echelle ol li:after,
 .l-deroulant.echelle ol li:before {
@@ -134,8 +162,8 @@ h3,
 .l-deroulant ol.c-coche li {
   list-style: none;
 }
+
 .l-deroulant.deroulant-custome ol.c-coche li {
-  list-style: inherit;
   font-size: 15px;
   padding-left: 13px;
 }
@@ -150,6 +178,7 @@ h3,
   top: 5px;
   background-size: contain;
   cursor: move;
+  z-index: 2;
 }
 .form-quizz .move:before {
   position: absolute;
@@ -162,6 +191,7 @@ h3,
   top: 13px;
   background-size: contain;
   cursor: move;
+  z-index: 2;
 }
 .form-quizz .move {
   position: relative;
@@ -265,8 +295,6 @@ h3,
     padding: 0 !important;
   }
 
-  .l-deroulant ol {
-  }
   .l-deroulant.c-coche ol {
     margin-left: 90px;
   }
@@ -274,6 +302,12 @@ h3,
     position: absolute;
     right: 0;
     top: 0;
+  }
+  .pad-resp-46 {
+    padding: 0 46px;
+  }
+  .bg-point {
+    margin: auto;
   }
 }
 .wto-50 > mat-form-field {
@@ -312,6 +346,7 @@ h3,
   color: #4a4a4a;
   opacity: 1;
   background-image: none;
+  font-style: normal;
 }
 .echelle ol li {
   list-style: none;
@@ -337,13 +372,12 @@ h3,
   cursor: pointer;
   color: #949d9e;
   transition: 0.3s;
-  
 }
-.modal-header{
+.modal-header {
   border-bottom: none;
   padding-bottom: 0;
 }
-.modal-header p.title{
+.modal-header p.title {
   font-size: 27px;
   font-family: firasans;
   font-weight: 200;
@@ -353,7 +387,7 @@ h3,
 .list-icon .child-list:hover > i {
   color: #fc6100;
 }
-.list-icon .child-list{
+.list-icon .child-list {
   display: inline-block;
   width: auto;
   float: left;
@@ -373,3 +407,11 @@ h3,
   width: 100%;
 }
 
+.score {
+  width: 57px;
+}
+
+.after-question {
+  background-image: none !important;
+  opacity: 1 !important;
+}

@@ -9,12 +9,13 @@ export class QuizDto {
     public status = '',
     public enterprise_id = 8178,
     public enterprise_name = 'LCAS AGENCY',
-    public is_anonyme = true,
+    public is_anonyme = false,
     public accept_reponse = true,
     public show_answer = true,
     public read_score = true,
     public initialize_quizz = false,
     public ending_message = '',
+    public basic_color = 'fc6100',
     public rubriques = []
   ) {}
 }

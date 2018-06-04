@@ -1,94 +1,222 @@
 <div class="prent-content-drop">
-  <div class="support"></div>
-  <div class="type-contenu">{{_questionQuiz.name}}</div>
-  <div class="content-drop">
+  <div class="support" *ngIf="!_questionQuiz.corection"></div>
+  <div class="type-contenu" *ngIf="!_questionQuiz.corection">{{_questionQuiz.name}}</div>
+  <div class="content-drop" [ngClass]="{'retour-class': _questionQuiz.corection}">
 
 
     <!-- choix multiple -->
-    <div *ngIf="_questionQuiz.value === 'multiple_choice'">
-      <div class="form-quizz l-deroulant ">
+    <div *ngIf="_questionQuiz.type_question.slug === 'multiple_choice'">
+      <div class="form-quizz l-deroulant multiple ">
         <div class="row">
           <div class="col-sm-12">
             <mat-form-field class="question example-full-width">
-              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
+              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description" [disabled]="_questionQuiz.corection">
             </mat-form-field>
           </div>
-          <div class="col-sm-12 move" *ngFor="let questQuiz of _questionQuiz.response_options;let i=index">
-            <div class="col-md-8 col-sm-12">
-              <ol class="plus rond">
-                <li>
-                  <mat-radio-button value="1"></mat-radio-button>
-                  <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
-                    <input matInput [placeholder]="questQuiz.placeholder" [(ngModel)]="questQuiz.name" (focus)="addOptionMs( _questionQuiz.response_options, questQuiz, i)">
+          <div class="col-sm-12" *ngIf="_questionQuiz.corection">
+            <div class="italic">
+              <i>Sélectionnez les réponses correctes et le nombre de points attribués par réponse
+              </i>
+            </div>
+          </div>
+          <div [dragula]='"bag-one"' [dragulaModel]='_questionQuiz.response_options'>
+            <div class="col-sm-12" [ngClass]="{'move': !_questionQuiz.corection}" *ngFor="let questQuiz of _questionQuiz.response_options;let i=index">
+              <div class="col-md-8 col-sm-12">
+                <ol class="plus ronds">
+                  <li>
+                    <mat-checkbox [disabled]="!_questionQuiz.corection" [(ngModel)]="questQuiz.correct_answer"></mat-checkbox>
+                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 === _questionQuiz.response_options.length) || (othersOptionExist && i === _questionQuiz.response_options.length -2)">
+                      <input #name matInput [placeholder]="questQuiz.placeholder" [disabled]="questQuiz.slug === 'autres'" [(ngModel)]="questQuiz.name"
+                        (focus)="addOptionMsFirst( _questionQuiz.response_options, questQuiz, i)">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 !== _questionQuiz.response_options.length) || (othersOptionExist && i !== _questionQuiz.response_options.length -2)">
+                      <input matInput [placeholder]="questQuiz.placeholder" [disabled]="questQuiz.slug === 'autres'" [(ngModel)]="questQuiz.name"
+                        (focus)="addOptionMsFirst( _questionQuiz.response_options, questQuiz, i)">
+                    </mat-form-field>
+                    <span class="fermer" (click)="deleteteOptionMs(_questionQuiz.response_options, i)" *ngIf="!_questionQuiz.corection"></span>
+                    <span class="after-question" *ngIf="_questionQuiz.corection && questQuiz.correct_answer">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" [attr.fill]="colorCss">
+                        <path fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />
+                      </svg>
+                    </span>
+                  </li>
+                </ol>
+              </div>
+
+              <div class="col-md-4 col-sm-12 no-border pad-21" *ngIf="_questionQuiz.response_redirection && !_questionQuiz.corection">
+                <div class="contenu-resp">
+                  <mat-form-field>
+                    <mat-select [(ngModel)]="questQuiz['action'].rubrique_target_poids" (change)="changeTargetSection(questQuiz.action)">
+                      <mat-option [value]="item.value" *ngFor="let item of allSections">
+                        {{item.name}}
+                      </mat-option>
+                    </mat-select>
                   </mat-form-field>
-                  <span class="fermer" (click)="deleteteOptionMs(_questionQuiz.response_options, i)"></span>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-12 no-border pad-21 bg-point" *ngIf="_questionQuiz.corection">
+                <div class="contenu-resp pad-resp-46 row">
+                  <div class="col-sm-4 col-xs-6">
+                    <mat-form-field class="score">
+                      <mat-select placeholder="" [(ngModel)]="questQuiz.points">
+                        <mat-option [value]="item" *ngFor="let item of listScore">
+                          <span class="f-bold"> {{item}}</span>
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6 col-xs-6 h36">
+                    <span class="f-bold">points</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-sm-12" *ngIf="showAddOption && !_questionQuiz.corection">
+            <div class="col-md-8 col-sm-12">
+              <ol class="plus c-coche">
+                <li>
+                  <mat-checkbox [disabled]="true" (click)="addOptionMs( _questionQuiz.response_options)"></mat-checkbox>
+                  <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
+                    <input matInput placeholder="ajouter option" (focus)="addOptionMs( _questionQuiz.response_options)">
+                  </mat-form-field>
+                  <div class="absolute" *ngIf="!othersOptionExist" (click)="addOptionMs( _questionQuiz.response_options,'autre')">
+                    ou AJOUTER AUTRE</div>
                 </li>
               </ol>
             </div>
-            <div class="col-md-4 col-sm-12 no-border pad-21">
-              <div class="contenu-resp">
-                <mat-form-field>
-                  <mat-select placeholder="Passer à la section suivante">
-                    <mat-option [value]="page">
-                      Passer à la section suivante
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </div>
+          </div>
+          <div class="myrow textarea pad-right" *ngIf="_questionQuiz.corection">
+            <mat-form-field class="example-full-width mat-form-field">
+              <textarea matInput [(ngModel)]="_questionQuiz.correction_explanation" placeholder="Ajouter un explicatif ..."></textarea>
+            </mat-form-field>
           </div>
 
         </div>
       </div>
     </div>
+
     <!--fin choix multiple -->
 
     <!-- case a cocher -->
-    <div *ngIf="_questionQuiz.value === 'checkboxes'">
+    <div *ngIf="_questionQuiz.type_question.slug === 'checkbox'">
       <div class="col-sm-12">
         <div class="form-quizz l-deroulant ">
           <div class="row">
             <div class="col-sm-12">
               <mat-form-field class="question example-full-width">
-                <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
+                <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description" [disabled]="_questionQuiz.corection">
               </mat-form-field>
             </div>
-            <div class="col-sm-12 move" *ngFor="let questQuiz of _questionQuiz.response_options;let i=index">
+            <div class="col-sm-12" *ngIf="_questionQuiz.corection">
+              <div class="italic">
+                <i>Sélectionnez les réponses correctes et le nombre de points attribués par réponse
+                </i>
+              </div>
+            </div>
+            <div [dragula]='"bag-one"' [dragulaModel]='_questionQuiz.response_options'>
+              <div class="col-sm-12" [ngClass]="{'move': !_questionQuiz.corection}" *ngFor="let questQuiz of _questionQuiz.response_options;let i=index">
+                <div class="col-md-8 col-sm-12">
+                  <ol class="plus c-coche">
+                    <li>
+                      <mat-checkbox [disabled]="!_questionQuiz.corection" [(ngModel)]="questQuiz.correct_answer"></mat-checkbox>
+                      <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 === _questionQuiz.response_options.length) || (othersOptionExist && i === _questionQuiz.response_options.length -2)">
+                        <input #name matInput placeholder="Option1" value="" [placeholder]="questQuiz.placeholder" [(ngModel)]="questQuiz.name" (focus)="addOptionMsFirst( _questionQuiz.response_options, questQuiz, i)"
+                          [disabled]="questQuiz.slug === 'autres'">
+                      </mat-form-field>
+                      <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 !== _questionQuiz.response_options.length) || (othersOptionExist && i !== _questionQuiz.response_options.length -2)">
+                        <input matInput placeholder="Option1" value="" [placeholder]="questQuiz.placeholder" [(ngModel)]="questQuiz.name" (focus)="addOptionMsFirst( _questionQuiz.response_options, questQuiz, i)"
+                          [disabled]="questQuiz.slug === 'autres'">
+                      </mat-form-field>
+                      <span class="fermer" (click)="deleteteOptionMs(_questionQuiz.response_options, i)" *ngIf="!_questionQuiz.corection"></span>
+                      <span class="after-question" *ngIf="_questionQuiz.corection && questQuiz.correct_answer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" [attr.fill]="colorCss">
+                          <path fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />
+                        </svg>
+                      </span>
+
+                    </li>
+                  </ol>
+                </div>
+                <div class="col-md-4 col-sm-12 no-border pad-21" *ngIf="_questionQuiz.response_redirection && !_questionQuiz.corection">
+                  <div class="contenu-resp">
+                    <mat-form-field>
+                      <mat-select [(ngModel)]="questQuiz['action'].rubrique_target_poids" (change)="changeTargetSection(questQuiz.action)">
+                        <mat-option [value]="item.value" *ngFor="let item of allSections">
+                          {{item.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12 no-border pad-21 bg-point" *ngIf="_questionQuiz.corection">
+                  <div class="contenu-resp pad-resp-46 row">
+                    <div class="col-sm-4 col-xs-6">
+                      <mat-form-field class="score">
+                        <mat-select placeholder="" [(ngModel)]="questQuiz.points">
+                          <mat-option [value]="item" *ngFor="let item of listScore">
+                            <span class="f-bold"> {{item}}</span>
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-xs-6 h36">
+                      <span class="f-bold">points</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-12 " *ngIf="showAddOption && !_questionQuiz.corection">
               <div class="col-md-8 col-sm-12">
                 <ol class="plus c-coche">
                   <li>
-                    <mat-checkbox></mat-checkbox>
+                    <mat-checkbox [disabled]="true" (click)="addOptionMs( _questionQuiz.response_options)"></mat-checkbox>
                     <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
-                      <input matInput placeholder="Option1" value="" [placeholder]="questQuiz.placeholder" [(ngModel)]="questQuiz.name" (focus)="addOptionMs( _questionQuiz.response_options, questQuiz, i)">
+                      <input matInput placeholder="ajouter option" (focus)="addOptionMs( _questionQuiz.response_options)">
                     </mat-form-field>
-                    <span class="fermer" (click)="deleteteOptionMs(_questionQuiz.response_options, i)"></span>
+                    <div class="absolute" *ngIf="!othersOptionExist" (click)="addOptionMs( _questionQuiz.response_options,'autre')">
+                      ou AJOUTER AUTRE</div>
                   </li>
                 </ol>
               </div>
             </div>
+            <div class="myrow textarea" *ngIf="_questionQuiz.corection">
+              <mat-form-field class="example-full-width mat-form-field">
+                <textarea matInput [(ngModel)]="_questionQuiz.correction_explanation" placeholder="Ajouter un explicatif ..."></textarea>
+              </mat-form-field>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
     <!--fin case a cocher -->
     <!-- question courte -->
-    <div *ngIf="_questionQuiz.value === 'short_answer'">
+    <div *ngIf="_questionQuiz.type_question.slug === 'short_answer'">
       <div class="form-quizz q-courte ">
         <div class=" col-sm-12">
           <div class="myrow">
             <mat-form-field class="example-full-width mat-form-field">
-              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
+              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description" [disabled]="_questionQuiz.corection">
             </mat-form-field>
           </div>
 
-          <div class="myrow textarea">
+          <div class="myrow textarea" *ngIf="!_questionQuiz.corection">
             <mat-form-field class="example-full-width mat-form-field">
               <textarea matInput placeholder="Réponse courte ..." [disabled]="true"></textarea>
             </mat-form-field>
           </div>
+          <div class="myrow textarea" *ngIf="_questionQuiz.corection">
+            <mat-form-field class="example-full-width mat-form-field">
+              <textarea matInput [(ngModel)]="_questionQuiz.correction_explanation" placeholder="Ajouter un explicatif ..."></textarea>
+            </mat-form-field>
+          </div>
         </div>
 
-        <div class="col-sm-12 q-child">
+        <div class="col-sm-12 q-child" *ngIf="!_questionQuiz.corection">
           <div class="row" *ngIf="contraintes">
             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
               <table class="w-100">
@@ -128,11 +256,11 @@
                 </div>
                 <div class="col-sm-8 label-italic wto-50" *ngIf="contrainteValue ==='Nombre2'">
                   <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
-                    <input matInput placeholder="Nombre" [(ngModel)]="_questionQuiz.constraint.constraint_value">
+                    <input matInput placeholder="Nombre" [(ngModel)]="value1" (change)="changeNumberOne(value1, 1, _questionQuiz.constraint)">
                   </mat-form-field>
                   <span class="inline">et</span>
                   <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
-                    <input matInput placeholder="Nombre" [(ngModel)]="_questionQuiz.constraint.constraint_value">
+                    <input matInput placeholder="Nombre" [(ngModel)]="value2" (change)="changeNumberOne(value2, 2, _questionQuiz.constraint)">
                   </mat-form-field>
                 </div>
                 <div class=" textarea" [ngClass]="{'col-sm-8': contrainteValue !=='Nombre2','col-sm-4': contrainteValue ==='Nombre2'}">
@@ -148,18 +276,23 @@
     </div>
 
     <!-- question long -->
-    <div *ngIf="_questionQuiz.value === 'long_answer'">
+    <div *ngIf="_questionQuiz.type_question.slug === 'width_answer'">
       <div class="form-quizz q-long">
         <div class=" col-sm-12">
           <div class="myrow">
             <mat-form-field class="example-full-width mat-form-field">
-              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
+              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description" [disabled]="_questionQuiz.corection">
             </mat-form-field>
           </div>
 
-          <div class="myrow textarea">
+          <div class="myrow textarea" *ngIf="!_questionQuiz.corection">
             <mat-form-field class="example-full-width mat-form-field">
               <textarea matInput placeholder="Réponse longue ..." [disabled]="true"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="myrow textarea" *ngIf="_questionQuiz.corection">
+            <mat-form-field class="example-full-width mat-form-field">
+              <textarea matInput [(ngModel)]="_questionQuiz.correction_explanation" placeholder="Ajouter un explicatif ..."></textarea>
             </mat-form-field>
           </div>
         </div>
@@ -167,39 +300,111 @@
     </div>
 
     <!-- liste deroulant -->
-    <div *ngIf="_questionQuiz.value === 'select'">
-      <div class="form-quizz l-deroulant deroulant-custome ">
+    <div *ngIf="_questionQuiz.type_question.slug === 'list_scroll'">
+      <div class="form-quizz l-deroulant deroulant-custome echelle ">
         <div class="row">
           <div class="col-sm-12">
             <mat-form-field class="question example-full-width">
-              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
+              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description" [disabled]="_questionQuiz.corection">
             </mat-form-field>
           </div>
-          <div class="col-sm-12">
+          <div class="col-sm-12" *ngIf="_questionQuiz.corection">
+            <div class="italic">
+              <i>Sélectionnez les réponses correctes et le nombre de points attribués par réponse
+              </i>
+            </div>
+          </div>
+          <div [dragula]='"bag-one"' [dragulaModel]='_questionQuiz.response_options'>
+            <div class="col-sm-12 " [ngClass]="{'move': !_questionQuiz.corection}" *ngFor="let questQuiz of _questionQuiz.response_options;let i=index">
+              <div class="col-md-8 col-sm-12">
+                <ol class="plus c-coche">
+                  <li>
+                    <i class="nbr" (click)="questQuiz.correct_answer = !questQuiz.correct_answer">{{i+1}}.</i>
+                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 === _questionQuiz.response_options.length) || (othersOptionExist && i === _questionQuiz.response_options.length -2)">
+                      <input #name matInput [placeholder]="questQuiz.placeholder" [disabled]="questQuiz.slug === 'autres'" [(ngModel)]="questQuiz.name"
+                        (focus)="addOptionMsFirst( _questionQuiz.response_options, questQuiz, i)">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 !== _questionQuiz.response_options.length) || (othersOptionExist && i !== _questionQuiz.response_options.length -2)">
+                      <input matInput [placeholder]="questQuiz.placeholder" [disabled]="questQuiz.slug === 'autres'" [(ngModel)]="questQuiz.name"
+                        (focus)="addOptionMsFirst( _questionQuiz.response_options, questQuiz, i)">
+                    </mat-form-field>
+                    <span class="fermer" *ngIf="!_questionQuiz.corection" (click)="deleteteOptionMs(_questionQuiz.response_options, i)"></span>
+                    <span class="after-question" *ngIf="_questionQuiz.corection && questQuiz.correct_answer">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" [attr.fill]="colorCss">
+                        <path fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />
+                      </svg>
+                    </span>
+                  </li>
+                </ol>
+              </div>
+              <div class="col-md-4 col-sm-12 no-border pad-21" *ngIf="_questionQuiz.response_redirection && !_questionQuiz.corection">
+                <div class="contenu-resp">
+                  <mat-form-field>
+                    <mat-select [(ngModel)]="questQuiz['action'].rubrique_target_poids" (change)="changeTargetSection(questQuiz.action)">
+                      <mat-option [value]="item.value" *ngFor="let item of allSections">
+                        {{item.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-12 no-border pad-21 bg-point" *ngIf="_questionQuiz.corection">
+                <div class="contenu-resp pad-resp-46 row">
+                  <div class="col-sm-4 col-xs-6">
+                    <mat-form-field class="score">
+                      <mat-select placeholder="" [(ngModel)]="questQuiz.points">
+                        <mat-option [value]="item" *ngFor="let item of listScore">
+                          <span class="f-bold"> {{item}}</span>
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6 col-xs-6 h36">
+                    <span class="f-bold">points</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12" *ngIf="showAddOption && !_questionQuiz.corection">
             <div class="col-md-8 col-sm-12">
               <ol class="plus c-coche">
-                <li *ngFor="let questQuiz of _questionQuiz.response_options;let i=index">
+                <li>
+                  <!-- <mat-checkbox [disabled]="true" (click)="addOptionMs( _questionQuiz.response_options)"></mat-checkbox> -->
+                  <i class="nbr" (click)="addOptionMs( _questionQuiz.response_options)">{{_questionQuiz.response_options.length + 1}}</i>
                   <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
-                    <input matInput [placeholder]="questQuiz.placeholder" [(ngModel)]="questQuiz.name" (focus)="addOptionMs( _questionQuiz.response_options, questQuiz, i)">
+                    <input matInput placeholder="ajouter option" (focus)="addOptionMs( _questionQuiz.response_options)">
                   </mat-form-field>
-                  <span class="fermer" (click)="deleteteOptionMs(_questionQuiz.response_options, i)"></span>
+                  <div class="absolute" *ngIf="!othersOptionExist" (click)="addOptionMs( _questionQuiz.response_options,'autre')" class="absolute">
+                    ou AJOUTER AUTRE</div>
                 </li>
               </ol>
             </div>
+
+          </div>
+          <div class="myrow textarea" *ngIf="_questionQuiz.corection">
+            <mat-form-field class="example-full-width mat-form-field">
+              <textarea matInput [(ngModel)]="_questionQuiz.correction_explanation" placeholder="Ajouter un explicatif ..."></textarea>
+            </mat-form-field>
           </div>
         </div>
       </div>
     </div>
 
     <!-- echelle lineaire -->
-    <div *ngIf="_questionQuiz.value === 'dropdown_list'">
+    <div *ngIf="_questionQuiz.type_question.slug === 'lineary_scale'">
       <div class="row">
         <div class="col-sm-12">
           <mat-form-field class="question example-full-width">
-            <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
+            <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description" [disabled]="_questionQuiz.corection">
           </mat-form-field>
         </div>
-        <div class="col-md-7 col-sm-12">
+        <div class="myrow textarea" *ngIf="_questionQuiz.corection">
+          <mat-form-field class="example-full-width mat-form-field">
+            <textarea matInput [(ngModel)]="_questionQuiz.correction_explanation" placeholder="Ajouter un explicatif ..."></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col-md-7 col-sm-12" *ngIf="!_questionQuiz.corection">
 
           <div class="form-quizz l-deroulant echelle">
             <table class="nbr-limite">
@@ -229,7 +434,7 @@
             </table>
             <ol class="plus">
               <li *ngFor="let item of _questionQuiz.response_options; let i = index">
-                <span class="nbr">{{i + toNumber(initialValue,null)}}.</span>
+                <i class="nbr">{{i + toNumber(initialValue,null)}}.</i>
 
                 <mat-form-field class="example-full-width mat-form-field">
                   <input matInput [placeholder]="(i === 0 || i+1 === _questionQuiz.response_options.length)? ('Réponse'+(i + toNumber(initialValue,null))+ '(obligatoire)') : ('Réponse'+(i + toNumber(initialValue,null))+ '(facultatif)')"
@@ -240,7 +445,7 @@
             </ol>
           </div>
         </div>
-        <div class="col-md-5 col-sm-12">
+        <div class="col-md-5 col-sm-12" *ngIf="!_questionQuiz.corection">
           <div class="row">
             <div class="echell-select">
               <div class="col-sm-5 col-xs-12">
@@ -248,8 +453,8 @@
               </div>
               <div class="col-sm-7 col-xs-12">
                 <mat-form-field class="w100">
-                  <mat-select placeholder="smiley">
-                    <mat-option *ngFor="let fa of ['smiley','point','coeur']" [value]="smifaley">
+                  <mat-select placeholder="smiley" [(ngModel)]="_questionQuiz.smiley">
+                    <mat-option *ngFor="let fa of ['smiley','point','coeur']" [value]="fa">
                       {{ fa }}
                     </mat-option>
                     <mat-option (click)="openModal(template)">
@@ -267,20 +472,25 @@
     <!--fin echelle lineaire -->
 
     <!-- date -->
-    <div *ngIf="_questionQuiz.value === 'date'">
+    <div *ngIf="_questionQuiz.type_question.slug === 'date'">
       <div class="form-quizz q-courte date ">
         <div class=" col-sm-12">
           <div class="myrow">
             <mat-form-field class="example-full-width mat-form-field">
-              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
+              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description" [disabled]="_questionQuiz.corection">
             </mat-form-field>
           </div>
 
-          <div class="myrow textarea">
+          <div class="myrow textarea" *ngIf="!_questionQuiz.corection">
             <mat-form-field>
-              <input matInput [matDatepicker]="dp2" placeholder="Jour/Mois/Année">
-              <mat-datepicker-toggle matSuffix [for]="dp2" disabled></mat-datepicker-toggle>
-              <mat-datepicker #dp2></mat-datepicker>
+              <input matInput [matDatepicker]="dp2" placeholder="Jour/Mois/Année" [disabled]="true">
+              <mat-datepicker-toggle matSuffix [for]="dp2" [disabled]="true"></mat-datepicker-toggle>
+              <mat-datepicker #dp2 [disabled]="true"></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="myrow textarea" *ngIf="_questionQuiz.corection">
+            <mat-form-field class="example-full-width mat-form-field">
+              <textarea matInput [(ngModel)]="_questionQuiz.correction_explanation" placeholder="Ajouter un explicatif ..."></textarea>
             </mat-form-field>
           </div>
         </div>
@@ -288,18 +498,18 @@
     </div>
     <!-- date fin -->
     <!-- heure -->
-    <div *ngIf="_questionQuiz.value === 'hour'">
+    <div *ngIf="_questionQuiz.type_question.slug === 'hour'">
       <div class="form-quizz q-courte date ">
         <div class=" col-sm-12">
           <div class="myrow">
             <mat-form-field class="example-full-width mat-form-field">
-              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description">
+              <input matInput placeholder="Question" [(ngModel)]="_questionQuiz.description" [disabled]="_questionQuiz.corection">
             </mat-form-field>
           </div>
 
-          <div class="myrow textarea hours">
+          <div class="myrow textarea hours" *ngIf="!_questionQuiz.corection">
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Heure" value="">
+              <input matInput placeholder="Heure" value="" [disabled]="true">
             </mat-form-field>
             <span class="absolute">
               <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
@@ -312,6 +522,12 @@
             </span>
 
           </div>
+          <div class="myrow textarea" *ngIf="_questionQuiz.corection">
+            <mat-form-field class="example-full-width mat-form-field">
+              <textarea matInput [(ngModel)]="_questionQuiz.correction_explanation" placeholder="Ajouter un explicatif ..."></textarea>
+            </mat-form-field>
+          </div>
+
         </div>
       </div>
     </div>
@@ -320,13 +536,22 @@
     <div class="groupe-btn">
       <div class="row">
         <div class="col-md-2 col-sm-1 col-xs-1 ">
-          <button class="btn edite" [style.color]="colorCss">
+          <button class="btn edite" [style.color]="colorCss" *ngIf="!_questionQuiz.corection" (click)="_questionQuiz.corection = true">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22">
               <g [attr.fill]="colorCss" fill-rule="evenodd" stroke="#fff" stroke-width=".5">
                 <path d="M16.381 4.873l-.981.977-2.331-2.326.981-.978 2.331 2.328zm-12.312 7.65L11.8 4.796l2.331 2.327L6.4 14.85l-2.331-2.326zm-1.269 3.6v-2.327l2.331 2.328H2.8zm-1.8 1.8h4.869l13.05-13.05L14.05 0 1 13.05v4.873zM1 21.523h18v-1.8H1z"
                 />
               </g>
             </svg>Corriger</button>
+          <button class="btn edite" [style.background-color]="colorCss" *ngIf="_questionQuiz.corection" (click)="_questionQuiz.corection = false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22">
+              <g [attr.fill]="'white'" fill-rule="evenodd" stroke="#fff" stroke-width=".5">
+                <path d="M16.381 4.873l-.981.977-2.331-2.326.981-.978 2.331 2.328zm-12.312 7.65L11.8 4.796l2.331 2.327L6.4 14.85l-2.331-2.326zm-1.269 3.6v-2.327l2.331 2.328H2.8zm-1.8 1.8h4.869l13.05-13.05L14.05 0 1 13.05v4.873zM1 21.523h18v-1.8H1z"
+                />
+              </g>
+            </svg>
+            <span [ngStyle]="{color: 'white'}">Retour</span>
+          </button>
         </div>
         <div class="col-md-4 col-sm-10 col-xs-10 pull-right">
           <table>
@@ -338,10 +563,35 @@
                 <span style="font-size: 12px; font-weight: 700;">obligatoire</span>
               </td>
               <td>
-                <mat-slide-toggle [(ngModel)]="_questionQuiz.is_mandatory"></mat-slide-toggle>
+                <mat-slide-toggle [(ngModel)]="_questionQuiz.is_mandatory" [color]="colorCss"></mat-slide-toggle>
               </td>
-              <td class="conditionE">
-                <button class="menu"></button>
+              <td class="conditionE" *ngIf="!_questionQuiz.corection && (_questionQuiz.type_question.slug === 'multiple_choice' || _questionQuiz.type_question.slug === 'checkbox' || _questionQuiz.type_question.slug === 'list_scroll') ">
+                <button class="menu  " mat-button [matMenuTriggerFor]="menu"></button>
+
+
+                <mat-menu #menu="matMenu" class="mat-menu-xx">
+                  <button mat-menu-item (click)="_questionQuiz.activate_vote = !_questionQuiz.activate_vote">
+                    <span class="txt">Activer les votes</span>
+                    <span *ngIf="_questionQuiz.activate_vote" class="svg">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" [attr.fill]="colorCss">
+                        <path fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />
+                      </svg>
+                    </span>
+                  </button>
+
+                  <button mat-menu-item>
+                    <span class="txt" *ngIf="!newRubrique.activate_points_rules && _questionQuiz.is_response_redirection" (click)="activateRedirection(_questionQuiz.response_redirection)">Accéder à une section en fonction de la réponse</span>
+                    <span class="txt" *ngIf="newRubrique.activate_points_rules" [style.opacity]="'0.5'" matTooltip="Merci de bien vouloir désactivé cette option sur la rubrique avant de l'activer ici">Accéder à une section en fonction de la réponse</span>
+                    <span class="txt" *ngIf="!questionQuiz.is_response_redirection" [style.opacity]="'0.5'" [matTooltip]="'Merci de bien vouloir désactivé cette option sur la question ' + questionQuiz.question_is_selected + ' avant de l\'activer ici'">Accéder à une section en fonction de la réponse</span>
+                    <span class="svg" *ngIf="_questionQuiz.response_redirection">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" [attr.fill]="colorCss">
+                        <path fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />
+                      </svg>
+                    </span>
+                  </button>
+
+                </mat-menu>
+
               </td>
             </tr>
           </table>

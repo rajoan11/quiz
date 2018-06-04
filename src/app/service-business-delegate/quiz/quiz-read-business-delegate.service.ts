@@ -34,6 +34,7 @@ export class QuizReadBusinessDelegateService
   }
 
   getEnterprises(): Observable<any> {
+    // const url = `assets/mock/enterprise.json`;
     const url = `${environment.apiUrlDrupal}/entreprise/all`;
     return this.http.get<any>(url);
   }

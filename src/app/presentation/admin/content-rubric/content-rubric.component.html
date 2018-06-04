@@ -14,10 +14,6 @@
         <iframe class="embed-responsive-item" [src]="getUrl(contentQuiz.content)"></iframe>
       </div>
       <div class="clear"></div>
-      <div class="outils">
-        <div class="w-50"></div>
-        <div class="w-50"></div>
-      </div>
     </div>
     <div *ngIf="contentQuiz.value === 'text'">
       <app-ngx-editor [placeholder]="'Enter text here...'" [(ngModel)]="contentQuiz.content" [spellcheck]="true"></app-ngx-editor>
@@ -25,11 +21,19 @@
     <div *ngIf="contentQuiz.value === 'image'">
 
       <div id="result "></div>
-      <img [src]="contentQuiz.content" alt=" ">
+      <div *ngIf="contentQuiz.content">
+        <img [src]="displayImage(contentQuiz.content)" alt=" ">
+      </div>
+      <!-- image pardefaut -->
+      <div class="img-defaut" *ngIf="!contentQuiz.content">
+        <svg viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+          <path  d="M1.944.278A1.959 1.959 0 0 0 0 2.222v15c0 1.063.882 1.945 1.944 1.945h21.112A1.959 1.959 0 0 0 25 17.222v-15A1.959 1.959 0 0 0 23.056.278H1.944zm0 1.666h21.112c.168 0 .277.11.277.278v10.313l-6.38-5.93a.844.844 0 0 0-.608-.216.843.843 0 0 0-.555.252l-5.304 5.555-3.845-3.125a.862.862 0 0 0-1.085.026l-3.89 3.481V2.222c0-.168.11-.278.278-.278z" fill-rule="nonzero" fill="#ccc"></path>
+        </svg>
+      </div>
       <div class="clear "></div>
-      <div class="outils ">
-        <div class="w-50 "></div>
-        <div class="w-50 "></div>
+      <div class="outils " *ngIf="contentQuiz.value === 'image'">
+        <div class="w-50 " [style.background-color]="colorCss" (click)="contentQuiz.display = 'full'"></div>
+        <div class="w-50 " (click)="contentQuiz.display= 'center'"></div>
       </div>
     </div>
     <div class="groupe-btn ">

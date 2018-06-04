@@ -6,7 +6,13 @@ import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 
 import { QuizCudMetierServiceACI } from '.';
-import { QuizDto, QuizDo, RubricDo, RubricDto } from '../../donnee/quiz';
+import {
+  QuizDto,
+  QuizDo,
+  RubricDo,
+  RubricDto,
+  QuizzPatch
+} from '../../donnee/quiz';
 import { QuizCudBusinessDelegateServiceACI } from '../../service-business-delegate/quiz';
 
 @Injectable()
@@ -29,6 +35,14 @@ export class QuizCudMetierService implements QuizCudMetierServiceACI {
   updateQuiz(quiz: QuizDto) {
     return this.quizCudBusinessDelegateService
       .updateQuiz(quiz)
+      .pipe(
+        tap(_ => this.log(`update successfully`)),
+        catchError(this.handleError)
+      );
+  }
+  finishQuizz(quiz: QuizzPatch) {
+    return this.quizCudBusinessDelegateService
+      .finishQuizz(quiz)
       .pipe(
         tap(_ => this.log(`update successfully`)),
         catchError(this.handleError)
@@ -60,11 +74,14 @@ export class QuizCudMetierService implements QuizCudMetierServiceACI {
   }
 
   private formatQuizToSave(quiz: QuizDto): void {
-    quiz.rubriques.forEach((rubrique: RubricDto) => {
-      rubrique.contents_rubriques.forEach(content => {
+    quiz.rubriques.forEach((rubrique: RubricDto, index) => {
+      rubrique.poids = index + 1;
+      rubrique.contents_rubriques.forEach((content, indexC) => {
         if (content && content.type_content === 'question') {
-          rubrique.question.push(content);
+          content.poids = indexC + 1;
+          rubrique.questions.push(content);
         } else {
+          content.poids = indexC + 1;
           rubrique.meta_contents.push(content);
         }
       });

@@ -8,7 +8,7 @@
           <li class="title">
             <a>Création de quizz</a>
           </li>
-          <li class="btn-group" dropdown>
+          <li class="btn-group" dropdown *ngIf="!finishQuizz">
 
             <mat-form-field floatPlaceholder="never">
               <mat-select panelClass="example-panel" [(ngModel)]="newQuiz.is_anonyme">
@@ -20,7 +20,7 @@
           </li>
         </ul>
 
-        <ul class="liste2 theme">
+        <ul class="liste2 theme" *ngIf="!finishQuizz">
           <li class="btn-group" dropdown [autoClose]="false" #dropdown="bs-dropdown">
             <a dropdownToggle type="button" class="btn-theme dropdown-toggle" aria-controls="dropdown-basic"></a>
             <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
@@ -44,7 +44,7 @@
     </div>
   </div>
 
-  <div class="container" >
+  <div class="container" *ngIf="!finishQuizz">
     <app-loader [load]="savingLoad"></app-loader>
     <div class="row">
       <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 bg" dnd-droppable (onDropSuccess)="transferRubricSuccess($event)" [dropZones]="['rubric']">
@@ -61,7 +61,7 @@
               <textarea matInput placeholder="Description..." name="" [(ngModel)]="newQuiz.description"></textarea>
             </mat-form-field>
           </div>
-          <div class="myrow textarea" *ngIf="isSuperAdmin">
+          <div class="myrow" *ngIf="isSuperAdmin">
             <mat-form-field class="example-full-width">
               <!-- floatPlaceholder="never" -->
               <input matInput placeholder="Choisissez votre entreprise..." name="searchEntreprise" [(ngModel)]="searchEntreprise" (ngModelChange)="onChangeEntreprise($event)">
@@ -95,12 +95,12 @@
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 relative">
         <app-quiz-question [colorCss]="colorCss">
+          <!-- <em class="resp-menu"></em> -->
         </app-quiz-question>
-        
       </div>
     </div>
   </div>
-  <div *ngIf="false">
-    <app-finish-quizz></app-finish-quizz>
+  <div *ngIf="finishQuizz">
+    <app-finish-quizz [finishQuizzId]="finishQuizzId" [quizzStateAnonyme]="quizzStateAnonyme"></app-finish-quizz>
   </div>
 </div>

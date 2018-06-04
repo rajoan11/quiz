@@ -36,28 +36,38 @@ export class QuizQuestionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.setQuestions();
     this.questionChange();
   }
 
-  getQuestions(): void {
+  setQuestions(): void {
     this.quizReadApplicatifServiceACI.getQuestion().subscribe(res => {
-      res.forEach(element => {
-        let quest = new Question();
-        quest = element;
-        element.id < 9
-          ? (quest.type_content = 'question')
-          : (quest.type_content = 'metaContent');
-        if (!this.questions.find(questio => questio.id === element.id)) {
-          this.questions.push(quest);
-        }
-      });
-      this.questions.sort((a, b) => a.id - b.id);
-      this.questions1 = JSON.parse(
-        JSON.stringify(this.questions.filter(q1 => q1.id < 9))
-      );
-      this.questions2 = JSON.parse(
-        JSON.stringify(this.questions.filter(q1 => q1.id > 8))
-      );
+      this.questionService.setQuestions(res);
+    });
+  }
+
+  getQuestions(): void {
+    this.questionService.getQuestions().subscribe(res => {
+      // this.questionService.setQuestions(res);
+      if (res && res.length > 0) {
+        res.forEach(element => {
+          let quest = new Question();
+          quest = element;
+          element.id < 9
+            ? (quest.type_content = 'question')
+            : (quest.type_content = 'metaContent');
+          if (!this.questions.find(questio => questio.id === element.id)) {
+            this.questions.push(quest);
+          }
+        });
+        this.questions.sort((a, b) => a.id - b.id);
+        this.questions1 = JSON.parse(
+          JSON.stringify(this.questions.filter(q1 => q1.id < 9))
+        );
+        this.questions2 = JSON.parse(
+          JSON.stringify(this.questions.filter(q1 => q1.id > 8))
+        );
+      }
     });
   }
 

@@ -26,7 +26,7 @@
   float: left;
   height:42px;
   background: url(/assets/images/theme.png) no-repeat center;
-  cursor: pointer;
+  cursor: pointer!important;
   margin: 0;
   width: 20%;
   text-align: left;
@@ -51,7 +51,7 @@
   top: 42px;
   border: 0;
   display: table;
-  max-width: 100%;
+  max-width: 400px;
 }
 .creation-quizz .liste > .liste2 > li.open > .dropdown-menu > li {
   width: 50px;
@@ -353,6 +353,8 @@
   .relative{
       position: absolute;
   }
+
+
   .relative app-quiz-question {
     position: fixed;
     right: -170px;
@@ -365,28 +367,10 @@
     overflow: visible;
   }
   .relative app-quiz-question:hover{
-    right: 0;    
+    right: 0;
   }
-  .relative app-quiz-question:before{
-    display: block;
-    width: 40px;
-    height: 60px;
-    background:#fff url(/assets/images/resp-menu.png) no-repeat center;
-    position: absolute;
-    content: '';
-    z-index: 100;
-    left: -40px;
-    transition:0.3s;
-    box-shadow: 7px -2px 12px #d0d0d0;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-  }
-  .relative app-quiz-question:hover:before{
-    transform: rotate(180deg);
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 15px;
-    border-top-right-radius: 15px;
+  .relative app-quiz-question:hover>.resp-menu{
+    opacity: 0;
   }
 
 }

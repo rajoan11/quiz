@@ -5,4 +5,5 @@ export class ResponseOption {
   points = null;
   slug = '';
   placeholder = '';
+  action = {};
 }

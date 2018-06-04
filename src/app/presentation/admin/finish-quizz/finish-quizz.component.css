@@ -44,6 +44,9 @@
 .fin-quizz .toogle p{
     margin-bottom: 15px;
 }
+#creation-quizz{
+    background-color: initial;
+}
 @media (max-width:768px){
     .fin-quizz .toogle .row{
         border-bottom:1px #95a5a6 solid;

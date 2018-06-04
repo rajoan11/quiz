@@ -6,3 +6,4 @@ export * from './rubric-do';
 export * from './rubric-dto';
 export * from './pointsrules';
 export * from './response-option';
+export * from './quizz-patch';
