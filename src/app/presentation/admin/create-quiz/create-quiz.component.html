@@ -21,15 +21,15 @@
         </ul>
 
         <ul class="liste2 theme" *ngIf="!finishQuizz">
-          <li class="btn-group" dropdown [autoClose]="false" #dropdown="bs-dropdown">
+          <li class="btn-group" dropdown [autoClose]="autoCloseDropDown" #dropdown="bs-dropdown">
             <a dropdownToggle type="button" class="btn-theme dropdown-toggle" aria-controls="dropdown-basic"></a>
             <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
               <li role="theme " class="theme" *ngFor="let color of colors">
                 <a class="dropdown-item theme{{color.id}}" (click)="changeColor(color.value);dropdown.hide()"></a>
               </li>
               <li role="theme " class="theme ">
-                <a class="dropdown-item theme16">
-                  <input [(colorPicker)]="color" [style.background]="color" [cpOKButton]="true" (colorPickerSelect)="changeColor(color);dropdown.hide()"
+                <a class="dropdown-item theme16" (click)="autoCloseDropDown = false">
+                  <input [(colorPicker)]="color" [cpOKButton]="true" (colorPickerSelect)="changeColor(color);dropdown.hide();autoCloseDropDown = true"
                   />
                 </a>
 
@@ -52,19 +52,19 @@
           <div class="myrow">
             <mat-form-field class="example-full-width">
               <!-- floatPlaceholder="never" -->
-              <input matInput placeholder="Nom Quizz..." value="" name="" [(ngModel)]="newQuiz.name">
+              <input matInput placeholder="Nom Quizz" value="" name="" [(ngModel)]="newQuiz.name" required>
             </mat-form-field>
           </div>
 
           <div class="myrow textarea">
             <mat-form-field class="example-full-width">
-              <textarea matInput placeholder="Description..." name="" [(ngModel)]="newQuiz.description"></textarea>
+              <textarea matInput placeholder="Description" name="" [(ngModel)]="newQuiz.description" required></textarea>
             </mat-form-field>
           </div>
           <div class="myrow" *ngIf="isSuperAdmin">
             <mat-form-field class="example-full-width">
               <!-- floatPlaceholder="never" -->
-              <input matInput placeholder="Choisissez votre entreprise..." name="searchEntreprise" [(ngModel)]="searchEntreprise" (ngModelChange)="onChangeEntreprise($event)">
+              <input matInput placeholder="Choisissez les entreprises" name="searchEntreprise" [(ngModel)]="searchEntreprise" (ngModelChange)="onChangeEntreprise($event)">
             </mat-form-field>
             <!-- <div class="input-group">
                 <input class="form-control " type="text" [(ngModel)]="searchEntreprise" (ngModelChange)="onChangeEntreprise($event)">
@@ -87,7 +87,8 @@
 
         <div class="rubrique" dnd-sortable-container [sortableData]="newQuiz.rubriques" [dropZones]="['container-rubrique-parent']">
           <div *ngFor="let rubric of newQuiz.rubriques; let x = index" dnd-sortable [sortableIndex]="x" [dragEnabled]="false">
-            <app-quiz-rubric [position]="x" [quizLength]="newQuiz.rubriques.length" [newRubrique]="rubric" [colorCss]="colorCss"></app-quiz-rubric>
+            <app-quiz-rubric (deleteRubrique)="deleteRubrique($event)" [position]="x" [quizLength]="newQuiz.rubriques.length" [newRubrique]="rubric"
+              [colorCss]="colorCss"></app-quiz-rubric>
           </div>
         </div>
 

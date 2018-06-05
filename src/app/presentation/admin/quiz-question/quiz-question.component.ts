@@ -70,6 +70,9 @@ export class QuizQuestionComponent implements OnInit {
       }
     });
   }
+  addTo($event): void {
+    this.getQuestions();
+  }
 
   questionChange(): void {
     console.log('here');

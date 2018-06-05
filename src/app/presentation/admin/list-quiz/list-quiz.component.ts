@@ -10,7 +10,7 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { MatTableDataSource, MatSort } from '@angular/material';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -19,6 +19,7 @@ import { QuizReadApplicatifServiceACI } from '../../../service-applicatif/quiz-a
 import { QuizCudApplicatifServiceACI } from '../../../service-applicatif/quiz-admin';
 import { ToastService } from '../../../commun/service/toaster.service';
 import { EnterpriseService } from '../../../commun/service/enterprise.service';
+import { AuthenticationApplicatifServiceACI } from '../../../service-applicatif/authentication';
 
 @Component({
   selector: 'app-list-quiz',
@@ -36,16 +37,17 @@ export class ListQuizComponent implements OnInit {
   idQuizToChange: number;
   idQuizTodelete: number;
   initialPage = 1;
+  isSuperAdmin = false;
   matSelected = false;
   message: string;
   modalRef: BsModalRef;
   modalRefChoiceEnterprise: BsModalRef;
   modalRefSelect: BsModalRef;
   loadingList = false;
-  pages = [10, 20, 30, 40];
+  pages = [10, 25, 50, 100];
   searchParams = {
     page: 1,
-    numberListPerPage: 10,
+    numberListPerPage: 25,
     keyWord: null,
     entreprise: null,
     orderby: null,
@@ -59,6 +61,7 @@ export class ListQuizComponent implements OnInit {
   valueQuizToChange: boolean;
   constructor(
     private router: Router,
+    private authenticationApplicatifServiceACI: AuthenticationApplicatifServiceACI,
     private enterpriseService: EnterpriseService,
     private toastService: ToastService,
     private activatedRoute: ActivatedRoute,
@@ -81,6 +84,9 @@ export class ListQuizComponent implements OnInit {
 
   ngOnInit() {
     this.searchQuiz();
+    this.checkRoles();
+
+    document.documentElement.style.setProperty('--my-var', '#FC6100');
     // this.autcompleteSearchEnterprise();
     this.getEntreprises();
     this.searchTerm.next(this.searchParams);
@@ -188,49 +194,37 @@ export class ListQuizComponent implements OnInit {
         err => this.onErrorSearch(err)
       );
   }
-
-  // autcompleteSearchEnterprise(): void {
-  //   this.searchTermEntreprise
-  //     .debounceTime(1000)
-  //     .distinctUntilChanged()
-  //     .subscribe(
-  //       res => {
-  //         if (res) {
-  //           this.enterprisesItems = this.enterprises
-  //             .filter(
-  //               enter =>
-  //                 !this.entrepriseSelected.find(
-  //                   enterSelect => enterSelect.nid === enter.nid
-  //                 )
-  //             )
-  //             .filter(enterprise =>
-  //               enterprise['title'].toLowerCase().includes(res.toLowerCase())
-  //             );
-  //           console.log(this.enterprisesItems);
-  //         } else {
-  //           this.enterprisesItems = [];
-  //         }
-  //       },
-  //       err => {}
-  //     );
-  // }
-
-  // selectEnterprise(enterprise): void {
-  //   this.entrepriseSelected.push(enterprise);
-  //   this.enterprisesItems.forEach((ent, index) => {
-  //     if (ent.nid === enterprise.nid) {
-  //       this.enterprisesItems.splice(index, 1);
-  //     }
-  //   });
-  // }
-
-  // deleteSelectEnterprise(enterprise): void {
-  //   this.entrepriseSelected.forEach((ent, index) => {
-  //     if (ent.nid === enterprise.nid) {
-  //       this.entrepriseSelected.splice(index, 1);
-  //     }
-  //   });
-  // }
+  checkRoles(): void {
+    let user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      user &&
+      user['role'] &&
+      user['role'][0] &&
+      (user['role'][0]['rid'] === '10' || user['role'][0]['rid'] === '5')
+        ? (this.isSuperAdmin = true)
+        : (this.isSuperAdmin = false);
+    } else {
+      this.activatedRoute.queryParams.subscribe((params: Params) => {
+        const token = params['token'];
+        if (token) {
+          localStorage.setItem('token_quizz', token);
+          this.authenticationApplicatifServiceACI
+            .login(token)
+            .subscribe(res => {
+              localStorage.setItem('user', JSON.stringify(res));
+              user = JSON.parse(localStorage.getItem('user'));
+              user &&
+              user['role'] &&
+              user['role'][0] &&
+              (user['role'][0]['rid'] === '10' ||
+                user['role'][0]['rid'] === '5')
+                ? (this.isSuperAdmin = true)
+                : (this.isSuperAdmin = false);
+            });
+        }
+      });
+    }
+  }
 
   onSuccessSearch(res): void {
     this.dataSource = new MatTableDataSource(res.forms);

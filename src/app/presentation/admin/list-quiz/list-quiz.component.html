@@ -11,7 +11,7 @@
           Filtrer par entreprise
           <span class="caret"></span> floatPlaceholder="never"
         </button> -->
-          <mat-form-field floatPlaceholder="never" class="custom-test-panel">
+          <mat-form-field floatPlaceholder="never" class="custom-test-panel" *ngIf="isSuperAdmin">
             <mat-select disableRipple placeholder="Filtrer par entreprise" [(ngModel)]="searchParams.entreprise" (change)="changeEnterprise()"
               (click)="addClassOnClickEnterprise = true" panelClass="test-panel">
               <mat-option>Aucun</mat-option>
@@ -97,7 +97,11 @@
                   <span class="bas caret" [ngClass]="{'is-selected': selectedSorter === 'desc_enterpriseName'}" (click)="orderQuizz('desc','enterpriseName')"></span>
                 </div>
               </mat-header-cell>
-              <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.enterprise_name}} </mat-cell>
+              <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}">
+                <span *ngFor="let item of element.enterprise_forms;let i= index">
+                  {{item.enterprise_name}}{{i === element.enterprise_forms.length - 1 ? '' : ', '}}
+                </span>
+              </mat-cell>
             </ng-container>
 
             <!-- Name Column -->
@@ -167,15 +171,14 @@
           </pagination>
         </div>
       </div>
-
-      <div class="add-quizz hvr-float ">
-          <a [routerLink]="[ '/admin/create'] " routerLinkActive="router-link-active ">+</a>
-          <!-- <a (click)="openModalChoiceEnterprise(templateChoiceEnterprise)">+</a> -->
-        </div>
+       
     </div><!-- parent-pagination -->
 
+    <div class="add-quizz hvr-float ">
+        <a [routerLink]="[ '/admin/create'] " routerLinkActive="router-link-active ">+</a>
+        <!-- <a (click)="openModalChoiceEnterprise(templateChoiceEnterprise)">+</a> -->
+      </div>
 
-    
   </div>
   <ng-template #template>
     <div class="modal-body text-center ">

@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, TemplateRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  TemplateRef,
+  EventEmitter,
+  Output
+} from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {
@@ -20,7 +27,9 @@ export class QuizRubricComponent implements OnInit {
   arrayScore2: Array<number>;
   @Input() colorCss: string;
   contentQuizs: Array<any> = [];
+  @Output() deleteRubrique: EventEmitter<number> = new EventEmitter<number>();
   modalRef: BsModalRef;
+  modalRefDelete: BsModalRef;
   pointRedirectionActiveExist = false;
   questionQuizs: Array<any> = [];
   scoreMax = 50;
@@ -46,6 +55,24 @@ export class QuizRubricComponent implements OnInit {
         }
       )
     );
+  }
+  openModalDelete(template: TemplateRef<any>) {
+    this.modalRefDelete = this.modalService.show(
+      template,
+      Object.assign(
+        {},
+        {
+          class: 'rubric-pops',
+          backdrop: true,
+          ignoreBackdropClick: true
+        }
+      )
+    );
+  }
+
+  confirmDelete() {
+    this.deleteRubrique.emit(this.position);
+    this.modalRefDelete.hide();
   }
   closeModal(template: TemplateRef<any>) {
     this.modalRef.hide();

@@ -13,7 +13,7 @@
   flex-direction: column;
 }
 
-.fond{
+.fond {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -22,7 +22,6 @@
   left: 0;
   top: 0;
   display: block;
-  
 }
 .spinner {
   width: 60px;
@@ -56,7 +55,7 @@
   height: 100%;
   border-radius: 50%;
   border: 5px solid #ffffff;
-  background-color: #eb6b1c;
+  background-color: var(--my-var);
   opacity: 1;
   position: absolute;
   top: 0;

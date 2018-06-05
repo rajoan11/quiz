@@ -61,9 +61,10 @@
     border-radius: 50%;
     left: 15px;
     text-align: center;
-    font-size: 19px;
+    font-size: 27px;
     line-height: 23px;
     top: 17px;
+    line-height: 27px;
 }
 #quetsion ng-scrollbar{
     height: 240px;

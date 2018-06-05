@@ -1,8 +1,11 @@
 <!--  <div dnd-droppable (onDropSuccess)="transferQuestionSuccess($event)" [dropZones]="['attachement']">
   <div class="drop-zone-question" dnd-droppable (onDropSuccess)="transferQuestionSuccess($event)" [dropZones]="['question']"> -->
-<div dnd-sortable-container [sortableData]="newRubrique.contents_rubriques" [ngStyle]="{'min-height': '100px'}" [dropZones]="['attachement']">
-  <div dnd-droppable class="drop-zone-question" [ngClass]="{'quest-exist': newRubrique && newRubrique.contents_rubriques  && newRubrique.contents_rubriques.length>0}"
-    (onDropSuccess)="addTo($event)" (onDragOver)="addTo($event)" [dropZones]="['attachement']">
+
+
+
+<div dnd-sortable-container [sortableData]="newRubrique.contents_rubriques" [ngStyle]="{'min-height': '100px'}" [dropZones]="['attachement','attachement1']">
+  <div dnd-droppable class="drop-zone-question" [ngClass]="{'quest-exist': (newRubrique && newRubrique.contents_rubriques  && newRubrique.contents_rubriques.length>0) || quizLengthValue >1}"
+    (onDragOver)="addTo($event)" [dropZones]="['attachement','attachement1']">
     <div class="order" [style.border-color]="colorCss">
       <p>
         <a>Rubrique
@@ -24,6 +27,7 @@
           </span>
 
         </button>
+        <button mat-menu-item *ngIf="quizLengthValue>1" (click)="openModalDelete(templateDelete)">Supprimer Rubrique </button>
       </mat-menu>
     </div>
     <p class="order-name">
@@ -41,6 +45,25 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #templateDelete>
+  <div class="modal-header text-center">
+    <h3 class="modal-title">Suppression rubrique</h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefDelete.hide()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path fill="#000" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"
+        />
+      </svg>
+    </button>
+  </div>
+  <div class="modal-body text-center ">
+    <p>Voullez vous supprimer cette rubrique?</p>
+
+    <button type="button " class="btn non-valide btn-quizz " (click)="modalRefDelete.hide()">annuler</button>
+    <button type="button " class="btn valide btn-quizz" (click)="confirmDelete() ">valider </button>
+  </div>
+</ng-template>
 
 <!-- MODALE NBR RUBRIQUE -->
 

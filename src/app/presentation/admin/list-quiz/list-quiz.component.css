@@ -43,17 +43,19 @@
 }
 
 ng-scrollbar {
-  height: 317px;
+  height: 500px;
   width: 100%;
 
   /* overflow-x: scroll!important; */
 }
 
+
 .quizz-table .container-table {
-  margin: 45px auto;
+  margin: 45px auto 15px;
   padding: 0;
-  max-height: 317px;
+  max-height: 500px;
   overflow: hidden;
+  border-bottom: 1px #000 solid;
 }
 
 .ng-scrollbar -vertical > .ng-scrollbar-thumb {
@@ -142,7 +144,7 @@ ng-scrollbar {
   width: auto;
 }
 .mat-table {
-  padding-right: 12px;
+  padding-right: 0px;
 }
 
 /* hover 
@@ -175,7 +177,6 @@ ng-scrollbar {
   display: inline-block;
   float: left;
   font-weight: 600;
-  padding-top: 11px;
 }
 @media (max-width: 1000px) {
   .parent-pagination .paginator {

@@ -85,7 +85,6 @@
   font-style: normal;
 }
 
-
 body {
   margin: 0;
   padding: 0;
@@ -119,13 +118,13 @@ ol {
 
 .mat-checkbox-checked.mat-accent .mat-checkbox-background,
 .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-  background-color: #fc6100 !important;
+  background-color: var(--my-var) !important;
 }
 .bg-quizz,
 .mat-accent .mat-slider-thumb,
 .mat-accent .mat-slider-thumb-label,
 .mat-accent .mat-slider-track-fill {
-  background-color: #fc6100;
+  background-color: var(--my-var);
 }
 /* BOUTTON
 &&&&&&&&&&&&&& */
@@ -139,25 +138,25 @@ body .btn-quizz {
   margin: 5px 20px;
   text-align: center;
   border-radius: 20px;
-  color: #fc6100;
+  color: var(--my-var);
   display: inline-block;
   border: none;
   font-weight: 400;
   cursor: pointer;
 }
 body .btn-quizz.valide {
-  background-color: #fc6100;
-  border-color: #fc6100;
+  background-color: var(--my-var);
+  border-color: var(--my-var);
   color: #fff;
   outline: none;
 }
 body .btn-quizz.valide:hover,
 body .btn-quizz.valide:focus {
-  background: linear-gradient(#f96000, #ff8e47);
-  border-color: #ff8e47;
+  background: linear-gradient(var(--my-var), var(--my-var));
+  border-color: var(--my-var);
 }
 body .btn-quizz.non-valide {
-  color: #fc6100;
+  color: var(--my-var);
   background-color: #fff;
 }
 body .btn-quizz.non-valide:hover,
@@ -187,8 +186,8 @@ body .btn-quizz.non-valide.focus {
   transform: translateY(-8px);
 }
 body .btn-primary {
-  background-color: #fc6100;
-  border-color: #fc6100;
+  background-color: var(--my-var);
+  border-color: var(--my-var);
   border-radius: 0;
   color: #fff;
   outline: none;
@@ -197,15 +196,15 @@ body .btn-primary:hover,
 body .btn-primary:focus,
 .contenu-header button:hover,
 .contenu-header button:focus {
-  background: linear-gradient(#f96000, #ff8e47);
-  border-color: #ff8e47;
+  background: linear-gradient(var(--my-var), var(--my-var));
+  border-color: var(--my-var);
 }
 .retour-class .pad-right mat-form-field {
   margin-left: 15px;
 }
 
 body .color {
-  color: #fc6100 !important;
+  color: var(--my-var) !important;
 }
 .l-deroulant ol li .absolute {
   position: absolute;
@@ -217,7 +216,7 @@ body .color {
   transition: 0.3s;
 }
 .l-deroulant ol li .absolute:hover {
-  color: #fc6100;
+  color: var(--my-var);
   font-weight: 600;
 }
 
@@ -401,11 +400,18 @@ body .color {
 .contenu .mat-select-arrow {
   border-top-color: inherit;
 }
+body .pagination {
+  margin-top: 0;
+}
 /* Responsive header quizz
 ************************** */
 @media (max-width: 992px) {
   .prent-content-drop {
     padding-right: 0 15px;
+  }
+  .pagination {
+    margin: 45px 0 !important;
+    margin-top: 45px !important;
   }
 }
 
@@ -435,7 +441,7 @@ body .color {
 .quizz-table .table tr.no-border td,
 .quizz-table .table tr.no-border th {
   border: 0px;
-  border-bottom: 2px #fc6100 solid;
+  border-bottom: 2pxvar (--my-var) solid;
 }
 .quizz-table .table tr td,
 .quizz-table .table tr th {
@@ -525,8 +531,8 @@ body .color {
   width: 80px;
   height: 80px;
   display: block !important;
-  background: #fc6100;
-  position: absolute;
+  background: var(--my-var);
+  position: fixed;
   bottom: 0px;
   right: 30px;
   border-radius: 50%;
@@ -578,8 +584,28 @@ body .color {
 /* .ng-scrollbar-container{
     overflow: scroll!important;
 } */
+
+.quizz-table .-vertical {
+  width: 14px;
+  top: 2px;
+}
+.quizz-table .-horizontal {
+  height: 14px;
+}
+
+.quizz-table .ng-scrollbar {
+  position: absolute;
+  border-radius: 0;
+  opacity: 1;
+}
+.quizz-table .-vertical .ng-scrollbar-thumb {
+  background: #fff !important;
+  border-radius: 15px;
+}
+
 .-horizontal .ng-scrollbar-thumb {
-  background-color: #9ba7b5;
+  background-color: #fff !important;
+  border-radius: 15px;
 }
 /*Création quizz :
 &&&&&&&&&&&&&&&&&&&*/
@@ -601,14 +627,15 @@ body .color {
   display: inline-block;
   transform: rotate(90deg);
   vertical-align: middle;
-  /* border-color: #0000 #0000 #0000 #fc6100; */
+  /* border-color: #0000 #0000 #0000var(--my-var); */
   border-style: solid;
   border-width: 6px;
   margin-top: -4px;
   padding: 0;
-  border-top-color: #0000;
-  border-right-color: #0000;
-  border-bottom-color: #0000;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+
   border-left-color: inherit;
 }
 #creation-quizz .mat-expansion-indicator {
@@ -659,7 +686,7 @@ body .color {
   height: 31px !important;
 }
 .w-picto {
-  border-left: 5px #fc6100 solid;
+  border-left: 5pxvar (--my-var) solid;
 }
 .content-drop .ng-star-inserted > .ngx-editor-grippie {
   visibility: hidden;
@@ -716,7 +743,7 @@ body .color {
 .pagination > li > a:hover,
 .pagination > li > span:focus,
 .pagination > li > span:hover {
-  color: #fc6100 !important;
+  color: var(--my-var) !important;
   cursor: pointer !important;
   background: none !important;
 }
@@ -744,9 +771,9 @@ body .color {
     display: table;
     float: none;
   }
-  .cdk-overlay-pane{
-    left: 0!important;
-    right: 0!important;
+  .cdk-overlay-pane {
+    left: 0 !important;
+    right: 0 !important;
   }
   .mat-menu-xx.mat-menu-panel {
     margin: auto;
@@ -823,7 +850,7 @@ body .color {
   padding-left: 40px;
   position: relative;
   font-weight: 600;
-  color: #fc6100;
+  color: var(--my-var);
   font-size: 12px;
   width: 130px;
   border-bottom: 0;
@@ -835,11 +862,13 @@ body .color {
   top: 29%;
   left: 13px;
 }
+
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
-  background-color: #fc6100;
+  background-color: var(--my-var);
 }
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-  background-color: #ff9b5c;
+  background-color: var(--my-var);
+  opacity: 0.8;
 }
 
 .form-quizz.q-courte .q-child .mat-form-field-label {
@@ -902,7 +931,7 @@ body .color {
   width: auto !important;
 }
 .mat-form-field-ripple {
-  background-color: #fc6100 !important;
+  background-color: var(--my-var) !important;
 }
 .mat-form-field-underline {
   background-color: #dcdcdc;
@@ -922,12 +951,11 @@ body .color {
   margin: 40px auto;
 }
 .border-none-color .mat-select-arrow {
-  border-top-color: #fc6100;
+  border-top-color: var(--my-var);
 }
 #attachement {
   opacity: 1;
   display: table;
-  box-shadow: 1px 1px 11px #ccc !important;
 }
 #attachement li {
   background-color: #fff;
@@ -1002,7 +1030,7 @@ li.list-group-item,
   border: none;
   padding: 5px 10px;
   margin: 1px;
-  background: #f96000;
+  background: var(--my-var);
   box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.27);
   position: relative;
   padding-right: 20px;
@@ -1038,7 +1066,7 @@ li.list-group-item,
 }
 .rubric-pops .modal-content {
   border: none;
-  border-left: 5px #f96000 solid !important;
+  border-left: 5px var(--my-var) solid !important;
   border-radius: 10px !important;
   background-color: #ffffff;
   box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.27);
@@ -1194,10 +1222,10 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline {
   display: none;
 }
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-  border-color: #fc6100;
+  border-color: var(--my-var);
 }
 .mat-radio-button.mat-accent .mat-radio-inner-circle {
-  background-color: #fc6100;
+  background-color: var(--my-var);
 }
 .nb-400 {
   font-weight: normal;
@@ -1227,7 +1255,7 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline {
 
 .order {
   vertical-align: middle !important;
-  border-color: #fc6100;
+  border-color: var(--my-var);
   border-width: 40px 29px 0 0;
   border-style: solid;
   width: 100%;
@@ -1235,9 +1263,13 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline {
   display: inline-block;
   height: 40px;
   position: relative;
-  border-left-color: #0000 !important;
-  border-bottom-color: #0000 !important;
-  border-right-color: #0000 !important;
+  border-left-color: transparent !important;
+  border-bottom-color: transparent !important;
+  border-right-color: transparent !important;
+
+  -webkit-border-left-color: transparent !important;
+  -webkit-border-bottom-color: transparent !important;
+  -webkit-border-right-color: transparent !important;
 }
 .order .order-option {
   position: absolute;
@@ -1306,7 +1338,7 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline {
   left: 17px;
 }
 .new-page p.suivant:hover {
-  background: linear-gradient(#f96000, #ff8e47);
+  background: linear-gradient(var(--my-var), var(--my-var));
 }
 .new-page p.retoure:hover {
   background: linear-gradient(#9b9b9b, #c7c7c7);
@@ -1317,7 +1349,7 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline {
 }
 .new-page p.suivant {
   text-align: right;
-  background-color: #fc6100;
+  background-color: var(--my-var);
 }
 
 .paginate-rubrique ul {
@@ -1427,7 +1459,7 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline {
   border-radius: 50%;
 }
 .multiple ol li mat-checkbox.mat-checkbox-checked .mat-checkbox-frame {
-  border-color: #f96000;
+  border-color: var(--my-var);
 }
 .multiple .mat-checkbox-checked.mat-accent .mat-checkbox-background {
   left: 5px;
@@ -1467,9 +1499,10 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline {
 .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
   color: inherit !important;
 }
-.relative app-quiz-question>.resp-menu{
+.relative app-quiz-question > .resp-menu {
   display: none;
 }
+
 /* RESPMONSIVE
 &&&&&&&&&&&&&&&& */
 @media (max-width: 768px) {
@@ -1489,9 +1522,7 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline {
   .quizz-table .table {
     width: 720px;
   }
-  .pagination {
-    margin-bottom: 125px !important;
-  }
+
   .form-quizz .mat-form-field {
     max-width: 100% !important;
     width: 100% !important;
@@ -1560,25 +1591,25 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline {
   .mat-menu-xx.mat-menu-panel {
     max-width: 300px !important;
   }
-  .relative app-quiz-question>.resp-menu{
+  .relative app-quiz-question > .resp-menu {
     display: block;
     width: 45px;
     height: 45px;
     position: absolute;
     z-index: 100;
     left: -45px;
-    transition:0.3s;
-    box-shadow:-9px -3px 22px #d8d8d8;
+    transition: 0.3s;
+    box-shadow: -9px -3px 22px #d8d8d8;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
     top: 0;
     padding: 5px;
     background: #fff;
   }
-  .relative app-quiz-question>.resp-menu{
+  .relative app-quiz-question > .resp-menu {
     display: block;
   }
-  .creation-quizz .liste > .liste2 > li.open > .dropdown-menu{
-    left: 0!important;
+  .creation-quizz .liste > .liste2 > li.open > .dropdown-menu {
+    left: 0 !important;
   }
 }

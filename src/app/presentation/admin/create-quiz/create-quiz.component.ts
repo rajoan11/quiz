@@ -16,6 +16,7 @@ import { RubriqueService } from '../../../commun/service/rubrique.service';
   styleUrls: ['./create-quiz.component.css']
 })
 export class CreateQuizComponent implements OnInit {
+  autoCloseDropDown = true;
   colorCss = '#FC6100';
   colors: Array<any>;
   enterprises: Array<any>;
@@ -52,6 +53,7 @@ export class CreateQuizComponent implements OnInit {
     this.autcompleteSearchEnterprise();
     this.checkRoles();
     this.pushDefaultRubrique();
+    document.documentElement.style.setProperty('--my-var', this.colorCss);
   }
 
   pushDefaultRubrique(): void {
@@ -98,9 +100,9 @@ export class CreateQuizComponent implements OnInit {
 
   changeColor(color: string): void {
     this.colorCss = `${color}`;
+    document.documentElement.style.setProperty('--my-var', this.colorCss);
+
     this.newQuiz.basic_color = this.colorCss.split('#')[1];
-    console.log(color);
-    console.log(this.newQuiz.basic_color);
   }
 
   saveQuiz(): void {
@@ -177,5 +179,13 @@ export class CreateQuizComponent implements OnInit {
       }
     });
     // this.getEnterprise();
+  }
+
+  deleteRubrique($event): void {
+    this.newQuiz.rubriques.forEach((rubric, index) => {
+      if (index === $event) {
+        this.newQuiz.rubriques.splice(index, 1);
+      }
+    });
   }
 }

@@ -24,16 +24,17 @@
 }
 .creation-quizz .liste > .liste2 > li:first-child {
   float: left;
-  height:42px;
+  height: 42px;
   background: url(/assets/images/theme.png) no-repeat center;
-  cursor: pointer!important;
+  cursor: pointer !important;
   margin: 0;
   width: 20%;
   text-align: left;
   transition: 0.3s;
   border-radius: 50%;
 }
-.creation-quizz .liste > .liste2 > li:first-child:hover,.creation-quizz .liste > .liste2 > li:first-child:active,
+.creation-quizz .liste > .liste2 > li:first-child:hover,
+.creation-quizz .liste > .liste2 > li:first-child:active,
 .creation-quizz .liste > .liste2 > li:first-child:focus {
   background-color: #fff3;
 }
@@ -80,17 +81,17 @@
   position: absolute;
   padding: 0;
 }
-.creation-quizz .liste > .liste2 > li.open > .dropdown-menu > li > a > input{
+.creation-quizz .liste > .liste2 > li.open > .dropdown-menu > li > a > input {
   width: 100%;
   border: 0;
   height: 100%;
   border-radius: 50%;
   position: absolute;
-    left: 0;
-    top: 0;
-    background: url(/assets/images/multicolor.png) no-repeat center;
+  left: 0;
+  top: 0;
+  background: url(/assets/images/multicolor.png) no-repeat center;
 }
-.creation-quizz .liste > .liste1 > .btn-group .mat-form-field{
+.creation-quizz .liste > .liste1 > .btn-group .mat-form-field {
   max-width: 140px;
 }
 .theme1,
@@ -174,7 +175,7 @@
 }
 
 .creation-quizz .liste > .liste2 > li:last-child {
-  margin-left:0px;
+  margin-left: 0px;
   width: 65%;
   float: right;
   padding: 6px 0;
@@ -220,9 +221,7 @@
   color: #5f5f5fde;
   font-size: 13px;
   font-family: firasans;
-  
 }
-
 
 @media (max-width: 992px) {
   .creation-quizz .liste1 {
@@ -230,7 +229,7 @@
   }
 }
 @media (max-width: 768px) {
-  .creation-quizz .liste > .liste1 > .btn-group .mat-form-field{
+  .creation-quizz .liste > .liste1 > .btn-group .mat-form-field {
     max-width: 100%;
   }
   .creation-quizz .liste1 {
@@ -244,34 +243,34 @@
   .creation-quizz .liste2 {
     width: 100%;
     float: none;
-    margin: 0 auto!important;
+    margin: 0 auto !important;
     display: table;
-    max-width: 100%!important;
+    max-width: 100% !important;
   }
-  .creation-quizz .liste .liste2 li:first-child{
+  .creation-quizz .liste .liste2 li:first-child {
     width: 7%;
     text-align: left;
     min-width: 32px;
   }
-  .creation-quizz .liste .liste2 li:first-child>a{
+  .creation-quizz .liste .liste2 li:first-child > a {
     display: inline;
   }
-  .creation-quizz .liste .liste2 li:last-child{
+  .creation-quizz .liste .liste2 li:last-child {
     width: 88%;
     padding: 6px 0;
   }
-  .creation-quizz .liste > .liste2 > li > .btn{
+  .creation-quizz .liste > .liste2 > li > .btn {
     width: 100%;
     border-radius: 0;
   }
 
-  .creation-quizz .liste .liste1 li .mat-form-field{
+  .creation-quizz .liste .liste1 li .mat-form-field {
     max-width: 100%;
   }
-  .creation-quizz .liste > .liste1 > li.title{
-    width:200px;
+  .creation-quizz .liste > .liste1 > li.title {
+    width: 200px;
   }
-  .creation-quizz .liste > .liste1 > li.btn-group{
+  .creation-quizz .liste > .liste1 > li.btn-group {
     width: 100%;
   }
 }
@@ -290,14 +289,14 @@
     width: 100%;
     margin-top: 0;
   }
-  .creation-quizz .liste2{
+  .creation-quizz .liste2 {
     margin: 0;
   }
 }
 
 /* FORM INPUT
 &&&&&&&&&&&&&&& */
-.form-quizz .myrow .mat-form-field{
+.form-quizz .myrow .mat-form-field {
   font-weight: 700;
 }
 .mat-form-field {
@@ -306,7 +305,7 @@
 }
 #creation-quizz {
   min-height: 655px;
-  background-color: rgba(0, 0, 0, 0.03)!important;
+  background-color: rgba(0, 0, 0, 0.03) !important;
 }
 #creation-quizz .bg {
   padding-bottom: 15px;
@@ -346,14 +345,13 @@
 .rubrique {
   min-height: 100px;
 }
-.relative{
+.relative {
   position: relative;
 }
-@media (max-width:768px){
-  .relative{
-      position: absolute;
+@media (max-width: 768px) {
+  .relative {
+    position: absolute;
   }
-
 
   .relative app-quiz-question {
     position: fixed;
@@ -366,11 +364,10 @@
     z-index: 2;
     overflow: visible;
   }
-  .relative app-quiz-question:hover{
+  .relative app-quiz-question:hover {
     right: 0;
   }
-  .relative app-quiz-question:hover>.resp-menu{
+  .relative app-quiz-question:hover > .resp-menu {
     opacity: 0;
   }
-
 }

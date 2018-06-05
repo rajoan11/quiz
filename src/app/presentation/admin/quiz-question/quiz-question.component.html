@@ -9,13 +9,13 @@
   </mat-expansion-panel-header>
 
 
-  <ul id="quetsion">
+  <ul id="quetsion" dnd-droppable (onDragEnter)="addTo($event)" [dropZones]="['attachement']">
     <ng-scrollbar #scrollRef [trackY]="true" [trackX]="false">
       <!-- <li *ngFor="let question of questions" dnd-draggable [dragEnabled]="true" [dragData]="question" [dropZones]="['question']">
         <a >{{question.name}}</a>
       </li> -->
       <div dnd-sortable-container [dropZones]="['attachement']" [sortableData]="questions1">
-        <li *ngFor="let question of questions1; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i" [dragEnabled]="true"
+        <li *ngFor="let question of questions1; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i" [dropEnabled]="false"
           [dragData]="question">
           <!-- <li *ngFor="let question of questions" dnd-draggable [dragEnabled]="true" [dragData]="attachement" [dropZones]="['question']"> -->
           <a *ngIf="question.id <9">{{question && question['name']}}</a>
@@ -25,34 +25,39 @@
   </ul>
 
 </mat-expansion-panel>
-<ul id="attachement">
-  <div dnd-sortable-container [dropZones]="['attachement']" [sortableData]="questions2">
-    <div *ngFor="let q2 of questions2; let j = index">
-      <li class="question text" *ngIf="q2.value === 'text'" dnd-sortable [sortableIndex]="j" [dragEnabled]="true" [dragData]="q2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="28" viewBox="0 0 26 18">
-          <g [attr.fill]="colorCss" fill-rule="nonzero">
-            <path d="M.563 0L0 3.78h.563c0-1.485 1.265-2.7 2.812-2.7h4.5v14.31c0 .743-.633 1.35-1.406 1.35h-.8v.54h6.706v-.54h-.844c-.773 0-1.406-.607-1.406-1.35V1.08h4.5c1.547 0 2.813 1.215 2.813 2.7H18L17.438 0H.563z"
+<ul id="attachement" dnd-droppable (onDragEnter)="addTo($event)" [dropZones]="['attachement1']">
+  <div dnd-sortable-container [dropZones]="['attachement1']" [sortableData]="questions2">
+    <div>
+      <div *ngFor="let q2 of questions2; let j = index">
+        <li class="question text" *ngIf="q2.value === 'text'" dnd-sortable [sortableIndex]="j" [dragEnabled]="true" [dropEnabled]="false"
+          [dragData]="q2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="28" viewBox="0 0 26 18">
+            <g [attr.fill]="colorCss" fill-rule="nonzero">
+              <path d="M.563 0L0 3.78h.563c0-1.485 1.265-2.7 2.812-2.7h4.5v14.31c0 .743-.633 1.35-1.406 1.35h-.8v.54h6.706v-.54h-.844c-.773 0-1.406-.607-1.406-1.35V1.08h4.5c1.547 0 2.813 1.215 2.813 2.7H18L17.438 0H.563z"
+              />
+              <path d="M15.344 7L15 9.31h.344c0-.907.773-1.65 1.719-1.65h2.75v8.745c0 .454-.387.825-.86.825h-.489v.33h4.099v-.33h-.516c-.473 0-.86-.371-.86-.825V7.66h2.75c.946 0 1.72.743 1.72 1.65H26L25.656 7H15.344z"
+              />
+            </g>
+          </svg>
+          <a>TEXT</a>
+        </li>
+        <li class="question img" *ngIf="q2.value === 'image'" dnd-sortable [sortableIndex]="j" [dragEnabled]="true" [dropEnabled]="false"
+          [dragData]="q2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20">
+            <path [attr.fill]="colorCss" fill-rule="nonzero" d="M1.944.278A1.959 1.959 0 0 0 0 2.222v15c0 1.063.882 1.945 1.944 1.945h21.112A1.959 1.959 0 0 0 25 17.222v-15A1.959 1.959 0 0 0 23.056.278H1.944zm0 1.666h21.112c.168 0 .277.11.277.278v10.313l-6.38-5.93a.844.844 0 0 0-.608-.216.843.843 0 0 0-.555.252l-5.304 5.555-3.845-3.125a.862.862 0 0 0-1.085.026l-3.89 3.481V2.222c0-.168.11-.278.278-.278z"
             />
-            <path d="M15.344 7L15 9.31h.344c0-.907.773-1.65 1.719-1.65h2.75v8.745c0 .454-.387.825-.86.825h-.489v.33h4.099v-.33h-.516c-.473 0-.86-.371-.86-.825V7.66h2.75c.946 0 1.72.743 1.72 1.65H26L25.656 7H15.344z"
+          </svg>
+          <a>IMAGES</a>
+        </li>
+        <li class="question embed" *ngIf="q2.value === 'embed'" dnd-sortable [sortableIndex]="j" [dragEnabled]="true" [dropEnabled]="false"
+          [dragData]="q2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="26" viewBox="0 0 26 16">
+            <path [attr.fill]="colorCss" fill-rule="nonzero" d="M5.341 2.36L0 7.698l5.341 5.34 1.385-1.384L2.77 7.699l3.956-3.956L5.341 2.36zm15.318 0l-1.385 1.384 3.956 3.955-3.956 3.957 1.385 1.384L26 7.7l-5.341-5.34zM7.765 14.482l1.731.914L17.152.915 15.42 0 7.765 14.483z"
             />
-          </g>
-        </svg>
-        <a>TEXT</a>
-      </li>
-      <li class="question img" *ngIf="q2.value === 'image'" dnd-sortable [sortableIndex]="j" [dragEnabled]="true" [dragData]="q2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20">
-          <path [attr.fill]="colorCss" fill-rule="nonzero" d="M1.944.278A1.959 1.959 0 0 0 0 2.222v15c0 1.063.882 1.945 1.944 1.945h21.112A1.959 1.959 0 0 0 25 17.222v-15A1.959 1.959 0 0 0 23.056.278H1.944zm0 1.666h21.112c.168 0 .277.11.277.278v10.313l-6.38-5.93a.844.844 0 0 0-.608-.216.843.843 0 0 0-.555.252l-5.304 5.555-3.845-3.125a.862.862 0 0 0-1.085.026l-3.89 3.481V2.222c0-.168.11-.278.278-.278z"
-          />
-        </svg>
-        <a>IMAGES</a>
-      </li>
-      <li class="question embed" *ngIf="q2.value === 'embed'" dnd-sortable [sortableIndex]="j" [dragEnabled]="true" [dragData]="q2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="26" viewBox="0 0 26 16">
-          <path [attr.fill]="colorCss" fill-rule="nonzero" d="M5.341 2.36L0 7.698l5.341 5.34 1.385-1.384L2.77 7.699l3.956-3.956L5.341 2.36zm15.318 0l-1.385 1.384 3.956 3.955-3.956 3.957 1.385 1.384L26 7.7l-5.341-5.34zM7.765 14.482l1.731.914L17.152.915 15.42 0 7.765 14.483z"
-          />
-        </svg>
-        <a>EMBED</a>
-      </li>
+          </svg>
+          <a>EMBED</a>
+        </li>
+      </div>
     </div>
 
   </div>
@@ -67,13 +72,13 @@
   </li>
 </ul>
 <em class="resp-menu">
-    <svg [attr.fill]="colorCss" f00version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-    width="35px" height="35px" viewBox="0 0 370.814 370.814" style="enable-background:new 0 0 370.814 370.814;"
+  <svg [attr.fill]="colorCss" f00version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    x="0px" y="0px" width="35px" height="35px" viewBox="0 0 370.814 370.814" style="enable-background:new 0 0 370.814 370.814;"
     xml:space="preserve">
- <g>
-   <g>
-     <polygon points="292.92,24.848 268.781,0 77.895,185.401 268.781,370.814 292.92,345.961 127.638,185.401 		"/>
-   </g>
- </g>
- </svg> 
+    <g>
+      <g>
+        <polygon points="292.92,24.848 268.781,0 77.895,185.401 268.781,370.814 292.92,345.961 127.638,185.401 		" />
+      </g>
+    </g>
+  </svg>
 </em>

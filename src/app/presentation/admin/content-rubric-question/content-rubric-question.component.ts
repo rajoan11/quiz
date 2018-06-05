@@ -100,7 +100,6 @@ export class ContentRubricQuestionComponent implements OnInit {
 
   @Input()
   set questionQuiz(value: any) {
-    console.log('value', value);
     this._questionQuiz = value;
   }
 
