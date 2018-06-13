@@ -2,8 +2,8 @@
   {
     "id": 1,
     "value": "multiple_choice",
-    "name": "Choix multiples",
     "type_question": {
+      "name": "Choix multiples",
       "slug": "multiple_choice"
     },
     "response_options": [
@@ -34,8 +34,8 @@
   {
     "id": 2,
     "value": "checkboxes",
-    "name": "Cases à cocher",
     "type_question": {
+      "name": "Cases à cocher",
       "slug": "checkbox"
     },
     "response_options": [
@@ -67,8 +67,8 @@
   {
     "id": 3,
     "value": "short_answer",
-    "name": "Réponse courte",
     "type_question": {
+      "name": "Réponse courte",
       "slug": "short_answer"
     },
     "response_options": [],
@@ -88,8 +88,8 @@
   {
     "id": 4,
     "value": "long_answer",
-    "name": "Réponse longue",
     "type_question": {
+      "name": "Réponse longue",
       "slug": "width_answer"
     },
     "response_options": [],
@@ -109,8 +109,8 @@
   {
     "id": 5,
     "value": "select",
-    "name": "Liste déroulante",
     "type_question": {
+      "name": "Liste déroulante",
       "slug": "list_scroll"
     },
     "response_options": [
@@ -142,9 +142,9 @@
   {
     "id": 6,
     "value": "dropdown_list",
-    "name": "Échelle linéaire",
     "type_question": {
-      "slug": "lineary_scale"
+      "slug": "lineary_scale",
+      "name": "Échelle linéaire"
     },
     "response_options": [],
     "is_mandatory": false,
@@ -163,8 +163,8 @@
   {
     "id": 7,
     "value": "date",
-    "name": "Date",
     "type_question": {
+      "name": "Date",
       "slug": "date"
     },
     "response_options": [],
@@ -184,24 +184,20 @@
   {
     "id": 8,
     "value": "hour",
-    "name": "Heure",
     "type_question": {
+      "name": "Heure",
       "slug": "hour"
     },
     "corection": false
   },
   {
     "id": 9,
-    "value": "text",
-    "name": "text",
     "content": "",
     "poids": "images",
-    "type": "textwysig"
+    "type": "texte"
   },
   {
     "id": 10,
-    "value": "image",
-    "name": "images",
     "content": "",
     "display": "full",
     "poids": "",
@@ -209,8 +205,13 @@
   },
   {
     "id": 11,
-    "value": "embed",
-    "name": "embed",
+    "content": "",
+    "urlYoutube": "",
+    "poids": "",
+    "type": "embed"
+  },
+  {
+    "id": 12,
     "content": "",
     "urlYoutube": "",
     "poids": "",

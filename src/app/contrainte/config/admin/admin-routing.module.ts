@@ -23,8 +23,13 @@ const routes: Routes = [
         resolve: { enterprises: QuizResolver }
       },
       {
+        path: 'update/:id',
+        component: CreateQuizComponent,
+        resolve: { enterprises: QuizResolver }
+      },
+      {
         path: 'create/finish',
-        component: FinishQuizzComponent,
+        component: FinishQuizzComponent
       }
     ]
   }

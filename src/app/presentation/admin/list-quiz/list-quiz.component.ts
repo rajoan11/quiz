@@ -1,13 +1,7 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  AfterViewInit,
-  TemplateRef,
-  Inject
-} from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { ActivatedRoute, Router, Params } from '@angular/router';
@@ -99,14 +93,25 @@ export class ListQuizComponent implements OnInit {
   }
 
   deleteQuiz(idQuiz: number): void {
-    this.quizCudApplicatifServiceACI
-      .deleteQuiz(idQuiz)
-      .subscribe(res => {}, err => {});
+    this.quizCudApplicatifServiceACI.deleteQuiz(idQuiz).subscribe(
+      res => {
+        if (res && res.delete) {
+          this.toastService.showToast(
+            res.message,
+            this.toastService.typeToast.success
+          );
+          this.searchTerm.next(this.searchParams);
+        }
+      },
+      err => {}
+    );
   }
 
   openModal(template: TemplateRef<any>, idQuiz: number) {
     this.idQuizTodelete = idQuiz;
-    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+    this.modalRef = this.modalService.show(template, {
+      class: 'modal-dialog-centered  modal-sm '
+    });
   }
 
   confirm(idQuiz: number): void {
@@ -126,7 +131,7 @@ export class ListQuizComponent implements OnInit {
     selBox.style.left = '0';
     selBox.style.top = '0';
     selBox.style.opacity = '0';
-    selBox.value = `/copy/${val}`;
+    selBox.value = `${window.location.origin}/front/resp/${val}`;
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();
@@ -139,7 +144,7 @@ export class ListQuizComponent implements OnInit {
       this.setPage(1);
     }, 1);
     this.totalItems =
-      this.allQuizLength * 10 / this.searchParams.numberListPerPage;
+      (this.allQuizLength * 10) / this.searchParams.numberListPerPage;
     this.searchTerm.next(this.searchParams);
   }
 
@@ -239,11 +244,11 @@ export class ListQuizComponent implements OnInit {
       }
     };
     this.totalItems =
-      this.allQuizLength * 10 / this.searchParams.numberListPerPage;
+      (this.allQuizLength * 10) / this.searchParams.numberListPerPage;
     this.loadingList = false;
   }
   onErrorSearch(err): void {
-    console.log(err);
+    // console.log(err);
     this.loadingList = false;
   }
 
@@ -269,7 +274,7 @@ export class ListQuizComponent implements OnInit {
     this.modalRefSelect = this.modalService.show(template, {
       backdrop: true,
       ignoreBackdropClick: true,
-      class: 'modal-sm'
+      class: 'modal-dialog-centered  modal-sm  '
     });
   }
 
@@ -308,9 +313,5 @@ export class ListQuizComponent implements OnInit {
         data['is_anonyme'] = !valueQuiz;
       }
     });
-  }
-
-  aaa(a: any): void {
-    console.log(a);
   }
 }

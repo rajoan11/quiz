@@ -13,6 +13,7 @@ import { QuizCudApplicatifServiceACI } from '../../../service-applicatif/quiz-ad
 })
 export class FinishQuizzComponent implements OnInit {
   @Input() finishQuizzId: number;
+  loadinFinish = false;
   _quizzStateAnonyme: boolean;
   quizzPatch = new QuizzPatch();
 
@@ -34,16 +35,21 @@ export class FinishQuizzComponent implements OnInit {
   }
 
   finishQuizz(withvue?: boolean): void {
-    this.quizCudApplicatifServiceACI
-      .finishQuizz(this.quizzPatch)
-      .subscribe(res => {
+    this.loadinFinish = true;
+    this.quizCudApplicatifServiceACI.finishQuizz(this.quizzPatch).subscribe(
+      res => {
         if (res) {
+          this.loadinFinish = false;
           if (withvue) {
-            this.router.navigate(['/front/resp']);
+            this.router.navigate(['/front/resp', this.finishQuizzId]);
           } else {
             this.router.navigate(['/admin/list']);
           }
         }
-      });
+      },
+      error => {
+        this.loadinFinish = false;
+      }
+    );
   }
 }

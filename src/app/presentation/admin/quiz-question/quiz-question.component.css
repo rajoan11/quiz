@@ -1,99 +1,131 @@
-#attachement, #quetsion {
-    padding: 0;
-    margin: 0;
+#attachement,
+#quetsion,
+.attachement {
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
-#attachement  li, #quetsion  li{
-    list-style: none;
-    display: block;
-    height: 60px;
-    background-color: #f9f9f9;
-    margin: 0;
-    font-family: Firasans;
-    font-size: 13px;
-    font-weight: 200;
-    line-height: 60px;
-    text-align: left;
-    padding: 0 26px;
-    position: relative;
-    border-bottom: 1px #e6e2e2 solid;
+.attachement .ngx-dnd-item:not(.has-handle):not(.move-disabled) {
+  cursor: move;
 }
-#attachement li:hover, #quetsion  li:hover{
-    background-color: #fff;
+#attachement li,
+#quetsion li,
+.attachement li {
+  list-style: none;
+  display: block;
+  height: 57px;
+  background-color: #f9f9f9;
+  margin: 0;
+  font-family: firasans;
+  font-size: 13px;
+  font-weight: 200;
+  line-height: 60px;
+  text-align: left;
+  padding: 0 26px;
+  position: relative;
+  border-bottom: 1px #e6e2e2 solid;
 }
-#attachement li ul>li, #quetsion  li ul>li{
-    height: auto;
+.attachement li {
+  list-style: none;
+  height: 60px;
 }
-#attachement  li>a, #quetsion  li>a{
-    color: #000;
-    text-decoration: none;
-    font-size: inherit;
+.attachement li.ngx-dnd-item {
+  display: block;
+  height: 60px;
+  line-height: 60px;
 }
-#attachement  li.question>a, #quetsion  li.question>a{
+#attachement li:hover,
+#quetsion li:hover,
+.attachement li:hover {
+  background-color: #fff;
+}
+#attachement li ul > li,
+#quetsion li ul > li {
+  height: auto;
+}
+#attachement li > a,
+#quetsion li > a {
+  color: #000;
+  text-decoration: none;
+  font-size: inherit;
+}
+.attachement li a {
+  color: #0009;
+  text-decoration: none;
+  font-size: inherit;
+}
+#attachement li.question > a,
+#quetsion li.question > a,
+.attachement li.question > a {
   letter-spacing: 0.5px;
   text-align: left;
   color: rgba(0, 0, 0, 0.6);
 }
-.mat-expansion-panel{
-    box-shadow: 1px 1px 11px #ccc!important;
-    border-radius: 0;
+.mat-expansion-panel {
+  box-shadow: 1px 1px 11px #ccc !important;
+  border-radius: 0;
 }
 
+#attachement li.question,
+#quetsion li.question,
+.attachement li.question {
+  padding-left: 80px;
+  background: #fff;
+}
+.mat-expansion-panel-header-title {
+  color: #797979;
+  font-family: firasans;
+  font-size: 13px;
+  width: 100%;
+  margin: 0;
+  padding-left: 24px;
+}
 
-#attachement  li.question, #quetsion  li.question{
-    padding-left: 80px;
+.mat-expansion-panel-header span.plus {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-color: #fc6100;
+  color: #fff;
+  border-radius: 50%;
+  left: 15px;
+  text-align: center;
+  font-size: 27px;
+  line-height: 23px;
+  top: 17px;
+  line-height: 27px;
 }
-.mat-expansion-panel-header-title{
-    color: #797979;
-    font-family: firasans;
-    font-size: 13px;
-    width: 100%;
-    margin: 0;
-    padding-left: 24px;
-
+#quetsion ng-scrollbar {
+  height: 240px;
 }
-
-.mat-expansion-panel-header span.plus{
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    background-color: #fc6100;
-    color: #fff;
-    border-radius: 50%;
-    left: 15px;
-    text-align: center;
-    font-size: 27px;
-    line-height: 23px;
-    top: 17px;
-    line-height: 27px;
-}
-#quetsion ng-scrollbar{
-    height: 240px;
-}
-.mat-expansion-panel-header{
-    border-bottom: 1px #e6e2e2 solid!important;
+.mat-expansion-panel-header {
+  border-bottom: 1px #e6e2e2 solid !important;
 }
 .mat-expansion-panel-header,
 .mat-expansion-panel-header:hover,
-.mat-expansion-panel-header:focus{
-    height: 60px!important;
-    position: relative;
-    border-color: #fc6100;
-    background-color: #fff!important;
-    cursor: pointer!important;
+.mat-expansion-panel-header:focus {
+  height: 57px !important;
+  position: relative;
+  border-color: #fc6100;
+  background-color: #fff !important;
+  cursor: pointer !important;
 }
 
-
-#attachement  li.question svg, #quetsion  li.question svg{
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    width: 36px!important;
-    height: 36px;
+#attachement li.question svg,
+#quetsion li.question svg,
+.attachement li.question .ngx-dnd-item svg,
+#quetsion li.question span.icone,
+#attachement li.question span.icone {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 36px !important;
+  height: 36px;
 }
-#attachement  li.question svg fill, #quetsion  li.question svg fill{
-    color: #FC6100;
+#attachement li.question svg fill,
+#quetsion li.question svg fill {
+  color: #fc6100;
 }
-#attachement  li{
-    background-color: #fff;
+#attachement li {
+  background-color: #fff;
 }
-

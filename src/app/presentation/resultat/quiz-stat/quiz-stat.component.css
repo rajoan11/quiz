@@ -1,0 +1,175 @@
+
+
+#resultat{
+    background-color: rgba(0, 0, 0, 0.03);
+    font-family: muli;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #4f5e65;
+    display: block;
+}
+li, p, a, span {
+    color: #4f5e65;
+    font-family: muli;
+}
+#resultat .navbar{
+    padding: 8px 15px;
+    background-color:#fc6100;
+}
+#resultat .navbar .title{
+    font-family: firasans, fira sans;
+    font-size: 22px;
+    color: #fff;
+}
+#resultat .navbar button.quizz{
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 4px;
+    width: 165px;
+    font-size: 12px;
+    text-align: center;
+}
+
+#resultat .navbar li>.group-btn {
+    display: table;
+    height: auto;
+    width: 100%;
+    margin-bottom: 1px;
+}
+#resultat .navbar li{
+    display: inline-block;
+    float: left;
+    list-style: none;
+    margin-right: 8%;
+}
+#resultat .navbar li:last-child{
+    float: right;
+    margin-right: 0;
+}
+
+#resultat .navbar li>a{
+    font-family: Muli;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 0 30px 0 15px;
+    position: relative;
+    display: block;
+    height: 24px;
+    line-height: 24px;
+}
+#resultat .navbar li>a>.picto{
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 26px;
+    background: #fff;
+    top: 0;
+    right: 0;
+}
+#resultat .navbar li>a>.csv{
+    background: url(/assets/images/pdf.png) no-repeat center;
+    background-size: 40px 27px;
+    background-position: 0px 0;
+}
+#resultat .navbar li>a>.pdf{
+    background: url(/assets/images/pdf.png) no-repeat center;
+    background-size: 44px 27px;
+    background-position: -24px 0;
+}
+
+.order{
+    border-color: #fc6100;
+}
+
+h2{
+  font-family: FiraSans;
+  font-size: 18px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #4a4a4a;
+}
+.contenu{
+    position: relative;
+}
+.contenu.pad-40{
+    padding: 40px;
+}
+
+.type-contenu {
+    width: 32%;
+    position: absolute;
+    padding-left: 4%;
+    line-height: 14px;
+}
+.after-contenu{
+    border: 1px #ccc solid;
+    bottom: 0;
+}
+.btn-groupe span{
+    font-family: firasans;
+    font-size: 15px;
+    font-weight: 400;
+    color: #4a4a4a;
+    padding-right: 17px;
+}
+#resultat .btn-groupe button{
+    border-radius: 2px;
+    font-family: Muli;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    text-align: center;
+    text-transform: uppercase;
+    border: 0;
+    height: 36px;
+}
+#resultat .btn-groupe button:first-child{
+  background-color: #fc6100;
+  color: #ffffff;
+  margin-right: -8px;
+}
+#resultat .btn-groupe button:last-child{
+    background-color: rgba(153, 153, 153, 0.1);
+    color: #b4b4b4;
+}
+
+/* RESPONSIVE */
+@media (max-width:992px){
+    .marg-25{
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    #resultat .navbar li>a{
+        padding-left: 0;
+    }
+
+}
+@media (max-width:768px){
+
+    #resultat .navbar li{
+        display: block;
+        float: none;
+        max-width: 250px;
+        margin: 15px auto;
+        padding: 10px;
+    }
+    #resultat .navbar li:last-child {
+        float: none;
+        margin-right: 0;
+        margin: auto;
+    }
+
+
+}

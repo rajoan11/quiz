@@ -1,0 +1,7 @@
+<p class="title">{{question.description || 'Question (réponse courte)'}}</p>
+<div class="myrow textarea">
+  <mat-form-field class="example-full-width" (change)="change($event)">
+    <textarea matInput placeholder="votre reponse"></textarea>
+  </mat-form-field>
+</div>
+<div class="obligatoire">Obligatoire</div>

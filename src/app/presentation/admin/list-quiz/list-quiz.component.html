@@ -7,10 +7,6 @@
           <a>Mes quizz</a>
         </li>
         <li class="btn-group" dropdown>
-          <!-- <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
-          Filtrer par entreprise
-          <span class="caret"></span> floatPlaceholder="never"
-        </button> -->
           <mat-form-field floatPlaceholder="never" class="custom-test-panel" *ngIf="isSuperAdmin">
             <mat-select disableRipple placeholder="Filtrer par entreprise" [(ngModel)]="searchParams.entreprise" (change)="changeEnterprise()"
               (click)="addClassOnClickEnterprise = true" panelClass="test-panel">
@@ -20,20 +16,6 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <!-- <select class="selectpicker" data-style="btn-warning" name="entreprise" [(ngModel)]="searchParams.entreprise" (change)="changeEnterprise()">
-            <option>- Veuillez choisir - </option>
-            <option *ngFor="let enterprise of enterprises" [value]="enterprise.nid">{{enterprise.title}}</option>
-          </select> -->
-          <!-- <option>Relish</option> -->
-
-
-          <!-- <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-          <li role="menuitem" *ngFor="let enterprise of enterprises">
-            <a class="dropdown-item" (click)="filterByEntreprise(enterprise.nid)">{{enterprise.title}}</a>
-          </li>
-          <li class="divider dropdown-divider"></li>
-
-        </ul> -->
         </li>
         <li class="form">
           <div class="input-group">
@@ -71,7 +53,9 @@
                   <span class="bas caret" [ngClass]="{'is-selected': selectedSorter === 'desc_name'}" (click)="orderQuizz('desc','name')"></span>
                 </div>
               </mat-header-cell>
-              <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}"> {{element.name}} </mat-cell>
+              <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}">
+                <a [routerLink]="['/admin/update',element.id]" routerLinkActive="router-link-active" [ngStyle]="{'color': '#4a4a4a'}"> {{element.name}} </a>
+              </mat-cell>
             </ng-container>
 
             <!-- Symbol Column -->
@@ -130,12 +114,14 @@
                 </mat-select>
               </mat-cell>
             </ng-container>
+            <!-- FIN HEADER -->
+
             <ng-container matColumnDef="vide">
               <mat-header-cell *matHeaderCellDef class="btn-header"> </mat-header-cell>
               <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}">
-                <a (click)="copyMessage(element.id)" class="picto copy" title="copie"></a>
+                <a (click)="copyMessage(element.uid)" class="picto copy" title="copie"></a>
                 <a class="picto reultat" title="stats global" [routerLink]="['/resultat/stat']" routerLinkActive="router-link-active"></a>
-                <a class="picto apercu" [routerLink]="['/front/resp']" target="_blank" title="Aperçu" title="Aperçu"></a>
+                <a class="picto apercu" [routerLink]="['/front/resp',element.uid]" target="_blank" title="Aperçu" title="Aperçu"></a>
                 <a (click)="openModal(template,element.id)" class="picto suppr " title="Supprimer "></a>
               </mat-cell>
             </ng-container>
@@ -151,7 +137,7 @@
       </ng-scrollbar>
     </div>
     <div class="parent-pagination">
-      <div class="container">
+      <div class="container" style="position: relative;">
         <div class="number-item-page">
           AFFICHER
           <mat-form-field>
@@ -170,14 +156,16 @@
 
           </pagination>
         </div>
+        <div class="add-quizz hvr-float ">
+          <a [routerLink]="[ '/admin/create'] " routerLinkActive="router-link-active ">+</a>
+          <!-- <a (click)="openModalChoiceEnterprise(templateChoiceEnterprise)">+</a> -->
+        </div>
       </div>
-       
-    </div><!-- parent-pagination -->
 
-    <div class="add-quizz hvr-float ">
-        <a [routerLink]="[ '/admin/create'] " routerLinkActive="router-link-active ">+</a>
-        <!-- <a (click)="openModalChoiceEnterprise(templateChoiceEnterprise)">+</a> -->
-      </div>
+    </div>
+    <!-- parent-pagination -->
+
+
 
   </div>
   <ng-template #template>
@@ -206,34 +194,5 @@
 
     </div>
   </ng-template>
-
-  <!-- <ng-template #templateChoiceEnterprise>
-
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefChoiceEnterprise.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-
-    <div class="modal-body">
-      <h2 class="text-center">CHOISIR VOTRE ENTREPRISE</h2>
-      <div class="input-group">
-        <input class="form-control " type="text" [(ngModel)]="searchEntreprise" (ngModelChange)="onChangeEntreprise($event)">
-      </div>
-      <div class="list-autocomplete">
-        <div *ngFor="let item of enterprisesItems">
-          <span (click)="selectEnterprise(item)">{{item.title}}</span>
-        </div>
-
-      </div>
-      <div class="list-selected">
-        <div *ngFor="let item of entrepriseSelected">
-          <span (click)="selectEnterprise(item)">{{item.title}}</span>
-          <span (click)="deleteSelectEnterprise(item)">x</span>
-        </div>
-
-      </div>
-      <button type="button " class="btn btn-primary btn-quizz " (click)="confirmSelectEntreprise(entrepriseSelected)" [disabled]="!entrepriseSelected || entrepriseSelected && entrepriseSelected.length === 0">valider </button>
-
-    </div>
-  </ng-template> -->
 
 </div>

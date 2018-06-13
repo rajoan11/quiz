@@ -7,8 +7,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxEditorModule } from 'ngx-editor';
-import { DndModule } from 'ngx-dnd';
+import { NgxDnDModule } from '@swimlane/ngx-dnd';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
@@ -18,8 +17,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { MatMenuModule } from '@angular/material/menu';
-
-import { DragulaModule } from 'ng2-dragula';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import {
   MatSortModule,
@@ -32,6 +31,7 @@ import {
 import { ScrollbarModule } from 'ngx-scrollbar';
 import { LoaderModule } from '../../../presentation/loader/loader.module';
 import { CommunModule } from '../../../commun/commun.module';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   imports: [
@@ -49,8 +49,6 @@ import { CommunModule } from '../../../commun/commun.module';
     ScrollbarModule,
     MatInputModule,
     MatExpansionModule,
-    NgxEditorModule,
-    DndModule.forRoot(),
     LoaderModule,
     MatSlideToggleModule,
     CommunModule,
@@ -63,11 +61,15 @@ import { CommunModule } from '../../../commun/commun.module';
     MatTooltipModule,
     ProgressbarModule.forRoot(),
     MatMenuModule,
-    DragulaModule
+    NgxDnDModule,
+    MatProgressBarModule,
+    QuillModule,
+    MatProgressSpinnerModule
   ],
   declarations: [],
   exports: [
     FormsModule,
+    ReactiveFormsModule,
     ButtonsModule,
     BsDropdownModule,
     CollapseModule,
@@ -80,8 +82,6 @@ import { CommunModule } from '../../../commun/commun.module';
     ScrollbarModule,
     MatInputModule,
     MatExpansionModule,
-    NgxEditorModule,
-    DndModule,
     LoaderModule,
     MatSlideToggleModule,
     CommunModule,
@@ -94,7 +94,11 @@ import { CommunModule } from '../../../commun/commun.module';
     MatTooltipModule,
     ProgressbarModule,
     MatMenuModule,
-    DragulaModule
+    NgxDnDModule,
+    MatProgressBarModule,
+    ProgressbarModule,
+    QuillModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SharedModule {}

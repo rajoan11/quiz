@@ -1,0 +1,30 @@
+<p class="title">Question (échelle linéaire)</p>
+<div class="myrow progress">
+  <ul>
+    <li *ngFor="let item of echelle" [ngStyle]="{'max-width': ((100/(echelle.length  -1))) +'%' }">
+      <span class="rond"></span>
+      <i>{{item}}</i>
+    </li>
+    <!-- <li>
+      <span class="rond"></span>
+      <i>2</i>
+    </li>
+    <li>
+      <span class="rond"></span>
+      <i>3</i>
+    </li>
+    <li>
+      <span class="rond"></span>
+      <i>4</i>
+    </li>
+    <li>
+      <span class="rond"></span>
+      <i>5</i>
+    </li>
+    <li>
+      <span class="rond"></span>
+      <i>6</i>
+    </li> -->
+  </ul>
+  <mat-slider step="1" min="1" max="8"></mat-slider>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { QuizReadApplicatifServiceACI } from '../../../service-applicatif/quiz-admin';
 import { RubricDto, Question } from '../../../donnee/quiz';
 import { QuestionService } from '../../../commun/service/question.service';
@@ -10,6 +10,7 @@ import { QuestionService } from '../../../commun/service/question.service';
 })
 export class QuizQuestionComponent implements OnInit {
   @Input() colorCss: string;
+  @Output() dragRubric: EventEmitter<boolean> = new EventEmitter<boolean>();
   image: {
     type: 'image';
     type_content: 'metaContent';
@@ -70,16 +71,20 @@ export class QuizQuestionComponent implements OnInit {
       }
     });
   }
-  addTo($event): void {
-    this.getQuestions();
-  }
 
   questionChange(): void {
-    console.log('here');
+    // console.log('here');
     this.questionService.getQuestionChange().subscribe(data => {
       if (data) {
         this.getQuestions();
       }
     });
+  }
+
+  dragStart(): void {
+    this.dragRubric.emit(true);
+  }
+  out(): void {
+    console.log('hereout');
   }
 }

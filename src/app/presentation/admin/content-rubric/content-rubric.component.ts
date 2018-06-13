@@ -15,7 +15,8 @@ export class ContentRubricComponent implements OnInit {
   isYoutubeVideo = true;
   @Input() questionQuizs: any;
   developerKey = 'ZMfujAxBWavplSWzmKfm-57i';
-  clientId = '274345426144-4pas2h82ls0u3qknse2ucnlrphpar7uf.apps.googleusercontent.com';
+  clientId =
+    '274345426144-4pas2h82ls0u3qknse2ucnlrphpar7uf.apps.googleusercontent.com';
   scope = ['https://www.googleapis.com/auth/photos'];
   pickerApiLoaded = false;
   oauthToken?: any;
@@ -56,7 +57,7 @@ export class ContentRubricComponent implements OnInit {
           .setDeveloperKey('AIzaSyDFf3LoI2iGoq21Py5mx0YdRZC4-wOu2jQ')
           .setCallback(function(e) {
             let url = 'nothing';
-            console.log(url);
+            // console.log(url);
             if (
               e[google.picker.Response.ACTION] === google.picker.Action.PICKED
             ) {
@@ -64,7 +65,7 @@ export class ContentRubricComponent implements OnInit {
               url = doc[google.picker.Document.URL];
             }
             const message = 'You picked: ' + url;
-            console.log(message);
+            // console.log(message);
           })
           .build();
         picker.setVisible(true);
@@ -86,7 +87,7 @@ export class ContentRubricComponent implements OnInit {
 
   pickerCallback(data) {
     let url = 'nothing';
-    console.log(url);
+    // console.log(url);
     if (data[google.picker.Response.ACTION] === google.picker.Action.PICKED) {
       const doc = data[google.picker.Response.DOCUMENTS][0];
       url = doc[google.picker.Document.URL];
@@ -97,6 +98,15 @@ export class ContentRubricComponent implements OnInit {
 
   deleteContent(index: number): void {
     this.deleteIndex.emit(index);
+  }
+
+  displayImage(url: string) {
+    const base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+    if (base64regex.test(url)) {
+      return `data:image/jpeg;base64,${url}`;
+    } else {
+      return `${url}`;
+    }
   }
 
   onFileChanged(event, contentQuiz) {
@@ -112,17 +122,7 @@ export class ContentRubricComponent implements OnInit {
           value: reader.result.split(',')[1]
         };
         contentQuiz.content = data.value;
-        console.log(data);
       });
-    }
-  }
-
-  displayImage(url: string) {
-    const base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-    if (base64regex.test(url)) {
-      return `data:image/jpeg;base64,${url}`;
-    } else {
-      return `${url}`;
     }
   }
 
@@ -156,7 +156,12 @@ export class ContentRubricComponent implements OnInit {
   }
 
   addYoutubeVideo(event: any, contentQuiz): void {
-    console.log(event);
+    // console.log(event);
     this.isYoutubeVideo = this.isValideYoutubeUrl(event, contentQuiz);
+  }
+
+  addIframe(event: any, contentQuiz): void {
+    console.log(event);
+    contentQuiz.content = this.sanitizer.bypassSecurityTrustHtml(event);
   }
 }

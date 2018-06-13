@@ -1,24 +1,44 @@
 <!-- IMAGES & embed -->
-<div class="prent-content-drop" [ngClass]="{ 'w-picto': contentQuiz.value === 'image'}" [ngStyle]="{'border-color':contentQuiz.value === 'image' ? colorCss : '' }">
-  <div class="support"></div>
-  <div class="type-contenu img" *ngIf="contentQuiz.value === 'image'">Image</div>
-  <div class="type-contenu text" *ngIf="contentQuiz.value === 'text'">
+<div class="prent-content-drop hvr-float-shadow">
+  <div class="support" ngxDragHandle></div>
+
+  <!-- ENTETE ZONE DRAGE MEDIA -->
+  <div class="type-contenu img" *ngIf="contentQuiz.type === 'image'">Image</div>
+  <div class="type-contenu text" *ngIf="contentQuiz.type === 'texte'">
     <i class="glyphicon glyphicon-text-size">&nbsp;</i>Texte</div>
-  <div class="type-contenu embed_a" *ngIf="contentQuiz.value === 'embed'">
+  <div class="type-contenu embed_a" *ngIf="contentQuiz.type === 'embed'">
     <i> </i>Embed</div>
   <div class="clear"></div>
+  <div class="type-contenu video" *ngIf="contentQuiz.type === 'video'">
+    <i class="icone glyphicon glyphicon-facetime-video"> </i>Video</div>
+  <div class="clear"></div>
+  <!-- ENTETE ZONE DRAGE MEDIA -->
 
   <div class="content-drop">
-    <div *ngIf="contentQuiz.value === 'embed'">
+    <!-- EMBED -->
+    <div *ngIf="contentQuiz.type === 'embed'">
+      <div class="embed-responsive embed-responsive-16by9" [innerHtml]="contentQuiz.content">
+
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <!-- VIDEO -->
+    <div *ngIf="contentQuiz.type === 'video'">
       <div class="embed-responsive embed-responsive-16by9">
         <iframe class="embed-responsive-item" [src]="getUrl(contentQuiz.content)"></iframe>
       </div>
       <div class="clear"></div>
     </div>
-    <div *ngIf="contentQuiz.value === 'text'">
-      <app-ngx-editor [placeholder]="'Entrer text ici...'" [(ngModel)]="contentQuiz.content" [spellcheck]="true"></app-ngx-editor>
+
+    <!-- wyswig -->
+    <div *ngIf="contentQuiz.type === 'texte'">
+      <!-- <div [froalaEditor]="options" [(froalaModel)]="contentQuiz.content"></div> -->
+      <quill-editor [placeholder]="'Entrer texte ici ...'" [(ngModel)]="contentQuiz.content"></quill-editor>
     </div>
-    <div *ngIf="contentQuiz.value === 'image'">
+
+    <!-- image: -->
+    <div *ngIf="contentQuiz.type === 'image'">
 
       <div id="result "></div>
       <div *ngIf="contentQuiz.content">
@@ -32,28 +52,39 @@
         </svg>
       </div>
       <div class="clear "></div>
-      <div class="outils " *ngIf="contentQuiz.value === 'image'">
-        <div class="w-50 " [style.background-color]="colorCss" (click)="contentQuiz.display = 'full'"></div>
+      <div class="outils " *ngIf="contentQuiz.type === 'image'">
+        <div class="w-50 " (click)="contentQuiz.display = 'full'"></div>
         <div class="w-50 " (click)="contentQuiz.display= 'center'"></div>
       </div>
     </div>
+
+    <!-- footer -->
     <div class="groupe-btn ">
       <div class="row ">
-        <div class="col-sm-4 pull-right" [ngClass]="{'text-type': contentQuiz.value === 'text'}">
-          <table>
+        <div class="col-sm-4 pull-right" [ngClass]="{'text-type': contentQuiz.type === 'texte'}">
+          <table [ngClass]="{'pour-img': (contentQuiz.type === 'image')}">
             <tr>
               <td>
                 <button class="btn btn-suppr" (click)="deleteContent(index)"></button>
               </td>
-              <td class="upload-img" *ngIf="contentQuiz.value === 'embed'">
+              <td class="upload-img" *ngIf="contentQuiz.type === 'video'">
                 <div class="input-group image-preview" [ngClass]="{'not-youtube': !isYoutubeVideo}">
+
                   <input placeholder="" [(ngModel)]="contentQuiz.urlYoutube" type="text" class="form-control image-preview-filename" placeholder="Votre url ..."
                     (blur)="addYoutubeVideo(contentQuiz.urlYoutube,contentQuiz)">
                 </div>
               </td>
-              <td class="upload-img" *ngIf="contentQuiz.value === 'image'">
+              <td class="upload-img" *ngIf="contentQuiz.type === 'embed'">
                 <div class="input-group image-preview">
-                  <input placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
+
+                  <input placeholder="" [(ngModel)]="contentQuiz.urlYoutube" (blur)="addIframe(contentQuiz.urlYoutube,contentQuiz)" type="text"
+                    class="form-control image-preview-filename" placeholder="Votre iframe ...">
+                </div>
+              </td>
+              <!-- images -->
+              <td class="upload-img" *ngIf="contentQuiz.type === 'image'">
+                <div class="input-group image-preview">
+                  <!-- <input placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled"> -->
                   <!-- don't give a name === doesn't send on POST/GET -->
                   <span class="input-group-btn">
                     <!-- image-preview-clear button -->
@@ -63,15 +94,17 @@
                     <div class="btn image-preview-input btn-primary" [style.background-color]="colorCss">
                       <span class="glyphicon glyphicon-folder-open"></span>
                       <span class="image-preview-input-title"></span>
-                      <input type="file" (change)="onFileChanged($event,contentQuiz)" accept="image/png, image/jpeg, image/gif" name="input-file-preview"
-                      />
+                      <input *ngIf="contentQuiz.type === 'image'" type="file" (change)="onFileChanged($event,contentQuiz)" accept="image/png, image/jpeg, image/gif"
+                        name="input-file-preview" />
+                      <input *ngIf="contentQuiz.type === 'video'" type="file" (change)="onFileChanged($event,contentQuiz)" accept="video/mp4, video/avi,video/3gpp"
+                        name="input-file-preview" />
                       <!-- rename it -->
                     </div>
-                    <button type="button" class="btn btn-labeled btn-primary" [style.background-color]="colorCss">
+                    <!-- <button type="button" class="btn btn-labeled btn-primary" [style.background-color]="colorCss">
                       <span class="btn-label">
                         <i class="glyphicon glyphicon-upload"></i>
                       </span>
-                    </button>
+                    </button> -->
                   </span>
                 </div>
               </td>

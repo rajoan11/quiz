@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { RubricDo, QuizDto, RubricDto } from '../../../donnee/quiz';
 import {
   QuizCudApplicatifServiceACI,
@@ -25,12 +25,15 @@ export class CreateQuizComponent implements OnInit {
   entrepriseSelected: Array<any> = [];
   finishQuizz = false;
   finishQuizzId = false;
+  hideContentRubric = false;
   isSuperAdmin = false;
+  isUpdateQuizz = false;
   newQuiz = new QuizDto();
   // rubrics: Array<RubricDo> = [];
   quizzStateAnonyme: boolean;
   savingLoad = false;
   searchTermEntreprise = new Subject<any>();
+  searchEntreprise: string;
   typeQuestionDefault = 'Nominatif';
   typeQuestions = [
     { type: 'Nominatif', value: false },
@@ -39,12 +42,10 @@ export class CreateQuizComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private enterpriseService: EnterpriseService,
     private rubriqueService: RubriqueService,
     private quizCudApplicatifService: QuizCudApplicatifServiceACI,
     private quizReadApplicatifService: QuizReadApplicatifServiceACI,
-    private toastService: ToastService,
-    private router: Router
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -73,18 +74,59 @@ export class CreateQuizComponent implements OnInit {
       : (this.isSuperAdmin = false);
   }
 
+  clickedInside($event: Event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickedOutside($event) {
+    this.enterprisesItems = [];
+    this.searchEntreprise = ``;
+    this.searchTermEntreprise.next();
+  }
+
   getEntreprises(): void {
     this.activatedRoute.data.subscribe(data => {
-      this.enterprises = data.enterprises;
-      this.enterprisesItems1 = this.enterprises.reduce((acc: any, curr) => {
-        const a = {
-          enterprise_id: curr['nid'],
-          enterprise_name: curr['title']
-        };
-        acc.push(a);
-        return acc;
-      }, []);
+      if (data && this.route.snapshot.paramMap.get('id')) {
+        this.isUpdateQuizz = true;
+        this.newQuiz = this.getMetaorQuestion(data.enterprises[0]);
+        this.formatEnterprises(data.enterprises[1]);
+      } else {
+        this.isUpdateQuizz = false;
+        this.formatEnterprises(data.enterprises);
+      }
     });
+  }
+
+  getMetaorQuestion(quiz: QuizDto): QuizDto {
+    quiz.rubriques.forEach((rubric: RubricDto) => {
+      rubric.meta_contents.forEach(meta => {
+        meta.type_content = 'metaContent';
+      });
+      rubric.questions.forEach(meta => {
+        meta.type_content = 'question';
+      });
+      rubric.contents_rubriques = [
+        ...rubric.meta_contents,
+        ...rubric.questions
+      ].sort((a, b) => {
+        return a.poids - b.poids;
+      });
+    });
+    console.log(quiz);
+    return quiz;
+  }
+
+  formatEnterprises(enterprises): void {
+    this.enterprisesItems1 = enterprises.reduce((acc: any, curr) => {
+      const a = {
+        enterprise_id: curr['nid'],
+        enterprise_name: curr['title']
+      };
+      acc.push(a);
+      return acc;
+    }, []);
   }
 
   getColors(): void {
@@ -116,12 +158,40 @@ export class CreateQuizComponent implements OnInit {
       this.newQuiz.enterprise_forms = [];
       this.newQuiz.enterprise_forms.push(data);
     }
+    this.isUpdateQuizz
+      ? (this.newQuiz.id = parseInt(
+          this.route.snapshot.paramMap.get('id'),
+          null
+        ))
+      : (this.newQuiz.id = null);
+
+    this.isUpdateQuizz ? this.updateQuizz() : this.createQuizz();
+  }
+
+  createQuizz(): void {
     this.quizCudApplicatifService.createQuiz(this.newQuiz).subscribe(
       res => {
         if (res && res.success) {
           this.savingLoad = false;
           this.quizzStateAnonyme = this.newQuiz.is_anonyme;
           this.newQuiz = new QuizDto();
+          this.finishQuizz = true;
+          this.finishQuizzId = res.idquizz;
+        }
+      },
+      err => {
+        this.savingLoad = false;
+      }
+    );
+  }
+  updateQuizz(): void {
+    this.quizCudApplicatifService.updateQuiz(this.newQuiz).subscribe(
+      res => {
+        if (res && res.success) {
+          this.savingLoad = false;
+          this.quizzStateAnonyme = this.newQuiz.is_anonyme;
+          this.newQuiz = new QuizDto();
+          console.log('modification avec success');
           this.finishQuizz = true;
           this.finishQuizzId = res.idquizz;
         }
@@ -187,5 +257,17 @@ export class CreateQuizComponent implements OnInit {
         this.newQuiz.rubriques.splice(index, 1);
       }
     });
+  }
+
+  dropSuccess(): void {
+    this.hideContentRubric = true;
+  }
+
+  dragRubric(event): void {
+    this.hideContentRubric = event;
+  }
+
+  out(): void {
+    this.hideContentRubric = false;
   }
 }

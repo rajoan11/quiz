@@ -7,4 +7,5 @@ export class PointsRules {
   rubrique_target: string;
   rubrique_target_id: number;
   rubrique_target_poids: number;
+  active: boolean;
 }

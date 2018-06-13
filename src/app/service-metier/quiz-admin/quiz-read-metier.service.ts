@@ -24,7 +24,7 @@ export class QuizReadMetierService implements QuizReadMetierServiceACI {
     return this.quizReadBusinessDelegateService
       .getQuizs(params)
       .pipe(
-        tap(quizs => console.log(`fetched quizs`)),
+        // tap(quizs => console.log(`fetched quizs`)),
         catchError(this.handleError)
       );
   }
@@ -37,7 +37,7 @@ export class QuizReadMetierService implements QuizReadMetierServiceACI {
     return this.quizReadBusinessDelegateService
       .getColors()
       .pipe(
-        tap(quizs => console.log(`fetched colors`)),
+        // tap(quizs => console.log(`fetched colors`)),
         catchError(this.handleError)
       );
   }
@@ -46,7 +46,7 @@ export class QuizReadMetierService implements QuizReadMetierServiceACI {
     return this.quizReadBusinessDelegateService
       .getEnterprises()
       .pipe(
-        tap(entreprises => console.log(`fetched entreprises`)),
+        // tap(entreprises => console.log(`fetched entreprises`)),
         catchError(this.handleError)
       );
   }
@@ -66,6 +66,6 @@ export class QuizReadMetierService implements QuizReadMetierServiceACI {
   }
 
   private log(message: string) {
-    console.log(+message);
+    // console.log(+message);
   }
 }

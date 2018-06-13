@@ -25,6 +25,7 @@ export class ContentRubricQuestionComponent implements OnInit {
   allSections: Array<any> = [];
   @Input() colorCss: string;
   contraintes: Array<any>;
+  contraintesForLong: Array<any>;
   contrainteValue = 'text';
   endValue: string;
   fontawesomes: Array<any>;
@@ -67,15 +68,17 @@ export class ContentRubricQuestionComponent implements OnInit {
         name: 'Passer à la section suivante',
         value: false
       });
-      rubriques.forEach((rs, index) => {
-        const data = {
-          name: rs.name
-            ? `Passer à la section ${rs.name}`
-            : `Passer à la section ${index + 1}`,
-          value: index + 1
-        };
-        this.allSections.push(data);
-      });
+      if (rubriques && rubriques.length > 0) {
+        rubriques.forEach((rs, index) => {
+          const data = {
+            name: rs.name
+              ? `Passer à la section ${rs.name}`
+              : `Passer à la section ${index + 1}`,
+            value: index + 1
+          };
+          this.allSections.push(data);
+        });
+      }
       this.allSections.push({
         name: 'Envoyer le formulaire',
         value: 'null'
@@ -86,6 +89,9 @@ export class ContentRubricQuestionComponent implements OnInit {
   getContraintes(): void {
     this.quizReadApplicatifServiceACI.getContraintes().subscribe(res => {
       this.contraintes = res;
+      this.contraintesForLong = res.filter(resp => {
+        return resp.type_value !== 'number' && resp.type_value !== 'Text';
+      });
     });
   }
   getFontawesomes(): void {
@@ -111,7 +117,7 @@ export class ContentRubricQuestionComponent implements OnInit {
   }
   addOptionMsAutre(): void {}
 
-  addOptionMs(quizQuestion: any, others?: any): void {
+  addOptionMs(quizQuestion: any, others?: any, $event?: any): void {
     if (others) {
       const quest = new ResponseOption();
       quest.name = `Autres`;
@@ -126,6 +132,7 @@ export class ContentRubricQuestionComponent implements OnInit {
       quizQuestion.push(quest1);
       setTimeout(() => {
         this.vc.nativeElement.focus();
+        this.vc.nativeElement.select();
       }, 100);
       const quest = new ResponseOption();
       quest.name = `Autres`;
@@ -141,8 +148,6 @@ export class ContentRubricQuestionComponent implements OnInit {
       if (this.othersOptionExist) {
         quizQuestion.push(quest);
       }
-
-      console.log(quizQuestion);
     }
   }
   addOptionMsFirst(
@@ -203,6 +208,13 @@ export class ContentRubricQuestionComponent implements OnInit {
           slug: null
         });
       });
+      questionQuiz1.response_options.forEach((q1, index) => {
+        index === 0
+          ? (q1.name = 'minimum')
+          : index + 1 === questionQuiz1.response_options.length
+            ? (q1.name = 'maximum')
+            : (q1.name = '');
+      });
     }
   }
 
@@ -220,6 +232,14 @@ export class ContentRubricQuestionComponent implements OnInit {
           poids: index,
           slug: null
         });
+      });
+
+      questionQuiz1.response_options.forEach((q1, index) => {
+        index === 0
+          ? (q1.name = 'minimum')
+          : index + 1 === questionQuiz1.response_options.length
+            ? (q1.name = 'maximum')
+            : (q1.name = '');
       });
     }
   }

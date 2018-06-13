@@ -12,7 +12,8 @@ import {
   RubricDto,
   Attachement,
   Question,
-  PointsRules
+  PointsRules,
+  QuizDto
 } from '../../../donnee/quiz';
 import { QuestionService } from '../../../commun/service/question.service';
 
@@ -28,11 +29,13 @@ export class QuizRubricComponent implements OnInit {
   @Input() colorCss: string;
   contentQuizs: Array<any> = [];
   @Output() deleteRubrique: EventEmitter<number> = new EventEmitter<number>();
+  @Input() hideContentRubric: boolean;
   modalRef: BsModalRef;
   modalRefDelete: BsModalRef;
+  @Input() newQuiz: QuizDto;
   pointRedirectionActiveExist = false;
   questionQuizs: Array<any> = [];
-  scoreMax = 50;
+  scoreMax = 0;
   typeAttachement: string;
 
   @Input() newRubrique: RubricDto;
@@ -43,7 +46,50 @@ export class QuizRubricComponent implements OnInit {
     private questionService: QuestionService
   ) {}
 
-  openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<any>, index) {
+    this.scoreMax = 0;
+    this.newQuiz.rubriques.forEach((rubric: RubricDto) => {
+      rubric.contents_rubriques.forEach(question => {
+        if (question.type_content === 'question') {
+          if (question.type_question.slug === 'multiple_choice') {
+            const max = Math.max.apply(
+              Math,
+              question.response_options.map(o => {
+                return o.points;
+              })
+            );
+            this.scoreMax = Number(this.scoreMax) + Number(max > 0 ? max : 0);
+          }
+          if (question.type_question.slug === 'checkbox') {
+            const score2 = parseInt(
+              question.response_options.reduce((acc, curr) => {
+                let somme = 0;
+                curr.points > 0
+                  ? (somme = Number(acc) + Number(curr.points))
+                  : (somme = acc);
+                return somme;
+              }, 0),
+              null
+            );
+            this.scoreMax = Number(this.scoreMax) + Number(score2);
+          }
+          if (question.type_question.slug === 'list_scroll') {
+            const score3 = parseInt(
+              question.response_options.reduce((acc, curr) => {
+                let somme = 0;
+                curr.points > 0
+                  ? (somme = Number(acc) + Number(curr.points))
+                  : (somme = acc);
+                return somme;
+              }, 0),
+              null
+            );
+            this.scoreMax = Number(this.scoreMax) + Number(score3);
+          }
+        }
+      });
+    });
+    this.getLengthOfQuizz(index);
     this.modalRef = this.modalService.show(
       template,
       Object.assign(
@@ -76,8 +122,9 @@ export class QuizRubricComponent implements OnInit {
   }
   closeModal(template: TemplateRef<any>) {
     this.modalRef.hide();
-    this.newRubrique.points_rules = [];
-    this.newRubrique.points_rules.push(new PointsRules());
+    this.newRubrique.points_rules.length === 0
+      ? this.newRubrique.points_rules.push(new PointsRules())
+      : (this.newRubrique.points_rules = this.newRubrique.points_rules);
   }
 
   ngOnInit() {
@@ -90,14 +137,13 @@ export class QuizRubricComponent implements OnInit {
     this.getLengthOfQuizz();
   }
 
-  getLengthOfQuizz(): void {
-    this.arrayQuiz = Array.from(Array(this.quizLengthValue).keys(), n => n + 1);
+  getLengthOfQuizz(index?: number): void {
+    this.arrayQuiz = Array.from(
+      Array(this.quizLengthValue).keys(),
+      n => n + 1
+    ).filter(arr => arr !== index);
     this.arrayScore1 = Array.from(Array(this.scoreMax).keys(), n => n + 1);
     this.arrayScore2 = Array.from(Array(this.scoreMax).keys(), n => n + 1);
-  }
-
-  addTo($event: any) {
-    this.questionService.setQuestionChange(true);
   }
 
   activatePointRule(): void {

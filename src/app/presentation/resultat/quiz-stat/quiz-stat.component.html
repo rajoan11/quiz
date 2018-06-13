@@ -1,3 +1,76 @@
-<p>
-  quiz-stat works!
-</p>
+<div id="resultat">
+    <div class=" navbar">
+      <div class="container">
+          <div class="row">
+            <div class="col-md-3 col-sm-12 marg-25">
+                <a class="title">Réponses du quizz</a>
+            </div>
+            <div class="col-md-9 col-sm-12">
+              <ul class="group-btn">
+                <li>
+                  <a>Telecharger au format <span class="picto csv"></span></a>
+                </li>
+                <li>
+                  <a>Telecharger au format <span class="picto pdf"></span></a>
+                </li>
+                <li>
+                  <button class="btn quizz">Quitter ce quizz</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- CONTENUE RESULTATS -->
+    <div class="container">
+      <!-- TOTALE REPONSE -->
+      <div class="contenu">
+        <h2>TOTAL : 41 réponses</h2>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="btn-groupe">
+              <button class="btn btn-1">Résumé</button>
+              <button class="btn btn-2">Individuel</button>
+
+            </div>
+          </div>
+          <div class="col-sm-4 pull-right reset-float col-xs-12">
+            <div class="btn-groupe table">
+               <span> Réponses acceptées</span>
+                <mat-slide-toggle></mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <!-- ORDER -->
+    <div class="container">
+        <div class="order">
+            <p>
+              <a>rubrique 1 sur 1
+                <!-- <span>0</span>/
+                <span>5</span> -->
+              </a>
+            </p>
+              
+    
+          </div>
+          <p class="order-name">
+            <input type="text" placeholder="Nom rubrique" name="name">
+          </p>
+    </div>
+
+    <!-- reponse courte -->
+   <div class="container">
+     <div class="contenu pd-40">
+      <div class="type-contenu">Réponse courte</div>
+      <div>
+          <fusioncharts [id]="id" [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat" [dataSource]="dataSource"></fusioncharts>
+          <fusioncharts [id]="id1" [width]="width" [height]="height" [type]="type2" [dataFormat]="dataFormat" [dataSource]="dataSource"></fusioncharts>
+      </div>
+      <div class="after-contenu">Télécharger au format image</div>
+     </div>
+   </div>
+  </div>

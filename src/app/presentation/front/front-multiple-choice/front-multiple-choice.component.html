@@ -1,0 +1,7 @@
+<p class="title">{{question.description || 'Question (choix multiples)'}}</p>
+<mat-radio-group>
+  <mat-radio-button *ngFor="let option of question.response_options" 
+    [value]="option.slug" (change)="change($event)">
+    <span class="nb-400 padd">{{option.name}}</span>
+  </mat-radio-button>
+</mat-radio-group>

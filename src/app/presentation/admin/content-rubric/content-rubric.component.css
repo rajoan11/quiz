@@ -1,19 +1,21 @@
 .type-contenu {
   width: 29%;
-  float: right;
-  position: relative;
+  position: absolute;
   height: 40px;
   background-color: #0003;
   padding: 11px;
   padding-left: 50px;
   color: #fff;
   font-size: 18px;
+  right: 0;
+  top: 0;
 }
 .type-contenu.text {
   padding-left: 2%;
 }
 
-.type-contenu.img:before {
+.type-contenu.img:before,
+.type-contenu.video>i {
   position: absolute;
   content: '';
   width: 25px;
@@ -21,6 +23,12 @@
   background: url(/assets/images/picto-image.png) no-repeat center;
   background-size: contain;
   left: 14px;
+}
+.type-contenu.video>i{
+  background: none;
+  top: 10px;
+  font-size: 25px;
+
 }
 .type-contenu.embed_a:before {
   position: absolute;
@@ -33,6 +41,8 @@
 }
 .prent-content-drop .content-drop {
   padding-bottom: 115px;
+  padding-top: 50px;
+  padding-right: 5px;
 }
 .prent-content-drop .content-drop img {
   width: 100%;
@@ -59,17 +69,39 @@
   margin: 2%;
   cursor: pointer;
 }
-.content-drop .outils .w-50:first-child {
-  background: #fc6100 url(/assets/images/format2.png) no-repeat center;
-  background-size: 22px 21px;
+/* .content-drop .outils .w-50:hover{
+  background-color: var(--my-var);
+} */
+.content-drop .outils .w-50:first-child{
+  background:  url(/assets/images/format2h.png) no-repeat center;
+  background-size: 22px 22px;
   border-radius: 50%;
   height: 32px;
   width: 31px;
+  transition: 0.3s;
 }
+
+.content-drop .outils .w-50:hover:first-child{
+  background:var(--my-var) url(/assets/images/format2.png) no-repeat center;
+  background-size: 22px;
+}
+
 .content-drop .outils .w-50:last-child {
-  background: url(/assets/images/format2.jpg) no-repeat center;
+  background: url(/assets/images/format3.png) no-repeat center;
   background-size: contain;
+  background-size: 22px;
+  border-radius: 50%;
+  height: 32px;
+  width: 31px;
+  transition: 0.3s
 }
+
+.content-drop .outils .w-50:hover:last-child{
+  background:var(--my-var) url(/assets/images/format3h.png) no-repeat center;
+  background-size: 22px;
+  
+}
+
 /*.content-drop::after{
     position: absolute;
     content: '';
@@ -83,6 +115,10 @@
     border: 1px #dedcdc solid;
 }*/
 
+table.pour-img{
+  width: 100px;
+  float: right;
+}
 .prent-content-drop {
   background-color: #fff;
   position: relative;

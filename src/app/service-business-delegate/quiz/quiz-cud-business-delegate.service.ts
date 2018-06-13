@@ -24,10 +24,11 @@ export class QuizCudBusinessDelegateService
     return this.http.patch<any>(url, quiz);
   }
   updateQuiz(quiz: any) {
-    throw new Error('Method not implemented.');
+    const url = `${environment.apiUrl}/admin/form/${quiz.id}`;
+    return this.http.put<any>(url, quiz);
   }
   deleteQuiz(quizId: number) {
-    const url = `assets/mock/question.json`;
+    const url = `${environment.apiUrl}/admin/form/${quizId}`;
     return this.http.delete(url);
   }
 }

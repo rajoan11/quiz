@@ -1,12 +1,15 @@
 <!-- création quizz  -->
 <ng2-toasty [position]="'top-right'"></ng2-toasty>
 <div id="creation-quizz">
-  <div class="navbar creation-quizz bg-quizz" [style.background-color]="colorCss" [style.border-color]="colorCss">
+
+  <div class="navbar creation-quizz bg-quizz" [ngClass]="{'cssClass': finishQuizz}" [style.background-color]="colorCss" [style.border-color]="colorCss">
+
     <div class="container">
       <div class="liste">
         <ul class="liste1">
           <li class="title">
-            <a>Création de quizz</a>
+            <a *ngIf="isUpdateQuizz">Modification de quizz</a>
+            <a *ngIf="!isUpdateQuizz">Création de quizz</a>
           </li>
           <li class="btn-group" dropdown *ngIf="!finishQuizz">
 
@@ -37,7 +40,8 @@
             </ul>
           </li>
           <li>
-            <button class="btn" (click)="saveQuiz()" [disabled]="!newQuiz.name" [style.color]="colorCss">FINALISER LE QUIZZ</button>
+            <button class="btn" (click)="saveQuiz()" [disabled]="!newQuiz.name || !newQuiz.description ||isSuperAdmin && newQuiz.enterprise_forms.length===0"
+              [style.color]="colorCss">FINALISER LE QUIZZ</button>
           </li>
         </ul>
       </div>
@@ -47,7 +51,7 @@
   <div class="container" *ngIf="!finishQuizz">
     <app-loader [load]="savingLoad"></app-loader>
     <div class="row">
-      <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 bg" dnd-droppable (onDropSuccess)="transferRubricSuccess($event)" [dropZones]="['rubric']">
+      <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 bg">
         <div class="form-quizz">
           <div class="myrow">
             <mat-form-field class="example-full-width">
@@ -58,7 +62,7 @@
 
           <div class="myrow textarea">
             <mat-form-field class="example-full-width">
-              <textarea matInput placeholder="Description" name="" [(ngModel)]="newQuiz.description" required></textarea>
+              <textarea matTextareaAutosize minRows="1" matInput placeholder="Description" name="" [(ngModel)]="newQuiz.description" required></textarea>
             </mat-form-field>
           </div>
           <div class="myrow" *ngIf="isSuperAdmin">
@@ -69,7 +73,7 @@
             <!-- <div class="input-group">
                 <input class="form-control " type="text" [(ngModel)]="searchEntreprise" (ngModelChange)="onChangeEntreprise($event)">
               </div> -->
-            <div class="list-autocomplete">
+            <div class="list-autocomplete" (click)="clickedInside($event)">
               <div *ngFor="let item of enterprisesItems">
                 <span (click)="selectEnterprise(item)">{{item.enterprise_name}}</span>
               </div>
@@ -85,17 +89,18 @@
           </div>
         </div>
 
-        <div class="rubrique" dnd-sortable-container [sortableData]="newQuiz.rubriques" [dropZones]="['container-rubrique-parent']">
-          <div *ngFor="let rubric of newQuiz.rubriques; let x = index" dnd-sortable [sortableIndex]="x" [dragEnabled]="false">
-            <app-quiz-rubric (deleteRubrique)="deleteRubrique($event)" [position]="x" [quizLength]="newQuiz.rubriques.length" [newRubrique]="rubric"
-              [colorCss]="colorCss"></app-quiz-rubric>
+        <div class="rubrique ngx-dnd-container" ngxDroppable [removeOnSpill]="false" [model]="newQuiz.rubriques" dropZone="restricted-rubric"
+          (drop)="dropSuccess()" (out)="out()">
+          <div class="ngx-dnd-item" ngxDraggable *ngFor="let rubric of newQuiz.rubriques; let x = index" [model]="rubric " dropZone="restricted-rubric">
+            <app-quiz-rubric [hideContentRubric]="hideContentRubric" (deleteRubrique)="deleteRubrique($event)" [newQuiz]="newQuiz" [position]="x"
+              [quizLength]="newQuiz.rubriques.length" [newRubrique]="rubric" [colorCss]="colorCss"></app-quiz-rubric>
           </div>
         </div>
 
 
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 relative">
-        <app-quiz-question [colorCss]="colorCss">
+        <app-quiz-question [colorCss]="colorCss" (dragRubric)="dragRubric($event)">
           <!-- <em class="resp-menu"></em> -->
         </app-quiz-question>
       </div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { combineLatest } from 'rxjs/observable/combineLatest';
 
 import { QuizDto } from '../../donnee/quiz';
 import { QuizReadBusinessDelegateServiceACI } from './index';
@@ -19,8 +20,14 @@ export class QuizReadBusinessDelegateService
   }
 
   getQuiz(id: number): Observable<any> {
-    const url = `assets/mock/detail-quiz.json`;
-    return this.http.get<QuizDto>(url);
+    // const url = `assets/mock/detail-quiz.json`;
+    const url = `${environment.apiUrl}/admin/form/${id}`;
+    const url2 = `${environment.apiUrlDrupal}/entreprise/all`;
+    const combined = combineLatest(
+      this.http.get<QuizDto>(url),
+      this.http.get<any>(url2)
+    );
+    return combined;
   }
 
   getQuestion(): Observable<any> {

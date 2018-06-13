@@ -1,3 +1,9 @@
+body{
+  background-color: #00000008 !important;
+}
+.fin-quizz{
+  padding-bottom: 165px;
+}
 .fin-quizz .navbar {
   margin-bottom: 40px;
 }
@@ -9,6 +15,7 @@
 .body .fin-quizz .ng-star-insertedmat-form-field-empty.mat-form-field-label {
   font-weight: normal !important;
 }
+
 .fin-quizz p {
   color: #4f5e65;
   font-size: 15px;
@@ -17,6 +24,7 @@
 
 .fin-quizz small {
   font-size: 12px;
+  opacity: 0.8;
 }
 
 .fin-quizz .myrow.textarea {
@@ -36,14 +44,20 @@
 }
 .fin-quizz .btn {
   color: #fff;
-  font-size: 12px;
+  font-size: 14px;
   width: auto;
+  text-transform: uppercase;
 }
 .fin-quizz .toogle p {
   margin-bottom: 15px;
 }
 #creation-quizz {
   background-color: initial;
+  padding-top: 40px;
+}
+.navbar.finish-class{
+  margin-bottom: 0;
+  padding-bottom: 40px;
 }
 @media (max-width: 768px) {
   .fin-quizz .toogle .row {

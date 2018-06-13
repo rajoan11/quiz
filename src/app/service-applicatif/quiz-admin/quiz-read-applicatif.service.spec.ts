@@ -9,7 +9,10 @@ describe('QuizReadApplicatifService', () => {
     });
   });
 
-  it('should be created', inject([QuizReadApplicatifService], (service: QuizReadApplicatifService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created', inject(
+    [QuizReadApplicatifService],
+    (service: QuizReadApplicatifService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });

@@ -25,44 +25,37 @@ export class QuizCudMetierService implements QuizCudMetierServiceACI {
     const quizCopy = JSON.parse(JSON.stringify(quiz));
     this.formatQuizToSave(quizCopy);
     const { id, created_at, ...quizToSave } = quizCopy;
-    return this.quizCudBusinessDelegateService
-      .createQuiz(quizToSave)
-      .pipe(
-        tap(_ => this.log(`create successfully`)),
-        catchError(this.handleError)
-      );
+    return this.quizCudBusinessDelegateService.createQuiz(quizToSave).pipe(
+      tap(_ => this.log(`create successfully`)),
+      catchError(this.handleError)
+    );
   }
   updateQuiz(quiz: QuizDto) {
-    return this.quizCudBusinessDelegateService
-      .updateQuiz(quiz)
-      .pipe(
-        tap(_ => this.log(`update successfully`)),
-        catchError(this.handleError)
-      );
+    const quizCopy = JSON.parse(JSON.stringify(quiz));
+    this.formatQuizToSave(quizCopy);
+    const { created_at, ...quizToSave } = quizCopy;
+    return this.quizCudBusinessDelegateService.updateQuiz(quizToSave).pipe(
+      tap(_ => this.log(`update successfully`)),
+      catchError(this.handleError)
+    );
   }
   finishQuizz(quiz: QuizzPatch) {
-    return this.quizCudBusinessDelegateService
-      .finishQuizz(quiz)
-      .pipe(
-        tap(_ => this.log(`update successfully`)),
-        catchError(this.handleError)
-      );
+    return this.quizCudBusinessDelegateService.finishQuizz(quiz).pipe(
+      tap(_ => this.log(`update successfully`)),
+      catchError(this.handleError)
+    );
   }
   deleteQuiz(quizId: number) {
-    return this.quizCudBusinessDelegateService
-      .deleteQuiz(quizId)
-      .pipe(
-        tap(_ => this.log(`delete successfully`)),
-        catchError(this.handleError)
-      );
+    return this.quizCudBusinessDelegateService.deleteQuiz(quizId).pipe(
+      tap(_ => this.log(`delete successfully`)),
+      catchError(this.handleError)
+    );
   }
   changeStatusQuiz(quizId: number) {
-    return this.quizCudBusinessDelegateService
-      .changeStatusQuiz(quizId)
-      .pipe(
-        tap(_ => this.log(`update successfully`)),
-        catchError(this.handleError)
-      );
+    return this.quizCudBusinessDelegateService.changeStatusQuiz(quizId).pipe(
+      tap(_ => this.log(`update successfully`)),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error) {
@@ -70,15 +63,23 @@ export class QuizCudMetierService implements QuizCudMetierServiceACI {
   }
 
   private log(message: string) {
-    console.log(message);
+    // console.log(message);
   }
 
   private formatQuizToSave(quiz: QuizDto): void {
     quiz.rubriques.forEach((rubrique: RubricDto, index) => {
+      rubrique.questions = [];
+      rubrique.meta_contents = [];
+      if (!rubrique.name) {
+        rubrique.name = `rubrique ${index}`;
+      }
       rubrique.poids = index + 1;
       rubrique.contents_rubriques.forEach((content, indexC) => {
         if (content && content.type_content === 'question') {
           content.poids = indexC + 1;
+          if (!content.description) {
+            content.description = `question ${indexC}`;
+          }
           rubrique.questions.push(content);
         } else {
           content.poids = indexC + 1;

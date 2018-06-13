@@ -1,23 +1,19 @@
-<!--  <div dnd-droppable (onDropSuccess)="transferQuestionSuccess($event)" [dropZones]="['attachement']">
-  <div class="drop-zone-question" dnd-droppable (onDropSuccess)="transferQuestionSuccess($event)" [dropZones]="['question']"> -->
-
-
-
-<div dnd-sortable-container [sortableData]="newRubrique.contents_rubriques" [ngStyle]="{'min-height': '100px'}" [dropZones]="['attachement','attachement1']">
-  <div dnd-droppable class="drop-zone-question" [ngClass]="{'quest-exist': (newRubrique && newRubrique.contents_rubriques  && newRubrique.contents_rubriques.length>0) || quizLengthValue >1}"
-    (onDragOver)="addTo($event)" [dropZones]="['attachement','attachement1']">
+<div>
+  <i ngxDragHandle>
+  </i>
+  <div>
     <div class="order" [style.border-color]="colorCss">
       <p>
         <a>Rubrique
           <span>{{position+1}}</span> sur
           <span>{{quizLengthValue}}</span>
         </a>
-        <span class="pops" *ngIf="newRubrique.activate_points_rules && quizLengthValue > 1" (click)="openModal(template)"></span>
+        <span class="pops" *ngIf="newRubrique.activate_points_rules && quizLengthValue > 1" (click)="openModal(template,position+1)"></span>
       </p>
       <!-- <span class="order-option" (click)="activatePointRule()"></span> -->
-      <span class="order-option" mat-button [matMenuTriggerFor]="menu"></span>
+      <span class="order-option" mat-button [matMenuTriggerFor]="menu" *ngIf="quizLengthValue > 1"></span>
       <mat-menu #menu="matMenu" class="mat-menu-xx">
-        <button mat-menu-item>
+        <div mat-menu-item class="boutton">
           <span class="txt" *ngIf="!pointRedirectionActiveExist" (click)="activatePointRule()">Accéder à une section en fonction du nombre de points</span>
           <span class="txt" *ngIf="pointRedirectionActiveExist" [ngStyle]="{'opacity': '0.5'}" matTooltip="Merci de bien vouloir désactivé cette option sur la question avant de l'activer ici">Accéder à une section en fonction du nombre de points</span>
           <span class="svg" *ngIf="newRubrique.activate_points_rules">
@@ -26,16 +22,20 @@
             </svg>
           </span>
 
-        </button>
+        </div>
         <button mat-menu-item *ngIf="quizLengthValue>1" (click)="openModalDelete(templateDelete)">Supprimer Rubrique </button>
       </mat-menu>
     </div>
     <p class="order-name">
       <input type="text" placeholder="Nom rubrique" name="name" [(ngModel)]="newRubrique.name">
     </p>
-    <div class="parent-content">
-      <div *ngFor="let contentQuiz of newRubrique.contents_rubriques;let i = index" dnd-sortable [sortableIndex]="i">
-        <div *ngIf="contentQuiz">
+    <div class="ngx-dnd-container parent-content drop-zone-question" [ngClass]="{'quest-exist': (newRubrique && newRubrique.contents_rubriques  && newRubrique.contents_rubriques.length>0) || quizLengthValue >1}"
+      [ngStyle]="{'min-height': '100px'}" ngxDroppable [removeOnSpill]="false" [model]="newRubrique.contents_rubriques" dropZone="restricted-target">
+      <div class="ngx-dnd-item" ngxDraggable *ngFor="let contentQuiz of newRubrique.contents_rubriques;let i = index" [model]="contentQuiz"
+        dropZones="restricted-target">
+
+        <!-- <div *ngFor="let contentQuiz of newRubrique.contents_rubriques;let i = index" dnd-sortable [sortableIndex]="i"> -->
+        <div *ngIf="contentQuiz && !hideContentRubric">
           <app-content-rubric (deleteIndex)="onDeleteIndex($event)" [contentQuiz]='contentQuiz' [colorCss]="colorCss" [index]="i" *ngIf="contentQuiz.type_content !== 'question'"></app-content-rubric>
           <app-content-rubric-question (deleteIndex)="onDeleteIndex($event)" [questionQuiz]="contentQuiz" [newRubrique]="newRubrique"
             [colorCss]="colorCss" [index]="i" *ngIf="contentQuiz.type_content === 'question'" (pointRedirectionActive)="pointRedirectionActive($event)"></app-content-rubric-question>
@@ -71,7 +71,7 @@
 <ng-template #template class="generale-pops">
   <div class="modal-header text-center">
     <h3 class="modal-title">Rubrique {{position+1}}</h3>
-    <p class="small">SCORE MAX : 50</p>
+    <p class="small">SCORE MAX : {{scoreMax}}</p>
     <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
         <path fill="#000" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"
@@ -79,11 +79,14 @@
       </svg>
     </button>
   </div>
-  <div class="modal-body">
+  <div class="modal-body" *ngIf="scoreMax === 0">
+    <p class="pad">Pas de redirection</p>
+  </div>
+  <div class="modal-body" *ngIf="scoreMax > 0">
     <p class="pad">Cette fonction vous permet de diriger l’utilisateur vers une selon son nombre de point obtenu à la fin de cette section</p>
 
 
-    <div class="group-selection" *ngFor="let pr of newRubrique.points_rules; let i = index">
+    <div class="group-selection" [ngClass]="{'flou': !pr.active}" *ngFor="let pr of newRubrique.points_rules; let i = index">
       <!-- table1 -->
       <table class="table1" align="left">
         <tr>
@@ -92,13 +95,12 @@
           </td>
           <td>
             <mat-form-field>
-              <mat-select [(ngModel)]="pr.point_min" (change)="changePoint(i, newRubrique.points_rules.length)">
+              <mat-select [(ngModel)]="pr.point_min" (change)="changePoint(i, newRubrique.points_rules.length); pr.active = true">
                 <mat-option *ngFor="let score1 of arrayScore1" [value]="score1">
                   {{ score1 }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-
           </td>
           <td>
             <span>points</span>
@@ -108,13 +110,12 @@
           </td>
           <td>
             <mat-form-field>
-              <mat-select [(ngModel)]="pr.point_max" (change)="changePoint(i, newRubrique.points_rules.length)">
+              <mat-select [(ngModel)]="pr.point_max" (change)="changePoint(i, newRubrique.points_rules.length); pr.active = true">
                 <mat-option *ngFor="let score2 of arrayScore2" [value]="score2">
                   {{ score2 }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-
           </td>
           <td>
             <span>points</span>
@@ -129,7 +130,7 @@
           </td>
           <td>
             <mat-form-field>
-              <mat-select [(ngModel)]="pr.rubrique_target_poids" (change)="changePoint(i, newRubrique.points_rules.length)">
+              <mat-select [(ngModel)]="pr.rubrique_target_poids" (change)="changePoint(i, newRubrique.points_rules.length); pr.active = true">
                 <mat-option *ngFor="let aq of arrayQuiz" [value]="aq">
                   rubrique {{ aq }}
                 </mat-option>

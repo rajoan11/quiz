@@ -11,7 +11,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'resp', pathMatch: 'full' },
       {
-        path: 'resp',
+        path: 'resp/:id',
         component: QuizzResponseComponent
       }
     ]

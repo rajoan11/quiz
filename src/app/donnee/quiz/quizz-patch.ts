@@ -5,6 +5,7 @@ export class QuizzPatch {
     public read_score = false,
     public initialize_quizz = false,
     public ending_message = '',
-    public tilte_message = `Merci d'avoir répondu au quizz`
+    public tilte_message = ``,
+    public title_ending_message = `Merci d'avoir répondu au quizz`
   ) {}
 }
