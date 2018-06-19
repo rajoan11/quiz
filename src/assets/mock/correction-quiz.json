@@ -1,0 +1,810 @@
+{
+  "id": 227,
+  "name": "mmmmmmmmmmmmmmmmmmmmmmmmmmm",
+  "description": "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
+  "created_at": "2018-06-15T12:34:44+00:00",
+  "is_anonyme": false,
+  "accept_reponse": true,
+  "show_answer": true,
+  "read_score": true,
+  "initialize_quizz": false,
+  "ending_message": "",
+  "enterprise_forms": [
+    {
+      "enterprise_id": 8058,
+      "enterprise_name": "SNCF",
+      "form_id": 227
+    }
+  ],
+  "rubriques": [
+    {
+      "id": 186,
+      "name": "aaaaaaaaaaaaaaaaaaaaaaa",
+      "activate_points_rules": false,
+      "form_id": 227,
+      "questions": [
+        {
+          "id": 132,
+          "correction_explanation": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "description":
+            "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "placeholder": "",
+          "is_mandatory": false,
+          "activate_vote": false,
+          "with_validation_contrainte": false,
+          "response_redirection": false,
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Choix multiples",
+            "slug": "multiple_choice"
+          },
+          "response_options": [
+            {
+              "id": 193,
+              "slug": "option0",
+              "name": "option 1",
+              "poids": 1,
+              "correct_answer": true,
+              "points": 2,
+              "id_question": 132,
+              "action_id": 105,
+              "action": {
+                "id": 105,
+                "has_rule_direction": false
+              }
+            },
+            {
+              "id": 194,
+              "slug": "option1",
+              "name": "option 2",
+              "poids": 2,
+              "correct_answer": true,
+              "points": 0,
+              "id_question": 132,
+              "action_id": 106,
+              "action": {
+                "id": 106
+              }
+            },
+            {
+              "id": 195,
+              "slug": "option2",
+              "name": "option 3",
+              "poids": 3,
+              "correct_answer": false,
+              "points": 4,
+              "id_question": 132,
+              "action_id": 107,
+              "action": {
+                "id": 107
+              }
+            }
+          ],
+          "poids": 3,
+          "response_inputs": [
+            {
+              "value_input": "option0",
+              "is_texte": false
+            }
+          ]
+        },
+        {
+          "id": 133,
+          "correction_explanation": "",
+          "description": "ccccccccccccccccccccccccc",
+          "placeholder": "",
+          "is_mandatory": true,
+          "activate_vote": false,
+          "with_validation_contrainte": false,
+          "response_redirection": false,
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Cases à cocher",
+            "slug": "checkbox"
+          },
+          "response_options": [
+            {
+              "id": 196,
+              "slug": "option0",
+              "name": "option 1",
+              "poids": 1,
+              "correct_answer": false,
+              "points": 0,
+              "id_question": 133,
+              "action_id": 108,
+              "action": {
+                "id": 108,
+                "has_rule_direction": false
+              }
+            },
+            {
+              "id": 197,
+              "slug": "option1",
+              "name": "option 2",
+              "poids": 2,
+              "correct_answer": false,
+              "points": 4,
+              "id_question": 133,
+              "action_id": 109,
+              "action": {
+                "id": 109
+              }
+            },
+            {
+              "id": 198,
+              "slug": "option2",
+              "name": "option 3",
+              "poids": 3,
+              "correct_answer": false,
+              "points": 5,
+              "id_question": 133,
+              "action_id": 110,
+              "action": {
+                "id": 110
+              }
+            }
+          ],
+          "poids": 10,
+          "response_inputs": [
+            {
+              "value_input": "option2",
+              "is_texte": false
+            },
+            {
+              "value_input": "option0",
+              "is_texte": false
+            }
+          ]
+        },
+        {
+          "id": 134,
+          "correction_explanation": "",
+          "description": "ccccccccccccc",
+          "placeholder": "",
+          "is_mandatory": false,
+          "activate_vote": false,
+          "with_validation_contrainte": false,
+          "response_redirection": false,
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Réponse Courte",
+            "slug": "short_answer"
+          },
+          "response_options": [],
+          "poids": 4,
+          "response_inputs": [
+            {
+              "value_input": "repon ccc",
+              "is_texte": true
+            }
+          ]
+        },
+        {
+          "id": 135,
+          "correction_explanation": "scscscscs",
+          "description": "llllllllllllllllllllllllllllllllllll",
+          "placeholder": "",
+          "is_mandatory": false,
+          "activate_vote": false,
+          "with_validation_contrainte": false,
+          "response_redirection": false,
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Réponse Longue",
+            "slug": "width_answer"
+          },
+          "response_options": [],
+          "poids": 5,
+          "response_inputs": [
+            {
+              "value_input": "reponse lll",
+              "is_texte": true
+            }
+          ]
+        },
+        {
+          "id": 136,
+          "correction_explanation": "ccccccccccccccccccc",
+          "description": "dddddddddddddddddddddddddddd",
+          "placeholder": "",
+          "is_mandatory": false,
+          "activate_vote": false,
+          "with_validation_contrainte": false,
+          "response_redirection": false,
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Liste déroulante",
+            "slug": "list_scroll"
+          },
+          "response_options": [
+            {
+              "id": 199,
+              "slug": "option0",
+              "name": "option 1",
+              "poids": 1,
+              "correct_answer": false,
+              "points": -3,
+              "id_question": 136,
+              "action_id": 111,
+              "action": {
+                "id": 111,
+                "has_rule_direction": false
+              }
+            },
+            {
+              "id": 200,
+              "slug": "option1",
+              "name": "option 2",
+              "poids": 2,
+              "correct_answer": false,
+              "points": 0,
+              "id_question": 136,
+              "action_id": 112,
+              "action": {
+                "id": 112
+              }
+            },
+            {
+              "id": 201,
+              "slug": "option2",
+              "name": "option 3",
+              "poids": 3,
+              "correct_answer": false,
+              "points": 3,
+              "id_question": 136,
+              "action_id": 113,
+              "action": {
+                "id": 113
+              }
+            },
+            {
+              "id": 202,
+              "slug": "option3",
+              "name": "option 4",
+              "poids": 4,
+              "correct_answer": false,
+              "points": 3,
+              "id_question": 136,
+              "action_id": 114,
+              "action": {
+                "id": 114
+              }
+            }
+          ],
+          "poids": 9,
+          "response_inputs": [
+            {
+              "value_input": "option2",
+              "is_texte": false
+            }
+          ]
+        },
+        {
+          "id": 137,
+          "correction_explanation": "cxcxcxc",
+          "description": "llllllllllllllllllllllllllllllllllllllllllllll",
+          "placeholder": "",
+          "is_mandatory": false,
+          "activate_vote": false,
+          "with_validation_contrainte": false,
+          "response_redirection": false,
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Echelle linéaire",
+            "slug": "lineary_scale"
+          },
+          "response_options": [
+            {
+              "id": 203,
+              "name": "minimum",
+              "poids": 1,
+              "id_question": 137
+            },
+            {
+              "id": 204,
+              "name": "222",
+              "poids": 2,
+              "id_question": 137
+            },
+            {
+              "id": 205,
+              "name": "33333",
+              "poids": 3,
+              "id_question": 137
+            },
+            {
+              "id": 206,
+              "name": "4444444",
+              "poids": 4,
+              "id_question": 137
+            },
+            {
+              "id": 207,
+              "name": "maximum",
+              "poids": 5,
+              "id_question": 137
+            }
+          ],
+          "poids": 8,
+          "response_inputs": [
+            {
+              "value_input": 3,
+              "is_texte": true
+            }
+          ]
+        },
+        {
+          "id": 138,
+          "correction_explanation": "cscscscscscc",
+          "description": "dddddddddddddddddddddddddd",
+          "placeholder": "",
+          "is_mandatory": false,
+          "activate_vote": false,
+          "with_validation_contrainte": false,
+          "response_redirection": false,
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Date",
+            "slug": "date"
+          },
+          "response_options": [],
+          "poids": 7,
+          "response_inputs": [
+            {
+              "value_input": "2018-06-16",
+              "is_texte": true
+            }
+          ]
+        },
+        {
+          "id": 139,
+          "correction_explanation": "cscsccsc",
+          "description": "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Heure",
+            "slug": "hour"
+          },
+          "response_options": [],
+          "poids": 6,
+          "response_inputs": [
+            {
+              "value_input": "23:58",
+              "is_texte": true
+            }
+          ]
+        }
+      ],
+      "meta_contents": [
+        {
+          "type": "video",
+          "content": "https://www.youtube.com/watch?v=MCtfdk3qfLw",
+          "poids": 1
+        },
+        {
+          "type": "embed",
+          "content":
+            "<iframe width=\"854\" height=\"480\" src=\"https://www.youtube.com/embed/MCtfdk3qfLw\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+          "poids": 2
+        },
+        {
+          "type": "image",
+          "content":
+            "http://lcas.arkeup.com/dpor/quizz_symfony/web/quizz_images/5b23b264eb6ae.png",
+          "display": "full",
+          "poids": 11
+        },
+        {
+          "type": "texte",
+          "content":
+            "<p>svsvsvvsvsvsvsv <img src=\"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxITEhUSEhIVFRUVFRUVFRUVFRUVFRUVFRUWFhUVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OFxAQFy0dHR0rLS0tLS0tLS0tLS0tLS0tLS0tLSstLS0tLS0tKy0tKy0tLS0tLS0tLS0tLS0tLS0",
+          "poids": 12
+        }
+      ],
+      "points_rules": [],
+      "poids": 1,
+      "contents": [
+        {
+          "type": "video",
+          "content": "https://www.youtube.com/watch?v=MCtfdk3qfLw",
+          "poids": 1
+        },
+        {
+          "type": "embed",
+          "content":
+            "<iframe width=\"854\" height=\"480\" src=\"https://www.youtube.com/embed/MCtfdk3qfLw\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+          "poids": 2
+        },
+        {
+          "id": 132,
+          "correction_explanation": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "description":
+            "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "placeholder": "",
+          "is_mandatory": false,
+          "activate_vote": false,
+          "with_validation_contrainte": false,
+          "response_redirection": false,
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Choix multiples",
+            "slug": "multiple_choice"
+          },
+          "response_options": [
+            {
+              "id": 193,
+              "slug": "option0",
+              "name": "option 1",
+              "poids": 1,
+              "correct_answer": true,
+              "points": 2,
+              "id_question": 132,
+              "action_id": 105,
+              "action": {
+                "id": 105,
+                "has_rule_direction": false
+              }
+            },
+            {
+              "id": 194,
+              "slug": "option1",
+              "name": "option 2",
+              "poids": 2,
+              "correct_answer": true,
+              "points": 0,
+              "id_question": 132,
+              "action_id": 106,
+              "action": {
+                "id": 106
+              }
+            },
+            {
+              "id": 195,
+              "slug": "option2",
+              "name": "option 3",
+              "poids": 3,
+              "correct_answer": false,
+              "points": 4,
+              "id_question": 132,
+              "action_id": 107,
+              "action": {
+                "id": 107
+              }
+            }
+          ],
+          "poids": 3,
+          "response_inputs": [
+            {
+              "value_input": "option2",
+              "is_texte": false
+            }
+          ]
+        },
+        {
+          "id": 134,
+          "correction_explanation": "",
+          "description": "ccccccccccccc",
+          "placeholder": "",
+          "is_mandatory": false,
+          "activate_vote": false,
+          "with_validation_contrainte": false,
+          "response_redirection": false,
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Réponse Courte",
+            "slug": "short_answer"
+          },
+          "response_options": [],
+          "poids": 4,
+          "response_inputs": [
+            {
+              "value_input": "repon ccc",
+              "is_texte": true
+            }
+          ]
+        },
+        {
+          "id": 135,
+          "correction_explanation": "scscscscs",
+          "description": "llllllllllllllllllllllllllllllllllll",
+          "placeholder": "",
+          "is_mandatory": false,
+          "activate_vote": false,
+          "with_validation_contrainte": false,
+          "response_redirection": false,
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Réponse Longue",
+            "slug": "width_answer"
+          },
+          "response_options": [],
+          "poids": 5,
+          "response_inputs": [
+            {
+              "value_input": "reponse lll",
+              "is_texte": true
+            }
+          ]
+        },
+        {
+          "id": 139,
+          "correction_explanation": "cscsccsc",
+          "description": "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Heure",
+            "slug": "hour"
+          },
+          "response_options": [],
+          "poids": 6,
+          "response_inputs": [
+            {
+              "value_input": "23:58",
+              "is_texte": true
+            }
+          ]
+        },
+        {
+          "id": 138,
+          "correction_explanation": "cscscscscscc",
+          "description": "dddddddddddddddddddddddddd",
+          "placeholder": "",
+          "is_mandatory": false,
+          "activate_vote": false,
+          "with_validation_contrainte": false,
+          "response_redirection": false,
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Date",
+            "slug": "date"
+          },
+          "response_options": [],
+          "poids": 7,
+          "response_inputs": [
+            {
+              "value_input": "2018-06-16",
+              "is_texte": true
+            }
+          ]
+        },
+        {
+          "id": 137,
+          "correction_explanation": "cxcxcxc",
+          "description": "llllllllllllllllllllllllllllllllllllllllllllll",
+          "placeholder": "",
+          "is_mandatory": false,
+          "activate_vote": false,
+          "with_validation_contrainte": false,
+          "response_redirection": false,
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Echelle linéaire",
+            "slug": "lineary_scale"
+          },
+          "response_options": [
+            {
+              "id": 203,
+              "name": "minimum",
+              "poids": 1,
+              "id_question": 137
+            },
+            {
+              "id": 204,
+              "name": "222",
+              "poids": 2,
+              "id_question": 137
+            },
+            {
+              "id": 205,
+              "name": "33333",
+              "poids": 3,
+              "id_question": 137
+            },
+            {
+              "id": 206,
+              "name": "4444444",
+              "poids": 4,
+              "id_question": 137
+            },
+            {
+              "id": 207,
+              "name": "maximum",
+              "poids": 5,
+              "id_question": 137
+            }
+          ],
+          "poids": 8,
+          "response_inputs": [
+            {
+              "value_input": 3,
+              "is_texte": true
+            }
+          ]
+        },
+        {
+          "id": 136,
+          "correction_explanation": "ccccccccccccccccccc",
+          "description": "dddddddddddddddddddddddddddd",
+          "placeholder": "",
+          "is_mandatory": false,
+          "activate_vote": false,
+          "with_validation_contrainte": false,
+          "response_redirection": false,
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Liste déroulante",
+            "slug": "list_scroll"
+          },
+          "response_options": [
+            {
+              "id": 199,
+              "slug": "option0",
+              "name": "option 1",
+              "poids": 1,
+              "correct_answer": false,
+              "points": -3,
+              "id_question": 136,
+              "action_id": 111,
+              "action": {
+                "id": 111,
+                "has_rule_direction": false
+              }
+            },
+            {
+              "id": 200,
+              "slug": "option1",
+              "name": "option 2",
+              "poids": 2,
+              "correct_answer": false,
+              "points": 0,
+              "id_question": 136,
+              "action_id": 112,
+              "action": {
+                "id": 112
+              }
+            },
+            {
+              "id": 201,
+              "slug": "option2",
+              "name": "option 3",
+              "poids": 3,
+              "correct_answer": false,
+              "points": 3,
+              "id_question": 136,
+              "action_id": 113,
+              "action": {
+                "id": 113
+              }
+            },
+            {
+              "id": 202,
+              "slug": "option3",
+              "name": "option 4",
+              "poids": 4,
+              "correct_answer": false,
+              "points": 3,
+              "id_question": 136,
+              "action_id": 114,
+              "action": {
+                "id": 114
+              }
+            }
+          ],
+          "poids": 9,
+          "response_inputs": [
+            {
+              "value_input": "option2",
+              "is_texte": false
+            }
+          ]
+        },
+        {
+          "id": 133,
+          "correction_explanation": "",
+          "description": "ccccccccccccccccccccccccc",
+          "placeholder": "",
+          "is_mandatory": true,
+          "activate_vote": false,
+          "with_validation_contrainte": false,
+          "response_redirection": false,
+          "rubrique_id": 186,
+          "type_question": {
+            "name": "Cases à cocher",
+            "slug": "checkbox"
+          },
+          "response_options": [
+            {
+              "id": 196,
+              "slug": "option0",
+              "name": "option 1",
+              "poids": 1,
+              "correct_answer": false,
+              "points": 0,
+              "id_question": 133,
+              "action_id": 108,
+              "action": {
+                "id": 108,
+                "has_rule_direction": false
+              }
+            },
+            {
+              "id": 197,
+              "slug": "option1",
+              "name": "option 2",
+              "poids": 2,
+              "correct_answer": false,
+              "points": 4,
+              "id_question": 133,
+              "action_id": 109,
+              "action": {
+                "id": 109
+              }
+            },
+            {
+              "id": 198,
+              "slug": "option2",
+              "name": "option 3",
+              "poids": 3,
+              "correct_answer": false,
+              "points": 5,
+              "id_question": 133,
+              "action_id": 110,
+              "action": {
+                "id": 110
+              }
+            }
+          ],
+          "poids": 10,
+          "response_inputs": [
+            {
+              "value_input": "option2",
+              "is_texte": false
+            },
+            {
+              "value_input": "option0",
+              "is_texte": false
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "content":
+            "http://lcas.arkeup.com/dpor/quizz_symfony/web/quizz_images/5b23b264eb6ae.png",
+          "display": "full",
+          "poids": 11
+        },
+        {
+          "type": "texte",
+          "content":
+            "<p>svsvsvvsvsvsvsv <img src=\"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxITEhUSEhIVFRUVFRUVFRUVFRUVFRUVFRUWFhUVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OFxAQFy0dHR0rLS0tLS0tLS0tLS0tLS0tLS0tLSstLS0tLS0tKy0tKy0tLS0tLS0tLS0tLS0tLS0",
+          "poids": 12
+        }
+      ]
+    },
+    {
+      "id": 187,
+      "name": "rubrique 1",
+      "activate_points_rules": false,
+      "form_id": 227,
+      "questions": [],
+      "meta_contents": [
+        {
+          "type": "texte",
+          "content": "<p>vddddddddddddd</p>",
+          "poids": 1
+        }
+      ],
+      "points_rules": [],
+      "poids": 2,
+      "contents": [
+        {
+          "type": "texte",
+          "content": "<p>vddddddddddddd</p>",
+          "poids": 1
+        }
+      ]
+    }
+  ],
+  "uid": "bceb08759dc05f180a85d5cdd5ca9f0d4ca918ce00b70858db703efedab28dc1",
+  "basic_color": "#673ab7"
+}

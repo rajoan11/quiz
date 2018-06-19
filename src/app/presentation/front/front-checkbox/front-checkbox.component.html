@@ -1,12 +1,14 @@
-<p class="title">Question (cases à cocher)</p>
+<p class="title">{{question.description || 'Question (cases à cocher)'}}</p>
 <mat-radio-group>
-  <mat-checkbox>
-    <span class="nb-400 padd">Réponse 1</span>
+  <mat-checkbox *ngFor="let option of question.response_options" 
+  [value]="option.slug" (change)="change($event, option.slug)">
+    <span class="nb-400 padd" *ngIf="option.slug !== 'autres'">{{option.name}}</span>
+    <ng-container *ngIf="option.slug === 'autres'">
+      <span class="other-option">Autres : </span>
+      <mat-form-field  (change)="changeTextInput()">
+        <input matInput [(ngModel)]="otherValue">
+      </mat-form-field>
+    </ng-container>
   </mat-checkbox>
-  <mat-checkbox>
-    <span class="nb-400 padd">Réponse 2</span>
-  </mat-checkbox>
-  <mat-checkbox>
-    <span class="nb-400 padd">Réponse 3</span>
-  </mat-checkbox>
-</mat-radio-group>
+</mat-radio-group> 
+<div class="obligatoire" *ngIf="question.is_mandatory">Obligatoire</div>

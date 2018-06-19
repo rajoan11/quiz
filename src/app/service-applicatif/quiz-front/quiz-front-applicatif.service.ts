@@ -11,4 +11,8 @@ export class QuizFrontApplicatifService implements QuizFrontApplicatifServiceACI
   public getQuiz(id: any): Observable<any> {
     return this.quizFrontMetierService.getQuiz(id);
   }
+
+  public getQuizCorrection(id: any): Observable<any> {
+    return this.quizFrontMetierService.getQuizCorrection(id);
+  }
 }

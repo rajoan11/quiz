@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, Injector } from '@angular/core';
 
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 
 @Component({
   selector: 'app-front-short-answer',
@@ -15,14 +15,21 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 export class FrontShortAnswerComponent implements OnInit, ControlValueAccessor {
-  @Input() question = {};
+  @Input() question: any;
+  @Input() errorMessage: string;
   private _value: any;
+  isValid = true;
+  ngControl: NgControl;
   onChangeValue = (_) => {};
   onTouchedValue = () => {};
 
-  constructor() { }
+
+  constructor(
+    private injector: Injector
+    ) { }
 
   ngOnInit() {
+    this.ngControl = this.injector.get(NgControl);
   }
 
   setDisabledState?(isDisabled: boolean): void { }
@@ -51,6 +58,9 @@ export class FrontShortAnswerComponent implements OnInit, ControlValueAccessor {
 
   change(event): void {
     this.onChangeValue(event.target.value);
+    this.isValid = this.ngControl.control.valid;
+    console.log(this.value);
+    console.log(this.ngControl.control.errors);
   }
 
 }

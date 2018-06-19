@@ -1,6 +1,7 @@
-<p class="title">Question (date)</p>
+<p class="title">{{question.description || 'Question (date)'}}</p>
 <div class="myrow date">
-  <mat-form-field class="example-full-width">
-    <input matInput type="date" placeholder="Jour/Mois/Année" value="Sushi">
+  <mat-form-field class="example-full-width" (change)="change($event)">
+    <input matInput type="date" [placeholder]="question.placeholder || 'Jour/Mois/Année'" value="Sushi">
   </mat-form-field>
 </div>
+<div class="obligatoire" *ngIf="question.is_mandatory">Obligatoire</div>

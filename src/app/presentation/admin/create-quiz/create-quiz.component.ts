@@ -54,7 +54,6 @@ export class CreateQuizComponent implements OnInit {
     this.autcompleteSearchEnterprise();
     this.checkRoles();
     this.pushDefaultRubrique();
-    document.documentElement.style.setProperty('--my-var', this.colorCss);
   }
 
   pushDefaultRubrique(): void {
@@ -91,10 +90,12 @@ export class CreateQuizComponent implements OnInit {
       if (data && this.route.snapshot.paramMap.get('id')) {
         this.isUpdateQuizz = true;
         this.newQuiz = this.getMetaorQuestion(data.enterprises[0]);
+
         this.formatEnterprises(data.enterprises[1]);
       } else {
         this.isUpdateQuizz = false;
         this.formatEnterprises(data.enterprises);
+        document.documentElement.style.setProperty('--my-var', this.colorCss);
       }
     });
   }
@@ -114,7 +115,12 @@ export class CreateQuizComponent implements OnInit {
         return a.poids - b.poids;
       });
     });
-    console.log(quiz);
+    this.colorCss = quiz.basic_color ? quiz.basic_color : '#FC6100';
+    document.documentElement.style.setProperty(
+      '--my-var',
+      quiz.basic_color ? quiz.basic_color : '#FC6100'
+    );
+
     return quiz;
   }
 

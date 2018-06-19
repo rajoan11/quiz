@@ -1,0 +1,104 @@
+<!-- choix multiple voire correction -->
+<!-- <div class="contenu correction barre-verticale-g  barre-verticale-r"> -->
+<div class="contenu correction " [ngClass]="{'barre-verticale-r': (question.type_question.slug === 'multiple_choice' || question.type_question.slug === 'checkbox' || question.type_question.slug === 'list_scroll') &&!findTrueAnswer(question.response_options,question.response_inputs), 'barre-verticale-g': (question.type_question.slug === 'multiple_choice' || question.type_question.slug === 'checkbox' || question.type_question.slug === 'list_scroll') && findTrueAnswer(question.response_options,question.response_inputs)}">
+  <span class="mon-point" *ngIf="question.type_question.slug === 'multiple_choice' || question.type_question.slug === 'checkbox' || question.type_question.slug === 'list_scroll'">1/2 points</span>
+  <p class="title">Question ({{question.type_question.name}})</p>
+  <div *ngIf="question.type_question.slug === 'multiple_choice'">
+    <mat-radio-group>
+
+      <!-- <mat-radio-button value="i" *ngFor="let reponOption of question.response_options;let i = index" [checked]="reponOption.slug === question.response_inputs[0].value_input"> -->
+      <mat-radio-button [value]="i" *ngFor="let reponOption of question.response_options;let i = index" [checked]="findReponse(question.response_inputs, reponOption.slug)">
+        <span class="nb-400 padd" [ngClass]="{'green': reponOption.correct_answer, 'red': !reponOption.correct_answer}">{{reponOption.name}}</span>
+        <i class="after-question" *ngIf="findReponse(question.response_inputs, reponOption.slug)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" *ngIf="reponOption.correct_answer">
+            <path [attr.fill]="reponOption.correct_answer? '#22BC3F' : '#D0021B'" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"
+            />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" *ngIf="!reponOption.correct_answer">
+            <path fill="#D0021B" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"
+            />
+          </svg>
+        </i>
+      </mat-radio-button>
+
+    </mat-radio-group>
+  </div>
+  <div *ngIf="question.type_question.slug === 'checkbox'">
+    <mat-radio-group>
+      <mat-checkbox *ngFor="let reponOption of question.response_options" [checked]="findReponse(question.response_inputs, reponOption.slug)">
+        <span class="nb-400 padd " [ngClass]="{'green': reponOption.correct_answer, 'red': !reponOption.correct_answer}">{{reponOption.name}}</span>
+        <i class="after-question" *ngIf="findReponse(question.response_inputs, reponOption.slug)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" *ngIf="reponOption.correct_answer">
+            <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" *ngIf="!reponOption.correct_answer">
+            <path fill="#D0021B" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"
+            />
+          </svg>
+        </i>
+      </mat-checkbox>
+    </mat-radio-group>
+  </div>
+  <div *ngIf="question.type_question.slug === 'short_answer'">
+    <div class="myrow textarea">
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="votre reponse" [(ngModel)]="question.response_inputs[0].value_input"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div *ngIf="question.type_question.slug === 'width_answer'">
+    <div class="myrow textarea">
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="votre reponse" [(ngModel)]="question.response_inputs[0].value_input"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div *ngIf="question.type_question.slug === 'list_scroll'">
+    <p class="relative" *ngFor="let reponOption of question.response_options">
+      <span class="tb-cell nb-400 padd" [ngClass]="{'green': reponOption.correct_answer, 'red': !reponOption.correct_answer}">{{reponOption.name}}</span>
+      <i class="absolute after-question" *ngIf="findReponse(question.response_inputs, reponOption.slug)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" *ngIf="reponOption.correct_answer">
+          <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />
+        </svg>
+        <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" *ngIf="!reponOption.correct_answer">
+          <path d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z" fill="#D0021B" fill-rule="evenodd"></path>
+        </svg>
+      </i>
+    </p>
+  </div>
+  <div *ngIf="question.type_question.slug === 'date'">
+    <div class="myrow date">
+      <mat-form-field class="example-full-width">
+        <input matInput type="date" [(ngModel)]="question.response_inputs[0].value_input">
+      </mat-form-field>
+    </div>
+  </div>
+  <div *ngIf="question.type_question.slug === 'hour'">
+    <div class="myrow date">
+      <mat-form-field class="example-full-width">
+        <input matInput type="time" [(ngModel)]="question.response_inputs[0].value_input">
+      </mat-form-field>
+    </div>
+  </div>
+  <div *ngIf="question.type_question.slug === 'lineary_scale'">
+    <div>
+      <div class="myrow progress">
+        <ul>
+          <li *ngFor="let item of question.response_options" [ngStyle]="{'max-width': (100/(question.response_options.length - 1)) +'%' }">
+            <span class="rond"></span>
+            <i>{{item.name}}</i>
+          </li>
+        </ul>
+
+        <mat-slider [value]="question.response_inputs[0].value_input" step="1" min="1" [max]="question.response_options.length" tickInterval="1"></mat-slider>
+      </div>
+    </div>
+  </div>
+
+  <div class="explicatif">
+    <p>
+      <span class="color">Explicatif</span>
+      <br/> {{question.correction_explanation}}
+    </p>
+  </div>
+</div>

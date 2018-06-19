@@ -17,7 +17,7 @@
   <div class="content-drop">
     <!-- EMBED -->
     <div *ngIf="contentQuiz.type === 'embed'">
-      <div class="embed-responsive embed-responsive-16by9" [innerHtml]="contentQuiz.content">
+      <div class="embed-responsive embed-responsive-16by9" [innerHtml]="trustUrl(contentQuiz.content)">
 
       </div>
       <div class="clear"></div>

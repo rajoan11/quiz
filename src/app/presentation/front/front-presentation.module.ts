@@ -17,9 +17,11 @@ import { FrontLinearScalComponent } from './front-linear-scal/front-linear-scal.
 import { FrontDateComponent } from './front-date/front-date.component';
 import { FrontHourComponent } from './front-hour/front-hour.component';
 import { FrontListScrollComponent } from './front-list-scroll/front-list-scroll.component';
+import { QuizCorrectionComponent } from './quiz-correction/quiz-correction.component';
+import { QuizzCorrectionQuestionComponent } from './quizz-correction-question/quizz-correction-question.component';
 
 @NgModule({
   imports: [CommonModule, FrontRoutingModule, SharedModule],
-  declarations: [FrontRootComponent, QuizzResponseComponent, FrontImageComponent, FrontVideoComponent, FrontEmbedComponent, FrontTextComponent, FrontMultipleChoiceComponent, FrontCheckboxComponent, FrontShortAnswerComponent, FrontLongAnswerComponent, FrontLinearScalComponent, FrontDateComponent, FrontHourComponent, FrontListScrollComponent]
+  declarations: [FrontRootComponent, QuizzResponseComponent, FrontImageComponent, FrontVideoComponent, FrontEmbedComponent, FrontTextComponent, FrontMultipleChoiceComponent, FrontCheckboxComponent, FrontShortAnswerComponent, FrontLongAnswerComponent, FrontLinearScalComponent, FrontDateComponent, FrontHourComponent, FrontListScrollComponent, QuizCorrectionComponent, QuizzCorrectionQuestionComponent]
 })
 export class FrontPresentationModule {}

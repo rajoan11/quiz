@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-front-embed',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./front-embed.component.css']
 })
 export class FrontEmbedComponent implements OnInit {
+  @Input() content: any;
 
-  constructor() { }
+  constructor(private sanitizer: DomSanitizer) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  trustUrl(url) {
+    return this.sanitizer.bypassSecurityTrustHtml(url);
   }
-
 }

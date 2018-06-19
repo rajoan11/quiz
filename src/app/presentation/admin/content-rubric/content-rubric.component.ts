@@ -162,6 +162,11 @@ export class ContentRubricComponent implements OnInit {
 
   addIframe(event: any, contentQuiz): void {
     console.log(event);
-    contentQuiz.content = this.sanitizer.bypassSecurityTrustHtml(event);
+    // contentQuiz.content = this.sanitizer.bypassSecurityTrustHtml(event);
+    contentQuiz.content = event;
+  }
+
+  trustUrl(url) {
+    return this.sanitizer.bypassSecurityTrustHtml(url);
   }
 }

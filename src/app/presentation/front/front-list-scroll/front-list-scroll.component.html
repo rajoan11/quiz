@@ -1,11 +1,11 @@
-<p class="title">Question (liste déroulante)</p>
+<p class="title">{{question.description || 'Question (liste déroulante)'}}</p>
 <div class="myrow date">
   <mat-form-field class="border-none-color">
-    <mat-select placeholder="Favorite food" class="border-none-color">
-      <mat-option *ngFor="let food of ['foods']" [value]="food">
-        {{ food }}
+    <mat-select [placeholder]="question.placeholder || 'Sélectionnez'" (change)="change($event)" class="border-none-color">
+      <mat-option *ngFor="let option of question.response_options" [value]="option.slug">
+        {{option.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 </div>
-<div class="obligatoire">Obligatoire</div>
+<div class="obligatoire" *ngIf="question.is_mandatory">Obligatoire</div>

@@ -1,76 +1,546 @@
 <div id="resultat">
-    <div class=" navbar">
-      <div class="container">
-          <div class="row">
-            <div class="col-md-3 col-sm-12 marg-25">
-                <a class="title">Réponses du quizz</a>
-            </div>
-            <div class="col-md-9 col-sm-12">
-              <ul class="group-btn">
-                <li>
-                  <a>Telecharger au format <span class="picto csv"></span></a>
-                </li>
-                <li>
-                  <a>Telecharger au format <span class="picto pdf"></span></a>
-                </li>
-                <li>
-                  <button class="btn quizz">Quitter ce quizz</button>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-    </div>
-    <!-- CONTENUE RESULTATS -->
+  <div class=" navbar">
     <div class="container">
-      <!-- TOTALE REPONSE -->
-      <div class="contenu">
-        <h2>TOTAL : 41 réponses</h2>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="btn-groupe">
-              <button class="btn btn-1">Résumé</button>
-              <button class="btn btn-2">Individuel</button>
-
-            </div>
-          </div>
-          <div class="col-sm-4 pull-right reset-float col-xs-12">
-            <div class="btn-groupe table">
-               <span> Réponses acceptées</span>
-                <mat-slide-toggle></mat-slide-toggle>
-            </div>
-          </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-12 marg-25">
+          <a class="title">Réponses du quizz</a>
         </div>
-      </div>
-    </div>
-    
-    
-    <!-- ORDER -->
-    <div class="container">
-        <div class="order">
-            <p>
-              <a>rubrique 1 sur 1
-                <!-- <span>0</span>/
-                <span>5</span> -->
+        <div class="col-md-9 col-sm-12">
+          <ul class="group-btn">
+            <li>
+              <a>Telecharger au format
+                <span class="picto csv"></span>
               </a>
-            </p>
-              
-    
-          </div>
-          <p class="order-name">
-            <input type="text" placeholder="Nom rubrique" name="name">
-          </p>
+            </li>
+            <li>
+              <a>Telecharger au format
+                <span class="picto pdf"></span>
+              </a>
+            </li>
+            <li>
+              <button class="btn quizz">Quitter ce quizz</button>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <!-- reponse courte -->
-   <div class="container">
-     <div class="contenu pd-40">
-      <div class="type-contenu">Réponse courte</div>
-      <div>
-          <fusioncharts [id]="id" [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat" [dataSource]="dataSource"></fusioncharts>
-          <fusioncharts [id]="id1" [width]="width" [height]="height" [type]="type2" [dataFormat]="dataFormat" [dataSource]="dataSource"></fusioncharts>
-      </div>
-      <div class="after-contenu">Télécharger au format image</div>
-     </div>
-   </div>
   </div>
+  <!-- CONTENUE RESULTATS -->
+  <div class="container">
+    <!-- TOTALE REPONSE -->
+    <div class="contenu">
+      <h2>TOTAL : 41 réponses</h2>
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="btn-groupe">
+            <button class="btn btn-1">Résumé</button>
+            <button class="btn btn-2">Individuel</button>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 pull-right reset-float col-xs-12">
+          <div class="btn-groupe table">
+            <span> Réponses acceptées</span>
+            <mat-slide-toggle></mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ORDER -->
+  <div class="container">
+    <div class="order">
+      <p>
+        <a>rubrique 1 sur 1
+          <!-- <span>0</span>/
+                <span>5</span> -->
+        </a>
+      </p>
+
+
+    </div>
+    <p class="order-name">
+      <input type="text" placeholder="Nom rubrique" name="name">
+    </p>
+  </div>
+
+  <!-- Choix multiple -->
+  <div class="contenu pd-40 pad-r-0">
+    <div class="type-contenu">Choix multiple</div>
+    <div style="clear:both;float:none;display: block;"></div>
+    <div style="clear:both;float:none;display: block;"></div>
+    <p class="title float">Question
+        <br/>
+        <small>41 Reponses</small>
+    </p>
+    <div class="Liste-contenu" id="choixmultiple">
+
+      <div class="relative">
+        <div class="absolute">
+          <p>14 <br>
+          <small>Reponse</small></p>
+
+        </div>
+          <ngx-charts-pie-chart class="relative" [view]="view" [scheme]="colorScheme" [results]="single" [legend]="showLegend" [explodeSlices]="explodeSlices"
+          [labels]="showLabels" [doughnut]="true" [gradient]="gradient" (select)="onSelect($event)">
+         
+          <ng-template #tooltipTemplate let-model="model">
+            <div class="mer-tooltip">
+              {{model && model.value}} %
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="#fff" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+                </svg>
+            </div>
+          </ng-template>
+        </ngx-charts-pie-chart>
+      </div>
+      <ul class="vale vale-bloc">
+          <li class="one">12,8% <br> <span>lorem ipsum </span>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg> -->
+        </li>
+          <li class="two">12,8% <br> <span>lorem ipsum </span>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg> -->
+          </li>
+          <li class="three">12,8% <br> <span>lorem ipsum </span>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg> -->
+          </li>
+          
+        </ul> 
+
+      <!-- <fusioncharts [id]="id1" [width]="width" [height]="height" [type]="type2" [dataFormat]="dataFormat" [dataSource]="dataSource"></fusioncharts> -->
+    </div>
+    <div style="clear:both;float:none;display: block;"></div>
+    <div class="after-contenu" (click)="downloadImage('choixmultiple')">Télécharger au format image
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+          <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+            <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+            />
+          </g>
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <!-- Cases à cocher-->
+  <div class="contenu pd-40  pad-r-0">
+    <div class="type-contenu">Cases à cocher</div>
+    <div style="clear:both;float:none;display: block;"></div>
+    <p class="title float">Question
+        <br/>
+        <small>41 Reponses</small>
+    </p>
+    <div class="Liste-contenu pad-r-0" id="caseacocher">
+      <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single" [barPadding]="30" [xAxis]="showXAxis"
+        [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+        <ng-template #tooltipTemplate let-model="model">
+          <div class="mer-tooltip">
+            {{model && model.value}} %
+            <!-- true or fales -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#fff" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg>
+          </div>
+        </ng-template>
+      </ngx-charts-bar-vertical>
+      <ul class="vale">
+          <li class="one">12,8% <br> <span>lorem ipsum </span>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg> -->
+        </li>
+          <li class="two marg-l">12,8% <br> <span>lorem ipsum </span>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg> -->
+          </li>
+          <li class="three">12,8% <br> <span>lorem ipsum </span>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg> -->
+          </li>
+          <li class="foure marg-l">12,8% <br> <span>lorem ipsum </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg>
+          </li>
+          <li class="five">12,8% <br> <span>lorem ipsum </span>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg> -->
+          </li>
+          <li class="six marg-l">12,8% <br> <span>lorem ipsum </span>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg> -->
+          </li>
+        </ul> 
+    </div>
+    <div style="clear:both;float:none;display: block;"></div>
+    <div class="after-contenu" (click)="downloadImage('caseacocher')">Télécharger au format image
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+          <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+            <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+            />
+          </g>
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <!-- Échelle linéaire-->
+  <div class="contenu pd-40 pad-r-0">
+    <div class="type-contenu">Échelle linéaire</div>
+    <div style="clear:both;float:none;display: block;"></div>
+    <p class="title float">Question
+        <br/>
+        <small>41 Reponses</small>
+    </p>
+    
+      <div class="Liste-contenu pad-l0" id="echellelineaire">
+        <div class="echellelineaire">
+          <ngx-charts-bar-vertical [barPadding]="30" [view]="view" [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
+            [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+            <ng-template #tooltipTemplate let-model="model">
+              <div class="mer-tooltip">
+                {{model && model.value}} %
+                <!-- a decommenter -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="#fff" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+                  </svg>
+              </div>
+            </ng-template>
+          </ngx-charts-bar-vertical>
+        </div>
+        <ul class="vale">
+          <li class="one">12,8% <br> <span>lorem ipsum </span>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg> -->
+        </li>
+          <li class="two marg-l">12,8% <br> <span>lorem ipsum </span>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg> -->
+          </li>
+          <li class="three">12,8% <br> <span>lorem ipsum </span>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg> -->
+          </li>
+          <li class="foure marg-l">12,8% <br> <span>lorem ipsum </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg>
+          </li>
+          <li class="five">12,8% <br> <span>lorem ipsum </span>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg> -->
+          </li>
+          <li class="six marg-l">12,8% <br> <span>lorem ipsum </span>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+            </svg> -->
+          </li>
+        </ul>    
+      </div>
+      <div style="clear:both;float:none;display: block;"></div>
+
+    <div class="after-contenu" (click)="downloadImage('echellelineaire')">Télécharger au format image
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+          <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+            <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+            />
+          </g>
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <!-- Liste déroulante-->
+  <div class="contenu pd-40">
+    <div class="type-contenu">Liste déroulante</div>
+    <p class="title">Question
+      <br/>
+      <small>41 Reponses</small>
+    </p>
+    <div class="Liste-contenu" id="listederoulante">
+      <table class="theme">
+        <td class="w-20">Lorem ipsume</td>
+        <td class="w-60">
+          <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+        </td>
+        <td class="text-center color">40%</td>
+      </table>
+
+      <table class="blue">
+        <td class="w-20">Lorem ipsume</td>
+        <td class="w-60">
+          <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+        </td>
+        <td class="text-center ">40%</td>
+      </table>
+
+      <table class="yellow">
+        <td class="w-20">Lorem ipsume</td>
+        <td class="w-60">
+          <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+        </td>
+        <td class="text-center color">40%</td>
+      </table>
+
+      <table class="green">
+        <td class="w-20">Lorem ipsume</td>
+        <td class="w-60">
+          <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+        </td>
+        <td class="text-center">40%</td>
+      </table>
+
+    </div>
+    <div class="after-contenu" (click)="downloadImage('listederoulante')">Télécharger au format image
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+          <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+            <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+            />
+          </g>
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <!-- Réponse courte -->
+  <div class="contenu pd-40">
+    <div class="type-contenu">Réponse courte</div>
+    <p class="title">Question
+      <br/>
+      <small>41 Reponses</small>
+    </p>
+    <div class="Liste-contenu " >
+      
+      <ng-scrollbar #scrollRef [trackY]="true" [trackX]="false">
+        <ul class="list-group" id="reponsecourte">
+          <li class="list-group-item">Djibouti</li>
+          <li class="list-group-item">Trinidad and Tobago</li>
+          <li class="list-group-item">Cape Verde</li>
+          <li class="list-group-item">Swaziland</li>
+          <li class="list-group-item">Mayotte</li>
+          <li class="list-group-item">Jordan</li>
+          <li class="list-group-item">Djibouti</li>
+          <li class="list-group-item">Trinidad and Tobago</li>
+          <li class="list-group-item">Cape Verde</li>
+          <li class="list-group-item">Swaziland</li>
+          <li class="list-group-item">Mayotte</li>
+          <li class="list-group-item">Jordan</li>
+          <li class="list-group-item">Djibouti</li>
+          <li class="list-group-item">Trinidad and Tobago</li>
+          <li class="list-group-item">Cape Verde</li>
+          <li class="list-group-item">Swaziland</li>
+          <li class="list-group-item">Mayotte</li>
+          <li class="list-group-item">Jordan</li>
+        </ul>
+        </ng-scrollbar>
+      
+
+    </div>
+    <div class="after-contenu" (click)="downloadImage('reponsecourte')">Télécharger au format image
+        <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+              <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+                <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+                />
+              </g>
+            </svg>
+          </span>
+    </div>
+  </div>
+
+  <!-- Réponse longue -->
+  <div class="contenu pd-40">
+    <div class="type-contenu">Réponse longue</div>
+    <p class="title">Question
+      <br/>
+      <small>41 Reponses</small>
+    </p>
+    <div class="Liste-contenu " >
+      
+        <ng-scrollbar #scrollRef [trackY]="true" [trackX]="false">
+        <ul class="list-group" id="reponselongue">
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit
+            amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">DjLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ibouti</li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit
+            amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit
+            amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">DjLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ibouti</li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit
+            amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit
+            amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">DjLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ibouti</li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
+          </ul>
+        </ng-scrollbar>
+      
+
+    </div>
+    <div class="after-contenu" (click)="downloadImage('reponselongue')">Télécharger au format image
+        <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+              <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+                <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+                />
+              </g>
+            </svg>
+          </span>
+    </div>
+  </div>
+  <!-- Réponse DATE -->
+  <div class="contenu pd-40">
+    <div class="type-contenu">Date</div>
+    <p class="title">Question
+      <br/>
+      <small>41 Reponses</small>
+    </p>
+    <div class="Liste-contenu " >
+    
+        <ng-scrollbar #scrollRef [trackY]="true" [trackX]="false">
+            <ul class="list-group" id="date">
+          <li class="list-group-item">09/12/2018</li>
+          <li class="list-group-item">10/12/2018</li>
+          <li class="list-group-item">11/12/2018</li>
+          <li class="list-group-item">12/12/2018</li>
+          <li class="list-group-item">13/12/2018</li>
+          <li class="list-group-item">14/12/2018</li>
+          <li class="list-group-item">15/12/2018</li>
+          <li class="list-group-item">16/12/2018</li>
+          <li class="list-group-item">17/12/2018</li>
+          <li class="list-group-item">20/12/2018</li>
+          <li class="list-group-item">22/12/2018</li>
+          <li class="list-group-item">25/12/2018</li>
+          <li class="list-group-item">26/12/2018</li>
+          <li class="list-group-item">2/01/2019</li>
+        </ul>
+        </ng-scrollbar>
+
+     
+
+    </div>
+    <div class="after-contenu" (click)="downloadImage('date')">Télécharger au format image
+        <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+              <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+                <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+                />
+              </g>
+            </svg>
+          </span>
+    </div>
+  </div>
+
+  <!-- Réponse HEURE -->
+  <div class="contenu pd-40">
+    <div class="type-contenu">Heure</div>
+    <p class="title">Question
+      <br/>
+      <small>41 Reponses</small>
+    </p>
+    <div class="Liste-contenu " id="heure">
+      <ul class="list-group">
+        <ng-scrollbar #scrollRef [trackY]="true" [trackX]="false">
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+          <li class="list-group-item">22h54</li>
+        </ng-scrollbar>
+
+      </ul>
+
+    </div>
+    <div class="after-contenu" (click)="downloadImage('reponselongue')">Télécharger au format image
+        <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+              <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+                <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+                />
+              </g>
+            </svg>
+          </span>
+    </div>
+  </div>
+
+</div>
+
+<!-- 
+    
+    <div class="contenu pd-40">
+    <div class="type-contenu">Réponse courte</div>
+    <p class="title">Question <br/> <small>41 Reponses</small> </p>
+    <div class="Liste-contenu ">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias voluptatibus magnam ipsum vitae tempora odit necessitatibus numquam ipsa,
+       hic facere magni corporis accusamus ullam dolore veniam dolores et fugit eius!
+    </div>
+    <div class="after-contenu">Télécharger au format image</div>
+  </div> 
+
+-->

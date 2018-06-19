@@ -1,7 +1,7 @@
-<p class="title">Question (réponse longue)</p>
+<p class="title">{{question.description || 'Question (réponse longue)'}}</p>
 <div class="myrow ">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="réponse longue" value="">
+  <mat-form-field class="example-full-width" (change)="change($event)">
+    <input matInput [placeholder]="question.placeholder || 'votre réponse'">
   </mat-form-field>
 </div>
-<div class="obligatoire">Obligatoire</div>
+<div class="obligatoire" *ngIf="question.is_mandatory">Obligatoire</div>

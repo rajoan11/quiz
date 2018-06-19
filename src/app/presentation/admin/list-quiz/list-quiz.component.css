@@ -32,6 +32,7 @@
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 .quizz-table {
   border-collapse: initial;
+  margin: 85px 0;
 }
 .mat-table {
   width: 100%;

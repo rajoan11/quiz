@@ -6,11 +6,17 @@ import { QuizFrontBusinessDelegateServiceACI } from './quiz-front-business-deleg
 import { environment } from '../../../environments/environment';
 
 @Injectable()
-export class QuizFrontBusinessDelegateService implements QuizFrontBusinessDelegateServiceACI {
-
+export class QuizFrontBusinessDelegateService
+  implements QuizFrontBusinessDelegateServiceACI {
   constructor(private http: HttpClient) {}
 
   public getQuiz(id: any) {
     return this.http.get(`${environment.apiUrl}/front/form/${id}`);
+  }
+
+  public getQuizCorrection(id: any) {
+    return this.http.get('assets/mock/correction-quiz.json');
+
+    // return this.http.get(`${environment.apiUrl}/front/record/${id}`);
   }
 }

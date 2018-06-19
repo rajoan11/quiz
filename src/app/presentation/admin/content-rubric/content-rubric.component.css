@@ -140,7 +140,13 @@ table.pour-img{
 }
 @media (max-width: 533px) {
   .type-contenu {
-    width: 33%;
+    width: 80%;
+  }
+  .prent-content-drop > .support{
+    left: 13px;
+    display: block;
+    margin: 0;
+    top: 15px;
   }
 }
 

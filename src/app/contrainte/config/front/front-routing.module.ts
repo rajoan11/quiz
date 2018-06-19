@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FrontRootComponent } from '../../../presentation/front/front-root/front-root.component';
 import { QuizzResponseComponent } from '../../../presentation/front/quizz-response/quizz-response.component';
+import { QuizCorrectionComponent } from '../../../presentation/front/quiz-correction/quiz-correction.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
       {
         path: 'resp/:id',
         component: QuizzResponseComponent
+      },
+      {
+        path: 'correction/:id',
+        component: QuizCorrectionComponent
       }
     ]
   }

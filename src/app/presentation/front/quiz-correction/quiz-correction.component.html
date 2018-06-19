@@ -1,0 +1,48 @@
+<app-loader [load]="loading">
+</app-loader>
+<header *ngIf="quiz">
+  <div class="nav-front">
+    <div class="container">
+      <h1>{{quiz.name}}</h1>
+      <!-- <p>{{quiz.description}} -->
+      <p>Vous venez de finalisez le quizz. </p>
+      <h1>Votre score final est de 0/8.
+      </h1>
+      <p>Vous pouvez consultez le détail de vos points ci-dessous.</p>
+    </div>
+  </div>
+</header>
+<div class="front-rubrique" *ngIf="quiz">
+  <div class="container">
+    <div class="contenu pad-contenu-collaps container">
+      <div *ngFor="let rubric of quiz.rubriques;let i = index">
+        <div class="order">
+          <p>
+            <a>Total des points {{rubric.name}} :
+              <span>0</span>/
+              <span>3</span>
+            </a>
+          </p>
+          <button type="button" (click)="isCollapsed[i] = !isCollapsed[i]" [attr.aria-expanded]="!isCollapsed[i]" aria-controls="collapseBasic">
+            <span class="caret"></span>
+          </button>
+        </div>
+        <div id="collapseBasic" [collapse]="!isCollapsed[i]" class="card card-block card-header">
+
+          <div class="well well-lg" *ngFor="let content of rubric.contents_rubriques">
+            <div *ngIf="content.type_content === 'metaContent'">
+              <app-front-image [content]="content.content" *ngIf="content.type === 'image'"></app-front-image>
+              <app-front-text [content]="content.content" *ngIf="content.type === 'texte'"></app-front-text>
+              <app-front-video [content]="content.content" *ngIf="content.type === 'video'"></app-front-video>
+              <app-front-embed [content]="content.content" *ngIf="content.type === 'embed'"></app-front-embed>
+            </div>
+            <div *ngIf="content.type_content === 'question'">
+              <app-quizz-correction-question [question]="content"></app-quizz-correction-question>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

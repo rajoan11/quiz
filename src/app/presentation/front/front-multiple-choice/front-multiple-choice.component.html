@@ -1,7 +1,13 @@
 <p class="title">{{question.description || 'Question (choix multiples)'}}</p>
 <mat-radio-group>
   <mat-radio-button *ngFor="let option of question.response_options" 
-    [value]="option.slug" (change)="change($event)">
-    <span class="nb-400 padd">{{option.name}}</span>
+    [value]="option.slug" (change)="change($event, option)">
+    <span class="nb-400 padd" *ngIf="option.slug !== 'autres'">{{option.name}}</span>
+    <ng-container *ngIf="option.slug === 'autres'">
+      <span class="other-option">Autres : </span>
+      <mat-form-field>
+        <input matInput [(ngModel)]="otherValue">
+      </mat-form-field>
+    </ng-container>
   </mat-radio-button>
-</mat-radio-group>
+</mat-radio-group><div class="obligatoire" *ngIf="question.is_mandatory">Obligatoire</div>
