@@ -16,6 +16,7 @@ export class QuizDto {
     public initialize_quizz = false,
     public ending_message = '',
     public basic_color = 'fc6100',
-    public rubriques = []
+    public rubriques = [],
+    public title_ending_message = ''
   ) {}
 }

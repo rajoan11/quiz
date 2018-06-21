@@ -29,7 +29,8 @@ export class ContentRubricQuestionComponent implements OnInit {
   contrainteValue = 'text';
   endValue: string;
   fontawesomes: Array<any>;
-  initialValue: string;
+  initialValue = 0;
+  isSelectedRedirection: any;
   @Input() index;
   @Output() deleteIndex: EventEmitter<number> = new EventEmitter<number>();
   listArrayLinear: Array<any>;
@@ -38,6 +39,7 @@ export class ContentRubricQuestionComponent implements OnInit {
   @Input() newRubrique: RubricDto;
   operator = [];
   othersOptionExist = false;
+  @Input() position;
   @Output()
   pointRedirectionActive: EventEmitter<boolean> = new EventEmitter<boolean>();
   _questionQuiz: any;
@@ -47,7 +49,7 @@ export class ContentRubricQuestionComponent implements OnInit {
   textLength: Array<number>;
   value1: number;
   value2: number;
-  @ViewChild('name') vc: ElementRef;
+  @ViewChild('nameselected') vc: ElementRef;
   constructor(
     private quizReadApplicatifServiceACI: QuizReadApplicatifServiceACI,
     private modalService: BsModalService,
@@ -61,6 +63,11 @@ export class ContentRubricQuestionComponent implements OnInit {
     this.getFontawesomes();
     this.getAllRubrique();
   }
+
+  @Input()
+  set isUpdateQuizz(isupdate: boolean) {
+    isupdate ? (this.showAddOption = true) : (this.showAddOption = false);
+  }
   getAllRubrique() {
     this.rubriqueService.getRubrique().subscribe(rubriques => {
       this.allSections = [];
@@ -72,11 +79,17 @@ export class ContentRubricQuestionComponent implements OnInit {
         rubriques.forEach((rs, index) => {
           const data = {
             name: rs.name
-              ? `Passer à la section ${rs.name}`
-              : `Passer à la section ${index + 1}`,
+              ? `Passer à la section ${rs.name} (${index + 1}/${
+                  rubriques.length
+                })`
+              : `Passer à la section ${index + 1} (${index + 1}/${
+                  rubriques.length
+                })`,
             value: index + 1
           };
-          this.allSections.push(data);
+          if (this.position !== index) {
+            this.allSections.push(data);
+          }
         });
       }
       this.allSections.push({
@@ -118,36 +131,37 @@ export class ContentRubricQuestionComponent implements OnInit {
   addOptionMsAutre(): void {}
 
   addOptionMs(quizQuestion: any, others?: any, $event?: any): void {
+    const quest = new ResponseOption();
+    quest.name = `Autres`;
+    quest.placeholder = `Autres`;
+    quest.slug = 'autres';
     if (others) {
-      const quest = new ResponseOption();
-      quest.name = `Autres`;
-      quest.placeholder = `Autres`;
-      quest.slug = 'autres';
       quizQuestion.push(quest);
       this.othersOptionExist = true;
     } else {
+      const max1 = Math.max.apply(
+        Math,
+        quizQuestion.map(o => {
+          return o.slug !== 'autres' && o.slug.split('option')[1];
+        })
+      );
       const quest1 = new ResponseOption();
       quest1.name = `option ${quizQuestion.length + 1}`;
       quest1.placeholder = `option ${quizQuestion.length + 1}`;
+      quest1.slug = `option${max1 + 1}`;
       quizQuestion.push(quest1);
-      setTimeout(() => {
-        this.vc.nativeElement.focus();
-        this.vc.nativeElement.select();
-      }, 100);
-      const quest = new ResponseOption();
-      quest.name = `Autres`;
-      quest.placeholder = `Autres`;
-      quest.slug = 'autres';
+
       quizQuestion.forEach((qz, index) => {
         if (qz.slug === 'autres') {
           quizQuestion.splice(index, 1);
-        } else {
-          qz.slug = `option${index}`;
         }
       });
+
       if (this.othersOptionExist) {
         quizQuestion.push(quest);
       }
+      this.vc.nativeElement.focus();
+      this.vc.nativeElement.select();
     }
   }
   addOptionMsFirst(
@@ -283,16 +297,18 @@ export class ContentRubricQuestionComponent implements OnInit {
     this.newRubrique.contents_rubriques.forEach((question, index) => {
       if (question.type_content === 'question') {
         question.question_is_selected = name;
-        !this._questionQuiz.response_redirection
-          ? (question.is_response_redirection = true)
-          : question.response_redirection
-            ? this.setAttributeQuestion(question, index)
-            : (question.is_response_redirection = false);
       }
     });
+    this.getAllRubrique();
   }
 
-  setAttributeQuestion(question, index) {
-    question.is_response_redirection = true;
+  checkIsredirect(_questionQuiz) {
+    const detect = this.newRubrique.contents_rubriques.filter(
+      (quest, index) => {
+        if (quest.response_redirection && !_questionQuiz.response_redirection) {
+          quest.response_redirection_exist = true;
+        }
+      }
+    );
   }
 }

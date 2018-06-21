@@ -8,7 +8,7 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./front-image.component.css']
 })
 export class FrontImageComponent implements OnInit {
-  @Input() content;
+  @Input() question;
   apiUrl: string;
 
   constructor() {

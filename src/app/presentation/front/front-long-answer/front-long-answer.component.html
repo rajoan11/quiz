@@ -4,4 +4,5 @@
     <input matInput [placeholder]="question.placeholder || 'votre réponse'">
   </mat-form-field>
 </div>
-<div class="obligatoire" *ngIf="question.is_mandatory">Obligatoire</div>
+<div class="obligatoire otherError" *ngIf="!isValid && !ngControl.control.hasError('required')">{{question.constraint?.text_error}}</div>
+<div class="obligatoire" *ngIf="question.is_mandatory && ngControl.control.hasError('required')">Obligatoire</div>

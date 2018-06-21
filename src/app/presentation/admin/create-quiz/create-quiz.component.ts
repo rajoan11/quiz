@@ -24,7 +24,8 @@ export class CreateQuizComponent implements OnInit {
   enterprisesItems1: Array<any>;
   entrepriseSelected: Array<any> = [];
   finishQuizz = false;
-  finishQuizzId = false;
+  finishQuizzId: number;
+  finishQuizzUidQuizz: number;
   hideContentRubric = false;
   isSuperAdmin = false;
   isUpdateQuizz = false;
@@ -90,6 +91,7 @@ export class CreateQuizComponent implements OnInit {
       if (data && this.route.snapshot.paramMap.get('id')) {
         this.isUpdateQuizz = true;
         this.newQuiz = this.getMetaorQuestion(data.enterprises[0]);
+        this.rubriqueService.setRubrique(this.newQuiz.rubriques);
 
         this.formatEnterprises(data.enterprises[1]);
       } else {
@@ -180,9 +182,9 @@ export class CreateQuizComponent implements OnInit {
         if (res && res.success) {
           this.savingLoad = false;
           this.quizzStateAnonyme = this.newQuiz.is_anonyme;
-          this.newQuiz = new QuizDto();
           this.finishQuizz = true;
           this.finishQuizzId = res.idquizz;
+          this.finishQuizzUidQuizz = res.uid_quizz;
         }
       },
       err => {
@@ -196,10 +198,10 @@ export class CreateQuizComponent implements OnInit {
         if (res && res.success) {
           this.savingLoad = false;
           this.quizzStateAnonyme = this.newQuiz.is_anonyme;
-          this.newQuiz = new QuizDto();
-          console.log('modification avec success');
           this.finishQuizz = true;
+
           this.finishQuizzId = res.idquizz;
+          this.finishQuizzUidQuizz = res.uid_quizz;
         }
       },
       err => {

@@ -32,7 +32,22 @@
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 .quizz-table {
   border-collapse: initial;
-  margin: 85px 0;
+  margin: 100px 0;
+}
+
+.quizz-table .container-table{
+  max-width: 100%;
+  width: 87%;
+  margin: 45px auto;
+  margin-bottom: 15px;
+  padding: 0;
+  max-height: 460px;
+  overflow: hidden;
+  border-bottom: 1px #000 solid;
+} 
+.quizz-table .container{
+  width: 80%;
+  max-width: 100%!important;
 }
 .mat-table {
   width: 100%;
@@ -65,13 +80,7 @@ ng-scrollbar {
     font-weight: 600;
     font-size: 15px;
 }
-.quizz-table .container-table {
-  margin: 45px auto 15px;
-  padding: 0;
-  max-height: 460px;
-  overflow: hidden;
-  border-bottom: 1px #000 solid;
-}
+
 
 .ng-scrollbar -vertical > .ng-scrollbar-thumb {
   background-color: #9ba7b5 !important;
@@ -276,10 +285,5 @@ ng-scrollbar {
   }
   .quizz-table .container-table {
     margin: 35px auto 15px;
-  }
-}
-@media (max-width:533px){
-  .add-quizz{
-    bottom: 0;
   }
 }

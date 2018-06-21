@@ -12,17 +12,14 @@
         "name": "option 1",
         "poids": null,
         "points": 0,
-        "slug": "",
-        "action": {
-          "has_rule_direction": false,
-          "rubrique_target_poids": null
-        }
+        "slug": "option1",
+        "action": {}
       }
     ],
     "is_mandatory": false,
     "response_redirection": false,
     "question_is_selected": "",
-    "is_response_redirection": true,
+
     "activate_vote": false,
     "constraint": "",
     "correction_explanation": "",
@@ -44,17 +41,14 @@
         "name": "option 1",
         "poids": null,
         "points": 0,
-        "slug": "",
-        "action": {
-          "has_rule_direction": false,
-          "rubrique_target_poids": null
-        }
+        "slug": "option1",
+        "action": {}
       }
     ],
     "is_mandatory": false,
     "response_redirection": false,
     "question_is_selected": "",
-    "is_response_redirection": true,
+
     "activate_vote": false,
     "constraint": "",
     "correction_explanation": "",
@@ -75,7 +69,7 @@
     "is_mandatory": false,
     "response_redirection": false,
     "question_is_selected": "",
-    "is_response_redirection": true,
+
     "activate_vote": false,
     "constraint": {},
     "correction_explanation": "",
@@ -96,9 +90,9 @@
     "is_mandatory": false,
     "response_redirection": false,
     "question_is_selected": "",
-    "is_response_redirection": true,
+
     "activate_vote": false,
-    "constraint": "",
+    "constraint": {},
     "correction_explanation": "",
     "description": "",
     "placeholder": "",
@@ -119,17 +113,14 @@
         "name": "option 1",
         "poids": null,
         "points": 0,
-        "slug": "",
-        "action": {
-          "has_rule_direction": false,
-          "rubrique_target_poids": null
-        }
+        "slug": "option1",
+        "action": {}
       }
     ],
     "is_mandatory": false,
     "response_redirection": false,
     "question_is_selected": "",
-    "is_response_redirection": true,
+
     "activate_vote": false,
     "constraint": "",
     "correction_explanation": "",
@@ -150,7 +141,7 @@
     "is_mandatory": false,
     "response_redirection": false,
     "question_is_selected": "",
-    "is_response_redirection": true,
+
     "activate_vote": false,
     "constraint": "",
     "correction_explanation": "",
@@ -171,7 +162,7 @@
     "is_mandatory": false,
     "response_redirection": false,
     "question_is_selected": "",
-    "is_response_redirection": true,
+
     "activate_vote": false,
     "constraint": "",
     "correction_explanation": "",

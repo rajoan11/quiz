@@ -23,6 +23,7 @@ export class FrontListScrollComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.question.response_options = this.question.response_options.sort((a, b) => a['poids'] - b['poids']);
   }
 
   change(event): void {

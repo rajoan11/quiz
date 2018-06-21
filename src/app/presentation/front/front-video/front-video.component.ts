@@ -10,14 +10,33 @@ export class FrontVideoComponent implements OnInit, OnChanges {
   @Input() content: any;
   url: any;
 
-  constructor(private domSanitizer: DomSanitizer) { }
+  constructor(private domSanitizer: DomSanitizer) {}
 
   ngOnInit() {}
 
   ngOnChanges() {
-    if (this.content.indexOf('youtube.com') > -1) {
-      this.content = this.content.replace('watch?v=', 'embed/');
+    this.url = this.getUrl(this.content);
+  }
+
+  getUrl(fileUrl: any) {
+    const idUrl = this.getIdYoutubeVideo(fileUrl);
+
+    return this.domSanitizer.bypassSecurityTrustResourceUrl(
+      `https://www.youtube.com/embed/${idUrl}`
+    );
+  }
+
+  getIdYoutubeVideo(url: any) {
+    if (url) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+
+      if (match && match[2].length === 11) {
+        return match[2];
+      } else {
+        return 'error';
+      }
     }
-    this.url = this.content && this.domSanitizer.bypassSecurityTrustResourceUrl(`https://${this.content}`);
+    return '';
   }
 }

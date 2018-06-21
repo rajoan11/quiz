@@ -1,10 +1,11 @@
+<ng2-toasty [position]="'top-right'"></ng2-toasty>
 <ng-container *ngIf="!isCorrectionPage">
-
   <header>
     <div class="nav-front">
       <div class="container">
         <h1>{{quiz.name}}</h1>
         <p>{{quiz.description}}
+
         </p>
       </div>
     </div>
@@ -16,9 +17,7 @@
         <div class="paginate-rubrique">
           <ul>
             <li *ngFor="let nbRubrique of quiz.rubriques; let j=index">
-              <span [class.actived]="(j < activeRubrique && j > 0 || j === 0)"
-                    [class.active]="j === activeRubrique"
-                    (click)="jumpTo(j)"></span>
+              <span [class.actived]="(j < activeRubrique && j > 0 || j === 0)" [class.active]="j === activeRubrique" (click)="jumpTo(j)"></span>
               <em *ngIf="j === activeRubrique" class="rubric-name">{{rubrique.name}}</em>
             </li>
           </ul>
@@ -35,69 +34,66 @@
         <form [formGroup]="forms[i]" *ngIf="forms[i]">
           <ng-container *ngFor="let question of rubrique.contents">
             <ng-container *ngIf="question.type === 'image'">
-              <app-front-image [content]="question.content"></app-front-image>
+              <app-front-image [question]="question"></app-front-image>
             </ng-container>
             <div class="contenu" *ngIf="question.type === 'video'">
               <app-front-video [content]="question.content"></app-front-video>
             </div>
-            <div class="contenu" *ngIf="question.type === 'texte'">    
+            <div class="contenu" *ngIf="question.type === 'embed'">
+              <app-front-embed [content]="question.content"></app-front-embed>
+            </div>
+            <div class="contenu" *ngIf="question.type === 'texte'">
+              <div [innerHtml]="question.content"></div>
+            </div>
+            <div class="contenu" *ngIf="question.type === 'embed'">    
               <div [innerHtml]="question.content"></div>
             </div>
 
             <!-- choix multiple -->
-            <div class="contenu " *ngIf="question.type_question?.slug === 'multiple_choice'" [id]="'control-'+question.id"
-              [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
-              <app-front-multiple-choice [question]="question" [formControlName]="'control-'+question.id"
-                [(ngModel)]="question.response_inputs" (ngModelChange)="change($event, rubrique)"
-                (goToSendForm)="goToSendForm($event)"></app-front-multiple-choice>
+            <div class="contenu " *ngIf="question.type_question?.slug === 'multiple_choice'" [id]="'control-'+question.id" [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
+              <app-front-multiple-choice [question]="question" [formControlName]="'control-'+question.id" [(ngModel)]="question.response_inputs"
+                (ngModelChange)="change($event, rubrique)" (goToSendForm)="goToSendForm($event)"></app-front-multiple-choice>
             </div>
 
             <!-- Case acocher -->
-            <div class="contenu" *ngIf="question.type_question?.slug === 'checkbox'" [id]="'control-'+question.id"
-              [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
-              <app-front-checkbox [question]="question" [formControlName]="'control-'+question.id"
-                [(ngModel)]="question.response_inputs" (ngModelChange)="change($event, rubrique)"></app-front-checkbox>
+            <div class="contenu" *ngIf="question.type_question?.slug === 'checkbox'" [id]="'control-'+question.id" [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
+              <app-front-checkbox [question]="question" [formControlName]="'control-'+question.id" [(ngModel)]="question.response_inputs"
+                (ngModelChange)="change($event, rubrique)"></app-front-checkbox>
             </div>
 
             <!-- question court -->
-            <div class="contenu" *ngIf="question.type_question?.slug === 'short_answer'" [id]="'control-'+question.id"
-              [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
-              <app-front-short-answer [question]="question" [formControlName]="'control-'+question.id"
-              [(ngModel)]="question.response_inputs[0]['value_input']" (ngModelChange)="change($event, rubrique)"></app-front-short-answer>
+            <div class="contenu" *ngIf="question.type_question?.slug === 'short_answer'" [id]="'control-'+question.id" [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
+              <app-front-short-answer [question]="question" [formControlName]="'control-'+question.id" [(ngModel)]="question.response_inputs[0]['value_input']"
+                (ngModelChange)="change($event, rubrique)"></app-front-short-answer>
             </div>
 
             <!-- Question (échelle linéaire)  -->
-            <div class="contenu" *ngIf="question.type_question?.slug === 'lineary_scale'" [id]="'control-'+question.id"
-              [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
-              <app-front-linear-scal [question]="question" [formControlName]="'control-'+question.id"
-              [(ngModel)]="question.response_inputs[0]['value_input']" (ngModelChange)="change($event, rubrique)"></app-front-linear-scal>
+            <div class="contenu" *ngIf="question.type_question?.slug === 'lineary_scale'" [id]="'control-'+question.id" [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
+              <app-front-linear-scal [question]="question" [formControlName]="'control-'+question.id" [(ngModel)]="question.response_inputs[0]['value_input']"
+                (ngModelChange)="change($event, rubrique)"></app-front-linear-scal>
             </div>
 
             <!-- Date  -->
-            <div class="contenu" *ngIf="question.type_question?.slug === 'date'" [id]="'control-'+question.id"
-              [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
-              <app-front-date [question]="question" [formControlName]="'control-'+question.id"
-              [(ngModel)]="question.response_inputs[0]['value_input']" (ngModelChange)="change($event, rubrique)"></app-front-date>
+            <div class="contenu" *ngIf="question.type_question?.slug === 'date'" [id]="'control-'+question.id" [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
+              <app-front-date [question]="question" [formControlName]="'control-'+question.id" [(ngModel)]="question.response_inputs[0]['value_input']"
+                (ngModelChange)="change($event, rubrique)"></app-front-date>
             </div>
 
             <!-- time  -->
-            <div class="contenu" *ngIf="question.type_question?.slug === 'hour'" [id]="'control-'+question.id"
-              [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
-              <app-front-hour [question]="question" [formControlName]="'control-'+question.id"
-              [(ngModel)]="question.response_inputs[0]['value_input']" (ngModelChange)="change($event, rubrique)"></app-front-hour>
+            <div class="contenu" *ngIf="question.type_question?.slug === 'hour'" [id]="'control-'+question.id" [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
+              <app-front-hour [question]="question" [formControlName]="'control-'+question.id" [(ngModel)]="question.response_inputs[0]['value_input']"
+                (ngModelChange)="change($event, rubrique)"></app-front-hour>
             </div>
             <!-- reponse longue  -->
-            <div class="contenu" *ngIf="question.type_question?.slug === 'width_answer'" [id]="'control-'+question.id"
-              [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
-              <app-front-long-answer [formControlName]="'control-'+question.id" [question]="question"
-              [(ngModel)]="question.response_inputs[0]['value_input']" (ngModelChange)="change($event, rubrique)"></app-front-long-answer>
+            <div class="contenu" *ngIf="question.type_question?.slug === 'width_answer'" [id]="'control-'+question.id" [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
+              <app-front-long-answer [formControlName]="'control-'+question.id" [question]="question" [(ngModel)]="question.response_inputs[0]['value_input']"
+                (ngModelChange)="change($event, rubrique)"></app-front-long-answer>
             </div>
 
             <!-- liste déroulante  -->
-            <div class="contenu" *ngIf="question.type_question?.slug === 'list_scroll'" [id]="'control-'+question.id"
-              [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
-              <app-front-list-scroll [question]="question" [formControlName]="'control-'+question.id"
-              [(ngModel)]="question.response_inputs[0]['value_input']" (ngModelChange)="change($event, rubrique)"></app-front-list-scroll>
+            <div class="contenu" *ngIf="question.type_question?.slug === 'list_scroll'" [id]="'control-'+question.id" [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
+              <app-front-list-scroll [question]="question" [formControlName]="'control-'+question.id" [(ngModel)]="question.response_inputs[0]['value_input']"
+                (ngModelChange)="change($event, rubrique)"></app-front-list-scroll>
             </div>
 
           </ng-container>
@@ -106,8 +102,8 @@
     </div>
     <!-- fin container -->
 
-  
-  <!--
+
+    <!--
 
     <div class="contenu">
       <p class="title">Question (choix multiple)</p>
@@ -129,13 +125,14 @@
 
   -->
 
-    
+
     <!-- FIN -->
 
 
     <div class="new-page">
-      <p class="retoure" *ngIf="i > 0" (click)="previous()">Retour</p>
-      <p class="suivant" (click)="next()">suivant</p>
+      <p class="retoure" *ngIf="activeRubrique > 0" (click)="previous()">Retour</p>
+      <p class="suivant" (click)="next()">{{activeRubrique
+        <quiz.rubriques.length-1 ? 'suivant' : 'terminer'}}</p>
     </div>
   </div>
 </ng-container>
@@ -144,17 +141,20 @@
   <div class="front-rubrique">
     <div class="contenu-header">
       <div class="container">
-        <h1 class="title">Merci d’avoir
+        <h1 class="title" *ngIf="quiz.ending_message === ''">Merci d’avoir
           <br class="bloc" />répondu au quizz !
           <br/>
-          <small>Votre score final est de 0/8.</small>
         </h1>
-        <p>Vous pouvez consultez le détail de vos points et la correction en cliquant ci-dessous :</p>
-        <button class="btn btn-one" [routerLink]="['/front/correction', quiz.uid]">Voir la correction</button>
+        <h1 *ngIf="quiz.ending_message !== ''">{{quiz.ending_message}}</h1>
+        <h1>
+          <small *ngIf="quiz.read_score">Votre score final est de {{score}}/{{scoreTarget}}.</small>
+        </h1>
+        <p *ngIf="quiz.show_answer">Vous pouvez consultez le détail de vos points et la correction en cliquant ci-dessous :</p>
+        <button class="btn btn-one" *ngIf="quiz.show_answer" [routerLink]="['/front/correction', idRecord]">Voir la correction</button>
       </div>
     </div>
     <div class="new-page">
-      <p class="suivant">Quitter</p>
+      <p class="suivant" routerLink="/admin">Quitter</p>
     </div>
   </div>
 </ng-container>

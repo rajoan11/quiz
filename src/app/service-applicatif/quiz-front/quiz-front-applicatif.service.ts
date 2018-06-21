@@ -15,4 +15,8 @@ export class QuizFrontApplicatifService implements QuizFrontApplicatifServiceACI
   public getQuizCorrection(id: any): Observable<any> {
     return this.quizFrontMetierService.getQuizCorrection(id);
   }
+
+  public saveQuizResponse(quiz: any): any {
+    return this.quizFrontMetierService.saveQuizResponse(quiz.rubriques);
+  }
 }

@@ -6,7 +6,7 @@
       <h1>{{quiz.name}}</h1>
       <!-- <p>{{quiz.description}} -->
       <p>Vous venez de finalisez le quizz. </p>
-      <h1>Votre score final est de 0/8.
+      <h1 *ngIf="quiz.read_score">Votre score final est de {{getScoreClient(quiz)}}/{{getAllScoreRubrique(quiz)}}.
       </h1>
       <p>Vous pouvez consultez le détail de vos points ci-dessous.</p>
     </div>
@@ -18,9 +18,17 @@
       <div *ngFor="let rubric of quiz.rubriques;let i = index">
         <div class="order">
           <p>
-            <a>Total des points {{rubric.name}} :
-              <span>0</span>/
-              <span>3</span>
+            <a *ngIf="quiz.read_score && rubric.score > 0 && getStrLength2(rubric.name)" [matTooltip]="'Total des points '+ rubric.name + ': '+rubric.score+'/'+getScoreRubrique(rubric)">Total des points {{rubric.name}} :
+              <span>{{rubric.score}}</span>/
+              <span>{{getScoreRubrique(rubric)}}</span>
+            </a>
+            <a *ngIf="quiz.read_score && rubric.score > 0 && !getStrLength2(rubric.name)">Total des points {{rubric.name}} :
+              <span>{{rubric.score}}</span>/
+              <span>{{getScoreRubrique(rubric)}}</span>
+            </a>
+            <a *ngIf="(!quiz.read_score || !rubric.score || rubric.score < 0 || rubric.score === 0) && getStrLength(rubric.name)" [matTooltip]="rubric.name">{{rubric.name}}
+            </a>
+            <a *ngIf="(!quiz.read_score || !rubric.score || rubric.score < 0 || rubric.score === 0) && !getStrLength(rubric.name)">{{rubric.name}}
             </a>
           </p>
           <button type="button" (click)="isCollapsed[i] = !isCollapsed[i]" [attr.aria-expanded]="!isCollapsed[i]" aria-controls="collapseBasic">
@@ -31,13 +39,13 @@
 
           <div class="well well-lg" *ngFor="let content of rubric.contents_rubriques">
             <div *ngIf="content.type_content === 'metaContent'">
-              <app-front-image [content]="content.content" *ngIf="content.type === 'image'"></app-front-image>
+              <app-front-image [question]="content" *ngIf="content.type === 'image'"></app-front-image>
               <app-front-text [content]="content.content" *ngIf="content.type === 'texte'"></app-front-text>
               <app-front-video [content]="content.content" *ngIf="content.type === 'video'"></app-front-video>
               <app-front-embed [content]="content.content" *ngIf="content.type === 'embed'"></app-front-embed>
             </div>
             <div *ngIf="content.type_content === 'question'">
-              <app-quizz-correction-question [question]="content"></app-quizz-correction-question>
+              <app-quizz-correction-question [question]="content" [quiz]="quiz"></app-quizz-correction-question>
             </div>
 
           </div>
@@ -46,3 +54,11 @@
     </div>
   </div>
 </div>
+<ng-container *ngIf="quiz">
+  <div class="front-rubrique">
+
+    <div class="new-page">
+      <p class="suivant">Quitter</p>
+    </div>
+  </div>
+</ng-container>

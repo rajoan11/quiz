@@ -27,6 +27,7 @@ export class FrontCheckboxComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.question.response_options = this.question.response_options.sort((a, b) => a['poids'] - b['poids']);
   }
 
   change(event: MatCheckboxChange, slug: string): void {

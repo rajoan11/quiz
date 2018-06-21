@@ -6,6 +6,8 @@ body {
   font-family: firaSans, muli, Arial, Helvetica, sans-serif;
   color: #4f5e65;
 }
+
+
 .padd {
   padding-left: 25px;
 }
@@ -27,11 +29,11 @@ body {
   clear: both;
   display: block;
 }
-.order p{
+.order p {
   max-width: 100%;
   width: 100%;
 }
-.order p>a{
+.order p > a {
   width: 80%;
   overflow: hidden;
   display: block;
@@ -190,7 +192,7 @@ p {
 }
 .correction .red {
   font-weight: 700;
-  color: var(--my-var);
+  color: #d0021b;
 }
 .correction .nb-400 {
   font-family: muli;
@@ -327,8 +329,8 @@ h1 > .bloc {
   background: #fff;
   box-shadow: none;
   min-height: 100px;
+  overflow: visible;
 }
-
 
 .contenu .progress mat-slider {
   display: table;
@@ -367,17 +369,21 @@ h1 > .bloc {
 }
 .contenu .progress ul li > i {
   position: absolute;
-  left: -1px;
+  left: -38%;
   top: -50px;
-  width: 15px;
+  width: 75px;
   height: 15px;
   font-size: 12px;
   font-weight: normal;
   font-style: normal;
+  text-align: center;
 }
 .contenu .progress ul li:last-child {
   display: inline-block;
   width: 0px !important;
+}
+.contenu .progress ul li:last-child > i {
+  left: -30px;
 }
 
 .title {
@@ -386,6 +392,7 @@ h1 > .bloc {
   font-family: muli;
   margin-bottom: 25px;
   color: #4f5e65;
+  word-wrap: break-word;
 }
 .contenu-header h1.title,
 .contenu-header h1,
@@ -537,4 +544,27 @@ textarea.mat-input-element {
   } */
 .hidden-content {
   display: none;
+}
+@media (max-width:533px){
+  .contenu.pad-contenu-collaps,
+  .nav-front, .contenu-header {
+    padding-left: 0!important;
+    padding-right: 0!important;
+  }
+  .contenu .mon-point{
+    width: 100%;
+  }
+  .front-rubrique .contenu {
+      padding: 75px 15px 25px;
+  }
+  .contenu .progress ul li > i{
+    left: -34%;
+    width: 65px;
+    background: #fff;
+    padding: 5px;
+    height: auto;
+  }
+}
+.barre-verticale-r .obligatoire {
+  color: #f70d0d!important;
 }

@@ -258,6 +258,10 @@ h3,
   background-color: #ececec;
 }
 
+.nbr.correction {
+  cursor: pointer !important;
+}
+
 @media (max-width: 992px) {
   .content-drop .groupe-btn .btn.edite {
     width: auto;
@@ -345,14 +349,7 @@ h3,
   top: 5px;
   z-index: 2;
 }
-@media (max-width: 533px) {
-  .w-100 {
-    width: 100% !important;
-    display: block;
-    float: none;
-    clear: both;
-  }
-}
+
 
 .list-icon .child-list > i {
   cursor: pointer;
@@ -421,7 +418,18 @@ h3,
   box-shadow: none;
   border-radius: 0;
 }
-.ngx-dnd-item.gu-transit{
+.ngx-dnd-item.gu-transit {
   box-shadow: 0px 8px 14px #8c8c8c;
   transition: 0.3s;
+}
+ol li.before{
+  padding-left: 24px;
+}
+@media (max-width: 533px) {
+  .w-100 {
+    width: 100% !important;
+    display: block;
+    float: none;
+    clear: both;
+  }
 }

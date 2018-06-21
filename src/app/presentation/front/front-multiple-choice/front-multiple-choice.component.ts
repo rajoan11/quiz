@@ -16,7 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class FrontMultipleChoiceComponent implements OnInit, ControlValueAccessor {
   @Input() question: any;
-  @Output() goToSendForm = new EventEmitter<boolean>();
+  @Output() goToSendForm = new EventEmitter<any>();
   private _value: any;
   otherValue: string;
   onChangeValue = (_) => {};
@@ -25,7 +25,9 @@ export class FrontMultipleChoiceComponent implements OnInit, ControlValueAccesso
 
   constructor( ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.question.response_options = this.question.response_options.sort((a, b) => a['poids'] - b['poids']);
+  }
 
   change(event, option: any): void {
     this.value = [];
@@ -40,7 +42,10 @@ export class FrontMultipleChoiceComponent implements OnInit, ControlValueAccesso
     }
     this.onChangeValue(this.value);
     if (option.action.hasOwnProperty('has_rule_direction')) {
-      this.goToSendForm.emit(option.action.has_rule_direction);
+      this.goToSendForm.emit({
+        has_rule_direction: option.action.has_rule_direction,
+        rubrique_target_poids: option.action.rubrique_target_poids
+      });
     }
   }
 

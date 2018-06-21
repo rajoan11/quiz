@@ -1,3 +1,6 @@
 .myrow.progress {
     overflow: visible;
 }
+.contenu .progress ul {
+    left: -4px !important;
+}

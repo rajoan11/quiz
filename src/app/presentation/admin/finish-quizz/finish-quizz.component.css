@@ -1,8 +1,12 @@
 body{
   background-color: #00000008 !important;
 }
-.fin-quizz{
+/* .fin-quizz{
   padding-bottom: 165px;
+  min-height: calc(100vh - 50px)!important;
+} */
+#creation-quizz{
+  min-height: calc(100vh - 50px)!important;
 }
 .fin-quizz .navbar {
   margin-bottom: 40px;

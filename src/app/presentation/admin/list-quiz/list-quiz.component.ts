@@ -7,6 +7,7 @@ import { MatTableDataSource, MatSort } from '@angular/material';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { PlatformLocation } from '@angular/common';
 
 import { QuizDto } from '../../../donnee/quiz';
 import { QuizReadApplicatifServiceACI } from '../../../service-applicatif/quiz-admin';
@@ -14,7 +15,6 @@ import { QuizCudApplicatifServiceACI } from '../../../service-applicatif/quiz-ad
 import { ToastService } from '../../../commun/service/toaster.service';
 import { EnterpriseService } from '../../../commun/service/enterprise.service';
 import { AuthenticationApplicatifServiceACI } from '../../../service-applicatif/authentication';
-
 @Component({
   selector: 'app-list-quiz',
   templateUrl: './list-quiz.component.html',
@@ -32,6 +32,8 @@ export class ListQuizComponent implements OnInit {
   idQuizTodelete: number;
   initialPage = 1;
   isSuperAdmin = false;
+  baseHrefUrl: string;
+
   matSelected = false;
   message: string;
   modalRef: BsModalRef;
@@ -55,6 +57,7 @@ export class ListQuizComponent implements OnInit {
   valueQuizToChange: boolean;
   constructor(
     private router: Router,
+    platformLocation: PlatformLocation,
     private authenticationApplicatifServiceACI: AuthenticationApplicatifServiceACI,
     private enterpriseService: EnterpriseService,
     private toastService: ToastService,
@@ -62,7 +65,11 @@ export class ListQuizComponent implements OnInit {
     private modalService: BsModalService,
     private quizCudApplicatifServiceACI: QuizCudApplicatifServiceACI,
     private quizReadApplicatifServiceACI: QuizReadApplicatifServiceACI
-  ) {}
+  ) {
+    this.baseHrefUrl = (platformLocation as any).location.href.split(
+      '/admin'
+    )[0];
+  }
 
   displayedColumns = [
     'name',
@@ -131,7 +138,7 @@ export class ListQuizComponent implements OnInit {
     selBox.style.left = '0';
     selBox.style.top = '0';
     selBox.style.opacity = '0';
-    selBox.value = `${window.location.origin}/front/resp/${val}`;
+    selBox.value = `${this.baseHrefUrl}/front/resp/${val}`;
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();

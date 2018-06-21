@@ -13,56 +13,56 @@ export class QuizReadMetierService implements QuizReadMetierServiceACI {
     private quizReadBusinessDelegateService: QuizReadBusinessDelegateServiceACI
   ) {}
   getQuiz(id: number) {
-    return this.quizReadBusinessDelegateService
-      .getQuiz(id)
-      .pipe(
-        tap(_ => this.log(`fetched hero id=${id}`)),
-        catchError(this.handleError)
-      );
+    return this.quizReadBusinessDelegateService.getQuiz(id).pipe(
+      tap(_ => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError)
+    );
   }
   getQuizs(params: any) {
-    return this.quizReadBusinessDelegateService
-      .getQuizs(params)
-      .pipe(
-        // tap(quizs => console.log(`fetched quizs`)),
-        catchError(this.handleError)
-      );
+    return this.quizReadBusinessDelegateService.getQuizs(params).pipe(
+      // tap(quizs => console.log(`fetched quizs`)),
+      catchError(this.handleError)
+    );
   }
   getQuestion() {
-    return this.quizReadBusinessDelegateService
-      .getQuestion()
-      .pipe(tap(quizs => {}), catchError(this.handleError));
+    return this.quizReadBusinessDelegateService.getQuestion().pipe(
+      tap(quizs => {}),
+      catchError(this.handleError)
+    );
   }
   getColors() {
-    return this.quizReadBusinessDelegateService
-      .getColors()
-      .pipe(
-        // tap(quizs => console.log(`fetched colors`)),
-        catchError(this.handleError)
-      );
+    return this.quizReadBusinessDelegateService.getColors().pipe(
+      // tap(quizs => console.log(`fetched colors`)),
+      catchError(this.handleError)
+    );
   }
 
   getEnterprises() {
-    return this.quizReadBusinessDelegateService
-      .getEnterprises()
-      .pipe(
-        // tap(entreprises => console.log(`fetched entreprises`)),
-        catchError(this.handleError)
-      );
+    return this.quizReadBusinessDelegateService.getEnterprises().pipe(
+      // tap(entreprises => console.log(`fetched entreprises`)),
+      catchError(this.handleError)
+    );
   }
   getContraintes() {
-    return this.quizReadBusinessDelegateService
-      .getContraintes()
-      .pipe(tap(entreprises => {}), catchError(this.handleError));
+    return this.quizReadBusinessDelegateService.getContraintes().pipe(
+      tap(entreprises => {}),
+      catchError(this.handleError)
+    );
   }
   getFontawesomes() {
-    return this.quizReadBusinessDelegateService
-      .getFontawesomes()
-      .pipe(tap(fas => {}), catchError(this.handleError));
+    return this.quizReadBusinessDelegateService.getFontawesomes().pipe(
+      tap(fas => {}),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error) {
-    return Observable.throw(error && error.message);
+    return Observable.throw(
+      error && {
+        status: error.status,
+        message: (error.error && error.error.message) || error.message
+      }
+    );
   }
 
   private log(message: string) {

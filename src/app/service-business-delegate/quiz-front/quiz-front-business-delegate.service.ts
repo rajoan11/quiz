@@ -15,8 +15,14 @@ export class QuizFrontBusinessDelegateService
   }
 
   public getQuizCorrection(id: any) {
-    return this.http.get('assets/mock/correction-quiz.json');
+    // return this.http.get('assets/mock/correction-quiz.json');
 
-    // return this.http.get(`${environment.apiUrl}/front/record/${id}`);
+    return this.http.get(`${environment.apiUrl}/front/record/${id}`);
+  }
+
+  public saveQuizResponse(quiz: any) {
+    return this.http.post(`${environment.apiUrl}/front/record`, {
+      rubriques: quiz
+    });
   }
 }

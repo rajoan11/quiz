@@ -16,6 +16,7 @@ import {
   QuizDto
 } from '../../../donnee/quiz';
 import { QuestionService } from '../../../commun/service/question.service';
+import { RubriqueService } from '../../../commun/service/rubrique.service';
 
 @Component({
   selector: 'app-quiz-rubric',
@@ -30,6 +31,7 @@ export class QuizRubricComponent implements OnInit {
   contentQuizs: Array<any> = [];
   @Output() deleteRubrique: EventEmitter<number> = new EventEmitter<number>();
   @Input() hideContentRubric: boolean;
+  @Input() isUpdateQuizz: boolean;
   modalRef: BsModalRef;
   modalRefDelete: BsModalRef;
   @Input() newQuiz: QuizDto;
@@ -43,7 +45,7 @@ export class QuizRubricComponent implements OnInit {
   quizLengthValue: number;
   constructor(
     private modalService: BsModalService,
-    private questionService: QuestionService
+    private rubriqueService: RubriqueService
   ) {}
 
   openModal(template: TemplateRef<any>, index) {
@@ -90,6 +92,10 @@ export class QuizRubricComponent implements OnInit {
       });
     });
     this.getLengthOfQuizz(index);
+    this.openModalContent(template, index);
+  }
+
+  openModalContent(template: TemplateRef<any>, index) {
     this.modalRef = this.modalService.show(
       template,
       Object.assign(
@@ -180,6 +186,10 @@ export class QuizRubricComponent implements OnInit {
     });
   }
   pointRedirectionActive($event): void {
-    this.pointRedirectionActiveExist = $event;
+    setTimeout(() => (this.pointRedirectionActiveExist = $event));
+  }
+
+  nameRubricChange(): void {
+    this.rubriqueService.setRubrique(this.newQuiz.rubriques);
   }
 }

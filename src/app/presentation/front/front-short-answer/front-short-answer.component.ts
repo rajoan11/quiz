@@ -59,8 +59,6 @@ export class FrontShortAnswerComponent implements OnInit, ControlValueAccessor {
   change(event): void {
     this.onChangeValue(event.target.value);
     this.isValid = this.ngControl.control.valid;
-    console.log(this.value);
-    console.log(this.ngControl.control.errors);
   }
 
 }

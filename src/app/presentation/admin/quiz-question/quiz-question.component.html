@@ -63,9 +63,9 @@
 
   <!-- </div> -->
 </ul>
-<ul class="attachement">
-  <li class="question ngx-dnd-container" ngxDroppable [copy]="true" (drag)="dragStart()" (out)="out()">
-    <div class="rubrique" class="ngx-dnd-item" ngxDraggable="[ 'restricted-rubric']" [model]="rubric">
+<ul class="attachement" ngxDroppable [copy]="true" (drag)="dragStart()" (out)="out()">
+  <li class="question ngx-dnd-container" ngxDraggable="[ 'restricted-rubric']" [model]="rubric">
+    <div class="rubrique" class="ngx-dnd-item">
       <svg class="test" xmlns="http://www.w3.org/2000/svg" width="35" height="33" viewBox="0 0 25 23">
         <g [attr.fill]="colorCss" fill-rule="evenodd">
           <rect width="25" height="9.615" rx="2" />

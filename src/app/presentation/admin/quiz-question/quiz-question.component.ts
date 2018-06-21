@@ -84,7 +84,5 @@ export class QuizQuestionComponent implements OnInit {
   dragStart(): void {
     this.dragRubric.emit(true);
   }
-  out(): void {
-    console.log('hereout');
-  }
+  out(): void {}
 }

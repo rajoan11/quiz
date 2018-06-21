@@ -59,9 +59,13 @@ export class QuizCudMetierService implements QuizCudMetierServiceACI {
   }
 
   private handleError(error) {
-    return Observable.throw(error && error.message);
+    return Observable.throw(
+      error && {
+        status: error.status,
+        message: (error.error && error.error.message) || error.message
+      }
+    );
   }
-
   private log(message: string) {
     // console.log(message);
   }
@@ -71,7 +75,7 @@ export class QuizCudMetierService implements QuizCudMetierServiceACI {
       rubrique.questions = [];
       rubrique.meta_contents = [];
       if (!rubrique.name) {
-        rubrique.name = `rubrique ${index}`;
+        rubrique.name = `rubrique ${index + 1}`;
       }
       rubrique.poids = index + 1;
       rubrique.contents_rubriques.forEach((content, indexC) => {

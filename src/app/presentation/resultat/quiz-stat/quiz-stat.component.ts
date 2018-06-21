@@ -43,6 +43,7 @@ export class QuizStatComponent implements OnInit {
   showYAxisLabel = false;
   yAxisLabel = 'Population';
   barPadding = '15';
+  yColor = {Tick: 'red'};
 
   colorScheme = {
     domain: ['#fc6100', '#9013fe', '#7ed321', '#C7B42C', '#1280fd', '#f8e71c', '#4a90e2']

@@ -53,8 +53,12 @@
       </div>
       <div class="clear "></div>
       <div class="outils " *ngIf="contentQuiz.type === 'image'">
-        <div class="w-50 " (click)="contentQuiz.display = 'full'"></div>
-        <div class="w-50 " (click)="contentQuiz.display= 'center'"></div>
+        <div class="w-50 " [ngClass]="{active: contentQuiz.display === 'full'}" (click)="contentQuiz.display = 'full'">
+
+        </div>
+        <div class="w-50 " [ngClass]="{active: contentQuiz.display === 'center'}" (click)="contentQuiz.display= 'center'">
+
+        </div>
       </div>
     </div>
 

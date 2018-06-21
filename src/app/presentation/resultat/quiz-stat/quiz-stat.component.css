@@ -87,7 +87,25 @@ span {
   background-size: 44px 27px;
   background-position: -24px 0;
 }
-
+#resultat .contenu .btn-groupe.table{
+  width: 200px;
+  float: right;
+}
+#resultat .profil .labele{
+  font-family: firasans;
+  font-size: 16px;
+  font-weight: 700;
+}
+#resultat .profil .font{
+  font-family: Muli;
+  font-size: 14px;
+  color: #4f5e65;
+}
+#resultat .profil .slide{
+  font-family: Muli;
+  font-size: 14px;
+  color: #4f5e65;
+}
 .order {
   border-color: #fc6100;
 }
@@ -109,8 +127,16 @@ h2 {
 .contenu.pad-40 {
   padding: 40px;
 }
+.contenu.pad-l-15 {
+  padding: 15px!important;
+}
 .contenu.pad-r-0, .pad-r-0  {
   padding-right: 0px!important;
+}
+.contenu .btn-quizz{
+  border-radius: 4px;
+  background-color: #fc6100;
+  padding: 10px 15px;
 }
 .mer-tooltip{
   background: #e65900!important;
@@ -383,6 +409,7 @@ ngx-charts-pie-chart {
 
 @media (max-width:768px){
 
+
     #resultat .navbar li{
         display: block;
         float: none;
@@ -416,5 +443,11 @@ ngx-charts-pie-chart {
       margin-bottom:15px;
     }
 
-
+    
+    #resultat .float + .Liste-contenu .vale{
+      width: 100%;
+    }
+    .vale li.marg-l{
+      margin-left: 0;
+    }
 }

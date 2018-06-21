@@ -27,7 +27,7 @@
       </mat-menu>
     </div>
     <p class="order-name">
-      <input type="text" placeholder="Nom rubrique" name="name" [(ngModel)]="newRubrique.name">
+      <input type="text" placeholder="Nom rubrique" name="name" [(ngModel)]="newRubrique.name" (change)="nameRubricChange()">
     </p>
     <div class="ngx-dnd-container parent-content drop-zone-question" [ngClass]="{'quest-exist': (newRubrique && newRubrique.contents_rubriques  && newRubrique.contents_rubriques.length>0) || quizLengthValue >1}"
       [ngStyle]="{'min-height': '100px'}" ngxDroppable [removeOnSpill]="false" [model]="newRubrique.contents_rubriques" dropZone="restricted-target">
@@ -38,7 +38,8 @@
         <div *ngIf="contentQuiz && !hideContentRubric">
           <app-content-rubric (deleteIndex)="onDeleteIndex($event)" [contentQuiz]='contentQuiz' [colorCss]="colorCss" [index]="i" *ngIf="contentQuiz.type_content !== 'question'"></app-content-rubric>
           <app-content-rubric-question (deleteIndex)="onDeleteIndex($event)" [questionQuiz]="contentQuiz" [newRubrique]="newRubrique"
-            [colorCss]="colorCss" [index]="i" *ngIf="contentQuiz.type_content === 'question'" (pointRedirectionActive)="pointRedirectionActive($event)"></app-content-rubric-question>
+            [colorCss]="colorCss" [index]="i" [position]="position" [isUpdateQuizz]="isUpdateQuizz" *ngIf="contentQuiz.type_content === 'question'"
+            (pointRedirectionActive)="pointRedirectionActive($event)"></app-content-rubric-question>
         </div>
       </div>
 
@@ -58,7 +59,7 @@
     </button>
   </div>
   <div class="modal-body text-center ">
-    <p>Voullez vous supprimer cette rubrique?</p>
+    <p>Voulez vous supprimer cette rubrique?</p>
 
     <button type="button " class="btn non-valide btn-quizz " (click)="modalRefDelete.hide()">annuler</button>
     <button type="button " class="btn valide btn-quizz" (click)="confirmDelete() ">valider </button>

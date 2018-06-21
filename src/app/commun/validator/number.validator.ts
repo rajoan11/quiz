@@ -2,6 +2,54 @@ import { AbstractControl } from '@angular/forms';
 
 export class NumberValidator {
 
+  static min(constraint: number) {
+    return (control: AbstractControl) => {
+      if (control.value && isNaN(control.value)) {
+        return {minError: true};
+      } else {
+        if (control.value && !isNaN(control.value) && +control.value <= constraint) {
+          return {minError: true};
+        }
+      }
+    };
+  }
+
+  static minOrEqual(constraint: number) {
+    return (control: AbstractControl) => {
+      if (control.value && isNaN(control.value)) {
+        return {minOrEqualError: true};
+      } else {
+        if (control.value && !isNaN(control.value) && +control.value < constraint) {
+          return {minOrEqualError: true};
+        }
+      }
+    };
+  }
+
+  static max(constraint: number) {
+    return (control: AbstractControl) => {
+      if (control.value && isNaN(control.value)) {
+        return {maxError: true};
+      } else {
+        if (control.value && !isNaN(control.value) && +control.value >= constraint) {
+          return {maxError: true};
+        }
+      }
+    };
+  }
+
+  static maxOrEqual(constraint: number) {
+    return (control: AbstractControl) => {
+      if (control.value && isNaN(control.value)) {
+        return {maxOrEqualError: true};
+      } else {
+        if (control.value && !isNaN(control.value) && +control.value > constraint) {
+          return {maxOrEqualError: true};
+        }
+      }
+    };
+  }
+
   static equal(constraint: number) {
     return (control: AbstractControl) => {
       if (control.value && isNaN(control.value)) {
@@ -17,7 +65,7 @@ export class NumberValidator {
   static notEqual(constraint: number) {
     return (control: AbstractControl) => {
       if (control.value && isNaN(control.value)) {
-        return {equalNumberError: true};
+        return {notEqualNumberError: true};
       } else {
         if (control.value && !isNaN(control.value) && +control.value === constraint) {
           return {notEqualNumberError: true};
@@ -29,7 +77,7 @@ export class NumberValidator {
   static between(min: number, max: number) {
     return (control: AbstractControl) => {
       if (control.value && isNaN(control.value)) {
-        return {equalNumberError: true};
+        return {numberBetweenError: true};
       } else {
         if (control.value && !isNaN(control.value) && (+control.value > max || +control.value < min)) {
           return {numberBetweenError: true};
@@ -38,9 +86,21 @@ export class NumberValidator {
     };
   }
 
+  static notBetween(min: number, max: number) {
+    return (control: AbstractControl) => {
+      if (control.value && isNaN(control.value)) {
+        return {numberNotBetweenError: true};
+      } else {
+        if (control.value && !isNaN(control.value) && (+control.value < max && +control.value > min)) {
+          return {numberNotBetweenError: true};
+        }
+      }
+    };
+  }
+
   static integer(control: AbstractControl) {
     if (control.value && isNaN(control.value)) {
-      return {equalNumberError: true};
+      return {integerError: true};
     } else {
       if (control.value && !isNaN(control.value) && (parseInt(control.value, 10) !== parseFloat(control.value))) {
         return {integerError: true};

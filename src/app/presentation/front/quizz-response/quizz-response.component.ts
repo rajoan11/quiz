@@ -2,9 +2,10 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { ToastService } from '../../../commun/service/toaster.service';
 import { QuizDto } from '../../../donnee/quiz/quiz-dto';
 import { QuizFrontApplicatifServiceACI } from '../../../service-applicatif/quiz-front';
-import { TextValidator, NumberValidator } from '../../../commun/validator';
+import { TextValidator, NumberValidator, RegexValidator } from '../../../commun/validator';
 
 @Component({
   selector: 'app-quizz-response',
@@ -16,14 +17,18 @@ export class QuizzResponseComponent implements OnInit {
   activeRubrique = 0;
   forms = new Array<FormGroup>();
   isCorrectionPage = false;
+  idRecord: number;
   loadingQuiz = false;
+  score = 0;
   showErrors = [];
+  scoreTarget = 0;
   quiz = new QuizDto();
 
   constructor(
     private route: ActivatedRoute,
     private quizFrontService: QuizFrontApplicatifServiceACI,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastService: ToastService
   ) { }
 
   ngOnInit() {
@@ -52,7 +57,7 @@ export class QuizzResponseComponent implements OnInit {
     if (control.is_mandatory) {
       validators.push(Validators.required);
     }
-    if (control.with_validation_contrainte) {
+    if (control.with_validation_contrainte && control.constraint) {
       switch (control.constraint.validation_operator) {
         /**TEXT VALIDATORS*/
         case 'Contient':
@@ -67,13 +72,13 @@ export class QuizzResponseComponent implements OnInit {
           validators.push(Validators.pattern(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/)); break;
         /**NUMBER VALIDATORS*/
         case 'Supérieur à':
-          validators.push(Validators.min(+control.constraint.constraint_value || 0)); break;
+          validators.push(NumberValidator.min(+control.constraint.constraint_value)); break;
         case 'Inférieur à':
-          validators.push(Validators.max(+control.constraint.constraint_value || 100000)); break;
+          validators.push(NumberValidator.max(+control.constraint.constraint_value)); break;
         case 'Supérieur ou égal à':
-          validators.push(Validators.min(+control.constraint.constraint_value - 1 || 0)); break;
+          validators.push(NumberValidator.minOrEqual(+control.constraint.constraint_value)); break;
         case 'Inférieur ou égal à':
-          validators.push(Validators.max(+control.constraint.constraint_value + 1 || 100000)); break;
+          validators.push(NumberValidator.maxOrEqual(+control.constraint.constraint_value)); break;
         case 'Egal à':
           validators.push(NumberValidator.equal(+control.constraint.constraint_value)); break;
         case 'Différent de':
@@ -81,13 +86,21 @@ export class QuizzResponseComponent implements OnInit {
         case 'Entre':
           validators.push(NumberValidator.between(+(control.constraint.constraint_value.split('-')[0]),
             +(control.constraint.constraint_value.split('-')[1]))); break;
+        case 'Non compris entre':
+          validators.push(NumberValidator.notBetween(+(control.constraint.constraint_value.split('-')[0]),
+            +(control.constraint.constraint_value.split('-')[1]))); break;
         case 'Nombre entier':
           validators.push(NumberValidator.integer); break;
-        /**LENGTH VALIDATION */
+        /**LENGTH VALIDATORS */
         case 'Nombre de caractères maximal':
           validators.push(Validators.maxLength(+control.constraint.constraint_value || 50)); break;
         case 'Nombre de caractères minimal':
           validators.push(Validators.minLength(+control.constraint.constraint_value || 1)); break;
+        /**REGEX VALIDATORS */
+        case 'Correspond à':
+          validators.push(RegexValidator.match(control.constraint.constraint_value)); break;
+        case 'Ne correspond à':
+          validators.push(RegexValidator.notMatch(control.constraint.constraint_value)); break;
       }
     }
     return validators;
@@ -102,6 +115,7 @@ export class QuizzResponseComponent implements OnInit {
         this.orderRubricContent();
         this.initCheckBoxAnswers();
         this.initForm();
+        this.scoreTarget = this.getScoreTarget();
         document.documentElement.style.setProperty('--my-var',
           this.quiz.basic_color ? this.quiz.basic_color : '#FC6100');
       },
@@ -140,9 +154,6 @@ export class QuizzResponseComponent implements OnInit {
 
   next(): void {
     const rubrique = this.quiz.rubriques[this.activeRubrique];
-    // Object.keys(this.forms[this.activeRubrique].controls).forEach(key => {
-    //   console.log(this.forms[this.activeRubrique].controls[key].errors);
-    // });
     if (this.activeRubrique < this.quiz.rubriques.length - 1) {
       if (this.forms[this.activeRubrique].valid) {
         if (rubrique.activate_points_rules) {
@@ -157,7 +168,7 @@ export class QuizzResponseComponent implements OnInit {
       }
     } else {
       if (this.forms[this.activeRubrique].valid) {
-        this.isCorrectionPage = true;
+        this.saveQuizResponse();
       } else {
         this.showErrors[this.activeRubrique] = true;
         this.jumpToError();
@@ -189,12 +200,42 @@ export class QuizzResponseComponent implements OnInit {
             count += responseTarget['points'] || 0;
           } else {
             const otherResponseTarget = question.response_options.find(({slug, points}) => slug === 'autres');
-            count += otherResponseTarget['points'] || 0;
+            if (otherResponseTarget) {
+              count += otherResponseTarget['points'] || 0;
+            }
           }
         });
       }
     });
     return count;
+  }
+
+  getScoreTarget(): number {
+    let totalScore = 0;
+    this.quiz.rubriques.forEach(rubrique => {
+      rubrique.questions.forEach(question => {
+        let count = 0;
+        if (question.type_question.slug === 'multiple_choice' || question.type_question.slug === 'list_scroll') {
+          if (question.response_options) {
+            count = question.response_options
+              .map(response => response['points'])
+              .filter(point => point > 0)
+              .reduce((val, acc) => val > acc ? val : acc, 0);
+          }
+        }
+        if (question.type_question.slug === 'checkbox') {
+          if (question.response_options) {
+            question.response_options.forEach(({points}) => {
+              if (points > 0) {
+                count += points;
+              }
+            });
+          }
+        }
+        totalScore += count;
+      });
+    });
+    return totalScore;
   }
 
   jumpTo(index: number): void {
@@ -212,23 +253,46 @@ export class QuizzResponseComponent implements OnInit {
   }
 
   jumpToError(): void {
-    Object.keys(this.forms[this.activeRubrique].controls).forEach(key => {
-      if (this.forms[this.activeRubrique].controls[key].errors) {
-        const pos = document.getElementById(key).getBoundingClientRect();
-        window.scrollTo(pos['x'], pos['y']);
-      }
-    });
+    const firstError = Object.keys(this.forms[this.activeRubrique].controls).sort()
+      .find(key => this.forms[this.activeRubrique].controls[key].errors != null);
+    if (firstError) {
+      document.getElementById(firstError).scrollIntoView();
+    }
   }
 
-  goToSendForm(event: boolean): void {
-    if (event) {
-      this.saveQuizResponse();
-    } else {
+  goToSendForm(event: any): void {
+    if (!event.has_rule_direction) {
       ++this.activeRubrique;
+    } else {
+      if (event.rubrique_target_poids > 0) {
+        this.activeRubrique = event.rubrique_target_poids - 1;
+      } else {
+        this.saveQuizResponse();
+      }
     }
   }
 
   saveQuizResponse(): void {
-    console.log(this.quiz.rubriques);
+    this.loadingQuiz = true;
+    this.getScore();
+    this.quizFrontService.saveQuizResponse(this.quiz).subscribe(
+      res => {
+        this.loadingQuiz = false;
+        this.isCorrectionPage = true;
+        this.idRecord   = res.id_record;
+      },
+      err => {
+        this.loadingQuiz = false;
+        this.toastService.showToast(
+          err.message || 'La sauvegarde de vos réponses a échoué, veuillez réessayer',
+          this.toastService.typeToast.error
+        );
+      }
+    );
   }
+
+  getScore(): void {
+    this.quiz.rubriques.forEach(rubrique => this.score += this.getRubricPoints(rubrique));
+  }
+
 }

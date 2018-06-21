@@ -306,6 +306,7 @@
 #creation-quizz {
   min-height: 655px;
   background-color: rgba(0, 0, 0, 0.03) !important;
+  min-height: 100vh;
 }
 #creation-quizz .bg {
   padding-bottom: 15px;

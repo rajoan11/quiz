@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { QuizzPatch } from '../../../donnee/quiz';
+import { QuizzPatch, QuizDto } from '../../../donnee/quiz';
 import { QuizCudApplicatifServiceACI } from '../../../service-applicatif/quiz-admin';
 
 @Component({
@@ -13,9 +13,11 @@ import { QuizCudApplicatifServiceACI } from '../../../service-applicatif/quiz-ad
 })
 export class FinishQuizzComponent implements OnInit {
   @Input() finishQuizzId: number;
+  @Input() finishQuizzUidQuizz: number;
   loadinFinish = false;
   _quizzStateAnonyme: boolean;
   quizzPatch = new QuizzPatch();
+  @Input() newQuizz: QuizDto;
 
   constructor(
     private quizCudApplicatifServiceACI: QuizCudApplicatifServiceACI,
@@ -23,6 +25,13 @@ export class FinishQuizzComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.quizzPatch.ending_message = this.newQuizz.ending_message;
+    this.quizzPatch.title_ending_message = this.newQuizz.title_ending_message
+      ? this.newQuizz.title_ending_message
+      : `Merci d'avoir répondu au quizz`;
+    this.quizzPatch.read_score = this.newQuizz.read_score;
+    this.quizzPatch.show_answer = this.newQuizz.show_answer;
+    this.quizzPatch.initialize_quizz = this.newQuizz.initialize_quizz;
     this.quizzPatch.id = this.finishQuizzId;
   }
 
@@ -40,8 +49,9 @@ export class FinishQuizzComponent implements OnInit {
       res => {
         if (res) {
           this.loadinFinish = false;
+          this.newQuizz = new QuizDto();
           if (withvue) {
-            this.router.navigate(['/front/resp', this.finishQuizzId]);
+            this.router.navigate(['/front/resp', this.finishQuizzUidQuizz]);
           } else {
             this.router.navigate(['/admin/list']);
           }

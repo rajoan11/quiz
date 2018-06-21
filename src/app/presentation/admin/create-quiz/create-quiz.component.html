@@ -93,7 +93,7 @@
           (drop)="dropSuccess()" (out)="out()">
           <div class="ngx-dnd-item" ngxDraggable *ngFor="let rubric of newQuiz.rubriques; let x = index" [model]="rubric " dropZone="restricted-rubric">
             <app-quiz-rubric [hideContentRubric]="hideContentRubric" (deleteRubrique)="deleteRubrique($event)" [newQuiz]="newQuiz" [position]="x"
-              [quizLength]="newQuiz.rubriques.length" [newRubrique]="rubric" [colorCss]="colorCss"></app-quiz-rubric>
+              [quizLength]="newQuiz.rubriques.length" [isUpdateQuizz]="isUpdateQuizz" [newRubrique]="rubric" [colorCss]="colorCss"></app-quiz-rubric>
           </div>
         </div>
 
@@ -107,6 +107,6 @@
     </div>
   </div>
   <div *ngIf="finishQuizz">
-    <app-finish-quizz [finishQuizzId]="finishQuizzId" [quizzStateAnonyme]="quizzStateAnonyme"></app-finish-quizz>
+    <app-finish-quizz [finishQuizzId]="finishQuizzId" [finishQuizzUidQuizz]="finishQuizzUidQuizz" [newQuizz]="newQuiz" [quizzStateAnonyme]="quizzStateAnonyme"></app-finish-quizz>
   </div>
 </div>

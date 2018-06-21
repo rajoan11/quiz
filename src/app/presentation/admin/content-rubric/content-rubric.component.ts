@@ -111,7 +111,6 @@ export class ContentRubricComponent implements OnInit {
 
   onFileChanged(event, contentQuiz) {
     const reader = new FileReader();
-    console.log(event.target.files[0]);
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
       reader.readAsDataURL(file);
