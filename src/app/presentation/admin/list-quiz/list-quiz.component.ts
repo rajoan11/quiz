@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  TemplateRef,
+  SecurityContext
+} from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
@@ -15,12 +21,14 @@ import { QuizCudApplicatifServiceACI } from '../../../service-applicatif/quiz-ad
 import { ToastService } from '../../../commun/service/toaster.service';
 import { EnterpriseService } from '../../../commun/service/enterprise.service';
 import { AuthenticationApplicatifServiceACI } from '../../../service-applicatif/authentication';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-list-quiz',
   templateUrl: './list-quiz.component.html',
   styleUrls: ['./list-quiz.component.css']
 })
 export class ListQuizComponent implements OnInit {
+  alert: any;
   addClassOnClickEnterprise = false;
   allQuizLength = 210;
   currentPage: number;
@@ -41,6 +49,7 @@ export class ListQuizComponent implements OnInit {
   modalRefSelect: BsModalRef;
   loadingList = false;
   pages = [10, 25, 50, 100];
+  records = 0;
   searchParams = {
     page: 1,
     numberListPerPage: 25,
@@ -103,10 +112,10 @@ export class ListQuizComponent implements OnInit {
     this.quizCudApplicatifServiceACI.deleteQuiz(idQuiz).subscribe(
       res => {
         if (res && res.delete) {
-          this.toastService.showToast(
-            res.message,
-            this.toastService.typeToast.success
-          );
+          this.alert = {
+            type: 'success',
+            msg: 'res.message'
+          };
           this.searchTerm.next(this.searchParams);
         }
       },
@@ -114,8 +123,9 @@ export class ListQuizComponent implements OnInit {
     );
   }
 
-  openModal(template: TemplateRef<any>, idQuiz: number) {
+  openModal(template: TemplateRef<any>, idQuiz: number, records: number) {
     this.idQuizTodelete = idQuiz;
+    this.records = records;
     this.modalRef = this.modalService.show(template, {
       class: 'modal-dialog-centered  modal-sm '
     });
@@ -144,6 +154,11 @@ export class ListQuizComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+
+    this.alert = {
+      type: 'success',
+      msg: 'Url copié'
+    };
   }
 
   changeNumberPage(): void {
@@ -295,10 +310,10 @@ export class ListQuizComponent implements OnInit {
   confirmSelect(idQuiz: number, valueQuiz: boolean): void {
     this.quizCudApplicatifServiceACI.changeStatusQuiz(idQuiz).subscribe(
       res => {
-        this.toastService.showToast(
-          res.message,
-          this.toastService.typeToast.success
-        );
+        this.alert = {
+          type: 'success',
+          msg: res.message
+        };
       },
       err => {}
     );

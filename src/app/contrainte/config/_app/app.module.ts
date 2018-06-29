@@ -19,6 +19,8 @@ import { AdminPresentationModule } from '../../../presentation/admin/admin-prese
 import { ResultatPresentationModule } from '../../../presentation/resultat/resultat-presentation.module';
 import { FrontPresentationModule } from '../../../presentation/front/front-presentation.module';
 import { CommunModule } from '../../../commun/commun.module';
+import { AuthenticationModule } from '../../../presentation/authentication/authentication.module';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -38,14 +40,16 @@ import { CommunModule } from '../../../commun/commun.module';
     AdminPresentationModule,
     ResultatPresentationModule,
     FrontPresentationModule,
-    CommunModule
+    CommunModule,
+    AuthenticationModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }
   ]
 })
 export class AppModule {

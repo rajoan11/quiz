@@ -192,4 +192,16 @@ export class QuizRubricComponent implements OnInit {
   nameRubricChange(): void {
     this.rubriqueService.setRubrique(this.newQuiz.rubriques);
   }
+
+  clickCorrection($event) {
+    this.newQuiz.rubriques.forEach((rubrique, index) => {
+      rubrique.contents_rubriques.forEach((question, ind) => {
+        $event.position === index &&
+        $event.index === ind &&
+        question.type_content === 'question'
+          ? (question.corection = $event.status)
+          : (question.corection = false);
+      });
+    });
+  }
 }

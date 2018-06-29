@@ -13,4 +13,7 @@ export class AuthenticationApplicatifService
   login(token: string): Observable<any> {
     return this.authenticationMetierServiceACI.login(token);
   }
+  loginFront(user: any): Observable<any> {
+    return this.authenticationMetierServiceACI.loginFront(user);
+  }
 }

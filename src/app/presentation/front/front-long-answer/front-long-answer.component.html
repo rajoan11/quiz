@@ -1,7 +1,10 @@
 <p class="title">{{question.description || 'Question (réponse longue)'}}</p>
 <div class="myrow ">
-  <mat-form-field class="example-full-width" (change)="change($event)">
+  <!-- <mat-form-field class="example-full-width" (change)="change($event)">
     <input matInput [placeholder]="question.placeholder || 'votre réponse'">
+  </mat-form-field> -->
+  <mat-form-field class="example-full-width" (change)="change($event)">
+    <textarea matTextareaAutosize minRows="1" matInput [placeholder]="question.placeholder || 'votre réponse'"></textarea>
   </mat-form-field>
 </div>
 <div class="obligatoire otherError" *ngIf="!isValid && !ngControl.control.hasError('required')">{{question.constraint?.text_error}}</div>

@@ -1,14 +1,14 @@
 <!-- choix multiple voire correction -->
 <!-- <div class="contenu correction barre-verticale-g  barre-verticale-r"> -->
 <div class="contenu correction " [ngClass]="{'barre-verticale-r': (question.type_question.slug === 'multiple_choice' || question.type_question.slug === 'checkbox' || question.type_question.slug === 'list_scroll') &&!findTrueAnswer(question.response_options,question.response_inputs), 'barre-verticale-g': (question.type_question.slug === 'multiple_choice' || question.type_question.slug === 'checkbox' || question.type_question.slug === 'list_scroll') && findTrueAnswer(question.response_options,question.response_inputs)}">
-  <span class="mon-point" *ngIf="quiz.read_score && (question.type_question.slug === 'multiple_choice' || question.type_question.slug === 'checkbox' || question.type_question.slug === 'list_scroll')">{{scoreRes(question)}}/{{scoreQuestion(question)}} points</span>
+  <span class="mon-point" *ngIf="scoreRes(question) != 0 && scoreQuestion(question) != 0 && quiz.read_score && (question.type_question.slug === 'multiple_choice' || question.type_question.slug === 'checkbox' || question.type_question.slug === 'list_scroll')">{{scoreRes(question)}}/{{scoreQuestion(question)}} points</span>
   <p class="title">{{question.description || question.type_question.name}}</p>
   <div *ngIf="question.type_question.slug === 'multiple_choice'">
-    <div *ngIf="!question.activate_vote">
+    <div>
       <mat-radio-group>
 
         <!-- <mat-radio-button value="i" *ngFor="let reponOption of question.response_options;let i = index" [checked]="reponOption.slug === question.response_inputs[0].value_input"> -->
-        <mat-radio-button [value]="i" *ngFor="let reponOption of question.response_options;let i = index" [checked]="findReponse(question.response_inputs, reponOption.slug)">
+        <mat-radio-button [disabled]="true" [value]="i" *ngFor="let reponOption of question.response_options;let i = index" [checked]="findReponse(question.response_inputs, reponOption.slug)">
           <span class="nb-400 padd" [ngClass]="{'green': reponOption.correct_answer, 'red': !reponOption.correct_answer}">{{reponOption.name}}</span>
           <i class="after-question" *ngIf="findReponse(question.response_inputs, reponOption.slug)">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" *ngIf="reponOption.correct_answer">
@@ -24,7 +24,7 @@
 
       </mat-radio-group>
     </div>
-    <div *ngIf="question.activate_vote">
+    <!-- <div *ngIf="question.activate_vote">
       <ul class="progress-bare">
         <li [ngClass]="{'ma-rep': findReponse(question.response_inputs, reponOption.slug),'rep': !findReponse(question.response_inputs, reponOption.slug)}"
           *ngFor="let reponOption of question.response_options;let i = index">
@@ -33,13 +33,16 @@
             <span class="absolute">{{reponOption.response_stat}}%</span>
           </progressbar>
         </li>
+
       </ul>
-    </div>
+    </div> -->
+
+
   </div>
 
   <div *ngIf="question.type_question.slug === 'checkbox'">
     <mat-radio-group>
-      <mat-checkbox *ngFor="let reponOption of question.response_options" [checked]="findReponse(question.response_inputs, reponOption.slug)">
+      <mat-checkbox [disabled]="true" *ngFor="let reponOption of question.response_options" [checked]="findReponse(question.response_inputs, reponOption.slug)">
         <span class="nb-400 padd " [ngClass]="{'green': reponOption.correct_answer, 'red': !reponOption.correct_answer}">{{reponOption.name}}</span>
         <i class="after-question" *ngIf="findReponse(question.response_inputs, reponOption.slug)">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" *ngIf="reponOption.correct_answer">
@@ -56,14 +59,14 @@
   <div *ngIf="question.type_question.slug === 'short_answer'">
     <div class="myrow textarea">
       <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="votre reponse" [(ngModel)]="question.response_inputs[0].value_input"></textarea>
+        <textarea [disabled]="true" matInput placeholder="votre reponse" [(ngModel)]="question.response_inputs[0].value_input"></textarea>
       </mat-form-field>
     </div>
   </div>
   <div *ngIf="question.type_question.slug === 'width_answer'">
     <div class="myrow textarea">
       <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="votre reponse" [(ngModel)]="question.response_inputs[0].value_input"></textarea>
+        <textarea [disabled]="true" matInput placeholder="votre reponse" [(ngModel)]="question.response_inputs[0].value_input"></textarea>
       </mat-form-field>
     </div>
   </div>
@@ -90,7 +93,7 @@
   <div *ngIf="question.type_question.slug === 'hour'">
     <div class="myrow date">
       <mat-form-field class="example-full-width">
-        <input matInput type="time" [(ngModel)]="question.response_inputs[0].value_input">
+        <input [disabled]="true" matInput type="time" [(ngModel)]="question.response_inputs[0].value_input">
       </mat-form-field>
     </div>
   </div>
@@ -98,18 +101,21 @@
     <div>
       <div class="myrow progress">
         <ul>
-          <li *ngFor="let item of question.response_options" [ngStyle]="{'max-width': (100/(question.response_options.length - 1)) +'%' }">
-            <span class="rond"></span>
+          <li *ngFor="let item of question.response_options; let i = index" [ngStyle]="{'max-width': (100/(question.response_options.length - 1)) +'%' }"
+            [ngClass]="{selected: i < question.response_inputs[0].value_input || i === question.response_inputs[0].value_input}">
+            <span [class.rond]="!question.smiley"></span>
+            <span [class.smiley]="question.smiley" [attr.data-smiley]="question.content"></span>
             <i>{{item.name}}</i>
           </li>
         </ul>
 
-        <mat-slider [value]="question.response_inputs[0].value_input" step="1" min="1" [max]="question.response_options.length" tickInterval="1"></mat-slider>
+        <mat-slider [disabled]="true" [value]="question.response_inputs[0].value_input" step="1" min="1" [max]="question.response_options.length"
+          tickInterval="1"></mat-slider>
       </div>
     </div>
   </div>
 
-  <div class="explicatif">
+  <div class="explicatif" *ngIf="question.correction_explanation">
     <p>
       <span class="color">Explicatif</span>
       <br/> {{question.correction_explanation}}

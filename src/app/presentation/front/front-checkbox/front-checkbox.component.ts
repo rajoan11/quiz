@@ -20,14 +20,15 @@ export class FrontCheckboxComponent implements OnInit {
   private _value: any;
   otherValue: string;
   otherOptionIsChecked = false;
-  onChangeValue = (_) => {};
+  onChangeValue = _ => {};
   onTouchedValue = () => {};
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
-    this.question.response_options = this.question.response_options.sort((a, b) => a['poids'] - b['poids']);
+    this.question.response_options = this.question.response_options.sort(
+      (a, b) => a['poids'] - b['poids']
+    );
   }
 
   change(event: MatCheckboxChange, slug: string): void {
@@ -36,16 +37,19 @@ export class FrontCheckboxComponent implements OnInit {
         if (slug === 'autres') {
           this.otherOptionIsChecked = true;
           if (this.otherValue) {
-            this.value.push({value_input: this.otherValue, is_texte: true});
+            this.value.push({ value_input: this.otherValue, is_texte: true });
           }
         } else {
-          this.value.push({value_input: slug, is_texte: false});
+          this.value.push({ value_input: slug, is_texte: false });
         }
       } else {
         if (slug === 'autres') {
           this.otherOptionIsChecked = false;
         }
-        const index = this._value.findIndex(item => (slug === 'autres' ? item['is_texte'] : item['value_input'] === slug));
+        const index = this._value.findIndex(
+          item =>
+            slug === 'autres' ? item['is_texte'] : item['value_input'] === slug
+        );
         if (index > -1) {
           this.value.splice(index, 1);
         }
@@ -56,7 +60,7 @@ export class FrontCheckboxComponent implements OnInit {
 
   changeTextInput(): void {
     if (this.otherValue && this.otherOptionIsChecked) {
-      this.value.push({value_input: this.otherValue, is_texte: true});
+      this.value.push({ value_input: this.otherValue, is_texte: true });
     } else if (!this.otherValue && this.otherOptionIsChecked) {
       const index = this._value.findIndex(item => item['is_texte']);
       if (index > -1) {
@@ -66,7 +70,7 @@ export class FrontCheckboxComponent implements OnInit {
     this.onChangeValue(this.value);
   }
 
-  setDisabledState?(isDisabled: boolean): void { }
+  setDisabledState?(isDisabled: boolean): void {}
 
   get value() {
     return this._value;
@@ -90,4 +94,7 @@ export class FrontCheckboxComponent implements OnInit {
     this.onTouchedValue = fn;
   }
 
+  findReponse(response_inputs, reponOptionslug): boolean {
+    return response_inputs.find(e => e.value_input === reponOptionslug);
+  }
 }

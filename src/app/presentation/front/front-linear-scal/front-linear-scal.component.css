@@ -1,6 +1,15 @@
 .myrow.progress {
-    overflow: visible;
+  overflow: visible;
 }
 .contenu .progress ul {
-    left: -4px !important;
+  left: -4px !important;
+}
+.smiley:before {
+  font-family: 'FontAwesome';
+  font-size: 16px;
+  content: attr(data-smiley);
+  position: relative;
+  top: -20px;
+  left: -2px;
+  color: inherit;
 }

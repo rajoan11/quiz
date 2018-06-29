@@ -14,4 +14,8 @@ export class AuthenticationBusinessDelegateService
     const url = `${environment.apiUrl}/login`;
     return this.http.post<any>(url, data);
   }
+  loginFront(user: any): Observable<any> {
+    const url = `${environment.apiUrlDrupal}/ws/user/login`;
+    return this.http.post<any>(url, user);
+  }
 }

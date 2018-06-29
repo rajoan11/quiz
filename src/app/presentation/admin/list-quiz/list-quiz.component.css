@@ -32,7 +32,7 @@
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 .quizz-table {
   border-collapse: initial;
-  margin: 100px 0;
+  margin: 25px 0;
 }
 
 .quizz-table .container-table{
@@ -41,25 +41,28 @@
   margin: 45px auto;
   margin-bottom: 15px;
   padding: 0;
-  max-height: 460px;
   overflow: hidden;
   border-bottom: 1px #000 solid;
+  height: calc(100vh - 170px);
 } 
+.full-container{
+  padding: 0 10%;
+}
 .quizz-table .container{
-  width: 80%;
+  width: calc(100% - 234px);
   max-width: 100%!important;
 }
 .mat-table {
   width: 100%;
 }
-@media (max-width: 1000px) {
+@media (max-width: 1199px) {
   .mat-table {
     width: 1000px;
   }
 }
 
 ng-scrollbar {
-  height: 600px;
+  height: calc(100vh - 170px);
   width: 100%;
 
   /* overflow-x: scroll!important; */

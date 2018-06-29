@@ -1,0 +1,97 @@
+@import '../../front/quizz-response/quizz-response.component.css';
+
+.nav-front{
+    background-color: #f96922;
+}
+.nav-front:after{
+    border-top-color: #f96922;
+}
+h2{
+    font-family: firasans;
+    font-size: 20.8px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.25;
+    letter-spacing: 1.7px;
+    color: #444444;
+    text-transform: uppercase;
+    margin-top: 0;
+}
+
+.front-login{
+    display: block;
+    margin: 7% auto;
+    padding: 25px 40px 15px;
+    max-width: 450.7px;
+    border-radius: 5.5px;
+    background-color: #ffffff;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.15);
+}
+.front-login mat-form-field{
+    width: 100%;
+    float: none;
+    clear: both;
+    margin-bottom: 0px;
+}
+.front-login mat-form-field.second{
+    color: #787e8c;
+    font-family: firasans;
+    font-size: 28.6px;
+}
+
+.front-login mat-form-field .mat-input-element{
+    border: none;
+    box-shadow: none;
+    border: 1px #ddd solid;
+    height: 55px;
+    border-radius: 2.2px;
+    background-color: #e5e9ed;
+    font-size: 15.4px;
+    color: #787e8c;
+    font-family: firasans;
+    padding: 0 15px;
+}
+
+.relative{
+    position: relative;
+}
+.relative mat-error{
+    position: absolute;
+    display: block;
+    bottom: -11px;
+    right: 0;
+    padding: 0px 5px;
+    font-size: 12px;
+    border: 1px #ff3c00 solid;
+    color: #ff3c00;
+}
+.relative .second + mat-error{
+    bottom: -4px;
+}
+.btn-login{
+    border-radius: 2.2px;
+    background-color: #fc6100;
+    color: #fff;
+    width: 100%;
+    padding: 14px 10px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: firasans;
+    margin: 30px 0 10px;
+    cursor: pointer;
+}
+.btn-login + p>a{
+    color: #787e8c;
+    font-size: 13px;
+    text-decoration: none!important;
+    cursor: pointer;
+}
+.btn-login + p>a:hover{
+    color: #fc6100;
+}
+button:disabled {
+    cursor: not-allowed;
+    background-color: #ffbf97;
+}

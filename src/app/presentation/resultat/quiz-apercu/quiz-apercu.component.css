@@ -1,0 +1,32 @@
+@import '../quiz-stat/quiz-stat.component.css';
+@import '../../front/quizz-response/quizz-response.component.css';
+.hidden-content {
+    display: none;
+}
+.myrow.progress {
+    overflow: visible;
+}
+.order p > a {
+    display: inline;
+}
+.contenu .progress ul {
+    top: 60px;
+}
+.smiley:before {
+    font-family: "FontAwesome";
+    font-size: 16px;
+    content: attr(data-smiley);
+    position: relative;
+    top: -20px;
+    left: -2px;
+}
+.contenu .progress ul li > i {
+    left: -10%;
+}
+.list-scroll {
+    max-width: 250px;
+    margin: 0 auto;
+}
+.progress ul li.selected span {
+    color: #fc6100;
+}

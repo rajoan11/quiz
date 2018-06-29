@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, TemplateRef } from '@angular/core';
 import { RubricDo, QuizDto, RubricDto } from '../../../donnee/quiz';
 import {
   QuizCudApplicatifServiceACI,
@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EnterpriseService } from '../../../commun/service/enterprise.service';
 import { Subject } from 'rxjs/Subject';
 import { RubriqueService } from '../../../commun/service/rubrique.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-create-quiz',
@@ -29,6 +30,7 @@ export class CreateQuizComponent implements OnInit {
   hideContentRubric = false;
   isSuperAdmin = false;
   isUpdateQuizz = false;
+  modalRefSelect: BsModalRef;
   newQuiz = new QuizDto();
   // rubrics: Array<RubricDo> = [];
   quizzStateAnonyme: boolean;
@@ -40,13 +42,15 @@ export class CreateQuizComponent implements OnInit {
     { type: 'Nominatif', value: false },
     { type: 'Anonyme', value: true }
   ];
+  valueQuizToChange: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private rubriqueService: RubriqueService,
     private quizCudApplicatifService: QuizCudApplicatifServiceACI,
     private quizReadApplicatifService: QuizReadApplicatifServiceACI,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit() {
@@ -55,6 +59,7 @@ export class CreateQuizComponent implements OnInit {
     this.autcompleteSearchEnterprise();
     this.checkRoles();
     this.pushDefaultRubrique();
+    window.scrollTo(0, 0);
   }
 
   pushDefaultRubrique(): void {
@@ -103,20 +108,24 @@ export class CreateQuizComponent implements OnInit {
   }
 
   getMetaorQuestion(quiz: QuizDto): QuizDto {
-    quiz.rubriques.forEach((rubric: RubricDto) => {
-      rubric.meta_contents.forEach(meta => {
-        meta.type_content = 'metaContent';
-      });
-      rubric.questions.forEach(meta => {
-        meta.type_content = 'question';
-      });
-      rubric.contents_rubriques = [
-        ...rubric.meta_contents,
-        ...rubric.questions
-      ].sort((a, b) => {
+    quiz.rubriques
+      .sort((a, b) => {
         return a.poids - b.poids;
+      })
+      .forEach((rubric: RubricDto) => {
+        rubric.meta_contents.forEach(meta => {
+          meta.type_content = 'metaContent';
+        });
+        rubric.questions.forEach(meta => {
+          meta.type_content = 'question';
+        });
+        rubric.contents_rubriques = [
+          ...rubric.meta_contents,
+          ...rubric.questions
+        ].sort((a, b) => {
+          return a.poids - b.poids;
+        });
       });
-    });
     this.colorCss = quiz.basic_color ? quiz.basic_color : '#FC6100';
     document.documentElement.style.setProperty(
       '--my-var',
@@ -274,8 +283,34 @@ export class CreateQuizComponent implements OnInit {
   dragRubric(event): void {
     this.hideContentRubric = event;
   }
-
-  out(): void {
+  out($event): void {
     this.hideContentRubric = false;
+  }
+  over($event): void {
+    this.hideContentRubric = true;
+  }
+
+  changeStatusQuiz(template: TemplateRef<any>, eventValue: any): void {
+    if (this.isUpdateQuizz) {
+      this.openModalChangeSelect(template, eventValue);
+    }
+  }
+
+  openModalChangeSelect(template: TemplateRef<any>, eventValue: any) {
+    this.valueQuizToChange = eventValue;
+    this.modalRefSelect = this.modalService.show(template, {
+      backdrop: true,
+      ignoreBackdropClick: true,
+      class: 'modal-dialog-centered  modal-sm  '
+    });
+  }
+
+  confirmSelect(idQuiz: number, valueQuiz: boolean): void {
+    this.modalRefSelect.hide();
+  }
+
+  declineSelect(valueQuiz: boolean): void {
+    this.modalRefSelect.hide();
+    this.newQuiz.is_anonyme = !valueQuiz;
   }
 }

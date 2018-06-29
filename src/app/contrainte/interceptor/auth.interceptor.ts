@@ -15,7 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const authHeader = this.getToken() || `b7bbd7a921bd2bae3a008d0629449db2`;
+    const authHeader = this.getToken();
     const escapedUrl = ['user/login', 'user/register'];
     if (escapedUrl.some(escaped => req.url.indexOf(escaped) >= 0)) {
       return next.handle(req);
@@ -30,7 +30,7 @@ export class AuthInterceptor implements HttpInterceptor {
   getToken(): string {
     const token = localStorage.getItem('token_quizz')
       ? localStorage.getItem('token_quizz')
-      : null;
+      : '';
     return token;
   }
 }

@@ -4,3 +4,7 @@
 .obligatoire.otherError {
     color: #f70d0d;
 }
+textarea.mat-input-element {
+    resize: none !important;
+    min-height: 30px;
+}

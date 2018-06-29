@@ -1,7 +1,6 @@
-<ng2-toasty [position]="'top-right'"></ng2-toasty>
 <div [ngClass]="{'class-flou': addClassOnClickEnterprise}">
   <div class="navbar filtre-quiz bg-quizz">
-    <div class="container">
+    <div class="full-container">
       <ul class="liste">
         <li class="title">
           <a>Mes quizz</a>
@@ -29,6 +28,11 @@
       </ul>
     </div>
   </div>
+  <!-- ALERT -->
+  <!-- <div *ngFor="let alert of alerts">
+    <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" [dismissible]="dismissible" (onClosed)="onClosed(alert)">{{ alert.msg }}</alert>
+  </div> -->
+  <app-alert [alert]="alert"></app-alert>
 
   <!-- quizz-table -->
 
@@ -119,10 +123,10 @@
             <ng-container matColumnDef="vide">
               <mat-header-cell *matHeaderCellDef class="btn-header"> </mat-header-cell>
               <mat-cell *matCellDef="let element; let i = index;" [ngClass]="{'odd':i%2 ===0,'even':i%2 !==0}">
-                <a (click)="copyMessage(element.uid)" class="picto copy" title="copie"></a>
-                <a class="picto reultat" title="stats global" [routerLink]="['/resultat/stat']" routerLinkActive="router-link-active"></a>
+                <a (click)="copyMessage(element.uid)" class="picto copy" title="Copie url d'accès"></a>
+                <a class="picto reultat" title="Statistiques global" [routerLink]="['/resultat/stat',element.id]" routerLinkActive="router-link-active"></a>
                 <a class="picto apercu" [routerLink]="['/front/resp',element.uid]" target="_blank" title="Aperçu" title="Aperçu"></a>
-                <a (click)="openModal(template,element.id)" class="picto suppr " title="Supprimer "></a>
+                <a (click)="openModal(template,element.id,element.nb_of_records)" class="picto suppr " title="Supprimer "></a>
               </mat-cell>
             </ng-container>
             <!-- deleteQuiz(element.id) -->
@@ -170,8 +174,8 @@
   </div>
   <ng-template #template>
     <div class="modal-body text-center ">
-      <p>La suppression du formulaire va aussi supprimer les XXX réponses sur celui-ci. Si vous souhaitez conserver les réponses
-        dans votre back-office et que le formulaire ne soit plus en ligne contacter le support.</p>
+      <p>La suppression du formulaire va aussi supprimer les {{records}} réponses sur celui-ci. Si vous souhaitez conserver
+        les réponses dans votre back-office et que le formulaire ne soit plus en ligne contacter le support.</p>
 
       <button type="button " class="btn non-valide btn-quizz " (click)="decline() ">annuler</button>
       <button type="button " class="btn valide btn-quizz" (click)="confirm(idQuizTodelete) ">valider </button>
@@ -185,10 +189,9 @@
     </button>
 
     <div class="modal-body text-center ">
-      <p *ngIf="valueQuizToChange"> vous passez de nominatif à anonyme donc toutes les anciennes donnée seront convertie en donnée anonyme (suppression
+      <p *ngIf="valueQuizToChange"> Vous passez de nominatif à anonyme donc toutes les anciennes donnée seront convertie en donnée anonyme (suppression
         nom prénom email).</p>
-      <p *ngIf="!valueQuizToChange"> vous passez de anonyme à nominatif donc une connexion sera obligatoire pour répondre aux formulaire et que toute les
-        donnée précédente resterons anonyme.</p>
+      <p *ngIf="!valueQuizToChange"> Vous passez d’anonyme à nominatif donc une connexion sera maintenant obligatoire pour répondre à ce formulaire, de plus toutes les données déjà saisies resteront anonymes</p>
       <button type="button " class="btn  non-valide btn-quizz " (click)="declineSelect(valueQuizToChange)">annuler</button>
       <button type="button " class="btn valide btn-quizz " (click)="confirmSelect(idQuizToChange,valueQuizToChange) ">valider </button>
 

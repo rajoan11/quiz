@@ -1,14 +1,29 @@
 <p class="title">{{question.description || 'Question (cases à cocher)'}}</p>
-<mat-radio-group>
-  <mat-checkbox *ngFor="let option of question.response_options" 
-  [value]="option.slug" (change)="change($event, option.slug)">
-    <span class="nb-400 padd" *ngIf="option.slug !== 'autres'">{{option.name}}</span>
-    <ng-container *ngIf="option.slug === 'autres'">
-      <span class="other-option">Autres : </span>
-      <mat-form-field  (change)="changeTextInput()">
-        <input matInput [(ngModel)]="otherValue">
-      </mat-form-field>
-    </ng-container>
-  </mat-checkbox>
-</mat-radio-group> 
+<div>
+  <mat-radio-group>
+    <mat-checkbox *ngFor="let option of question.response_options" [value]="option.slug" (change)="change($event, option.slug)">
+      <span class="nb-400 padd" *ngIf="option.slug !== 'autres'">{{option.name}}</span>
+      <ng-container *ngIf="option.slug === 'autres'">
+        <span class="other-option">Autres : </span>
+        <mat-form-field (change)="changeTextInput()">
+          <input matInput [(ngModel)]="otherValue">
+        </mat-form-field>
+      </ng-container>
+    </mat-checkbox>
+  </mat-radio-group>
+</div>
+
+
+<div *ngIf="false">
+  <ul class="progress-bare">
+    <li [ngClass]="{'ma-rep': findReponse(question.response_inputs, reponOption.slug),'rep': !findReponse(question.response_inputs, reponOption.slug)}"
+      *ngFor="let reponOption of question.response_options;let i = index">
+      <p>{{reponOption.name}}</p>
+      <progressbar [value]="reponOption.response_stat">
+        <span class="absolute">{{reponOption.response_stat}}%</span>
+      </progressbar>
+    </li>
+
+  </ul>
+</div>
 <div class="obligatoire" *ngIf="question.is_mandatory">Obligatoire</div>

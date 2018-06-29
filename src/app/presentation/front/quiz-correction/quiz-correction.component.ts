@@ -14,6 +14,7 @@ import { ToastService } from '../../../commun/service/toaster.service';
 export class QuizCorrectionComponent implements OnInit {
   isCollapsed: Array<boolean> = [];
   loading = false;
+  alert: any;
   menu: any;
   quiz: QuizDto;
 
@@ -24,7 +25,7 @@ export class QuizCorrectionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    document.documentElement.style.setProperty('--my-var', '#FC6100');
+    // document.documentElement.style.setProperty('--my-var', '#FC6100');
     this.route.params.subscribe(
       param => param['id'] && this.getQuizCorrection(param['id'])
     );
@@ -56,10 +57,10 @@ export class QuizCorrectionComponent implements OnInit {
         });
       },
       err => {
-        this.toastService.showToast(
-          (err && err.message) || 'erreur serveur',
-          this.toastService.typeToast.error
-        );
+        this.alert = {
+          type: 'danger',
+          msg: (err && err.message) || 'erreur serveur'
+        };
       }
     );
   }

@@ -1,3 +1,4 @@
+<app-loader [load]="loadingStats"></app-loader>
 <div id="resultat">
   <div class=" navbar">
     <div class="container">
@@ -18,7 +19,7 @@
               </a>
             </li>
             <li>
-              <button class="btn quizz">Quitter ce quizz</button>
+              <button class="btn quizz" routerLink="/admin/list">Quitter ce quizz</button>
             </li>
           </ul>
         </div>
@@ -31,536 +32,333 @@
     <!-- TOTALE REPONSE -->
     <div class="contenu pad-l-15">
        
-      <h2>TOTAL : 41 réponses</h2>
+      <h2>TOTAL : {{quizStats.nb_of_records}} réponses</h2>
       <div class="row">
         <div class="col-md-4 col-sm-6 col-xs-12">
           <div class="btn-groupe">
-            <button class="btn btn-1">Résumé</button>
-            <button class="btn btn-2">Individuel</button>
+            <button class="btn btn-1 active" [routerLink]="['/resultat/stat/', quizStats.id]">Résumé</button>
+            <button class="btn btn-2 inactive" [routerLink]="['/resultat/preview/', quizStats.id]">Individuel</button>
           </div>
         </div>
         <div class="col-md-4 col-sm-6 pull-right reset-float col-xs-12">
           <div class="btn-groupe table">
             <span> Réponses acceptées</span>
-            <mat-slide-toggle></mat-slide-toggle>
+            <mat-slide-toggle [(ngModel)]="quizPatch.accept_reponse" (change)="changeQuizPatch()"></mat-slide-toggle>
           </div>
         </div>
       </div>
-    </div>
 
-        <!-- TOTALE REPONSE -->
-        <div class="contenu pad-l-15 profil">
-          <div class="row">
-            <div class="col-sm-5 "><span class="labele">Utilisateur :  </span>
+      <div class="row" *ngIf="!quizPatch.accept_reponse">
+        <p class="desc">Plus aucun utilisateur ne pourra accéder au quizz.
+          <br/> Ceux ayant déjà répondu pourront encore voir leurs réponses et la correction (si actif).
+          <br/> Vous pouvez personnaliser le message affiché à l’utilisateur si cette fonction est active :
+        </p>
+        <div class="form-quizz">
+          <div class="myrow textarea">
+            <div class="col-sm-12">
               <mat-form-field class="example-full-width">
-                <input class="font" matInput placeholder="Lena Lawson" value="">
+                <textarea matTextareaAutosize minRows="1" matInput [(ngModel)]="quizPatch.disabled_response_message"
+                (change)="changeQuizPatch()"></textarea>
               </mat-form-field>
+              <br>
             </div>
-            <div class="col-sm-2 slide">
-              <span class="fa fa-angle-left"></span>
-              <span class="pg">1</span> sur 
-              <span class="pg">2</span>
-              <span class="fa fa-angle-right"></span>
-             </div>
-            <div class="col-sm-5"><button class="btn btn-quizz valide">Supprimer ce profil du quizz</button>  </div>
           </div>
         </div>
-  </div>
-
-
-  <!-- ORDER -->
-  <div class="container">
-    <div class="order">
-      <p>
-        <a>rubrique 1 sur 1
-          <!-- <span>0</span>/
-                <span>5</span> -->
-        </a>
-      </p>
-
-
-    </div>
-    <p class="order-name">
-      <input type="text" placeholder="Nom rubrique" name="name">
-    </p>
-  </div>
-
-  <!-- Choix multiple -->
-  <div class="contenu pd-40 pad-r-0">
-    <div class="type-contenu">Choix multiple</div>
-    <div style="clear:both;float:none;display: block;"></div>
-    <div style="clear:both;float:none;display: block;"></div>
-    <p class="title float">Question
-        <br/>
-        <small>41 Reponses</small>
-    </p>
-    <div class="Liste-contenu" id="choixmultiple">
-
-      <div class="relative">
-        <div class="absolute">
-          <p>14 <br>
-          <small>Reponse</small></p>
-
-        </div>
-          <ngx-charts-pie-chart class="relative" [view]="view" [scheme]="colorScheme" [results]="single" [legend]="showLegend" [explodeSlices]="explodeSlices"
-          [labels]="showLabels" [doughnut]="true" [gradient]="gradient" (select)="onSelect($event)">
-         
-          <ng-template #tooltipTemplate let-model="model">
-            <div class="mer-tooltip">
-              {{model && model.value}} %
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="#fff" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-                </svg>
-            </div>
-          </ng-template>
-        </ngx-charts-pie-chart>
       </div>
-      <ul class="vale vale-bloc">
-          <li class="one">12,8% <br> <span>lorem ipsum </span>
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg> -->
-        </li>
-          <li class="two">12,8% <br> <span>lorem ipsum </span>
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg> -->
-          </li>
-          <li class="three">12,8% <br> <span>lorem ipsum </span>
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg> -->
-          </li>
-          
-        </ul> 
+    </div>
+
+    <ng-container *ngFor="let rubrique of quizStats.rubriques; let i = index">
+    <!-- ORDER -->
+      <div class="container">
+        <div class="order">
+          <p>
+            <a>rubrique {{i+1}} sur {{quizStats.rubriques.length}}</a>
+          </p>
+        </div>
+        <p class="order-name">
+          <input type="text" [placeholder]="rubrique.name" name="name">
+        </p>
+      </div>
+
+      <ng-container *ngFor="let question of rubrique.questions">
+        
+        <!-- Choix multiple -->
+        <div class="contenu pd-40 pad-r-0" *ngIf="question.type_question.slug === 'multiple_choice'">
+          <div class="type-contenu">Choix multiple</div>
+          <div style="clear:both;float:none;display: block;"></div>
+          <div style="clear:both;float:none;display: block;"></div>
+          <p class="title float">{{question.description}}
+            <br/>
+            <small>{{question.response_inputs.length}} Réponses</small>
+          </p>
+          <div class="Liste-contenu" id="choixmultiple">
+            <div class="relative">
+              <div class="absolute">
+                <p>{{question.response_inputs.length}} <br>
+                <small>Réponses</small></p>
+              </div>
+              <ngx-charts-pie-chart class="relative" [view]="view" [scheme]="colorScheme" [results]="question.data" [legend]="showLegend" [explodeSlices]="explodeSlices"
+              [labels]="showLabels" [doughnut]="true" [gradient]="gradient" (select)="onSelect($event)">             
+                <ng-template #tooltipTemplate let-model="model">
+                  <div class="mer-tooltip">
+                    {{model && ((model.value/question.response_inputs.length) * 100) | number:'1.0-2'}} %
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="#fff" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+                    </svg>
+                  </div>
+                </ng-template>
+              </ngx-charts-pie-chart>
+            </div>
+            <ul class="vale vale-bloc">
+              <li *ngFor="let data of question.data; let optionIndex = index;"
+                  [class.one]="optionIndex%6 === 0" [class.two]="optionIndex%6 === 1" [class.three]="optionIndex%6 === 2"
+                  [class.four]="optionIndex%6 === 3" [class.five]="optionIndex%6 === 4" [class.six]="optionIndex%6 === 5">{{((data.value/question.response_inputs.length) * 100) | number:'1.0-2'}} % <br> <span>{{data.name}} </span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" *ngIf="data.correct_answer">
+                  <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+                  </svg>
+              </li>
+            </ul> 
 
       <!-- <fusioncharts [id]="id1" [width]="width" [height]="height" [type]="type2" [dataFormat]="dataFormat" [dataSource]="dataSource"></fusioncharts> -->
-    </div>
-    <div style="clear:both;float:none;display: block;"></div>
-    <div class="after-contenu" (click)="downloadImage('choixmultiple')">Télécharger au format image
-      <span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
-          <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
-            <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
-            />
-          </g>
-        </svg>
-      </span>
-    </div>
-  </div>
-
-  <!-- Cases à cocher-->
-  <div class="contenu pd-40  pad-r-0">
-    <div class="type-contenu">Cases à cocher</div>
-    <div style="clear:both;float:none;display: block;"></div>
-    <p class="title float">Question
-        <br/>
-        <small>41 Reponses</small>
-    </p>
-    <div class="Liste-contenu pad-r-0" id="caseacocher">
-      <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single" [barPadding]="30" [xAxis]="showXAxis"
-        [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
-        <ng-template #tooltipTemplate let-model="model">
-          <div class="mer-tooltip">
-            {{model && model.value}} %
-            <!-- true or fales -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path fill="#fff" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg>
           </div>
-        </ng-template>
-      </ngx-charts-bar-vertical>
-      <ul class="vale">
-          <li class="one">12,8% <br> <span>lorem ipsum </span>
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg> -->
-        </li>
-          <li class="two marg-l">12,8% <br> <span>lorem ipsum </span>
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg> -->
-          </li>
-          <li class="three">12,8% <br> <span>lorem ipsum </span>
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg> -->
-          </li>
-          <li class="foure marg-l">12,8% <br> <span>lorem ipsum </span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg>
-          </li>
-          <li class="five">12,8% <br> <span>lorem ipsum </span>
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg> -->
-          </li>
-          <li class="six marg-l">12,8% <br> <span>lorem ipsum </span>
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg> -->
-          </li>
-        </ul> 
-    </div>
-    <div style="clear:both;float:none;display: block;"></div>
-    <div class="after-contenu" (click)="downloadImage('caseacocher')">Télécharger au format image
-      <span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
-          <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
-            <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
-            />
-          </g>
-        </svg>
-      </span>
-    </div>
-  </div>
-
-  <!-- Échelle linéaire-->
-  <div class="contenu pd-40 pad-r-0">
-    <div class="type-contenu">Échelle linéaire</div>
-    <div style="clear:both;float:none;display: block;"></div>
-    <p class="title float">Question
-        <br/>
-        <small>41 Reponses</small>
-    </p>
-    
-      <div class="Liste-contenu pad-l0" id="echellelineaire">
-        <div class="echellelineaire">
-          <ngx-charts-bar-vertical [barPadding]="30" [view]="view" [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
-            [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
-            <ng-template #tooltipTemplate let-model="model">
-              <div class="mer-tooltip">
-                {{model && model.value}} %
-                <!-- a decommenter -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                  <path fill="#fff" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-                  </svg>
-              </div>
-            </ng-template>
-          </ngx-charts-bar-vertical>
+          <div style="clear:both;float:none;display: block;"></div>
+          <div class="after-contenu" (click)="downloadImage('choixmultiple')">Télécharger au format image
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+                <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+                  <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+                  />
+                </g>
+              </svg>
+            </span>
+          </div>
         </div>
-        <ul class="vale">
-          <li class="one">12,8% <br> <span>lorem ipsum </span>
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg> -->
-        </li>
-          <li class="two marg-l">12,8% <br> <span>lorem ipsum </span>
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+
+              <!-- Cases à cocher-->
+        <div class="contenu pd-40  pad-r-0" *ngIf="question.type_question.slug === 'checkbox'">
+          <div class="type-contenu">Cases à cocher</div>
+          <div style="clear:both;float:none;display: block;"></div>
+          <p class="title float">{{question.description}}
+              <br/>
+              <small>{{question.response_inputs.length}} Réponses</small>
+          </p>
+          <div class="Liste-contenu pad-r-0" id="caseacocher">
+            <ngx-charts-bar-vertical [roundEdges]="false" [view]="view" [scheme]="colorScheme" [results]="question.data" [barPadding]="30" [xAxis]="showXAxis"
+              [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+              <ng-template #tooltipTemplate let-model="model">
+                <div class="mer-tooltip">
+                {{model && ((model.value/question.response_inputs.length) * 100) | number:'1.0-2'}} %  
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="#fff" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+                  </svg>
+                </div>
+              </ng-template>
+            </ngx-charts-bar-vertical>
+            <ul class="vale">
+              <li *ngFor="let data of question.data; let colorIndex = index;"
+                [class.one]="colorIndex%6 === 0" [class.two]="colorIndex%6 === 1" [class.three]="colorIndex%6 === 2" [class.four]="colorIndex%6 === 3"
+                [class.five]="colorIndex%6 === 4" [class.siz]="colorIndex%6 === 5" [class.marg-l]="colorIndex%2 === 1">
+                  {{((data.value/question.response_inputs.length) * 100) | number:'1.0-2'}}% <br> <span>{{data.name}} </span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" *ngIf="data.correct_answer">
+                  <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+                  </svg>
+              </li>
+            </ul> 
+          </div>
+          <div style="clear:both;float:none;display: block;"></div>
+          <div class="after-contenu" (click)="downloadImage('caseacocher')">Télécharger au format image
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+                <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+                  <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+                  />
+                </g>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Échelle linéaire-->
+        <div class="contenu pd-40 pad-r-0" *ngIf="question.type_question.slug === 'lineary_scale'">
+          <div class="type-contenu">Échelle linéaire</div>
+          <div style="clear:both;float:none;display: block;"></div>
+          <p class="title float">{{question.description}}
+              <br/>
+              <small>{{question.response_inputs.length}} Réponses</small>
+          </p>
+          
+          <div class="Liste-contenu pad-l0" id="echellelineaire">
+            <div class="echellelineaire">
+              <ngx-charts-bar-vertical [roundEdges]="false" [barPadding]="30" [view]="view" [scheme]="colorScheme" [results]="question.data" [xAxis]="showXAxis"
+                [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+                <ng-template #tooltipTemplate let-model="model">
+                  <div class="mer-tooltip">
+                    {{model && ((model.value/question.response_inputs.length) * 100) | number:'1.0-2'}}%
+                  </div>
+                </ng-template>
+              </ngx-charts-bar-vertical>
+            </div>
+            <ul class="vale">
+              <li *ngFor="let data of question.data; let colorIndex = index;"
+                [class.one]="colorIndex%6 === 0" [class.two]="colorIndex%6 === 1" [class.three]="colorIndex%6 === 2"
+                [class.four]="colorIndex%6 === 3" [class.five]="colorIndex%6 === 4" [class.six]="colorIndex%6 === 5" [class.marg-l]="colorIndex%2 === 1">
+                  {{((data.value/question.response_inputs.length) * 100) | number:'1.0-2'}}% <br> <span>{{data.name}} </span>
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg> -->
-          </li>
-          <li class="three">12,8% <br> <span>lorem ipsum </span>
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg> -->
-          </li>
-          <li class="foure marg-l">12,8% <br> <span>lorem ipsum </span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg>
-          </li>
-          <li class="five">12,8% <br> <span>lorem ipsum </span>
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg> -->
-          </li>
-          <li class="six marg-l">12,8% <br> <span>lorem ipsum </span>
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="#22BC3F" fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
-            </svg> -->
-          </li>
-        </ul>    
-      </div>
-      <div style="clear:both;float:none;display: block;"></div>
+                </svg> -->
+            </li>
+            </ul>    
+          </div>
+          <div style="clear:both;float:none;display: block;"></div>
 
-    <div class="after-contenu" (click)="downloadImage('echellelineaire')">Télécharger au format image
-      <span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
-          <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
-            <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
-            />
-          </g>
-        </svg>
-      </span>
-    </div>
-  </div>
+          <div class="after-contenu" (click)="downloadImage('echellelineaire')">Télécharger au format image
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+                <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+                  <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+                  />
+                </g>
+              </svg>
+            </span>
+          </div>
+        </div>
 
-  <!-- Liste déroulante-->
-  <div class="contenu pd-40">
-    <div class="type-contenu">Liste déroulante</div>
-    <p class="title">Question
-      <br/>
-      <small>41 Reponses</small>
-    </p>
-    <div class="Liste-contenu" id="listederoulante">
-      <table class="theme">
-        <td class="w-20">Lorem ipsume</td>
-        <td class="w-60">
-          <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-        </td>
-        <td class="text-center color">40%</td>
-      </table>
+        <!-- Liste déroulante-->
+        <div class="contenu pd-40" *ngIf="question.type_question.slug === 'list_scroll'">
+          <div class="type-contenu">Liste déroulante</div>
+          <p class="title">{{question.description}}
+            <br/>
+            <small>{{question.response_inputs.length}} Réponses</small>
+          </p>
+          <div class="Liste-contenu" id="listederoulante">
+            <table [class.theme]="colorIndex%4 === 0" [class.blue]="colorIndex%4 === 1" [class.yellow]="colorIndex%4 === 2" [class.green]="colorIndex%4 === 3"
+              *ngFor="let data of question.data; let colorIndex = index">
+              <td class="w-20">{{data.name}}</td>
+              <td class="w-60">
+                <mat-progress-bar mode="determinate" [value]="(data.value/question.response_inputs.length) * 100"></mat-progress-bar>
+              </td>
+              <td class="text-center" [class.color]="!data.correct_answer">{{((data.value/question.response_inputs.length) * 100) | number:'1.0-2'}} %</td>
+            </table>
+          </div>
+          <div class="after-contenu" (click)="downloadImage('listederoulante')">Télécharger au format image
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+                <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+                  <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+                  />
+                </g>
+              </svg>
+            </span>
+          </div>
+        </div>
 
-      <table class="blue">
-        <td class="w-20">Lorem ipsume</td>
-        <td class="w-60">
-          <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-        </td>
-        <td class="text-center ">40%</td>
-      </table>
+        <!-- Réponse courte -->
+        <div class="contenu pd-40" *ngIf="question.type_question.slug === 'short_answer'">
+          <div class="type-contenu">Réponse courte</div>
+          <p class="title">{{question.description}}
+            <br/>
+            <small>{{question.response_inputs.length}} Réponses</small>
+          </p>
+          <div class="Liste-contenu " >        
+            <ng-scrollbar #scrollRef [trackY]="true" [trackX]="false">
+              <ul class="list-group" id="reponsecourte">
+                <li class="list-group-item" *ngFor="let response of question.response_inputs">{{response.value_input}}</li>
+              </ul>
+              </ng-scrollbar>
+            
+          </div>
+          <div class="after-contenu" (click)="downloadImage('reponsecourte')">Télécharger au format image
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+                <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+                  <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+                  />
+                </g>
+              </svg>
+            </span>
+          </div>
+        </div>
 
-      <table class="yellow">
-        <td class="w-20">Lorem ipsume</td>
-        <td class="w-60">
-          <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-        </td>
-        <td class="text-center color">40%</td>
-      </table>
+        <!-- Réponse longue -->
+        <div class="contenu pd-40" *ngIf="question.type_question.slug === 'width_answer'">
+          <div class="type-contenu">Réponse longue</div>
+          <p class="title">{{question.description}}
+            <br/>
+            <small>{{question.response_inputs.length}} Réponses</small>
+          </p>
+          <div class="Liste-contenu " >
+            <ng-scrollbar #scrollRef [trackY]="true" [trackX]="false">
+            <ul class="list-group" id="reponselongue">
+              <li class="list-group-item" *ngFor="let response of question.response_inputs">{{response.value_input}} </li>
+            </ul>
+            </ng-scrollbar>
 
-      <table class="green">
-        <td class="w-20">Lorem ipsume</td>
-        <td class="w-60">
-          <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-        </td>
-        <td class="text-center">40%</td>
-      </table>
+          </div>
+          <div class="after-contenu" (click)="downloadImage('reponselongue')">Télécharger au format image
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+                <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+                  <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+                  />
+                </g>
+              </svg>
+            </span>
+          </div>
+        </div>
 
-    </div>
-    <div class="after-contenu" (click)="downloadImage('listederoulante')">Télécharger au format image
-      <span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
-          <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
-            <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
-            />
-          </g>
-        </svg>
-      </span>
-    </div>
-  </div>
+        <!-- Réponse DATE -->
+        <div class="contenu pd-40" *ngIf="question.type_question.slug === 'date'">
+          <div class="type-contenu">Date</div>
+          <p class="title">{{question.description}}
+            <br/>
+            <small>{{question.response_inputs.length}} Reponses</small>
+          </p>
+          <div class="Liste-contenu " >           
+            <ng-scrollbar #scrollRef [trackY]="true" [trackX]="false">
+              <ul class="list-group" id="date">
+                <li class="list-group-item" *ngFor="let response of question.response_inputs">{{response?.value_input?.split('-').reverse().join('/')}}</li>
+              </ul>
+            </ng-scrollbar>
+          </div>
+          <div class="after-contenu" (click)="downloadImage('date')">Télécharger au format image
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+                <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+                  <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+                  />
+                </g>
+              </svg>
+            </span>
+          </div>
+        </div>
 
-  <!-- Réponse courte -->
-  <div class="contenu pd-40">
-    <div class="type-contenu">Réponse courte</div>
-    <p class="title">Question
-      <br/>
-      <small>41 Reponses</small>
-    </p>
-    <div class="Liste-contenu " >
-      
-      <ng-scrollbar #scrollRef [trackY]="true" [trackX]="false">
-        <ul class="list-group" id="reponsecourte">
-          <li class="list-group-item">Djibouti</li>
-          <li class="list-group-item">Trinidad and Tobago</li>
-          <li class="list-group-item">Cape Verde</li>
-          <li class="list-group-item">Swaziland</li>
-          <li class="list-group-item">Mayotte</li>
-          <li class="list-group-item">Jordan</li>
-          <li class="list-group-item">Djibouti</li>
-          <li class="list-group-item">Trinidad and Tobago</li>
-          <li class="list-group-item">Cape Verde</li>
-          <li class="list-group-item">Swaziland</li>
-          <li class="list-group-item">Mayotte</li>
-          <li class="list-group-item">Jordan</li>
-          <li class="list-group-item">Djibouti</li>
-          <li class="list-group-item">Trinidad and Tobago</li>
-          <li class="list-group-item">Cape Verde</li>
-          <li class="list-group-item">Swaziland</li>
-          <li class="list-group-item">Mayotte</li>
-          <li class="list-group-item">Jordan</li>
-        </ul>
-        </ng-scrollbar>
-      
-
-    </div>
-    <div class="after-contenu" (click)="downloadImage('reponsecourte')">Télécharger au format image
-        <span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
-              <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
-                <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
-                />
-              </g>
-            </svg>
-          </span>
-    </div>
-  </div>
-
-  <!-- Réponse longue -->
-  <div class="contenu pd-40">
-    <div class="type-contenu">Réponse longue</div>
-    <p class="title">Question
-      <br/>
-      <small>41 Reponses</small>
-    </p>
-    <div class="Liste-contenu " >
-      
-        <ng-scrollbar #scrollRef [trackY]="true" [trackX]="false">
-        <ul class="list-group" id="reponselongue">
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit
-            amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">DjLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ibouti</li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit
-            amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit
-            amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">DjLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ibouti</li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit
-            amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit
-            amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">DjLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ibouti</li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </li>
-          </ul>
-        </ng-scrollbar>
-      
-
-    </div>
-    <div class="after-contenu" (click)="downloadImage('reponselongue')">Télécharger au format image
-        <span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
-              <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
-                <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
-                />
-              </g>
-            </svg>
-          </span>
-    </div>
-  </div>
-  <!-- Réponse DATE -->
-  <div class="contenu pd-40">
-    <div class="type-contenu">Date</div>
-    <p class="title">Question
-      <br/>
-      <small>41 Reponses</small>
-    </p>
-    <div class="Liste-contenu " >
-    
-        <ng-scrollbar #scrollRef [trackY]="true" [trackX]="false">
-            <ul class="list-group" id="date">
-          <li class="list-group-item">09/12/2018</li>
-          <li class="list-group-item">10/12/2018</li>
-          <li class="list-group-item">11/12/2018</li>
-          <li class="list-group-item">12/12/2018</li>
-          <li class="list-group-item">13/12/2018</li>
-          <li class="list-group-item">14/12/2018</li>
-          <li class="list-group-item">15/12/2018</li>
-          <li class="list-group-item">16/12/2018</li>
-          <li class="list-group-item">17/12/2018</li>
-          <li class="list-group-item">20/12/2018</li>
-          <li class="list-group-item">22/12/2018</li>
-          <li class="list-group-item">25/12/2018</li>
-          <li class="list-group-item">26/12/2018</li>
-          <li class="list-group-item">2/01/2019</li>
-        </ul>
-        </ng-scrollbar>
-
-     
-
-    </div>
-    <div class="after-contenu" (click)="downloadImage('date')">Télécharger au format image
-        <span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
-              <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
-                <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
-                />
-              </g>
-            </svg>
-          </span>
-    </div>
-  </div>
-
-  <!-- Réponse HEURE -->
-  <div class="contenu pd-40">
-    <div class="type-contenu">Heure</div>
-    <p class="title">Question
-      <br/>
-      <small>41 Reponses</small>
-    </p>
-    <div class="Liste-contenu " id="heure">
-      <ul class="list-group">
-        <ng-scrollbar #scrollRef [trackY]="true" [trackX]="false">
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-          <li class="list-group-item">22h54</li>
-        </ng-scrollbar>
-
-      </ul>
-
-    </div>
-    <div class="after-contenu" (click)="downloadImage('reponselongue')">Télécharger au format image
-        <span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
-              <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
-                <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
-                />
-              </g>
-            </svg>
-          </span>
-    </div>
-  </div>
-
-
+        <!-- Réponse HEURE -->
+        <div class="contenu pd-40" *ngIf="question.type_question.slug === 'hour'">
+          <div class="type-contenu">Heure</div>
+          <p class="title">{{question.description}}
+            <br/>
+            <small>{{question.response_inputs.length}} Réponses</small>
+          </p>
+          <div class="Liste-contenu " id="heure">
+            <ul class="list-group">
+              <ng-scrollbar #scrollRef [trackY]="true" [trackX]="false">
+                <li class="list-group-item" *ngFor="let response of question.response_inputs">{{response.value_input.split(':').join('h')}}</li>
+              </ng-scrollbar>
+            </ul>
+          </div>
+          <div class="after-contenu" (click)="downloadImage('reponselongue')">Télécharger au format image
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24">
+                <g fill="#95A5A6" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+                  <path d="M23 21H3v-4h5v2h10v-2h5v4zm2-6h-9v2h-6v-2H1v8h24v-8zM12 1v9.673L8.35 7.028 6.94 8.441l6.12 6.116 6.11-6.116-1.41-1.413L14 10.783V1h-2"
+                  />
+                </g>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
 </div>
-
-<!-- 
-    
-    <div class="contenu pd-40">
-    <div class="type-contenu">Réponse courte</div>
-    <p class="title">Question <br/> <small>41 Reponses</small> </p>
-    <div class="Liste-contenu ">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias voluptatibus magnam ipsum vitae tempora odit necessitatibus numquam ipsa,
-       hic facere magni corporis accusamus ullam dolore veniam dolores et fugit eius!
-    </div>
-    <div class="after-contenu">Télécharger au format image</div>
-  </div> 
-
--->

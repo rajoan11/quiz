@@ -10,44 +10,45 @@
       </div>
     </div>
   </header>
+  <app-alert [alert]="alert"></app-alert>
   <app-loader [load]="loadingQuiz"></app-loader>
-  <div class="front-rubrique">
-    <div class="container" *ngFor="let rubrique of quiz.rubriques; let i=index">
-      <div [class.hidden-content]="i !== activeRubrique">
-        <div class="paginate-rubrique">
+  <div class="front-rubrique" id="destination">
+    <div class="container full-height" [class.hidden-content]="i !== activeRubrique" *ngFor="let rubrique of quiz.rubriques; let i=index">
+      <div>
+        <div class="paginate-rubrique" ngx-sticky [useParentOffset]="true">
           <ul>
             <li *ngFor="let nbRubrique of quiz.rubriques; let j=index">
-              <span [class.actived]="(j < activeRubrique && j > 0 || j === 0)" [class.active]="j === activeRubrique" (click)="jumpTo(j)"></span>
+              <span [class.actived]="(j < activeRubrique && j > 0 || j === 0)" [class.active]="j === activeRubrique"></span>
+              <!-- <span [class.actived]="(j < activeRubrique && j > 0 || j === 0)" [class.active]="j === activeRubrique" (click)="jumpTo(j)"></span> -->
               <em *ngIf="j === activeRubrique" class="rubric-name">{{rubrique.name}}</em>
             </li>
           </ul>
         </div>
         <div class="order">
           <p>
-            <a>Rubrique
-              <span>{{i+1}}</span> sur
-              <span>{{quiz.rubriques.length}}</span>
+            <a>{{rubrique.name}}
+              <span>({{i+1}}/{{quiz.rubriques.length}})</span>
             </a>
           </p>
         </div>
 
         <form [formGroup]="forms[i]" *ngIf="forms[i]">
           <ng-container *ngFor="let question of rubrique.contents">
-            <ng-container *ngIf="question.type === 'image'">
+            <ng-container *ngIf="question.type === 'image' && question.content">
               <app-front-image [question]="question"></app-front-image>
             </ng-container>
-            <div class="contenu" *ngIf="question.type === 'video'">
+            <div class="" *ngIf="question.type === 'video' && question.content">
               <app-front-video [content]="question.content"></app-front-video>
             </div>
-            <div class="contenu" *ngIf="question.type === 'embed'">
+            <div class="" *ngIf="question.type === 'embed' && question.content">
               <app-front-embed [content]="question.content"></app-front-embed>
             </div>
-            <div class="contenu" *ngIf="question.type === 'texte'">
+            <div class="contenu" *ngIf="question.type === 'texte' && question.content">
               <div [innerHtml]="question.content"></div>
             </div>
-            <div class="contenu" *ngIf="question.type === 'embed'">    
+            <!-- <div class="contenu" *ngIf="question.type === 'embed' && question.content">
               <div [innerHtml]="question.content"></div>
-            </div>
+            </div> -->
 
             <!-- choix multiple -->
             <div class="contenu " *ngIf="question.type_question?.slug === 'multiple_choice'" [id]="'control-'+question.id" [class.barre-verticale-r]="showErrors[i] && !this.forms[i].controls['control-'+question.id].valid">
@@ -129,7 +130,7 @@
     <!-- FIN -->
 
 
-    <div class="new-page">
+    <div class="new-page" [ngx-scroll-to]="'#destination'">
       <p class="retoure" *ngIf="activeRubrique > 0" (click)="previous()">Retour</p>
       <p class="suivant" (click)="next()">{{activeRubrique
         <quiz.rubriques.length-1 ? 'suivant' : 'terminer'}}</p>
@@ -139,21 +140,22 @@
 
 <ng-container *ngIf="isCorrectionPage">
   <div class="front-rubrique">
-    <div class="contenu-header">
-      <div class="container">
-        <h1 class="title" *ngIf="quiz.ending_message === ''">Merci d’avoir
-          <br class="bloc" />répondu au quizz !
-          <br/>
-        </h1>
-        <h1 *ngIf="quiz.ending_message !== ''">{{quiz.ending_message}}</h1>
-        <h1>
-          <small *ngIf="quiz.read_score">Votre score final est de {{score}}/{{scoreTarget}}.</small>
-        </h1>
-        <p *ngIf="quiz.show_answer">Vous pouvez consultez le détail de vos points et la correction en cliquant ci-dessous :</p>
-        <button class="btn btn-one" *ngIf="quiz.show_answer" [routerLink]="['/front/correction', idRecord]">Voir la correction</button>
+    <div class="full-height-rubrique">
+      <div class="contenu-header ">
+        <div class="container">
+          <h1 class="title">{{quiz.title_ending_message || 'Merci d\'avoir répondu au quizz'}}
+
+            <small *ngIf="quiz.read_score">
+              {{quiz.ending_message}}
+              <br/> Votre score final est de {{score}}/{{scoreTarget}}.</small>
+          </h1>
+          <p *ngIf="quiz.show_answer">Vous pouvez consultez le détail de vos points et la correction en cliquant ci-dessous :</p>
+          <button class="btn btn-one" *ngIf="quiz.show_answer" [routerLink]="['/front/correction', idRecord]">Voir la correction</button>
+        </div>
       </div>
     </div>
-    <div class="new-page">
+
+    <div class="new-page hide-xs">
       <p class="suivant" routerLink="/admin">Quitter</p>
     </div>
   </div>

@@ -17,19 +17,19 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class FrontDateComponent implements OnInit {
   @Input() question: any;
   private _value: any;
-  onChangeValue = (_) => {};
+  onChangeValue = _ => {};
   onTouchedValue = () => {};
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  change(event): void {
+  addEvent(event): void {
+    console.log(event.target.value);
     this.onChangeValue(event.target.value);
   }
 
-  setDisabledState?(isDisabled: boolean): void { }
+  setDisabledState?(isDisabled: boolean): void {}
 
   get value() {
     return this._value;
@@ -52,5 +52,4 @@ export class FrontDateComponent implements OnInit {
   registerOnTouched(fn: any): void {
     this.onTouchedValue = fn;
   }
-
 }

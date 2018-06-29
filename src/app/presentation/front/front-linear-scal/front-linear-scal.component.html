@@ -1,13 +1,13 @@
 <p class="title">{{question.description || 'Question (échelle linéaire)'}}</p>
-<div class="myrow progress">
+<div class="myrow progress" [attr.id]="question.id">
   <ul>
-    <li *ngFor="let item of question.response_options"
-      [ngStyle]="{'max-width': (100/(question.response_options.length - 1)) +'%' }">
-      <span class="rond"></span>
+    <li *ngFor="let item of question.response_options;let i =index" [ngStyle]="{'max-width': (100/(question.response_options.length - 1)) +'%' }"
+      [ngClass]="{selected: i+1 < valueSlider || i+1 === valueSlider}">
+      <span [class.rond]="!question.smiley"></span>
+      <span [class.smiley]="question.smiley" [attr.data-smiley]="question.content"></span>
       <i>{{item.name}}</i>
     </li>
   </ul>
-  <mat-slider step="1" min="1" [max]="question.response_options.length"
-  tickInterval="1" (change)="change($event)"></mat-slider>
+  <mat-slider step="1" min="1" [max]="question.response_options.length" tickInterval="1" (change)="change($event)"></mat-slider>
 </div>
 <div class="obligatoire" *ngIf="question.is_mandatory">Obligatoire</div>

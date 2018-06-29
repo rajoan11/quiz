@@ -11,6 +11,7 @@ import { NgxDnDModule } from '@swimlane/ngx-dnd';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSliderModule } from '@angular/material/slider';
@@ -18,7 +19,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgxStickyModule } from 'ng6-sticky';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 import {
   MatSortModule,
@@ -32,6 +35,7 @@ import { ScrollbarModule } from 'ngx-scrollbar';
 import { LoaderModule } from '../../../presentation/loader/loader.module';
 import { CommunModule } from '../../../commun/commun.module';
 import { QuillModule } from 'ngx-quill';
+import { MyAlertModule } from '../../../presentation/alert/alert.module';
 
 @NgModule({
   imports: [
@@ -50,6 +54,7 @@ import { QuillModule } from 'ngx-quill';
     MatInputModule,
     MatExpansionModule,
     LoaderModule,
+    MyAlertModule,
     MatSlideToggleModule,
     CommunModule,
     MatCheckboxModule,
@@ -64,7 +69,10 @@ import { QuillModule } from 'ngx-quill';
     NgxDnDModule,
     MatProgressBarModule,
     QuillModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxStickyModule,
+    ScrollToModule.forRoot(),
+    MatIconModule
   ],
   declarations: [],
   exports: [
@@ -83,6 +91,7 @@ import { QuillModule } from 'ngx-quill';
     MatInputModule,
     MatExpansionModule,
     LoaderModule,
+    MyAlertModule,
     MatSlideToggleModule,
     CommunModule,
     MatCheckboxModule,
@@ -98,7 +107,10 @@ import { QuillModule } from 'ngx-quill';
     MatProgressBarModule,
     ProgressbarModule,
     QuillModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxStickyModule,
+    ScrollToModule,
+    MatIconModule
   ]
 })
 export class SharedModule {}

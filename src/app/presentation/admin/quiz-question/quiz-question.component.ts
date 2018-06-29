@@ -81,8 +81,10 @@ export class QuizQuestionComponent implements OnInit {
     });
   }
 
-  dragStart(): void {
+  dragStart($event): void {
     this.dragRubric.emit(true);
   }
-  out(): void {}
+  cancel($event): void {
+    this.dragRubric.emit(false);
+  }
 }

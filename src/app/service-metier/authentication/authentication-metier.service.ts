@@ -19,6 +19,12 @@ export class AuthenticationMetierService
       catchError(this.handleError)
     );
   }
+  public loginFront(user: any): Observable<any> {
+    return this.authenticationBusinessDelegateServiceACI.loginFront(user).pipe(
+      tap(_ => this.log(`create successfully`)),
+      catchError(this.handleError)
+    );
+  }
 
   private handleError(error) {
     return Observable.throw(

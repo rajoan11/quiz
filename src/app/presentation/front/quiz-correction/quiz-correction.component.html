@@ -12,13 +12,14 @@
     </div>
   </div>
 </header>
+<app-alert [alert]="alert"></app-alert>
 <div class="front-rubrique" *ngIf="quiz">
   <div class="container">
     <div class="contenu pad-contenu-collaps container">
       <div *ngFor="let rubric of quiz.rubriques;let i = index">
         <div class="order">
           <p>
-            <a *ngIf="quiz.read_score && rubric.score > 0 && getStrLength2(rubric.name)" [matTooltip]="'Total des points '+ rubric.name + ': '+rubric.score+'/'+getScoreRubrique(rubric)">Total des points {{rubric.name}} :
+            <a *ngIf="quiz.read_score && rubric.score != 0 && getScoreRubrique(rubric) != 0 && getStrLength2(rubric.name)" [matTooltip]="'Total des points '+ rubric.name + ': '+rubric.score+'/'+getScoreRubrique(rubric)">Total des points {{rubric.name}} :
               <span>{{rubric.score}}</span>/
               <span>{{getScoreRubrique(rubric)}}</span>
             </a>
@@ -38,11 +39,11 @@
         <div id="collapseBasic" [collapse]="!isCollapsed[i]" class="card card-block card-header">
 
           <div class="well well-lg" *ngFor="let content of rubric.contents_rubriques">
-            <div *ngIf="content.type_content === 'metaContent'">
-              <app-front-image [question]="content" *ngIf="content.type === 'image'"></app-front-image>
-              <app-front-text [content]="content.content" *ngIf="content.type === 'texte'"></app-front-text>
-              <app-front-video [content]="content.content" *ngIf="content.type === 'video'"></app-front-video>
-              <app-front-embed [content]="content.content" *ngIf="content.type === 'embed'"></app-front-embed>
+            <div *ngIf="content.type_content === 'metaContent' && rubric.meta_contents && rubric.meta_contents.length>0">
+              <app-front-image [question]="content" *ngIf="content.type === 'image' && content.content"></app-front-image>
+              <app-front-text [content]="content.content" *ngIf="content.type === 'texte' && content.content"></app-front-text>
+              <app-front-video [content]="content.content" *ngIf="content.type === 'video' && content.content"></app-front-video>
+              <app-front-embed [content]="content.content" *ngIf="content.type === 'embed' && content.content"></app-front-embed>
             </div>
             <div *ngIf="content.type_content === 'question'">
               <app-quizz-correction-question [question]="content" [quiz]="quiz"></app-quizz-correction-question>
@@ -55,10 +56,7 @@
   </div>
 </div>
 <ng-container *ngIf="quiz">
-  <div class="front-rubrique">
-
-    <div class="new-page">
-      <p class="suivant">Quitter</p>
-    </div>
+  <div class="new-page">
+    <p class="suivant">Quitter</p>
   </div>
 </ng-container>

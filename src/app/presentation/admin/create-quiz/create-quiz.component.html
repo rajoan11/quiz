@@ -14,7 +14,7 @@
           <li class="btn-group" dropdown *ngIf="!finishQuizz">
 
             <mat-form-field floatPlaceholder="never">
-              <mat-select panelClass="example-panel" [(ngModel)]="newQuiz.is_anonyme">
+              <mat-select panelClass="example-panel" [(ngModel)]="newQuiz.is_anonyme" (change)="changeStatusQuiz(templateSelect ,$event.value)">
                 <mat-option *ngFor="let typeQuestion of typeQuestions" [value]="typeQuestion.value">
                   {{typeQuestion.type}}
                 </mat-option>
@@ -68,7 +68,8 @@
           <div class="myrow" *ngIf="isSuperAdmin">
             <mat-form-field class="example-full-width">
               <!-- floatPlaceholder="never" -->
-              <input matInput placeholder="Choisissez les entreprises" name="searchEntreprise" [(ngModel)]="searchEntreprise" (ngModelChange)="onChangeEntreprise($event)">
+              <input matInput placeholder="Choisissez les entreprises" name="searchEntreprise" [(ngModel)]="searchEntreprise" (ngModelChange)="onChangeEntreprise($event)"
+                required>
             </mat-form-field>
             <!-- <div class="input-group">
                 <input class="form-control " type="text" [(ngModel)]="searchEntreprise" (ngModelChange)="onChangeEntreprise($event)">
@@ -90,7 +91,7 @@
         </div>
 
         <div class="rubrique ngx-dnd-container" ngxDroppable [removeOnSpill]="false" [model]="newQuiz.rubriques" dropZone="restricted-rubric"
-          (drop)="dropSuccess()" (out)="out()">
+          (drop)="dropSuccess()" (out)="out($event)" (over)="over($event)">
           <div class="ngx-dnd-item" ngxDraggable *ngFor="let rubric of newQuiz.rubriques; let x = index" [model]="rubric " dropZone="restricted-rubric">
             <app-quiz-rubric [hideContentRubric]="hideContentRubric" (deleteRubrique)="deleteRubrique($event)" [newQuiz]="newQuiz" [position]="x"
               [quizLength]="newQuiz.rubriques.length" [isUpdateQuizz]="isUpdateQuizz" [newRubrique]="rubric" [colorCss]="colorCss"></app-quiz-rubric>
@@ -110,3 +111,20 @@
     <app-finish-quizz [finishQuizzId]="finishQuizzId" [finishQuizzUidQuizz]="finishQuizzUidQuizz" [newQuizz]="newQuiz" [quizzStateAnonyme]="quizzStateAnonyme"></app-finish-quizz>
   </div>
 </div>
+
+<ng-template #templateSelect>
+
+  <button type="button" class="close pull-right" aria-label="Close" (click)="declineSelect(valueQuizToChange)">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+  <div class="modal-body text-center ">
+    <p *ngIf="valueQuizToChange"> Vous passez de nominatif à anonyme donc toutes les anciennes donnée seront convertie en donnée anonyme (suppression nom
+      prénom email).</p>
+    <p *ngIf="!valueQuizToChange"> Vous passez d’anonyme à nominatif donc une connexion sera maintenant obligatoire pour répondre à ce formulaire, de plus
+      toutes les données déjà saisies resteront anonymes</p>
+    <button type="button " class="btn  non-valide btn-quizz " (click)="declineSelect(valueQuizToChange)">annuler</button>
+    <button type="button " class="btn valide btn-quizz " (click)="confirmSelect(idQuizToChange,valueQuizToChange) ">valider </button>
+
+  </div>
+</ng-template>

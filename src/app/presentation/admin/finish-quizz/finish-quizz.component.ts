@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { QuizzPatch, QuizDto } from '../../../donnee/quiz';
 import { QuizCudApplicatifServiceACI } from '../../../service-applicatif/quiz-admin';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-finish-quizz',
@@ -51,10 +52,13 @@ export class FinishQuizzComponent implements OnInit {
           this.loadinFinish = false;
           this.newQuizz = new QuizDto();
           if (withvue) {
-            this.router.navigate(['/front/resp', this.finishQuizzUidQuizz]);
-          } else {
-            this.router.navigate(['/admin/list']);
+            window.open(
+              `${environment.appBaseUrl}/front/resp/${this.finishQuizzUidQuizz}`
+            );
           }
+          setTimeout(() => {
+            this.router.navigate(['/admin/list']);
+          }, 10);
         }
       },
       error => {

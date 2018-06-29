@@ -43,6 +43,10 @@
 
 /* MULI */
 
+a,a:hover{
+  text-decoration: none!important;
+}
+
 @font-face {
   font-family: 'muli';
   src: url('assets/fonts/muli-bold-webfont.woff2') format('woff2'),
@@ -317,7 +321,7 @@ body .btn-primary:focus,
 /*HEADER QUIZZ*/
 .navbar {
   border-radius: 0 !important;
-  margin-bottom: 30px;
+  margin-bottom: 15px!important;
   min-height: 1px !important;
 }
 .filtre-quiz .liste > li {
@@ -509,6 +513,19 @@ body .pagination {
   border-right: none;
   border-bottom: none;
 }
+
+.sticky {
+  position: fixed;
+  width: 100%;
+  background: #ffffffe0;
+  display: block;
+  z-index: 9999;
+  left: 0;
+  right: 0;
+  padding: 29px 0;
+  top: 15px;
+  height: 75px;
+}
 /* Responsive header quizz
 ************************** */
 @media (max-width: 992px) {
@@ -524,7 +541,9 @@ body .pagination {
     display: block !important;
   }
 }
-
+.quizz-table .mat-row a:hover{
+  color: #fc6100!important;
+}
 /*Fquizz-table
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 .quizz-table .table {
@@ -700,6 +719,7 @@ body .pagination {
 .quizz-table .-vertical {
   width: 14px;
   top: 2px;
+
 }
 .quizz-table .-horizontal {
   height: 14px;
@@ -930,7 +950,29 @@ body .pagination {
   .mat-menu-xx.mat-menu-panel {
     margin: auto;
   }
+  #resultat .w-100{
+    width: 100%;
+    float: none;
+    clear: both;
+  }
+  #resultat .contenu .btn-quizz{
+    margin: 20px auto;
+    text-align: center;
+    display: block;
+    float: none;
+  }
+  #resultat .contenu .mat-form-field {
+    margin-bottom: 15px;
+  }
+  #resultat .contenu .btn-groupe.table {
+    float: none!important;
+    margin: auto;
+  }
+  #resultat .type-contenu{
+    width: 100%;
+  }
 }
+
 .content-drop {
   display: block;
   width: 100%;
@@ -1058,13 +1100,13 @@ body .pagination {
 .form-quizz .textarea-height .mat-form-field-wrapper textarea {
   min-height: 80px;
 }
+ 
+.form-quizz.q-long .textarea .mat-form-field,
 .form-quizz.q-courte .textarea .mat-form-field {
-  width: 100%;
-}
-.form-quizz.q-long .textarea .mat-form-field {
   max-width: 100%;
   width: 100%;
 }
+
 .form-quizz .mat-form-field {
   max-width: 290px;
   width: 95%;
@@ -1080,17 +1122,39 @@ body .pagination {
 }
 .form-quizz .mat-form-field-type-mat-select {
   background-color: #fafafa; /*fafafa */
-  padding: 6px 0 0px 15px;
+  padding: 6px 0 0px 0px;
   height: 40px;
 }
 .form-quizz .pad-21 .mat-form-field {
   padding-right: 21px;
 }
 
+
 .form-quizz .no-border .mat-select-arrow-wrapper {
   position: absolute;
   right: -28px;
   top: 44%;
+
+  /* position: absolute;
+  right: -28px;
+  top: -11px;
+  height: 38px; */
+}
+.form-quizz .no-border.bg-point .mat-select-arrow-wrapper{
+  top: -11px;
+  height: 38px;
+}
+.form-quizz .no-border.bg-point .mat-select-arrow{
+  top: 17px;
+  position: absolute;
+}
+.form-quizz .no-border.bg-point mat-form-field{
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+.form-quizz .textarea-height mat-form-field{
+  max-width: 100%;
 }
 .mat-form-field-infix {
   border-top: 0px !important;
@@ -1118,6 +1182,10 @@ body .pagination {
   margin: 40px auto;
   max-height: 343px;
   height: 343px;
+  padding-bottom: 0!important;
+}
+.prent-content-drop .embed-responsive iframe{
+  height: 343px;
 }
 .border-none-color .mat-select-arrow {
   border-top-color: var(--my-var);
@@ -1138,7 +1206,7 @@ li.list-group-item,
 .ng-star-inserted > li {
   cursor: move !important;
 }
-.attachement li {
+span.plus {
   background-color: #fff;
 }
 .relative app-quiz-question {
@@ -1230,6 +1298,30 @@ li.list-group-item,
   text-align: center;
   padding-top: 5px;
 }
+.alert-success {
+  color: #35cc99!important;
+  background-color: #c3ffeb!important;
+  border-color: #d6e9c6!important;
+  border: none!important;
+  border-radius: 0!important;
+}
+.alert-danger {
+  color: #ff612f!important;
+  background-color: #ffd4c7!important;
+  border-radius: 0!important;
+  border: none!important;
+}
+app-list-quiz .alert{
+  max-width: 83%;
+  margin: 0 auto;
+  display: block;
+  border-bottom: 1px #fff solid!important;
+  padding: 10px 15px;
+}
+app-list-quiz .alert-dismissable .close,
+app-list-quiz .alert-dismissible .close{
+  right: 0;
+}
 
 /* MODALE NBR RUBRIQUE */
 
@@ -1291,19 +1383,25 @@ body .rubric-pops .modal-body .close {
 }
 .rubric-pops .modal-body table td .close {
   top: 0;
-  left: -15px;
+  left: 0;
   text-align: center;
-  width: 25px;
   padding: 0;
+  width: 100%;
 }
 .rubric-pops .modal-body table td.relative {
   position: relative;
+  width: 40px;
 }
+
 .rubric-pops .modal-body p {
   font-family: FiraSans;
   font-size: 16px;
   font-weight: 200;
   text-align: center;
+}
+.rubric-pops .modal-body {
+  padding-left: 0!important;
+  padding-right: 0!important;
 }
 
 .rubric-pops .modal-header,
@@ -1335,10 +1433,14 @@ body .rubric-pops .modal-body .close {
   transition: 0.3s;
 }
 .modal-backdrop.in {
-  background: #ffffffa8;
+  background: #fff;
+  opacity: 0.3!important;
+}
+li{
+  list-style: none!important;
 }
 .modal-open > app-root {
-  filter: blur(6px);
+  filter: blur(5px);
   display: table;
   width: 100%;
 }
@@ -1353,11 +1455,16 @@ body .rubric-pops .modal-body .close {
 .group-selection > table:last-child {
   width: 40%;
 }
+.group-selection > .table2 td.w-cust mat-form-field{
+  width: 100%;
+}
 .w100 {
   width: 100% !important;
 }
-body .ng-star-inserted {
-  cursor: default !important;
+.ngx-dnd-item:not(.has-handle):not(.move-disabled),
+.ngx-dnd-item.has-handle [ngxdraghandle],
+.ngx-dnd-item.has-handle [ngxDragHandle]{
+  cursor: default!important;
 }
 .echell-select {
   padding: 25px 0px;
@@ -1368,10 +1475,14 @@ body .ng-star-inserted {
   color: #727272;
   font-size: 16px;
   font-weight: 200;
+  height: 40px;
+  margin: 0;
+  line-height: 40px;
 }
 .mat-option-text,
 .mat-input-element {
   color: inherit;
+  caret-color: inherit;
 }
 .echell-select .mat-form-field-label,
 .echell-select .mat-option-text {
@@ -1401,6 +1512,13 @@ body .fin-quizz label {
 body .nbr-limite .mat-input-underline.mat-form-field-underline {
   display: none;
 }
+.echell-select .mat-form-field-type-mat-select .mat-form-field-label{
+  padding-left: 15px;
+}
+.nbr-limite td{
+  min-width: 50px;
+  text-align: center;
+}
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
   border-color: var(--my-var);
 }
@@ -1429,7 +1547,8 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline {
   background: url(/assets/images/pops.png) no-repeat center;
   cursor: pointer;
 }
-.order p > a {
+.order p > a,
+.order p {
   color: #fff;
   text-decoration: none;
   font-family: firasans;
@@ -1471,13 +1590,12 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline {
   max-width: 300px;
   box-shadow: 1px 1px 7px #ccc;
   border-radius: 0;
-}
-.order-name {
   font-size: 16px;
   font-family: firasans;
   color: #4a4a4a;
-  margin-bottom: 28px;
+  margin-bottom: 0px;
 }
+
 .order-name input {
   border: none;
   width: 100%;
@@ -1582,6 +1700,26 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline {
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
   fill: var(--my-var) !important;
 }
+/* LOGIN
+&&&&&&&&&& */
+.front-login .mat-form-field-label{
+  height: 55px;
+  line-height: 55px;
+  padding: 0 15px;
+}
+.front-login .second .mat-form-field-label{
+  line-height: 66px;
+}
+.front-login .mat-form-field-underline{
+  background-color: #fff;
+}
+.front-login .mat-form-field-invalid .mat-input-element,
+.front-login .mat-warn .mat-input-element,
+.front-login .mat-input-element{
+  caret-color: #4a4a4a!important;
+}
+
+
 /* FRONT
 &&&&&&&&&&& */
 .new-page {
@@ -1597,7 +1735,7 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline {
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
-  cursor: pointer;
+  cursor: pointer!important;
   position: relative;
 }
 .new-page p:before {
@@ -1644,11 +1782,18 @@ body .nbr-limite .mat-input-underline.mat-form-field-underline {
 #resultat .contenu {
   max-width: 780px;
 }
+
 .front-rubrique .contenu:last-child {
   margin-bottom: 40px;
 }
+.front-rubrique .contenu.full {
+  padding: 15px !important;
+}
 .front-rubrique .contenu img {
   width: 100%;
+}
+.img-defaut{
+  padding-bottom: 30px;
 }
 .front-rubrique .contenu mat-radio-group > mat-radio-button,
 .front-rubrique .contenu mat-radio-group > mat-checkbox {
@@ -1690,10 +1835,11 @@ mat-form-field textarea {
 .correction .mat-checkbox-checked .mat-checkbox-frame {
   border: none;
 }
-.multiple ol li mat-checkbox .mat-checkbox-frame {
+
+.multiple mat-checkbox .mat-checkbox-frame {
   border-radius: 50%;
 }
-.multiple ol li mat-checkbox.mat-checkbox-checked .mat-checkbox-frame {
+.multiple mat-checkbox.mat-checkbox-checked .mat-checkbox-frame {
   border-color: var(--my-var);
 }
 .multiple .mat-checkbox-checked.mat-accent .mat-checkbox-background {
@@ -1716,23 +1862,14 @@ mat-form-field textarea {
 .multiple mat-checkbox .mat-checkbox-background {
   transition: none;
 }
+.correction .Liste-contenu .mat-checkbox-checked .mat-checkbox-frame{
+  border: 1px #0000008a solid;
+}
 
 body .fin-quizz mat-form-field {
   max-width: 320px !important;
 }
-/* .multiple .no-border .mat-select-arrow-wrapper {
-  position: absolute;
-  right: 0;
-  top: 0;
-  background: #fafafa;
-  opacity: 1;
-}
-.multiple .mat-select-arrow{
-  margin: 8px 11px 4px;
-}
-.multiple .pad-21 .mat-form-field {
-  padding-right: 8px;
-} */
+
 
 .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
   color: inherit !important;
@@ -1869,6 +2006,9 @@ body .fin-quizz mat-form-field {
 .gu-transit li span.icone {
   color: var(--my-var);
   font-size: 100px;
+}
+.gu-transit .prent-content-drop {
+  background-color: #0000;
 }
 
 /* .gu-over */

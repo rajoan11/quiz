@@ -1,7 +1,7 @@
 <p class="title">{{question.description || 'Question (heure)'}}</p>
 <div class="myrow date">
   <mat-form-field class="example-full-width" (change)="change($event)">
-    <input matInput type="time" [placeholder]="question.placeholder || 'Heure:Minute'">
+    <input matInput type="time" [placeholder]="question.placeholder || 'Heure:Minute'" value="00:00">
   </mat-form-field>
 </div>
 <div class="obligatoire" *ngIf="question.is_mandatory">Obligatoire</div>

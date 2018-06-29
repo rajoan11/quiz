@@ -1,3 +1,4 @@
+@import '../../front/quizz-response/quizz-response.component.css';
 #resultat {
   background-color: rgba(0, 0, 0, 0.03);
   font-family: muli;
@@ -95,6 +96,30 @@ span {
   font-family: firasans;
   font-size: 16px;
   font-weight: 700;
+  height: 40px;
+  line-height: 40px;
+  padding-right: 15px;
+}
+#resultat .profil .slide span{
+  padding: 3px 6px;
+  font-size: 15px;
+  cursor: pointer;
+  font-family: firasans;
+  font-size: 16px;
+  color: #4a4a4a;
+  transition: 0.3;
+}
+#resultat .profil .slide span:hover{
+  color: #fc6100;
+}
+#resultat .profil .fa-angle-left{
+  padding-right: 15px!important;
+}
+#resultat .profil .fa-angle-right{
+  padding-left: 15px!important;
+}
+#resultat .profil .fa.active{
+  opacity: 0.6;
 }
 #resultat .profil .font{
   font-family: Muli;
@@ -105,11 +130,27 @@ span {
   font-family: Muli;
   font-size: 14px;
   color: #4f5e65;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
 }
+#resultat .profil .slide mat-form-field{
+  width: 40px;
+  height: 35px;
+  max-width:100%;
+  text-align: center;
+}
+.contenu .mat-form-field
 .order {
   border-color: #fc6100;
+  margin-bottom: 0px;
 }
-
+.order {
+  margin-bottom: 0px;
+}
+.order-name {
+  margin-bottom: 50px;
+}
 h2 {
   font-family: FiraSans;
   font-size: 18px;
@@ -136,7 +177,10 @@ h2 {
 .contenu .btn-quizz{
   border-radius: 4px;
   background-color: #fc6100;
-  padding: 10px 15px;
+  padding: 5px 15px;
+  font-size: 12px;
+  margin: 8px 0;
+  float: right;
 }
 .mer-tooltip{
   background: #e65900!important;
@@ -168,15 +212,22 @@ h2 {
   background-color: #e65900!important;
 }
 .type-contenu {
-  width: 32%;
+  width: 35%;
   position: absolute;
-  padding-left: 4%;
+  padding-left: 1%;
   line-height: 14px;
+  font-size: 16px;
 }
 .contenu .type-contenu + .title {
   font-size: 17px;
   font-family: muli;
   font-weight: 700;
+}
+.contenu mat-radio-group{
+  display: table;
+  max-width: 250px;
+  width: 100%;
+  margin: 0 auto;
 }
 .title > small {
   font-size: 14px;
@@ -228,12 +279,12 @@ h2 {
   border: 0;
   height: 36px;
 }
-#resultat .btn-groupe button:first-child {
+#resultat .btn-groupe button.active {
   background-color: #fc6100;
   color: #ffffff;
   margin-right: -8px;
 }
-#resultat .btn-groupe button:last-child {
+#resultat .btn-groupe button.inactive {
   background-color: rgba(153, 153, 153, 0.1);
   color: #b4b4b4;
 }
@@ -276,6 +327,7 @@ h2 {
     display: table;
     width: 100%;
 }
+
 #resultat .Liste-contenu ul .list-group-item {
   border: none;
   border-bottom: 1px #ddd solid;
@@ -288,6 +340,8 @@ h2 {
   padding: 6px 0;
   cursor: auto !important;
   line-height: 20px;
+  min-height: 33px;
+  margin-right: 2px;
 }
 .echellelineaire{
     display: table;
@@ -325,6 +379,7 @@ h2 {
     float: left;
     margin-bottom: 35px;
     font-weight: 700;
+    min-height: 43px;
 
 }
 .vale li.marg-l{
@@ -354,7 +409,7 @@ h2 {
 .vale li.three:before{
   background-color: #f8e71c;
 }
-.vale li.foure:before{
+.vale li.four:before{
   background-color: #fc6100;
 }
 .vale li.five:before{
@@ -380,6 +435,16 @@ h2 {
   color: #232425;
   font-weight: 200;
 }
+.list-group-item:first-child{
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-size: 13px;
+  font-weight: 200;
+  border-bottom: 1px #ddd solid;
+}
 .vale-bloc{
   width: 34%;
   float: right;
@@ -395,7 +460,51 @@ ngx-charts-pie-chart {
   display: table;
   width: 100%;
 } */
+.correction mat-radio-group mat-radio-button,
+.correction mat-radio-group mat-checkbox {
+  position: relative;
+  max-width: 200px;
+  display: block;
+  margin-bottom: 10px;
+  clear: both;
+  float: none;
+  
+}
 
+/* CHEQUE TO RADIOS DESIGN */
+/* .multiple mat-checkbox .mat-checkbox-frame {
+  border-radius: 50%;
+}
+.multiple mat-checkbox.mat-checkbox-checked .mat-checkbox-frame {
+  border-color: #fc6100;
+}
+.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #fc6100;
+} */
+.contenu .mat-form-field{
+  max-width: calc(100% - 110px);
+}
+
+.multiple .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  left: 5px;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  font-size: 0px;
+  top: 5px;
+}
+.multiple .mat-checkbox-checked .mat-checkbox-checkmark {
+  opacity: 0;
+  display: none;
+  width: 0px;
+  height: 0px;
+}
+.multiple mat-checkbox svg:not(:root) {
+  display: none;
+}
+.multiple mat-checkbox .mat-checkbox-background {
+  transition: none;
+}
 /* RESPONSIVE */
 @media (max-width: 992px) {
   .marg-25 {
@@ -451,3 +560,4 @@ ngx-charts-pie-chart {
       margin-left: 0;
     }
 }
+

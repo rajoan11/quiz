@@ -1,6 +1,8 @@
 <div class="prent-content-drop hvr-float-shadow">
   <div class="support" *ngIf="!_questionQuiz.corection" ngxDragHandle></div>
-  <div class="type-contenu" *ngIf="!_questionQuiz.corection">{{_questionQuiz.type_question.name}}</div>
+  <div class="type-contenu" *ngIf="!_questionQuiz.corection">{{_questionQuiz.type_question.name }}
+    <span *ngIf="_questionQuiz.activate_vote">(vote)</span>
+  </div>
   <div class="content-drop" [ngClass]="{'retour-class': _questionQuiz.corection}">
 
 
@@ -27,11 +29,11 @@
                 <ol class="plus ronds">
                   <li>
                     <mat-checkbox [disabled]="!_questionQuiz.corection" [(ngModel)]="questQuiz.correct_answer"></mat-checkbox>
-                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 === _questionQuiz.response_options.length) || (othersOptionExist && i === _questionQuiz.response_options.length -2)">
+                    <mat-form-field class="example-full-width mat-form-field" (change)="checkDoublon($event, questQuiz, _questionQuiz.response_options)" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 === _questionQuiz.response_options.length) || (othersOptionExist && i === _questionQuiz.response_options.length -2)">
                       <input #nameselected matInput (click)="$event.target.select()" [placeholder]="questQuiz.placeholder" [disabled]="questQuiz.slug === 'autres'"
                         [(ngModel)]="questQuiz.name" (focus)="addOptionMsFirst( _questionQuiz.response_options, questQuiz, i,$event)">
                     </mat-form-field>
-                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 !== _questionQuiz.response_options.length) || (othersOptionExist && i !== _questionQuiz.response_options.length -2)">
+                    <mat-form-field class="example-full-width mat-form-field" (change)="checkDoublon($event, questQuiz, _questionQuiz.response_options)" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 !== _questionQuiz.response_options.length) || (othersOptionExist && i !== _questionQuiz.response_options.length -2)">
                       <input matInput (click)="$event.target.select()" [placeholder]="questQuiz.placeholder" [disabled]="questQuiz.slug === 'autres'"
                         [(ngModel)]="questQuiz.name" (focus)="addOptionMsFirst( _questionQuiz.response_options, questQuiz, i)">
                     </mat-form-field>
@@ -75,7 +77,7 @@
             </div>
 
           </div>
-          <div class="col-sm-12" *ngIf="showAddOption && !_questionQuiz.corection">
+          <div class="col-sm-12" *ngIf="(showAddOption || _questionQuiz.response_options.length>1) && !_questionQuiz.corection">
             <div class="col-md-8 col-sm-12">
               <ol class="plus c-coche relative border">
                 <li class="pointer">
@@ -131,12 +133,12 @@
                   <ol class="plus c-coche">
                     <li>
                       <mat-checkbox [disabled]="!_questionQuiz.corection" [(ngModel)]="questQuiz.correct_answer"></mat-checkbox>
-                      <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 === _questionQuiz.response_options.length) || (othersOptionExist && i === _questionQuiz.response_options.length -2)">
+                      <mat-form-field class="example-full-width mat-form-field" (change)="checkDoublon($event, questQuiz, _questionQuiz.response_options)" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 === _questionQuiz.response_options.length) || (othersOptionExist && i === _questionQuiz.response_options.length -2)">
                         <input #nameselected (click)="$event.target.select()" matInput placeholder="Option1" value="" [placeholder]="questQuiz.placeholder"
                           [(ngModel)]="questQuiz.name" (focus)="addOptionMsFirst( _questionQuiz.response_options, questQuiz, i)"
                           [disabled]="questQuiz.slug === 'autres'">
                       </mat-form-field>
-                      <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 !== _questionQuiz.response_options.length) || (othersOptionExist && i !== _questionQuiz.response_options.length -2)">
+                      <mat-form-field class="example-full-width mat-form-field" (change)="checkDoublon($event, questQuiz, _questionQuiz.response_options)" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 !== _questionQuiz.response_options.length) || (othersOptionExist && i !== _questionQuiz.response_options.length -2)">
                         <input matInput (click)="$event.target.select()" placeholder="Option1" value="" [placeholder]="questQuiz.placeholder" [(ngModel)]="questQuiz.name"
                           (focus)="addOptionMsFirst( _questionQuiz.response_options, questQuiz, i)" [disabled]="questQuiz.slug === 'autres'">
                       </mat-form-field>
@@ -180,7 +182,7 @@
               </div>
             </div>
 
-            <div class="col-sm-12 " *ngIf="showAddOption && !_questionQuiz.corection">
+            <div class="col-sm-12 " *ngIf="(showAddOption || _questionQuiz.response_options.length>1) && !_questionQuiz.corection">
               <div class="col-md-8 col-sm-12">
                 <ol class="plus c-coche relative border">
                   <li class="pointer">
@@ -237,7 +239,7 @@
                 <tr>
                   <td class="w-100">
                     <mat-form-field floatPlaceholder="never">
-                      <mat-select placeholder="Nombre" [(ngModel)]="_questionQuiz.constraint.type_validation" (change)="changeContrainteType($event)">
+                      <mat-select placeholder="" [(ngModel)]="_questionQuiz.constraint.type_validation" (change)="changeContrainteType($event,_questionQuiz.constraint)">
                         <mat-option *ngFor="let type of contraintes" [value]="type.type_value">
                           {{type.type_validation}}
                         </mat-option>
@@ -247,7 +249,7 @@
                   <td class="w-100">
                     <mat-form-field floatPlaceholder="never">
 
-                      <mat-select placeholder="Superieur à" [(ngModel)]="_questionQuiz.constraint.validation_operator" (change)="changeValidationOperator($event)">
+                      <mat-select [(ngModel)]="_questionQuiz.constraint.validation_operator" (change)="changeValidationOperator($event)">
                         <mat-option *ngFor="let op of operator" [value]="op.validation_operator">
                           {{op.validation_operator}}
                         </mat-option>
@@ -270,16 +272,19 @@
                 </div>
                 <div class="col-sm-8 label-italic wto-50" *ngIf="contrainteValue ==='Nombre2'">
                   <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
-                    <input matInput placeholder="Nombre" [(ngModel)]="value1" (change)="changeNumberOne(value1, 1, _questionQuiz.constraint)">
+                    <input matInput placeholder="numérique " [(ngModel)]="value1" (change)="changeNumberOne(value1, 1, _questionQuiz.constraint)">
                   </mat-form-field>
                   <span class="inline">et</span>
                   <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
-                    <input matInput placeholder="Nombre" [(ngModel)]="value2" (change)="changeNumberOne(value2, 2, _questionQuiz.constraint)">
+                    <input matInput placeholder="numérique " [(ngModel)]="value2" (change)="changeNumberOne(value2, 2, _questionQuiz.constraint)">
                   </mat-form-field>
                 </div>
                 <div class=" textarea relative" [ngClass]="{'col-sm-8': contrainteValue !=='Nombre2','col-sm-4': contrainteValue ==='Nombre2'}">
-                  <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
+                  <!-- <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
                     <textarea matInput matTextareaAutosize minRows="1" matInput placeholder="Texte d'erreur personnalisé ..." [(ngModel)]="_questionQuiz.constraint.text_error"></textarea>
+                  </mat-form-field> -->
+                  <mat-form-field class="example-full-width" floatPlaceholder="never">
+                    <input matInput placeholder="Texte d'erreur personnalisé ..." [(ngModel)]="_questionQuiz.constraint.text_error">
                   </mat-form-field>
 
                   <div (click)="_questionQuiz.with_validation_contrainte = false">
@@ -326,7 +331,7 @@
                   <tr>
                     <td class="w-100">
                       <mat-form-field floatPlaceholder="never">
-                        <mat-select placeholder="Nombre" [(ngModel)]="_questionQuiz.constraint.type_validation" (change)="changeContrainteType($event)">
+                        <mat-select placeholder="" [(ngModel)]="_questionQuiz.constraint.type_validation" (change)="changeContrainteType2($event,_questionQuiz.constraint)">
                           <mat-option *ngFor="let type of contraintesForLong" [value]="type.type_value">
                             {{type.type_validation}}
                           </mat-option>
@@ -335,9 +340,8 @@
                     </td>
                     <td class="w-100">
                       <mat-form-field floatPlaceholder="never">
-
-                        <mat-select placeholder="Superieur à" [(ngModel)]="_questionQuiz.constraint.validation_operator" (change)="changeValidationOperator($event)">
-                          <mat-option *ngFor="let op of operator" [value]="op.validation_operator">
+                        <mat-select [(ngModel)]="_questionQuiz.constraint.validation_operator" (change)="changeValidationOperatorLong($event)">
+                          <mat-option *ngFor="let op of operatorForLong" [value]="op.validation_operator">
                             {{op.validation_operator}}
                           </mat-option>
                         </mat-select>
@@ -352,26 +356,30 @@
                   <div class="col-sm-4 label-italic" *ngIf="contrainteValue !=='Nombre2'">
 
                     <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
-                      <input matInput [placeholder]="contrainteValue" [(ngModel)]="_questionQuiz.constraint.constraint_value">
+                      <input matInput [placeholder]="contrainteValuelong" [(ngModel)]="_questionQuiz.constraint.constraint_value">
                     </mat-form-field>
 
 
                   </div>
                   <div class="col-sm-8 label-italic wto-50" *ngIf="contrainteValue ==='Nombre2'">
                     <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
-                      <input matInput placeholder="Nombre" [(ngModel)]="value1" (change)="changeNumberOne(value1, 1, _questionQuiz.constraint)">
+                      <input matInput placeholder="numérique " [(ngModel)]="value1" (change)="changeNumberOne(value1, 1, _questionQuiz.constraint)">
                     </mat-form-field>
                     <span class="inline">et</span>
                     <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
-                      <input matInput placeholder="Nombre" [(ngModel)]="value2" (change)="changeNumberOne(value2, 2, _questionQuiz.constraint)">
+                      <input matInput placeholder="numérique " [(ngModel)]="value2" (change)="changeNumberOne(value2, 2, _questionQuiz.constraint)">
                     </mat-form-field>
                   </div>
                   <div class=" textarea" [ngClass]="{'col-sm-8': contrainteValue !=='Nombre2','col-sm-4': contrainteValue ==='Nombre2'}">
-                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
+                    <!-- <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never">
                       <textarea matInput matTextareaAutosize minRows="1" matInput placeholder="Texte d'erreur personnalisé ..." [(ngModel)]="_questionQuiz.constraint.text_error"></textarea>
+                    </mat-form-field> -->
+                    <mat-form-field class="example-full-width" floatPlaceholder="never">
+                      <input matInput placeholder="Texte d'erreur personnalisé ..." [(ngModel)]="_questionQuiz.constraint.text_error">
                     </mat-form-field>
+
                     <div (click)="_questionQuiz.with_validation_contrainte = false">
-                      <button type="button" class="close pull-right" aria-label="Close">
+                      <button type="button" class="close pull-right absolute" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
@@ -414,11 +422,11 @@
                     <i class="nbr correction" matTooltip="cliquer ici pour activer la bonne/mauvaise réponse" *ngIf="_questionQuiz.corection"
                       (click)="questQuiz.correct_answer = !questQuiz.correct_answer">{{i+1}}.</i>
                     <i class="nbr" *ngIf="!_questionQuiz.corection">{{i+1}}.</i>
-                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 === _questionQuiz.response_options.length) || (othersOptionExist && i === _questionQuiz.response_options.length -2)">
+                    <mat-form-field class="example-full-width mat-form-field" (change)="checkDoublon($event, questQuiz, _questionQuiz.response_options)" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 === _questionQuiz.response_options.length) || (othersOptionExist && i === _questionQuiz.response_options.length -2)">
                       <input #nameselected (click)="$event.target.select()" matInput [placeholder]="questQuiz.placeholder" [disabled]="questQuiz.slug === 'autres'"
                         [(ngModel)]="questQuiz.name" (focus)="addOptionMsFirst( _questionQuiz.response_options, questQuiz, i)">
                     </mat-form-field>
-                    <mat-form-field class="example-full-width mat-form-field" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 !== _questionQuiz.response_options.length) || (othersOptionExist && i !== _questionQuiz.response_options.length -2)">
+                    <mat-form-field class="example-full-width mat-form-field" (change)="checkDoublon($event, questQuiz, _questionQuiz.response_options)" floatPlaceholder="never" *ngIf="(!othersOptionExist && i+1 !== _questionQuiz.response_options.length) || (othersOptionExist && i !== _questionQuiz.response_options.length -2)">
                       <input matInput (click)="$event.target.select()" [placeholder]="questQuiz.placeholder" [disabled]="questQuiz.slug === 'autres'"
                         [(ngModel)]="questQuiz.name" (focus)="addOptionMsFirst( _questionQuiz.response_options, questQuiz, i)">
                     </mat-form-field>
@@ -460,7 +468,7 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-12" *ngIf="showAddOption && !_questionQuiz.corection">
+          <div class="col-sm-12" *ngIf="(showAddOption || _questionQuiz.response_options.length>1) && !_questionQuiz.corection">
             <div class="col-md-8 col-sm-12">
               <ol class="plus c-coche with-btn relative border">
                 <li class="pointer">
@@ -509,7 +517,7 @@
                 <td>
                   <mat-form-field>
                     <mat-select [(ngModel)]="initialValue" (change)="changeInitialType($event,_questionQuiz)">
-                      <mat-option *ngFor="let nbr1 of ['0','1']" [value]="nbr1">
+                      <mat-option *ngFor="let nbr1 of firtsArray" [value]="nbr1">
                         {{nbr1}}
                       </mat-option>
                     </mat-select>
@@ -537,7 +545,7 @@
                   <input matInput [placeholder]="(i === 0 || i+1 === _questionQuiz.response_options.length)? ('Réponse'+(i + toNumber(initialValue,null))+ '(obligatoire)') : ('Réponse'+(i + toNumber(initialValue,null))+ '(facultatif)')"
                     [(ngModel)]="item.name" (click)="$event.target.select()">
                 </mat-form-field>
-                <span class="fermer" (click)="deleteteOptionMs(_questionQuiz.response_options, i)"></span>
+                <span class="fermer" (click)="deleteteOptionMs(_questionQuiz.response_options, i,true)"></span>
               </li>
             </ol>
           </div>
@@ -550,12 +558,13 @@
               </div>
               <div class="col-sm-7 col-xs-12">
                 <mat-form-field class="w100" floatPlaceholder="never">
-                  <mat-select placeholder="smiley" [(ngModel)]="_questionQuiz.smiley">
-                    <mat-option *ngFor="let fa of ['smiley','point','coeur']" [value]="fa">
+
+                  <div class="content-fa" *ngIf="_questionQuiz.keysmiley">
+                    <i class="fa {{_questionQuiz.keysmiley}}"></i>
+                  </div>
+                  <mat-select [placeholder]="!_questionQuiz.keysmiley?'smiley':''" [(ngModel)]="_questionQuiz.smiley">
+                    <mat-option *ngFor="let fa of ['smiley','point','coeur','autre']" [value]="fa" (click)="openModal(template, fa)">
                       {{ fa }}
-                    </mat-option>
-                    <mat-option (click)="openModal(template)">
-                      autre
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -635,14 +644,14 @@
     <div class="groupe-btn">
       <div class="row">
         <div class="col-md-2 col-sm-1 col-xs-1 ">
-          <button class="btn edite" [style.color]="colorCss" *ngIf="!_questionQuiz.corection" (click)="_questionQuiz.corection = true">
+          <button class="btn edite" [style.color]="colorCss" *ngIf="!_questionQuiz.corection" (click)=" correction(true,index)">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22">
               <g [attr.fill]="colorCss" fill-rule="evenodd" stroke="#fff" stroke-width=".5">
                 <path d="M16.381 4.873l-.981.977-2.331-2.326.981-.978 2.331 2.328zm-12.312 7.65L11.8 4.796l2.331 2.327L6.4 14.85l-2.331-2.326zm-1.269 3.6v-2.327l2.331 2.328H2.8zm-1.8 1.8h4.869l13.05-13.05L14.05 0 1 13.05v4.873zM1 21.523h18v-1.8H1z"
                 />
               </g>
             </svg>Corriger</button>
-          <button class="btn edite" [style.background-color]="colorCss" *ngIf="_questionQuiz.corection" (click)="_questionQuiz.corection = false">
+          <button class="btn edite" [style.background-color]="colorCss" *ngIf="_questionQuiz.corection" (click)="correction(false,index)">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22">
               <g [attr.fill]="'white'" fill-rule="evenodd" stroke="#fff" stroke-width=".5">
                 <path d="M16.381 4.873l-.981.977-2.331-2.326.981-.978 2.331 2.328zm-12.312 7.65L11.8 4.796l2.331 2.327L6.4 14.85l-2.331-2.326zm-1.269 3.6v-2.327l2.331 2.328H2.8zm-1.8 1.8h4.869l13.05-13.05L14.05 0 1 13.05v4.873zM1 21.523h18v-1.8H1z"
@@ -679,10 +688,9 @@
                   </button>
 
                   <div class="boutton" mat-menu-item *ngIf="_questionQuiz.type_question.slug === 'multiple_choice' || _questionQuiz.type_question.slug === 'checkbox' || _questionQuiz.type_question.slug === 'list_scroll'">
-                    <span class="txt" *ngIf="!newRubrique.activate_points_rules" (click)="activateRedirection(_questionQuiz.response_redirection)">Accéder à une section en fonction de la réponse</span>
+                    <span class="txt" *ngIf="!newRubrique.activate_points_rules && !_questionQuiz.response_redirection_exist" (click)="activateRedirection(_questionQuiz.response_redirection)">Accéder à une section en fonction de la réponse</span>
                     <span class="txt" *ngIf="newRubrique.activate_points_rules" [style.opacity]="'0.5'" matTooltip="Merci de bien vouloir désactivé cette option sur la rubrique avant de l'activer ici">Accéder à une section en fonction de la réponse</span>
-                    <!-- <span class="txt" *ngIf="!questionQuiz.response_redirection_exist && !_questionQuiz.response_redirection" [style.opacity]="'0.5'"
-                      [matTooltip]="'Merci de bien vouloir désactivé cette option sur la question ' + questionQuiz.question_is_selected + ' avant de l\'activer ici'">Accéder à une section en fonction de la réponse</span> -->
+                    <span class="txt" *ngIf="_questionQuiz.response_redirection_exist" [style.opacity]="'0.5'" [matTooltip]="'Merci de bien vouloir désactivé cette option sur la question ' + _questionQuiz.response_redirection_text  + ' avant de l\'activer ici'">Accéder à une section en fonction de la réponse</span>
                     <span class="svg" *ngIf="_questionQuiz.response_redirection">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" [attr.fill]="colorCss">
                         <path fill-rule="evenodd" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />
@@ -713,7 +721,7 @@
 <ng-template #template>
   <div class="modal-header">
     <p class="color title">choisir une icône</p>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <button type="button" class="close pull-right absolute" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -721,7 +729,7 @@
     <div class="list-icon">
       <ng-scrollbar #scrollRef [trackY]="true" [trackX]="true">
         <div *ngFor="let fontawesome of fontawesomes" class="child-list">
-          <i class="fa {{fontawesome.key}}" (click)="faValue(fontawesome.value)"></i>
+          <i class="fa {{fontawesome.key}}" (click)="faValue(fontawesome.value, fontawesome.key)"></i>
         </div>
       </ng-scrollbar>
     </div>

@@ -26,43 +26,43 @@
     "operator": [
       {
         "validation_operator": "Supérieur à",
-        "constraint_value": "Nombre"
+        "constraint_value": "numérique"
       },
       {
         "validation_operator": "Supérieur ou égal à",
-        "constraint_value": "Nombre"
+        "constraint_value": "numérique"
       },
       {
         "validation_operator": "Inférieur à",
-        "constraint_value": "Nombre"
+        "constraint_value": "numérique"
       },
       {
         "validation_operator": "Inférieur ou égal à",
-        "constraint_value": "Nombre"
+        "constraint_value": "numérique"
       },
       {
         "validation_operator": "Egal à",
-        "constraint_value": "Nombre"
+        "constraint_value": "numérique"
       },
       {
         "validation_operator": "Différent de",
-        "constraint_value": "Nombre"
+        "constraint_value": "numérique"
       },
       {
         "validation_operator": "Entre",
-        "constraint_value": "Nombre2"
+        "constraint_value": "numérique"
       },
       {
         "validation_operator": "Non compris entre",
-        "constraint_value": "Nombre2"
+        "constraint_value": "numérique"
       },
       {
         "validation_operator": "Est le nombre",
-        "constraint_value": "Nombre"
+        "constraint_value": "numérique"
       },
       {
         "validation_operator": "Nombre entier",
-        "constraint_value": "Nombre"
+        "constraint_value": "numérique"
       }
     ],
     "test_error": "",
@@ -73,11 +73,11 @@
     "operator": [
       {
         "validation_operator": "Nombre de caractères maximal",
-        "constraint_value": "Nombre"
+        "constraint_value": "numérique"
       },
       {
         "validation_operator": "Nombre de caractères minimal",
-        "constraint_value": "Nombre"
+        "constraint_value": "numérique"
       }
     ],
     "test_error": "",

@@ -26,7 +26,7 @@
     <!-- VIDEO -->
     <div *ngIf="contentQuiz.type === 'video'">
       <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" [src]="getUrl(contentQuiz.content)"></iframe>
+        <iframe allowfullscreen class="embed-responsive-item" [src]="getUrl(contentQuiz.content)" ></iframe>
       </div>
       <div class="clear"></div>
     </div>
@@ -41,7 +41,7 @@
     <div *ngIf="contentQuiz.type === 'image'">
 
       <div id="result "></div>
-      <div *ngIf="contentQuiz.content">
+      <div *ngIf="contentQuiz.content"  [ngClass]="{'center': contentQuiz.display === 'center','full': contentQuiz.display === 'full'}">
         <img [src]="displayImage(contentQuiz.content)" alt=" ">
       </div>
       <!-- image pardefaut -->
@@ -53,10 +53,10 @@
       </div>
       <div class="clear "></div>
       <div class="outils " *ngIf="contentQuiz.type === 'image'">
-        <div class="w-50 " [ngClass]="{active: contentQuiz.display === 'full'}" (click)="contentQuiz.display = 'full'">
+        <div class="w-50 " [ngClass]="{active: contentQuiz.display === 'center'}" (click)="contentQuiz.display = 'center' ">
 
         </div>
-        <div class="w-50 " [ngClass]="{active: contentQuiz.display === 'center'}" (click)="contentQuiz.display= 'center'">
+        <div class="w-50 " [ngClass]="{active: contentQuiz.display === 'full'}" (click)="contentQuiz.display= 'full'">
 
         </div>
       </div>

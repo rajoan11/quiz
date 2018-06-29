@@ -11,13 +11,13 @@ const routes: Routes = [
     path: 'resultat',
     component: ResultatRootComponent,
     children: [
-      { path: '', redirectTo: 'stat', pathMatch: 'full' },
+      { path: '', redirectTo: 'stat/:id', pathMatch: 'full' },
       {
-        path: 'stat',
+        path: 'stat/:id',
         component: QuizStatComponent
       },
       {
-        path: 'preview',
+        path: 'preview/:id',
         component: QuizApercuComponent
       }
     ]

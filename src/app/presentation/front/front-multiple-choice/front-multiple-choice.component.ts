@@ -41,7 +41,7 @@ export class FrontMultipleChoiceComponent implements OnInit, ControlValueAccesso
       this.value.push({value_input: event.value, is_texte: false});
     }
     this.onChangeValue(this.value);
-    if (option.action.hasOwnProperty('has_rule_direction')) {
+    if (option.action.hasOwnProperty('has_rule_direction') && option.action.has_rule_direction !== null) {
       this.goToSendForm.emit({
         has_rule_direction: option.action.has_rule_direction,
         rubrique_target_poids: option.action.rubrique_target_poids

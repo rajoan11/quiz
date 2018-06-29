@@ -40,7 +40,7 @@
   left: 14px;
 }
 .prent-content-drop .content-drop {
-  padding-bottom: 115px;
+  padding-bottom: 75px;
   padding-top: 50px;
   padding-right: 5px;
 }
@@ -48,6 +48,11 @@
   width: 100%;
   height: auto;
   padding: 40px;
+  transition: 0.3s;
+}
+.prent-content-drop .content-drop .full img {
+  padding: 40px 0;
+  transition: 0.3s;
 }
 .content-drop {
   position: relative;

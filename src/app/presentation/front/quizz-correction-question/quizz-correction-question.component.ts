@@ -12,7 +12,19 @@ export class QuizzCorrectionQuestionComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.question.smiley) {
+      if (this.question.smiley === 'smiley') {
+        this.question.content = String.fromCharCode(0xf118);
+      } else if (this.question.smiley === 'coeur') {
+        this.question.content = String.fromCharCode(0xf004);
+      } else {
+        this.question.content = String.fromCharCode(
+          parseInt('0x' + this.question.smiley, 16)
+        );
+      }
+    }
+  }
 
   findReponse(response_inputs, reponOptionslug): boolean {
     return response_inputs.find(e => e.value_input === reponOptionslug);
@@ -99,5 +111,9 @@ export class QuizzCorrectionQuestionComponent implements OnInit {
       score = Number(score) + Number(score2);
     }
     return score;
+  }
+
+  labelFn(value: number): string {
+    return `${value} cm`;
   }
 }

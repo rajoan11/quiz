@@ -4,10 +4,11 @@
   <div>
     <div class="order" [style.border-color]="colorCss">
       <p>
-        <a>Rubrique
-          <span>{{position+1}}</span> sur
-          <span>{{quizLengthValue}}</span>
-        </a>
+
+        Rubrique
+        <span>{{position+1}}</span> sur
+        <span>{{quizLengthValue}}</span>
+
         <span class="pops" *ngIf="newRubrique.activate_points_rules && quizLengthValue > 1" (click)="openModal(template,position+1)"></span>
       </p>
       <!-- <span class="order-option" (click)="activatePointRule()"></span> -->
@@ -24,6 +25,8 @@
 
         </div>
         <button mat-menu-item *ngIf="quizLengthValue>1" (click)="openModalDelete(templateDelete)">Supprimer Rubrique </button>
+        <button mat-menu-item *ngIf="!newRubrique.open" (click)="newRubrique.open = true">Fermer Rubrique</button>
+        <button mat-menu-item *ngIf="newRubrique.open" (click)="newRubrique.open = false">Ouvrir Rubrique</button>
       </mat-menu>
     </div>
     <p class="order-name">
@@ -35,11 +38,11 @@
         dropZones="restricted-target">
 
         <!-- <div *ngFor="let contentQuiz of newRubrique.contents_rubriques;let i = index" dnd-sortable [sortableIndex]="i"> -->
-        <div *ngIf="contentQuiz && !hideContentRubric">
+        <div *ngIf="contentQuiz && !hideContentRubric && !newRubrique.open">
           <app-content-rubric (deleteIndex)="onDeleteIndex($event)" [contentQuiz]='contentQuiz' [colorCss]="colorCss" [index]="i" *ngIf="contentQuiz.type_content !== 'question'"></app-content-rubric>
-          <app-content-rubric-question (deleteIndex)="onDeleteIndex($event)" [questionQuiz]="contentQuiz" [newRubrique]="newRubrique"
-            [colorCss]="colorCss" [index]="i" [position]="position" [isUpdateQuizz]="isUpdateQuizz" *ngIf="contentQuiz.type_content === 'question'"
-            (pointRedirectionActive)="pointRedirectionActive($event)"></app-content-rubric-question>
+          <app-content-rubric-question (clickCorrection)="clickCorrection($event)" (deleteIndex)="onDeleteIndex($event)" [questionQuiz]="contentQuiz"
+            [newRubrique]="newRubrique" [colorCss]="colorCss" [index]="i" [position]="position" [isUpdateQuizz]="isUpdateQuizz"
+            *ngIf="contentQuiz.type_content === 'question'" (pointRedirectionActive)="pointRedirectionActive($event)"></app-content-rubric-question>
         </div>
       </div>
 
@@ -87,7 +90,7 @@
     <p class="pad">Cette fonction vous permet de diriger l’utilisateur vers une selon son nombre de point obtenu à la fin de cette section</p>
 
 
-    <div class="group-selection" [ngClass]="{'flou': !pr.active}" *ngFor="let pr of newRubrique.points_rules; let i = index">
+    <div class="group-selection" [ngClass]="{'flou': !pr.active && (!pr.point_min || !pr.point_max)}" *ngFor="let pr of newRubrique.points_rules; let i = index">
       <!-- table1 -->
       <table class="table1" align="left">
         <tr>
@@ -129,7 +132,7 @@
           <td class="w30">
             <span class="mask">aller à</span>
           </td>
-          <td>
+          <td class="w-cust">
             <mat-form-field>
               <mat-select [(ngModel)]="pr.rubrique_target_poids" (change)="changePoint(i, newRubrique.points_rules.length); pr.active = true">
                 <mat-option *ngFor="let aq of arrayQuiz" [value]="aq">

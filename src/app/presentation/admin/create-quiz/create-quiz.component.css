@@ -93,6 +93,7 @@
 }
 .creation-quizz .liste > .liste1 > .btn-group .mat-form-field {
   max-width: 140px;
+  height: 30px;
 }
 .theme1,
 .dropdown-menu > li > a.theme1:focus,
@@ -199,8 +200,9 @@
   display: table;
   width: 100%;
 }
+
 .creation-quizz .liste1 {
-  width: 40%;
+  width: 46%;
   float: left;
   list-style: none;
   margin: 0;
@@ -221,6 +223,10 @@
   color: #5f5f5fde;
   font-size: 13px;
   font-family: firasans;
+}
+.creation-quizz .liste1 li:first-child{
+  width:auto;
+  padding-right: 15px;
 }
 
 @media (max-width: 992px) {
@@ -330,7 +336,7 @@
   background-color: #fff;
   padding: 15px;
   box-shadow: 1px 1px 9px #e2e2e2;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   margin-right: 0px;
 }
 .form-quizz .myrow.textarea {

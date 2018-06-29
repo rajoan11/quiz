@@ -80,6 +80,7 @@ export class QuizCudMetierService implements QuizCudMetierServiceACI {
       rubrique.poids = index + 1;
       rubrique.contents_rubriques.forEach((content, indexC) => {
         if (content && content.type_content === 'question') {
+          this.removeEmptyOption(content);
           content.poids = indexC + 1;
           if (!content.description) {
             content.description = `question ${indexC}`;
@@ -92,5 +93,12 @@ export class QuizCudMetierService implements QuizCudMetierServiceACI {
       });
       rubrique.contents_rubriques = [];
     });
+  }
+
+  private removeEmptyOption(question): void {
+    if (question.type_question.slug === 'checkbox' || question.type_question.slug === 'multiple_choice'
+    || question.type_question.slug === 'list_scroll') {
+      question.response_options = question.response_options.filter(option => option['name'] && option['name'] !== '');
+    }
   }
 }

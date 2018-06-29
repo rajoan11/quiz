@@ -7,16 +7,20 @@ body {
   color: #4f5e65;
 }
 
-
 .padd {
   padding-left: 25px;
 }
+
 .nav-front,
 .contenu-header {
   padding: 45px 40px;
   background-color: var(--my-var);
   position: relative;
   margin-bottom: 70px;
+}
+.full-height-rubrique .contenu-header {
+  margin-bottom: 0;
+  height: 100vh;
 }
 .paginate-rubrique,
 .order {
@@ -130,12 +134,16 @@ p {
   color: var(--my-var);
 }
 
+.paginate-rubrique.sticky ul li > .rubric-name {
+  display: none;
+}
+
 .paginate-rubrique ul li > .rubric-name {
   font-family: muli;
   font-size: 12px;
   font-weight: 200;
   position: absolute;
-  top: -25px;
+  top: -30px;
   height: 25px;
   background: #efefef;
   padding: 5px;
@@ -251,6 +259,11 @@ p {
   display: block;
   margin: auto;
 }
+.contenu-header button:hover {
+  background: #0000;
+  color: #fff;
+  border-color: #fff;
+}
 
 .contenu .card > .well {
   background-color: transparent;
@@ -321,7 +334,19 @@ h1 > .bloc {
   width: 75%;
   height: 32px;
 }
-
+.sticky,
+#paginate-rubrique1.sticky {
+  position: fixed;
+  width: 100%;
+  background: #ffffffe0;
+  display: block;
+  z-index: 9999;
+  left: 0;
+  right: 0;
+  padding: 29px 0;
+  top: 15px;
+  height: 75px;
+}
 .contenu .progress {
   position: relative;
   display: table;
@@ -357,6 +382,9 @@ h1 > .bloc {
   max-width: 70px;
   position: relative;
   width: 100%;
+}
+.contenu .progress ul li.selected {
+  color: var(--my-var);
 }
 .contenu .progress ul li > .rond {
   position: absolute;
@@ -501,6 +529,8 @@ textarea.mat-input-element {
 }
 .contenu .progress-bare li {
   list-style: none;
+  clear: both;
+  float: none;
 }
 .contenu .progress-bare li > p {
   display: inline-block;
@@ -513,6 +543,9 @@ textarea.mat-input-element {
   margin-bottom: 0;
   height: 31px;
   line-height: 28px;
+  width: 85px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .contenu .progress-bare progressbar {
   width: 250px;
@@ -523,6 +556,7 @@ textarea.mat-input-element {
 }
 .contenu .progress-bare li.ma-rep .progress-bar {
   background-color: var(--my-var);
+  display: inherit;
 }
 .contenu .progress-bare li.rep .progress-bar {
   background-color: rgba(0, 0, 0, 0.1);
@@ -545,19 +579,49 @@ textarea.mat-input-element {
 .hidden-content {
   display: none;
 }
-@media (max-width:533px){
-  .contenu.pad-contenu-collaps,
-  .nav-front, .contenu-header {
-    padding-left: 0!important;
-    padding-right: 0!important;
+.full-height {
+  min-height: calc(100vh - 200px);
+}
+.full-height-rubrique {
+  min-height: calc(100vh - 40px);
+}
+
+.paginate-rubrique.undefined {
+  display: block;
+  width: 100%;
+  left: 0;
+  z-index: 9999;
+  background: #fff;
+  padding: 15px;
+  top: 10px;
+  padding-top: 34px;
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 100%;
   }
-  .contenu .mon-point{
+}
+@media (max-width: 992px) {
+  .new-page.hide-xs {
+    display: none;
+  }
+}
+
+@media (max-width: 533px) {
+  .contenu.pad-contenu-collaps,
+  .nav-front,
+  .contenu-header {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .contenu .mon-point {
     width: 100%;
   }
   .front-rubrique .contenu {
-      padding: 75px 15px 25px;
+    padding: 75px 15px 25px;
   }
-  .contenu .progress ul li > i{
+  .contenu .progress ul li > i {
     left: -34%;
     width: 65px;
     background: #fff;
@@ -566,5 +630,5 @@ textarea.mat-input-element {
   }
 }
 .barre-verticale-r .obligatoire {
-  color: #f70d0d!important;
+  color: #f70d0d !important;
 }

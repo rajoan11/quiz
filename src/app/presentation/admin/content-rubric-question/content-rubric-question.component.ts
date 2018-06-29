@@ -26,22 +26,26 @@ export class ContentRubricQuestionComponent implements OnInit {
   @Input() colorCss: string;
   contraintes: Array<any>;
   contraintesForLong: Array<any>;
-  contrainteValue = 'text';
-  endValue: string;
+  contrainteValue = 'numérique';
+  contrainteValuelong = 'numérique';
+  endValue = 5;
+  firtsArray: Array<number>;
   fontawesomes: Array<any>;
   initialValue = 0;
   isSelectedRedirection: any;
   @Input() index;
   @Output() deleteIndex: EventEmitter<number> = new EventEmitter<number>();
   listArrayLinear: Array<any>;
-  listScore = ['-5', '-4', '-3', '-2', '-1', '0', '1', '2', '3', '4', '5'];
+  listScore: Array<any>;
   modalRef: BsModalRef;
   @Input() newRubrique: RubricDto;
   operator = [];
+  operatorForLong = [];
   othersOptionExist = false;
   @Input() position;
   @Output()
   pointRedirectionActive: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() clickCorrection: EventEmitter<{}> = new EventEmitter<{}>();
   _questionQuiz: any;
   response_options: Array<any>;
   secondArray: Array<number>;
@@ -59,6 +63,60 @@ export class ContentRubricQuestionComponent implements OnInit {
   ngOnInit() {
     this.textLength = Array.from(Array(50).keys(), n => n + 1);
     this.secondArray = Array.from(Array(11).keys(), n => n + 0);
+    this.firtsArray = [0, 1];
+    this.operator = [
+      {
+        validation_operator: 'Supérieur à',
+        constraint_value: 'numérique'
+      },
+      {
+        validation_operator: 'Supérieur ou égal à',
+        constraint_value: 'numérique'
+      },
+      {
+        validation_operator: 'Inférieur à',
+        constraint_value: 'numérique'
+      },
+      {
+        validation_operator: 'Inférieur ou égal à',
+        constraint_value: 'numérique'
+      },
+      {
+        validation_operator: 'Egal à',
+        constraint_value: 'numérique'
+      },
+      {
+        validation_operator: 'Différent de',
+        constraint_value: 'numérique'
+      },
+      {
+        validation_operator: 'Entre',
+        constraint_value: 'numérique'
+      },
+      {
+        validation_operator: 'Non compris entre',
+        constraint_value: 'numérique'
+      },
+      {
+        validation_operator: 'Est le nombre',
+        constraint_value: 'numérique'
+      },
+      {
+        validation_operator: 'Nombre entier',
+        constraint_value: 'numérique'
+      }
+    ];
+    this.operatorForLong = [
+      {
+        validation_operator: 'Nombre de caractères maximal',
+        constraint_value: 'numérique'
+      },
+      {
+        validation_operator: 'Nombre de caractères minimal',
+        constraint_value: 'numérique'
+      }
+    ];
+    this.listScore = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
     this.getContraintes();
     this.getFontawesomes();
     this.getAllRubrique();
@@ -67,6 +125,25 @@ export class ContentRubricQuestionComponent implements OnInit {
   @Input()
   set isUpdateQuizz(isupdate: boolean) {
     isupdate ? (this.showAddOption = true) : (this.showAddOption = false);
+  }
+
+  functionUpdate(): void {
+    this.newRubrique.questions.forEach(quest => {
+      if (quest.constraint && this.contraintes) {
+        quest.type_question.slug === 'short_answer'
+          ? this.changeContrainteType(
+              { value: quest.constraint.type_validation },
+              quest.constraint
+            )
+          : this.changeContrainteType2(
+              { value: quest.constraint.type_validation },
+              quest.constraint
+            );
+        this.changeValidationOperator({
+          value: quest.constraint.validation_operator
+        });
+      }
+    });
   }
   getAllRubrique() {
     this.rubriqueService.getRubrique().subscribe(rubriques => {
@@ -94,7 +171,7 @@ export class ContentRubricQuestionComponent implements OnInit {
       }
       this.allSections.push({
         name: 'Envoyer le formulaire',
-        value: 'null'
+        value: 0
       });
     });
   }
@@ -102,6 +179,9 @@ export class ContentRubricQuestionComponent implements OnInit {
   getContraintes(): void {
     this.quizReadApplicatifServiceACI.getContraintes().subscribe(res => {
       this.contraintes = res;
+      if (this.showAddOption) {
+        this.functionUpdate();
+      }
       this.contraintesForLong = res.filter(resp => {
         return resp.type_value !== 'number' && resp.type_value !== 'Text';
       });
@@ -135,6 +215,7 @@ export class ContentRubricQuestionComponent implements OnInit {
     quest.name = `Autres`;
     quest.placeholder = `Autres`;
     quest.slug = 'autres';
+    quest.points = 0;
     if (others) {
       quizQuestion.push(quest);
       this.othersOptionExist = true;
@@ -149,6 +230,7 @@ export class ContentRubricQuestionComponent implements OnInit {
       quest1.name = `option ${quizQuestion.length + 1}`;
       quest1.placeholder = `option ${quizQuestion.length + 1}`;
       quest1.slug = `option${max1 + 1}`;
+      quest1.points = 0;
       quizQuestion.push(quest1);
 
       quizQuestion.forEach((qz, index) => {
@@ -173,9 +255,10 @@ export class ContentRubricQuestionComponent implements OnInit {
       this.showAddOption = true;
     }
   }
-  deleteteOptionMs(quizQuestion, index: number): void {
+  deleteteOptionMs(quizQuestion, index: number, isLinear?: boolean): void {
+    const limit = isLinear ? 2 : 1;
     quizQuestion.forEach((qz, indexation) => {
-      if (quizQuestion && quizQuestion.length > 1 && indexation === index) {
+      if (quizQuestion && quizQuestion.length > limit && indexation === index) {
         quizQuestion.splice(index, 1);
       }
     });
@@ -186,10 +269,19 @@ export class ContentRubricQuestionComponent implements OnInit {
     }
   }
 
-  changeContrainteType($event): void {
+  changeContrainteType($event, type_validation?): void {
     this.contraintes.forEach(contrainte => {
       if (contrainte.type_value === $event.value) {
         this.operator = contrainte.operator;
+        type_validation.validation_operator = this.operator[0].validation_operator;
+      }
+    });
+  }
+  changeContrainteType2($event, type_validation?): void {
+    this.contraintes.forEach(contrainte => {
+      if (contrainte.type_value === $event.value) {
+        this.operatorForLong = contrainte.operator;
+        type_validation.validation_operator = this.operatorForLong[0].validation_operator;
       }
     });
   }
@@ -197,6 +289,13 @@ export class ContentRubricQuestionComponent implements OnInit {
     this.operator.forEach(contrainte => {
       if (contrainte.validation_operator === $event.value) {
         this.contrainteValue = contrainte.constraint_value;
+      }
+    });
+  }
+  changeValidationOperatorLong($event): void {
+    this.operatorForLong.forEach(contrainte => {
+      if (contrainte.validation_operator === $event.value) {
+        this.contrainteValuelong = contrainte.constraint_value;
       }
     });
   }
@@ -262,10 +361,15 @@ export class ContentRubricQuestionComponent implements OnInit {
     return parseInt(value, null);
   }
 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+  openModal(template: TemplateRef<any>, fa) {
+    if (fa !== 'smiley' && fa !== 'point' && fa !== 'coeur') {
+      this.modalRef = this.modalService.show(template);
+    } else {
+      this._questionQuiz.keysmiley = null;
+    }
   }
-  faValue(value: string): void {
+  faValue(value: string, key): void {
+    this._questionQuiz.keysmiley = key;
     this._questionQuiz.smiley = value;
     this.modalRef.hide();
   }
@@ -281,7 +385,7 @@ export class ContentRubricQuestionComponent implements OnInit {
   }
   changeTargetSection(actionTarget): void {
     actionTarget.rubrique_target_poids ||
-    actionTarget.rubrique_target_poids === 'null'
+    actionTarget.rubrique_target_poids === 0
       ? (actionTarget.has_rule_direction = true)
       : (actionTarget.has_rule_direction = false);
   }
@@ -298,6 +402,9 @@ export class ContentRubricQuestionComponent implements OnInit {
       if (question.type_content === 'question') {
         question.question_is_selected = name;
       }
+      if (!this._questionQuiz.response_redirection) {
+        question.response_redirection_exist = false;
+      }
     });
     this.getAllRubrique();
   }
@@ -305,10 +412,28 @@ export class ContentRubricQuestionComponent implements OnInit {
   checkIsredirect(_questionQuiz) {
     const detect = this.newRubrique.contents_rubriques.filter(
       (quest, index) => {
-        if (quest.response_redirection && !_questionQuiz.response_redirection) {
-          quest.response_redirection_exist = true;
+        if (quest.response_redirection && index !== this.index) {
+          _questionQuiz.response_redirection_exist = true;
+          _questionQuiz.response_redirection_text = quest.description
+            ? quest.description
+            : `question ${index + 1}`;
         }
       }
     );
+  }
+
+  correction(status, i) {
+    this.clickCorrection.emit({
+      status: status,
+      index: i,
+      position: this.position
+    });
+  }
+
+  checkDoublon(event: any, responseOption: any, options: Array<any>): void {
+    const doublonExist = options.find(item => item['name'] === event.target.value && item.slug !== responseOption.slug);
+    if (doublonExist) {
+      responseOption['name'] = '';
+    }
   }
 }

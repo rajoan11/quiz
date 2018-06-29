@@ -1,0 +1,45 @@
+<header>
+  <div class="nav-front">
+    <div class="container">
+      <h1>Quizz - lorem ipsume</h1>
+      <!-- <p>{{quiz.description}} -->
+      <p>Vous devez d’abord vous connecter pour accéder au quizz </p>
+    </div>
+  </div>
+</header>
+<ng2-toasty [position]="'top-right'"></ng2-toasty>
+ 
+<div class="relative">
+    <app-alert [alert]="alert"></app-alert>
+</div>
+
+<form [formGroup]="loginForm" (submit)=login()>
+
+  <div class="front-login">
+    <h2>Connectez-vous à votre compte</h2>
+    <div class="relative">
+        <mat-form-field floatPlaceholder="never">
+          <input class="form-control" formControlName="mail" matInput placeholder="Email" name="username" [(ngModel)]="user.username">
+        </mat-form-field>
+        <mat-error *ngIf="loginForm.controls.mail.errors && loginForm.controls.mail.errors.required">
+            email obligatoire
+        </mat-error>
+        <mat-error *ngIf="loginForm.controls.mail.errors && !loginForm.controls.mail.errors.required &&loginForm.controls.mail.errors.email">
+            format email incorrecte
+        </mat-error>
+    </div>
+    
+    <div class="relative">
+      <mat-form-field class="second" floatPlaceholder="never">
+        <input class="form-control" formControlName="password" matInput type="password" placeholder="********" name="password"
+          [(ngModel)]="user.password">
+      </mat-form-field>
+      <mat-error *ngIf="loginForm.controls.password.errors && loginForm.controls.password.errors.required">
+        Mot de passe obligatoire
+      </mat-error>
+    </div>
+    <button class="hvr-float btn-login" type="submit" [disabled]="!loginForm.valid">SE CONNECTER</button>
+    <p class="text-center"><a>Mot de passe oublié ?</a> </p>
+  </div>
+
+</form>

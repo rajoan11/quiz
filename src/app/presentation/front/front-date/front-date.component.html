@@ -1,7 +1,14 @@
 <p class="title">{{question.description || 'Question (date)'}}</p>
 <div class="myrow date">
-  <mat-form-field class="example-full-width" (change)="change($event)">
-    <input matInput type="date" [placeholder]="question.placeholder || 'Jour/Mois/Année'" value="Sushi">
+  <mat-form-field class="example-full-width">
+    <!-- <input matInput type="date" [placeholder]="question.placeholder || 'Jour/Mois/Année'" value="Sushi"> -->
+    <!-- <input matInput [matDatepicker]="dp2" [placeholder]="question.placeholder || 'Jour/Mois/Année'">
+    <mat-datepicker-toggle matSuffix [for]="dp2" [disabled]="true"></mat-datepicker-toggle>
+    <mat-datepicker #dp2></mat-datepicker> -->
+    <input matInput [matDatepicker]="picker" [placeholder]="question.placeholder || 'Jour/Mois/Année'">
+    <mat-datepicker-toggle matSuffix [for]="picker" (dateChange)="addEvent( $event)">
+    </mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 </div>
-<div class="obligatoire" *ngIf="question.is_mandatory">Obligatoire</div>
+<div class="obligatoire " *ngIf="question.is_mandatory ">Obligatoire</div>
